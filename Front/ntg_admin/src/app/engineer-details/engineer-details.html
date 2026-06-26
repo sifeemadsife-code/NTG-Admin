@@ -1,0 +1,273 @@
+<div class="dashboard">
+
+  <aside class="sidebar">
+
+    <div class="logo-section">
+      <img src="assets/images/logo.png" class="logo">
+    </div>
+
+    <div class="profile">
+      <div class="avatar-container">
+
+        <img
+          src="assets/images/avatar.png"
+          class="avatar"
+        >
+
+        <span class="status">
+          {{ engineer.status }}
+        </span>
+
+      </div>
+
+      <h2>{{ engineer.fullName }}</h2>
+
+      <p class="job">
+        {{ engineer.specialization }}
+      </p>
+
+      <h3 class="salary">
+        {{ engineer.salary }}
+      </h3>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="info">
+
+      <div class="info-item">
+        <i class="fa fa-envelope"></i>
+        <div class="info-text">
+          <strong>Email</strong>
+          <span>{{ engineer.email }}</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fa fa-phone"></i>
+        <div class="info-text">
+          <strong>Phone</strong>
+          <span>{{ engineer.phone }}</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fa fa-calendar"></i>
+        <div class="info-text">
+          <strong>Join Date</strong>
+          <span>{{ engineer.joinDate }}</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fa fa-briefcase"></i>
+        <div class="info-text">
+          <strong>Experience</strong>
+          <span>{{ engineer.experience }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="message-btn">
+      <i class="fa fa-paper-plane"></i>
+      Send Message
+    </button>
+
+  </aside>
+
+  <main class="content">
+
+    <div class="top-bar">
+
+      <div class="search-box">
+        <i class="fa fa-search"></i>
+
+        <input
+          type="text"
+          placeholder="Search anything..."
+        >
+      </div>
+
+      <button class="back-btn">
+        <i class="fa fa-chevron-left"></i>
+        Back
+      </button>
+
+    </div>
+
+    <h1>Engineers</h1>
+
+    <p class="breadcrumb">
+      Dashboard > Engineers > Engineer Details
+    </p>
+
+    <div class="cards">
+
+      <div class="card students">
+
+        <div class="icon-box blue-box">
+          <img
+            src="assets/images/students.png"
+            class="card-icon"
+          >
+        </div>
+
+        <div class="card-data">
+          <h4>Students</h4>
+          <h2>{{ engineer.students }}</h2>
+          <span>Assigned</span>
+        </div>
+
+      </div>
+
+      <div class="card reports">
+
+        <div class="icon-box red-box">
+          <img
+            src="assets/images/reports.png"
+            class="card-icon"
+          >
+        </div>
+        <div class="card-data">
+          <h4>Reports</h4>
+          <h2>{{ engineer.reports }}</h2>
+          <span>Submitted</span>
+        </div>
+
+      </div>
+
+      <div class="card rating">
+
+        <div class="icon-box orange-box">
+          <img
+            src="assets/images/rating.png"
+            class="card-icon"
+          >
+        </div>
+
+        <div class="card-data">
+          <h4>Rating</h4>
+          <h2>{{ engineer.rating }}</h2>
+          <span>Excellent</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="tabs">
+
+      <span class="active">
+        Overview
+      </span>
+
+      <span>
+        Personal Info
+      </span>
+
+      <span>
+        Documents
+      </span>
+
+      <span>
+        Reports
+      </span>
+
+    </div>
+
+  
+    <div class="bottom">
+
+  
+      <div class="about">
+
+        <h2>About</h2>
+
+        <p>
+          {{ engineer.about }}
+        </p>
+
+        <h3>Subjects</h3>
+
+        <p>
+          {{ engineer.subjects }}
+        </p>
+
+        <h3>Skills</h3>
+
+        <div class="skills">
+
+          <span *ngFor="let skill of engineer.skills">
+            {{ skill }}
+          </span>
+
+        </div>
+
+      </div>
+
+      
+      <div class="performance">
+
+        <h4>Performance</h4>
+
+        <div class="progress-circle" [style.background]="performanceGradient">
+          <span>
+            {{ engineer.performance }}%
+          </span>
+        </div>
+
+        <h3>Excellent</h3>
+
+        <p>
+          The apprentice is well in the apprentice.
+        </p>
+
+      </div>
+
+      <div class="statistics">
+
+        <h4>Statistics</h4>
+
+        <div class="stat">
+
+          <div class="row">
+            <span>Projects</span>
+            <span>{{ engineer.projectsPercent ?? 0 }}%</span>
+          </div>
+
+          <div class="bar blue-bar" [style.width.%]="engineer.projectsPercent ?? 0"></div>
+
+        </div>
+
+        <div class="stat">
+
+          <div class="row">
+            <span>Reports</span>
+            <span>{{ engineer.reportsPercent ?? 0 }}%</span>
+          </div>
+
+          <div class="bar green-bar" [style.width.%]="engineer.reportsPercent ?? 0"></div>
+
+        </div>
+
+        <div class="stat">
+
+          <div class="row">
+            <span>Attendance</span>
+            <span>{{ engineer.attendancePercent ?? 0 }}%</span>
+          </div>
+
+          <div class="bar orange-bar" [style.width.%]="engineer.attendancePercent ?? 0"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
