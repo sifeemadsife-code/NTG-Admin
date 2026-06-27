@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EngineerService } from './services/engineer';
-import { Engineer } from './models/engineer';
+import { EngineerService } from '../../Services/engineer';
+import { Engineer } from '../../Models/engineer';
 
 @Component({
-  selector: 'app-engineer-details',
+  selector: 'app-engineer-details-overview',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './engineer-details.html',
-  styleUrls: ['./engineer-details.scss']
+  styleUrls: ["./engineer-details.css"],
 })
-export class EngineerDetailsComponent implements OnInit {
-
+export class EngineerDetailsOverView implements OnInit {
   engineer: Engineer = {
     status: '',
     fullName: '',
@@ -32,30 +31,26 @@ export class EngineerDetailsComponent implements OnInit {
     about: '',
     subjects: '',
     skills: [],
-    performance: 0
+    performance: 0,
   };
 
-  constructor(
-    private readonly engineerService: EngineerService
-  ) {}
+  constructor(private readonly engineerService: EngineerService) {}
 
   ngOnInit(): void {
+    this.engineerService.getEngineer(1).subscribe({
+      next: (data) => {
+        this.engineer = {
+          ...data,
+          projectsPercent: data.projectsPercent ?? data.projects ?? 0,
+          reportsPercent: data.reportsPercent ?? data.reports ?? 0,
+          attendancePercent: data.attendancePercent ?? 0,
+        };
+      },
 
-    this.engineerService.getEngineer(1)
-      .subscribe({
-        next: (data) => {
-          this.engineer = {
-            ...data,
-            projectsPercent: data.projectsPercent ?? data.projects ?? 0,
-            reportsPercent: data.reportsPercent ?? data.reports ?? 0,
-            attendancePercent: data.attendancePercent ?? 0
-          };
-        },
-
-        error: (err) => {
-          console.log(err);
-        }
-      });
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   get performanceGradient(): string {
