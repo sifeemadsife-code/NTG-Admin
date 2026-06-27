@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.User;
+import com.example.demo.entities.User;
 
 import java.time.LocalDate;
 @NoArgsConstructor
