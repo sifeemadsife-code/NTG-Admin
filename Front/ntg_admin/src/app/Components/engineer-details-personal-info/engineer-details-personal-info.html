@@ -3,7 +3,6 @@
     <div class="logo-section">
       <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
-
     <div class="profile">
       <div class="avatar-container">
         <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
@@ -23,7 +22,7 @@
 
     <div class="info">
       <div class="info-item">
-        <i class="fa fa-envelope"></i>
+
         <div class="info-text">
           <strong>Email</strong>
           <span>{{ engineer.email }}</span>
@@ -32,21 +31,20 @@
     </div>
 
     <button class="message-btn">
-      <i class="fa fa-paper-plane"></i>
+
       Send Message
     </button>
   </aside>
-
   <main class="content">
     <div class="top-bar">
       <div class="search-box">
-        <i class="fa fa-search"></i>
+
 
         <input type="text" placeholder="Search anything..." />
       </div>
 
       <button class="back-btn">
-        <i class="fa fa-chevron-left"></i>
+
         Back
       </button>
     </div>
@@ -93,80 +91,49 @@
     </div>
 
     <div class="tabs">
-      <span class="active"> Overview </span>
+      <span > Overview </span>
 
-      <span> Personal Info </span>
+      <span class="active"> Personal Info </span>
 
       <span> Documents </span>
 
       <span> Reports </span>
     </div>
+    <div class="profile-card" *ngIf="engineer">
+      <div class="card-header">
 
-    <!-- <div class="bottom">
-      <div class="about">
-        <h2>About</h2>
+        <h2>Personal Information</h2>
+    </div>
+    <div class="info-row">
+      <span class="label">Full Name</span>
+      <span class="value">{{ engineer.firstName }} {{ engineer.lastName }}</span>
+    </div>
 
-        <p>
-          {{ engineer.about }}
-        </p>
+  <div class="info-row">
+    <span class="label"> Email Address</span>
+    <span class="value">{{ engineer.email }}</span>
+  </div>
 
-        <h3>Subjects</h3>
+  <div class="info-row">
+    <span class="label"> Education</span>
+    <span class="value">{{ engineer.education }}</span>
+  </div>
 
-        <p>
-          {{ engineer.subjects }}
-        </p>
+  <div class="info-row">
+    <span class="label"> Experience</span>
+    <span class="value">{{ engineer.numberOfYearsOfExperience }}</span>
+  </div>
 
-        <h3>Skills</h3>
+  <div class="info-row">
+    <span class="label"> Employment History</span>
+    <span class="value">{{ engineer.employmentHistory }}</span>
+  </div>
 
-        <div class="skills">
-          <span *ngFor="let skill of engineer.skills">
-            {{ skill }}
-          </span>
-        </div>
-      </div>
+  <div class="info-row">
+    <span class="label"> Address</span>
+    <span class="value">{{ engineer.address }}</span>
+  </div>
 
-      <div class="performance">
-        <h4>Performance</h4>
 
-        <div class="progress-circle" [style.background]="performanceGradient">
-          <span> {{ engineer.performance }}% </span>
-        </div>
 
-        <h3>Excellent</h3>
-
-        <p>The apprentice is well in the apprentice.</p>
-      </div>
-
-      <div class="statistics">
-        <h4>Statistics</h4>
-
-        <div class="stat">
-          <div class="row">
-            <span>Projects</span>
-            <span>{{ engineer.projectsPercent ?? 0 }}%</span>
-          </div>
-
-          <div class="bar blue-bar" [style.width.%]="engineer.projectsPercent ?? 0"></div>
-        </div>
-
-        <div class="stat">
-          <div class="row">
-            <span>Reports</span>
-            <span>{{ engineer.reportsPercent ?? 0 }}%</span>
-          </div>
-
-          <div class="bar green-bar" [style.width.%]="engineer.reportsPercent ?? 0"></div>
-        </div>
-
-        <div class="stat">
-          <div class="row">
-            <span>Attendance</span>
-            <span>{{ engineer.attendancePercent ?? 0 }}%</span>
-          </div>
-
-          <div class="bar orange-bar" [style.width.%]="engineer.attendancePercent ?? 0"></div>
-        </div>
-      </div>
-    </div> -->
-  </main>
-</div>
+    </div>

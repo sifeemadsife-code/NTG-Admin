@@ -4,10 +4,13 @@ import { ngineerDetails } from './Components/engineer-details-documents/engineer
 import { NotFound } from './Components/not-found/not-found';
 import { Login } from './Components/login/login';
 
+import { EngineerDetailsPersonalInfo } from './Components/engineer-details-personal-info/engineer-details-personal-info';
+
+
 export const routes: Routes = [
     {
         path : "",
-        component : Login
+        component : EngineerDetailsPersonalInfo
     },
     {
         path : "engineerDetails",
