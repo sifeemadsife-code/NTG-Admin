@@ -19,7 +19,6 @@ public class Teacher {
     private Long id;
 
     @NotNull
-    @MapsId
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false, unique = true)
     private com.example.demo.entities.User user;

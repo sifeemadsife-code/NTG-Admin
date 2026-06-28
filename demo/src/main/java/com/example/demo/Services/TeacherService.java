@@ -92,6 +92,7 @@ public class TeacherService {
         User savedUser = userRepository.save(user);
 
         Teacher teacher = new Teacher();
+        teacher.setId(savedUser.getId());
         teacher.setUser(savedUser);
         teacher.setEducation(request.education());
         teacher.setEmploymentHistory(request.employmentHistory());
