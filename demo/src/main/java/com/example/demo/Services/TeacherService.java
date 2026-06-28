@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import com.example.demo.DTOs.CreateEngineerRequestDTO;
+import com.example.demo.DTOs.EngineerCardsDTO;
 import com.example.demo.DTOs.EngineerFeedbackResponseDTO;
 import com.example.demo.DTOs.TeacherListDTO;
 import com.example.demo.DTOs.TeacherProfileDTO;
@@ -8,6 +9,8 @@ import com.example.demo.entities.Role;
 import com.example.demo.entities.Teacher;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.EngineerFeedbackRepository;
+import com.example.demo.repositories.MarkRepository;
+import com.example.demo.repositories.ReportRepository;
 import com.example.demo.repositories.RoleRepository;
 import com.example.demo.repositories.TeacherRepository;
 import com.example.demo.repositories.UserRepository;
@@ -26,6 +29,8 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
     private final EngineerFeedbackRepository engineerFeedbackRepository;
+    private final ReportRepository reportRepository;
+    private final MarkRepository markRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -68,6 +73,19 @@ public class TeacherService {
                         f.getUser().getLastName()
                 ))
                 .toList();
+    }
+
+    public EngineerCardsDTO getEngineerCards(Long teacherId) {
+        var teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+        Long userId = teacher.getUser().getId();
+
+        long studentsCount = markRepository.countDistinctStudentsByTeacherId(teacherId);
+        long reportsCount = reportRepository.countByUserId(userId);
+        Double averageRate = engineerFeedbackRepository.findAverageRateByTeacherId(teacherId);
+
+        return new EngineerCardsDTO(studentsCount, reportsCount, averageRate);
     }
 
     @Transactional

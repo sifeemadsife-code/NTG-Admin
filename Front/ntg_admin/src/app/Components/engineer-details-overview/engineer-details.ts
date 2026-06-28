@@ -3,59 +3,54 @@ import { CommonModule } from '@angular/common';
 
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
+import { EngineerCards } from '../../Models/engineer-cards';
 
 @Component({
   selector: 'app-engineer-details-overview',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './engineer-details.html',
-  styleUrls: ["./engineer-details.css"],
+  styleUrls: ['./engineer-details.css'],
 })
 export class EngineerDetailsOverView implements OnInit {
   engineer: Engineer = {
-    status: '',
-    fullName: '',
-    specialization: '',
-    salary: '',
+    id: 1,
+    firstName: '',
+    lastName: '',
     email: '',
-    phone: '',
-    joinDate: '',
-    experience: '',
+    address: '',
+    education: '',
+    employmentHistory: '',
+    numberOfYearsOfExperience: 0,
+  };
+
+  cards: EngineerCards = {
     students: 0,
     reports: 0,
     rating: 0,
-    projects: 0,
-    projectsPercent: 0,
-    reportsPercent: 0,
-    attendancePercent: 0,
-    about: '',
-    subjects: '',
-    skills: [],
-    performance: 0,
   };
 
   constructor(private readonly engineerService: EngineerService) {}
 
   ngOnInit(): void {
-    this.engineerService.getEngineer(1).subscribe({
-      next: (data) => {
-        this.engineer = {
-          ...data,
-          projectsPercent: data.projectsPercent ?? data.projects ?? 0,
-          reportsPercent: data.reportsPercent ?? data.reports ?? 0,
-          attendancePercent: data.attendancePercent ?? 0,
-        };
-      },
+    const engineerId = 1000;
 
+    this.engineerService.getEngineer(engineerId).subscribe({
+      next: (data) => {
+        this.engineer = data;
+      },
       error: (err) => {
-        console.log(err);
+        console.error('Failed to load engineer profile', err);
       },
     });
-  }
 
-  get performanceGradient(): string {
-    const value = Math.max(0, Math.min(100, this.engineer.performance ?? 0));
-    const degrees = Math.round(value * 3.6);
-    return `conic-gradient(#2d6df6 0deg ${degrees}deg, #e5e7eb ${degrees}deg 360deg)`;
+    this.engineerService.getEngineerCards(engineerId).subscribe({
+      next: (data) => {
+        this.cards = data;
+      },
+      error: (err) => {
+        console.error('Failed to load engineer cards', err);
+      },
+    });
   }
 }

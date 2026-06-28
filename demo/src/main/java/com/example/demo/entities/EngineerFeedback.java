@@ -44,5 +44,6 @@ public class EngineerFeedback {
     @Column(name = "NOTES")
     private String notes;
 
-
+    @Column(name = "RATE")
+    private float rate;
 }

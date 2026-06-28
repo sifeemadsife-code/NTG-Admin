@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.DTOs.CreateEngineerRequestDTO;
+import com.example.demo.DTOs.EngineerCardsDTO;
 import com.example.demo.DTOs.EngineerFeedbackResponseDTO;
 import com.example.demo.DTOs.TeacherListDTO;
 import com.example.demo.DTOs.TeacherProfileDTO;
@@ -31,6 +32,11 @@ public class TeacherController {
     @GetMapping("/{id}/feedback")
     public List<EngineerFeedbackResponseDTO> getTeacherFeedback(@PathVariable Long id) {
         return teacherService.getTeacherFeedback(id);
+    }
+
+    @GetMapping("/{id}/dashboard")
+    public EngineerCardsDTO getEngineerCards(@PathVariable Long id) {
+        return teacherService.getEngineerCards(id);
     }
 
     @PostMapping
