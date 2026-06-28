@@ -6,14 +6,13 @@ import { EngineerCards } from '../../Models/engineer-cards';
 
 
 @Component({
-  selector: 'app-engineer-details-overview',
-  standalone: true,
+  selector: 'app-admin-engineer',
   imports: [CommonModule],
-  templateUrl: './engineer-details.html',
-  styleUrls: ['./engineer-details.css'],
+  templateUrl: './admin-engineer.html',
+  styleUrl: './admin-engineer.css',
 })
-export class EngineerDetailsOverView implements OnInit {
-  engineer: Engineer = {
+export class AdminEngineer {
+engineer: Engineer = {
     id: 1,
     firstName: '',
     lastName: '',
@@ -29,6 +28,7 @@ export class EngineerDetailsOverView implements OnInit {
     reports: 0,
     rating: 0,
   };
+Engineers: any;
 
   constructor(private readonly engineerService: EngineerService) {}
 
@@ -56,3 +56,5 @@ export class EngineerDetailsOverView implements OnInit {
     }
   });
 }}
+
+
