@@ -24,6 +24,4 @@ public class Role {
     @NotNull
     @Column(name = "ROLE_NAME", nullable = false, length = 100)
     private String roleName;
-
-
 }

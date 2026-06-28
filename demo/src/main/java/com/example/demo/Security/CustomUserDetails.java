@@ -11,6 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
+
     private final User user;
 
     @Override
@@ -19,16 +20,40 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return user.getEmail(); // بما إنك بتدور بالإيميل
-    }
-
-    @Override
     public String getPassword() {
         return user.getPassword();
     }
 
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override
+    public String getUsername() {
+        return user.getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return user.getIsdeleted() == null || !user.getIsdeleted();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Long getUserId() {
+        return user.getId();
+    }
 }
