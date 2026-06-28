@@ -3,10 +3,13 @@ import { EngineerDetailsOverView } from './Components/engineer-details-overview/
 import { ngineerDetails } from './Components/engineer-details-documents/engineer-details';
 import { NotFound } from './Components/not-found/not-found';
 
+import { EngineerDetailsPersonalInfo } from './Components/engineer-details-personal-info/engineer-details-personal-info';
+
+
 export const routes: Routes = [
     {
         path : "",
-        component : EngineerDetailsOverView
+        component : EngineerDetailsPersonalInfo
     },
     {
         path : "engineerDetails",

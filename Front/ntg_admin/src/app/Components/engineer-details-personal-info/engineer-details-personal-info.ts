@@ -4,16 +4,14 @@ import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
 
-
 @Component({
-  selector: 'app-engineer-details-overview',
-  standalone: true,
+  selector: 'app-engineer-details-personal-info',
   imports: [CommonModule],
-  templateUrl: './engineer-details.html',
-  styleUrls: ['./engineer-details.css'],
+  templateUrl: './engineer-details-personal-info.html',
+  styleUrl: './engineer-details-personal-info.css',
 })
-export class EngineerDetailsOverView implements OnInit {
-  engineer: Engineer = {
+export class EngineerDetailsPersonalInfo implements OnInit {
+ engineer: Engineer = {
     id: 1,
     firstName: '',
     lastName: '',
@@ -21,7 +19,7 @@ export class EngineerDetailsOverView implements OnInit {
     address: '',
     education: '',
     employmentHistory: '',
-    numberOfYearsOfExperience: 0,
+    numberOfYearsOfExperience: null,
   };
 
   cards: EngineerCards = {

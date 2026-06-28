@@ -6,5 +6,5 @@ export interface Engineer {
   address : string;
   education : string;
   employmentHistory : string;
-  numberOfYearsOfExperience : number;
+  numberOfYearsOfExperience : number | null;
 }

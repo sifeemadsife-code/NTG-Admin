@@ -1,0 +1,141 @@
+
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="logo-section">
+      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
+    </div>
+
+    <div class="profile">
+      <div class="avatar-container">
+        <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
+
+        <span class="status">
+        </span>
+      </div>
+
+      <h2>{{ engineer.firstName }}</h2>
+
+      <p class="job">
+        {{ engineer.education }}
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="info">
+      <div class="info-item">
+
+        <div class="info-text">
+          <strong>Email</strong>
+          <span>{{ engineer.email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="message-btn">
+
+      Send Message
+    </button>
+  </aside>
+  <main class="content">
+    <div class="top-bar">
+      <div class="search-box">
+
+
+        <input type="text" placeholder="Search anything..." />
+      </div>
+
+      <button class="back-btn">
+
+        Back
+      </button>
+    </div>
+
+    <h1>Engineers</h1>
+
+    <p class="breadcrumb">Dashboard > Engineers > Engineer Details</p>
+
+    <div class="cards">
+      <div class="card students">
+        <div class="icon-box blue-box">
+          <img alt="Student Image" src="/images/students.png" class="card-icon" />
+        </div>
+
+        <div class="card-data">
+          <h4>Students</h4>
+          <h2>{{ cards.students }}</h2>
+          <span>Assigned</span>
+        </div>
+      </div>
+
+      <div class="card reports">
+        <div class="icon-box red-box">
+          <img alt="Reports Icon" src="/images/reports.png" class="card-icon" />
+        </div>
+        <div class="card-data">
+          <h4>Reports</h4>
+          <h2>{{ cards.reports }}</h2>
+          <span>Submitted</span>
+        </div>
+      </div>
+
+      <div class="card rating">
+        <div class="icon-box orange-box">
+          <img alt="Rating Icon" src="/images/rating.png" class="card-icon" />
+        </div>
+
+        <div class="card-data">
+          <h4>Rating</h4>
+          <h2>{{ cards.rating }}</h2>
+          <span>Excellent</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <span > Overview </span>
+
+      <span class="active"> Personal Info </span>
+
+      <span> Documents </span>
+
+      <span> Reports </span>
+    </div>
+    <div class="profile-card" *ngIf="engineer">
+      <div class="card-header">
+
+        <h2>Personal Information</h2>
+    </div>
+    <div class="info-row">
+      <span class="label">Full Name</span>
+      <span class="value">{{ engineer.firstName }} {{ engineer.lastName }}</span>
+    </div>
+
+  <div class="info-row">
+    <span class="label"> Email Address</span>
+    <span class="value">{{ engineer.email }}</span>
+  </div>
+
+  <div class="info-row">
+    <span class="label"> Education</span>
+    <span class="value">{{ engineer.education }}</span>
+  </div>
+
+  <div class="info-row">
+    <span class="label"> Experience</span>
+    <span class="value">{{ engineer.numberOfYearsOfExperience }}</span>
+  </div>
+
+  <div class="info-row">
+    <span class="label"> Employment History</span>
+    <span class="value">{{ engineer.employmentHistory }}</span>
+  </div>
+
+  <div class="info-row">
+    <span class="label"> Address</span>
+    <span class="value">{{ engineer.address }}</span>
+  </div>
+
+
+
+    </div>
