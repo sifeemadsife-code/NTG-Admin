@@ -4,12 +4,13 @@ import { ngineerDetails } from './Components/engineer-details-documents/engineer
 import { NotFound } from './Components/not-found/not-found';
 
 import { EngineerDetailsPersonalInfo } from './Components/engineer-details-personal-info/engineer-details-personal-info';
+import { AdminEngineer } from './Components/admin-engineer/admin-engineer';
 
 
 export const routes: Routes = [
     {
         path : "",
-        component : EngineerDetailsPersonalInfo
+        component : AdminEngineer
     },
     {
         path : "engineerDetails",
