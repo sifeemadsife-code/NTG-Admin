@@ -14,11 +14,11 @@ export class EngineerService {
   constructor(private http: HttpClient) {}
 
   getEngineer(id: number): Observable<Engineer> {
-    return this.http.get<Engineer>(`${this.apiUrl}/engineers/${id}`);
+    return this.http.get<Engineer>(`${this.apiUrl}/teachers/${id}`);
   }
 
   getEngineerCards(id: number): Observable<EngineerCards> {
-    return this.http.get<EngineerCards>(`${this.apiUrl}/engineers/${id}/cards`);
+    return this.http.get<EngineerCards>(`${this.apiUrl}/teachers/${id}/dashboard`);
   }
 
   getDocuments(): Observable<any[]> {

@@ -33,8 +33,18 @@ export class EngineerDetailsOverView implements OnInit {
   constructor(private readonly engineerService: EngineerService) {}
 
   ngOnInit(): void {
-    const engineerId = 1000;
+  const engineerId = 1000;
+  this.engineerService.getEngineer(engineerId).subscribe({
+    next: (data) => {
+      console.log("Engineer:", data);
+      this.engineer = data;
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
 
+<<<<<<< HEAD
     this.engineerService.getEngineer(engineerId).subscribe({
       next: (data) => {
         this.engineer = data;
@@ -54,3 +64,15 @@ export class EngineerDetailsOverView implements OnInit {
     });
   }
 }
+=======
+  this.engineerService.getEngineerCards(engineerId).subscribe({
+    next: (data) => {
+      console.log("Cards:", data);
+      this.cards = data;
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+}}
+>>>>>>> fb38d2bb9598bd9223cb9b9d3967180313c75bdf
