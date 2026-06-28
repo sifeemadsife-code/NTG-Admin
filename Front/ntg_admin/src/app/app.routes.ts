@@ -10,7 +10,7 @@ import { EngineerDetailsPersonalInfo } from './Components/engineer-details-perso
 export const routes: Routes = [
     {
         path : "",
-        component : EngineerDetailsPersonalInfo
+        component : EngineerDetailsOverView
     },
     {
         path : "engineerDetails",
