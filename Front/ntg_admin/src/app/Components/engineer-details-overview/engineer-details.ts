@@ -33,24 +33,24 @@ export class EngineerDetailsOverView implements OnInit {
   constructor(private readonly engineerService: EngineerService) {}
 
   ngOnInit(): void {
-    const engineerId = 1000;
+  const engineerId = 1000;
+  this.engineerService.getEngineer(engineerId).subscribe({
+    next: (data) => {
+      console.log("Engineer:", data);
+      this.engineer = data;
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
 
-    this.engineerService.getEngineer(engineerId).subscribe({
-      next: (data) => {
-        this.engineer = data;
-      },
-      error: (err) => {
-        console.error('Failed to load engineer profile', err);
-      },
-    });
-
-    this.engineerService.getEngineerCards(engineerId).subscribe({
-      next: (data) => {
-        this.cards = data;
-      },
-      error: (err) => {
-        console.error('Failed to load engineer cards', err);
-      },
-    });
-  }
-}
+  this.engineerService.getEngineerCards(engineerId).subscribe({
+    next: (data) => {
+      console.log("Cards:", data);
+      this.cards = data;
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+}}
