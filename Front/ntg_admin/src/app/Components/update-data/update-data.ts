@@ -1,92 +1,69 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
+import { Engineer } from './../../Models/engineer';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-// import { EngineerService } from '../../Services/engineer';
-// import { Engineer as FullEngineer } from '../../Models/engineer';
-// import { Engineer } from './models/engineer';
+import { EngineerService } from '../../Services/engineer';
+import { Engineer as FullEngineer } from '../../Models/engineer';
 
-// @Component({
-//   selector: 'app-update-data',
-//   standalone: true,
-//   imports: [FormsModule],
-//   templateUrl: './update-data.html',
-//   styleUrls: ['./update-data.scss']
-// })
-// export class UpdateDataComponent implements OnInit {
+@Component({
+  selector: 'app-update-data',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './update-data.html',
+  styleUrls: ['./update-data.css'],
+})
+export class UpdateDataComponent implements OnInit {
+  engineer: Engineer = {
+    id: 1,
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    education: '',
+    employmentHistory: '',
+    numberOfYearsOfExperience: 0,
+  };
+  imageSrc = 'images/avatar.png';
+  private fullEngineer: FullEngineer | null = null;
 
-//   engineer: Engineer = {
-//     id: 0,
-//     fullName: '',
-//     email: '',
-//     phone: '',
-//     subject: '',
-//     experience: '',
-//     joinDate: '',
-//     password: '',
-//     imageUrl: ''
-//   };
-//   imageSrc = 'assets/images/avatar.png';
-//   private fullEngineer: FullEngineer | null = null;
+  constructor(private engineerService: EngineerService) {}
 
-//   constructor(
-//     private engineerService: EngineerService
-//   ) {}
+  ngOnInit(): void {
+    this.engineerService.getEngineer(1).subscribe((data) => {
+      this.fullEngineer = data;
+      this.engineer = {
+        id: 1,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        address: data.address,
+        education: data.education,
+        employmentHistory: data.employmentHistory,
+        numberOfYearsOfExperience: data.numberOfYearsOfExperience,
+      };
+      this.imageSrc = 'assets/images/avatar.png';
+    });
+  }
 
-//   ngOnInit(): void {
+  saveEngineer(): void {
+    if (!this.fullEngineer) {
+      return;
+    }
 
-//     this.engineerService
-//       .getEngineer(1)
-//       .subscribe(data => {
-//         this.fullEngineer = data;
-//         this.engineer = {
-//           id: data.id,
-//           fullName: data.fullName,
-//           email: data.email,
-//           phone: data.phone,
-//           subject: data.subject ?? data.subjects ?? '',
-//           experience: data.experience,
-//           joinDate: data.joinDate,
-//           password: '',
-//           imageUrl: data.imageUrl ?? ''
-//         };
-//         this.imageSrc = data.imageUrl ?? 'assets/images/avatar.png';
-//       });
-//   }
+    const updatedEngineer: FullEngineer = {
+      ...this.fullEngineer,
+      id: 1,
+      firstName: this.engineer.firstName,
+      lastName: this.engineer.lastName,
+      email: this.engineer.email,
+      address: this.engineer.address,
+      education: this.engineer.education,
+      employmentHistory: this.engineer.employmentHistory,
+      numberOfYearsOfExperience: this.engineer.numberOfYearsOfExperience,
+    };
 
-//   saveEngineer(): void {
-//     if (!this.fullEngineer) {
-//       return;
-//     }
-
-//     const updatedEngineer: FullEngineer = {
-//       ...this.fullEngineer,
-//       subject: this.engineer.subject,
-//       fullName: this.engineer.fullName,
-//       email: this.engineer.email,
-//       phone: this.engineer.phone,
-//       experience: this.engineer.experience,
-//       joinDate: this.engineer.joinDate,
-//       imageUrl: this.engineer.imageUrl,
-//       password: this.engineer.password
-//     };
-
-//     this.engineerService
-//       .updateEngineer(
-//         this.engineer.id,
-//         updatedEngineer
-//       )
-//       .subscribe(() => {
-//         alert('Engineer Updated');
-//       });
-//   }
-
-//   onImageSelected(event: Event): void {
-//     const input = event.target as HTMLInputElement;
-//     const file = input?.files?.[0];
-//     if (!file) {
-//       return;
-//     }
-//     this.engineer.imageUrl = URL.createObjectURL(file);
-//     this.imageSrc = this.engineer.imageUrl;
-//   }
-// }
+    this.engineerService.updateEngineer(this.engineer.id, updatedEngineer).subscribe(() => {
+      alert('Engineer Updated');
+    });
+  }
+}

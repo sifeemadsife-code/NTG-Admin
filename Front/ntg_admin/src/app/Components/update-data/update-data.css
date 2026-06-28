@@ -1,0 +1,233 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #EEEEEE;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background: #620000;
+}
+
+.logo-section {
+  margin: 10% 0 0 5%;
+  width: 100%;
+  height: 10%;
+  background: white;
+  border-bottom-left-radius: 35px;
+  border-top-left-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 110px;
+}
+::placeholder{
+  color: #8E8E93;
+}
+.profile-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.profile-section h2 {
+  color: white;
+  margin-bottom: 30px;
+}
+
+.avatar-box {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.change-photo{
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  align-items: center;
+}
+/* CONTENT */
+
+.content {
+  flex: 1;
+
+  padding: 35px;
+}
+
+.header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 38px;
+}
+
+.breadcrumb {
+  color: gray;
+
+  margin-top: 6px;
+}
+
+.back-btn {
+  width: 90px;
+  height: 35px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  background: white;
+
+  cursor: pointer;
+}
+
+/* CARD */
+
+.edit-card {
+  background: white;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 15px;
+
+  padding: 35px;
+
+  display: flex;
+
+  gap: 40px;
+
+  box-shadow: 0 3px 15px rgba(0,0,0,.06);
+}
+
+.form-section {
+  flex: 1;
+}
+
+.form-section h3 {
+  margin-bottom: 25px;
+
+  font-size: 22px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+
+  height: 42px;
+
+  padding: 0 15px;
+
+  border: 1px solid #d7d7d7;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  transition: .3s;
+}
+
+.form-group input:focus {
+  border-color: #620000;
+}
+
+.row {
+  display: flex;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.small-group {
+  flex: 1;
+}
+
+.small-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.small-group input {
+  width: 100%;
+
+  height: 42px;
+
+  padding: 0 15px;
+
+  border: 1px solid #d7d7d7;
+
+  border-radius: 10px;
+
+  outline: none;
+}
+
+.save-btn {
+  width: 100%;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #001b52;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.save-btn:hover {
+  background: #02256f;
+}
