@@ -6,16 +6,13 @@ import { Login } from './Components/login/login';
 
 import { EngineerDetailsPersonalInfo } from './Components/engineer-details-personal-info/engineer-details-personal-info';
 import { AdminEngineer } from './Components/admin-engineer/admin-engineer';
+import { AddEngineer } from './Components/add-engineer/add-engineer';
 
 
 export const routes: Routes = [
     {
         path : "",
-<<<<<<< HEAD
-        component : AdminEngineer
-=======
-        component : EngineerDetailsOverView
->>>>>>> e15ed23d183c732dc4669e6c2fd965f959571f06
+        component : AddEngineer
     },
     {
         path : "engineerDetails",
