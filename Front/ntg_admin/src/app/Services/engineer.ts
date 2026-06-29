@@ -16,7 +16,9 @@ export class EngineerService {
   getEngineer(id: number): Observable<Engineer> {
     return this.http.get<Engineer>(`${this.apiUrl}/teachers/${id}`);
   }
-
+  updateEngineer(id: number, newEngineer: Engineer) {
+  return this.http.put(`${this.apiUrl}/teachers/${id}`, newEngineer);
+}
   getEngineerCards(id: number): Observable<EngineerCards> {
     return this.http.get<EngineerCards>(`${this.apiUrl}/teachers/${id}/dashboard`);
   }

@@ -1,10 +1,9 @@
 <div class="dashboard">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
 
-    <div class="logo-box">
-      <img src="assets/images/logo.png" class="logo" alt="NTG Logo">
+    <div class="logo-section">
+      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
 
     <div class="profile-section">
@@ -13,29 +12,19 @@
 
       <div class="avatar-box">
         <img
-          [src]="imageSrc"
+          src="/images/avatar.png"
           class="avatar"
           alt="Avatar"
         >
       </div>
-
-      <input
-        type="file"
-        hidden
-        #fileInput
-        (change)="onImageSelected($event)"
-      >
-
-      <button class="change-btn" (click)="fileInput.click()">
-        <i class="fa fa-camera"></i>
+      <button title="Change The Photo" class="change-photo">
+        <img src="/images/camera.png" alt="Camera Image">
         Change Photo
       </button>
-
     </div>
 
   </aside>
 
-  <!-- CONTENT -->
   <main class="content">
 
     <div class="header">
@@ -65,16 +54,19 @@
 
         <div class="form-group">
           <label>Full Name*</label>
-
           <input
+          title="DDD"
+          placeholder=""
             type="text"
-            [(ngModel)]="engineer.fullName">
+            [(ngModel)]="engineer.firstName">
         </div>
 
         <div class="form-group">
           <label>Email*</label>
 
           <input
+          title="DDD"
+          placeholder=""
             type="email"
             [(ngModel)]="engineer.email">
         </div>
@@ -83,8 +75,10 @@
           <label>Phone*</label>
 
           <input
+          title="DDD"
+          placeholder=""
             type="text"
-            [(ngModel)]="engineer.phone">
+            [(ngModel)]="engineer.address">
         </div>
 
       </div>
@@ -99,8 +93,10 @@
           <label>Subject*</label>
 
           <input
+          title="DDD"
+          placeholder=""
             type="text"
-            [(ngModel)]="engineer.subject">
+            [(ngModel)]="engineer.education">
         </div>
 
         <div class="row">
@@ -109,26 +105,22 @@
             <label>Experience*</label>
 
             <input
+            title="DDD"
+          placeholder=""
               type="text"
-              [(ngModel)]="engineer.experience">
+              [(ngModel)]="engineer.employmentHistory">
           </div>
 
           <div class="small-group">
             <label>Join Date*</label>
 
             <input
+            title="DDD"
+          placeholder=""
               type="date"
-              [(ngModel)]="engineer.joinDate">
+              [(ngModel)]="engineer.numberOfYearsOfExperience">
           </div>
 
-        </div>
-
-        <div class="form-group">
-          <label>Password*</label>
-
-          <input
-            type="password"
-            [(ngModel)]="engineer.password">
         </div>
 
         <button class="save-btn">
