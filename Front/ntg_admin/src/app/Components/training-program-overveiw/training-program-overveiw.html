@@ -1,0 +1,207 @@
+<div class="dashbored">
+<aside class="sidebar">
+    <div class="logo-section">
+      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Dashboard</a></span>
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Engineers</a></span>
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/reading.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Students</a></span>
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/reports.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Reports</a></span>
+    </div>
+    <div class="logo-engineer">
+      <img alt="icon" src="/images/code.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Training Programs</a></span>
+    </div>
+    <div class="logo-text1">
+      <img alt="icon" src="/images/books.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Subjects</a></span>
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/Setting.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Settings</a></span>
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/user.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Profile</a></span>
+    </div>
+    <div class="logo-text">
+      <img alt="icon" src="/images/logout.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Logout</a></span>
+    </div>
+  </aside>
+
+  <div class="engineers-page">
+      <!-- Header -->
+    <div class="page-header">
+      <div>
+        <h1>Training Programs</h1>
+        <p>Dashboard > Training Programs > Training Program Details</p>
+      </div>
+    </div>
+
+    <div class="page" >
+
+  <div class="header">
+
+      <div class="title">
+
+          <div class="icon">
+              <img src="/images/code1.png" alt="Code Icon" width="50" height="45" />
+          </div>
+
+          <div>
+
+              <h2>{{program.name}}</h2>
+
+              <p>{{program.description}}</p>
+
+          </div>
+
+          <span class="status">
+              {{program.status}}
+          </span>
+
+      </div>
+
+      <div class="buttons">
+
+          <button class="edit">
+              Edit Program
+          </button>
+
+          <button class="assign">
+              + Assign Student
+          </button>
+
+      </div>
+
+  </div>
+
+  <div class="cards">
+
+      <div class="card">
+
+          <h2>{{program.totalStudents}}</h2>
+
+          <p>Total Students</p>
+
+      </div>
+
+      <div class="card">
+
+          <h2>{{program.assignedEngineers}}</h2>
+
+          <p>Assigned Engineers</p>
+
+      </div>
+
+      <div class="card">
+
+          <h2>{{program.attendanceRate}}%</h2>
+
+          <p>Attendance Rate</p>
+
+      </div>
+
+      <div class="card">
+
+          <h2>{{program.averageProgress}}%</h2>
+
+          <p>Average Progress</p>
+
+      </div>
+
+      <div class="card">
+
+          <h2>{{program.averageScore}}</h2>
+
+          <p>Average Score</p>
+
+      </div>
+
+  </div>
+
+  <div class="tabs">
+
+      <a class="active">Overview</a>
+      <a>Students</a>
+      <a>Engineers</a>
+      <a>Reports</a>
+      <a>Assessments</a>
+
+  </div>
+
+  <div class="content">
+
+      <div class="chart">
+          Attendance Trend Chart
+      </div>
+
+      <div class="chart">
+          Student Progress Chart
+      </div>
+
+      <div class="chart">
+          Performance Distribution
+      </div>
+
+      <div class="info">
+
+          <h3>Program Information</h3>
+
+          <div class="row">
+              <span>Category</span>
+              <strong>{{program.category}}</strong>
+          </div>
+
+          <div class="row">
+              <span>Level</span>
+              <strong>{{program.level}}</strong>
+          </div>
+
+          <div class="row">
+              <span>Start Date</span>
+              <strong>{{program.startDate}}</strong>
+          </div>
+
+          <div class="row">
+              <span>End Date</span>
+              <strong>{{program.endDate}}</strong>
+          </div>
+
+          <div class="row">
+              <span>Duration</span>
+              <strong>{{program.duration}}</strong>
+          </div>
+
+          <div class="row">
+              <span>Training Hours</span>
+              <strong>{{program.trainingHours}}</strong>
+          </div>
+
+          <div class="row">
+              <span>Capacity</span>
+              <strong>{{program.capacity}}</strong>
+          </div>
+
+      </div>
+
+  </div>
+
+</div>
+  </div>
+</div>
+
+
+

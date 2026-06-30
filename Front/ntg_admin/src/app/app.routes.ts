@@ -7,11 +7,12 @@ import { NotFound } from './Components/not-found/not-found';
 import { UpdateDataComponent } from './Components/update-data/update-data';
 import { AddEngineer } from './Components/add-engineer/add-engineer';
 import { StudentsList } from './Components/students-list/students-list';
+import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
 
 export const routes: Routes = [
   {
     path: '',
-    component: StudentsList
+    component: TrainingProgramOverveiw
     },
   {
     path: 'engineers/:id',
