@@ -1,24 +1,22 @@
 package com.example.demo.entities;
 
+import com.example.demo.entities.Team;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.example.demo.entities.User;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Getter
 @Setter
 @Entity
 @Table(name = "STUDENT")
 public class Student {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "STUDENT_ID", nullable = false)
     private Long id;
 
@@ -38,13 +36,26 @@ public class Student {
     @Column(name = "PLACE_OF_BIRTH", length = 90)
     private String placeOfBirth;
 
+
+    @ManyToOne
+    @JoinColumn(name = "CLASS_ID")
+    private Class studentClass;
+
+    public enum MartialParentsStatus{
+        MARRIED,
+        DIVORCED
+    }
+
+    @Column(name = "MARTIAL_PARENT_STATUS", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MartialParentsStatus martialParentsStatus;
+
     @ManyToMany
     @JoinTable(
             name = "STUDENT_IN_A_TEAM",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "TEAM_ID")
     )
-    private Set<com.example.demo.entities.Team> teams = new LinkedHashSet<>();
-
+    private Set<Team> teams = new LinkedHashSet<>();
 
 }

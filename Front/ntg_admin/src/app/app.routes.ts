@@ -6,6 +6,7 @@ import { ngineerDetails } from './Components/engineer-details-documents/engineer
 import { NotFound } from './Components/not-found/not-found';
 import { UpdateDataComponent } from './Components/update-data/update-data';
 import { AddEngineer } from './Components/add-engineer/add-engineer';
+import { StudentsList } from './Components/students-list/students-list';
 
 export const routes: Routes = [
   {
