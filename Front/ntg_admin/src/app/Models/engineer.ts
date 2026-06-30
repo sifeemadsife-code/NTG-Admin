@@ -1,10 +1,21 @@
 export interface Engineer {
-  id: number;
-  firstName: string;
-  lastName : string;
+  status: string;
+  fullName: string;
+  specialization: string;
+  salary: string;
   email: string;
-  address : string;
-  education : string;
-  employmentHistory : string;
-  numberOfYearsOfExperience : number | null;
+  phone: string;
+  joinDate: string;
+  experience: string;
+  students: number;
+  reports: number;
+  rating: number;
+  projects?: number;
+  projectsPercent?: number;
+  reportsPercent?: number;
+  attendancePercent?: number;
+  about: string;
+  subjects: string;
+  skills: string[];
+  performance: number;
 }

@@ -1,0 +1,100 @@
+<div class="notification-page">
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+        <h2>Notification</h2>
+
+        <p>Dashboard > Notification</p>
+
+    </div>
+
+    <!-- Notification Card -->
+
+    <div class="notification-card">
+
+        <div
+            class="notification-item"
+            *ngFor="let item of notifications">
+
+            <!-- Left -->
+
+            <div
+                class="icon-container"
+                [style.background]="item.color">
+
+                <span class="material-icons">
+
+                    {{item.icon}}
+
+                </span>
+
+            </div>
+
+            <!-- Center -->
+
+            <div class="notification-content">
+
+                <h4>{{item.title}}</h4>
+
+                <p>{{item.message}}</p>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="notification-time">
+
+                {{item.time}}
+
+                <span class="status"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <div class="pagination">
+
+        <button>
+
+            <span class="material-icons">
+                chevron_left
+            </span>
+
+        </button>
+
+        <button
+            class="active">
+
+            1
+
+        </button>
+
+        <button>
+
+            2
+
+        </button>
+
+        <button>
+
+            3
+
+        </button>
+
+        <button>
+
+            <span class="material-icons">
+                chevron_right
+            </span>
+
+        </button>
+
+    </div>
+
+</div>

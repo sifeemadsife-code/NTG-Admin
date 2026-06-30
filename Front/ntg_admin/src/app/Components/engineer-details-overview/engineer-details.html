@@ -3,17 +3,25 @@
     <div class="logo-section">
       <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
+
     <div class="profile">
       <div class="avatar-container">
         <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
+
         <span class="status">
+          {{ engineer.status }}
         </span>
       </div>
-      <h2>{{ engineer.firstName }}</h2>
+
+      <h2>{{ engineer.fullName }}</h2>
 
       <p class="job">
-        {{ engineer.education }}
+        {{ engineer.specialization }}
       </p>
+
+      <h3 class="salary">
+        {{ engineer.salary }}
+      </h3>
     </div>
 
     <div class="divider"></div>
@@ -24,6 +32,30 @@
         <div class="info-text">
           <strong>Email</strong>
           <span>{{ engineer.email }}</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fa fa-phone"></i>
+        <div class="info-text">
+          <strong>Phone</strong>
+          <span>{{ engineer.phone }}</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fa fa-calendar"></i>
+        <div class="info-text">
+          <strong>Join Date</strong>
+          <span>{{ engineer.joinDate }}</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fa fa-briefcase"></i>
+        <div class="info-text">
+          <strong>Experience</strong>
+          <span>{{ engineer.experience }}</span>
         </div>
       </div>
     </div>
@@ -60,7 +92,7 @@
 
         <div class="card-data">
           <h4>Students</h4>
-          <h2>{{ cards.students }}</h2>
+          <h2>{{ engineer.students }}</h2>
           <span>Assigned</span>
         </div>
       </div>
@@ -71,7 +103,7 @@
         </div>
         <div class="card-data">
           <h4>Reports</h4>
-          <h2>{{ cards.reports }}</h2>
+          <h2>{{ engineer.reports }}</h2>
           <span>Submitted</span>
         </div>
       </div>
@@ -83,7 +115,7 @@
 
         <div class="card-data">
           <h4>Rating</h4>
-          <h2>{{ cards.rating }}</h2>
+          <h2>{{ engineer.rating }}</h2>
           <span>Excellent</span>
         </div>
       </div>
@@ -99,7 +131,7 @@
       <span> Reports </span>
     </div>
 
-    <!-- <div class="bottom">
+    <div class="bottom">
       <div class="about">
         <h2>About</h2>
 
@@ -164,6 +196,6 @@
           <div class="bar orange-bar" [style.width.%]="engineer.attendancePercent ?? 0"></div>
         </div>
       </div>
-    </div> -->
+    </div>
   </main>
 </div>
