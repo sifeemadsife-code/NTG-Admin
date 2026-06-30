@@ -5,12 +5,12 @@ import { EngineerDetailsPersonalInfo } from './Components/engineer-details-perso
 import { ngineerDetails } from './Components/engineer-details-documents/engineer-details';
 import { NotFound } from './Components/not-found/not-found';
 import { UpdateDataComponent } from './Components/update-data/update-data';
+import { AddEngineer } from './Components/add-engineer/add-engineer';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AdminEngineer
-  },
+    component: AddEngineer  },
   {
     path: 'engineers/:id',
     component: EngineerDetailsOverView
