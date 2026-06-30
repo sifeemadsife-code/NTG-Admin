@@ -45,4 +45,10 @@ public class TeacherController {
     public TeacherProfileDTO createEngineer(@RequestBody CreateEngineerRequestDTO request) {
         return teacherService.createEngineer(request);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEngineer(@PathVariable Long id) {
+        teacherService.deleteEngineer(id);
+    }
+
 }

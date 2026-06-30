@@ -6,13 +6,11 @@
     <div class="profile">
       <div class="avatar-container">
         <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
-        <span class="status">
-        </span>
+        <span class="status"> </span>
       </div>
-      <h2>{{ engineer.firstName }}</h2>
-
+      <h2>{{ engineer().firstName }}</h2>
       <p class="job">
-        {{ engineer.education }}
+        {{ engineer().education }}
       </p>
     </div>
 
@@ -23,7 +21,7 @@
         <i class="fa fa-envelope"></i>
         <div class="info-text">
           <strong>Email</strong>
-          <span>{{ engineer.email }}</span>
+          <span>{{ engineer().email }}</span>
         </div>
       </div>
     </div>
@@ -60,7 +58,7 @@
 
         <div class="card-data">
           <h4>Students</h4>
-          <h2>{{ cards.students }}</h2>
+          <h2>{{ cards().students }}</h2>
           <span>Assigned</span>
         </div>
       </div>
@@ -71,7 +69,7 @@
         </div>
         <div class="card-data">
           <h4>Reports</h4>
-          <h2>{{ cards.reports }}</h2>
+          <h2>{{ cards().reports }}</h2>
           <span>Submitted</span>
         </div>
       </div>
@@ -83,55 +81,41 @@
 
         <div class="card-data">
           <h4>Rating</h4>
-          <h2>{{ cards.rating }}</h2>
-          <span>Excellent</span>
+          <h2>{{ cards().rating }}</h2>
+
+          <span>
+            {{
+              cards().rating >= 4.5
+                ? 'Excellent'
+                : cards().rating >= 3.5
+                  ? 'Very Good'
+                  : cards().rating >= 2.5
+                    ? 'Good'
+                    : cards().rating >= 1.5
+                      ? 'Fair'
+                      : 'Poor'
+            }}
+          </span>
         </div>
       </div>
     </div>
 
     <div class="tabs">
-      <span class="active"> Overview </span>
+      <a [routerLink]="['/engineers', engineer_id]">Overview</a>
 
-      <span> Personal Info </span>
+      <a [routerLink]="['/engineers', engineer_id, 'personal-info']"> Personal Info </a>
 
-      <span> Documents </span>
-
-      <span> Reports </span>
+      <a [routerLink]="['/engineers', engineer_id, 'documents']"> Documents </a>
+      <i><span> Reports </span></i>
     </div>
 
-    <!-- <div class="bottom">
+    <div class="bottom">
       <div class="about">
         <h2>About</h2>
 
-        <p>
-          {{ engineer.about }}
-        </p>
-
-        <h3>Subjects</h3>
-
-        <p>
-          {{ engineer.subjects }}
-        </p>
-
-        <h3>Skills</h3>
-
-        <div class="skills">
-          <span *ngFor="let skill of engineer.skills">
-            {{ skill }}
-          </span>
-        </div>
-      </div>
-
-      <div class="performance">
-        <h4>Performance</h4>
-
-        <div class="progress-circle" [style.background]="performanceGradient">
-          <span> {{ engineer.performance }}% </span>
-        </div>
-
-        <h3>Excellent</h3>
-
-        <p>The apprentice is well in the apprentice.</p>
+        <p>Education : {{ engineer().education }}</p>
+        <p>Employment History : {{ engineer().employmentHistory }}</p>
+        <p>Experience : {{ engineer().numberOfYearsOfExperience }}</p>
       </div>
 
       <div class="statistics">
@@ -139,31 +123,22 @@
 
         <div class="stat">
           <div class="row">
-            <span>Projects</span>
-            <span>{{ engineer.projectsPercent ?? 0 }}%</span>
+            <span>Students</span>
+            <span>{{ cards().students }}%</span>
           </div>
 
-          <div class="bar blue-bar" [style.width.%]="engineer.projectsPercent ?? 0"></div>
+          <div class="bar blue-bar" [style.width.%]="cards().students"></div>
         </div>
 
         <div class="stat">
           <div class="row">
             <span>Reports</span>
-            <span>{{ engineer.reportsPercent ?? 0 }}%</span>
+            <span>{{ cards().reports }}%</span>
           </div>
 
-          <div class="bar green-bar" [style.width.%]="engineer.reportsPercent ?? 0"></div>
-        </div>
-
-        <div class="stat">
-          <div class="row">
-            <span>Attendance</span>
-            <span>{{ engineer.attendancePercent ?? 0 }}%</span>
-          </div>
-
-          <div class="bar orange-bar" [style.width.%]="engineer.attendancePercent ?? 0"></div>
+          <div class="bar green-bar" [style.width.%]="cards().reports"></div>
         </div>
       </div>
-    </div> -->
+    </div>
   </main>
 </div>

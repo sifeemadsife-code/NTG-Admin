@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
+import { ActivatedRoute, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-engineer-details-personal-info',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './engineer-details-personal-info.html',
   styleUrl: './engineer-details-personal-info.css',
 })
 export class EngineerDetailsPersonalInfo implements OnInit {
- engineer: Engineer = {
+
+  engineer = signal<Engineer>({
     id: 1,
     firstName: '',
     lastName: '',
@@ -19,36 +21,38 @@ export class EngineerDetailsPersonalInfo implements OnInit {
     address: '',
     education: '',
     employmentHistory: '',
-    numberOfYearsOfExperience: null,
-  };
+    numberOfYearsOfExperience: 0,
+  });
 
-  cards: EngineerCards = {
+  cards = signal<EngineerCards>({
     students: 0,
     reports: 0,
     rating: 0,
-  };
+  });
 
-  constructor(private readonly engineerService: EngineerService) {}
+  constructor(private readonly engineerService: EngineerService, private route: ActivatedRoute) {}
+  engineerId = 0;
 
   ngOnInit(): void {
-    const engineerId = 1000;
-
-    this.engineerService.getEngineer(engineerId).subscribe({
+    this.engineerId = Number(this.route.snapshot.paramMap.get('id'));
+    this.engineerService.getEngineer(this.engineerId).subscribe({
       next: (data) => {
-        this.engineer = data;
+        console.log('Engineer:', data);
+        this.engineer.set(data);
       },
       error: (err) => {
-        console.error('Failed to load engineer profile', err);
-      },
+        console.log(err);
+      }
     });
-
-    this.engineerService.getEngineerCards(engineerId).subscribe({
+    
+    this.engineerService.getEngineerCards(this.engineerId).subscribe({
       next: (data) => {
-        this.cards = data;
+        console.log('Cards:', data);
+        this.cards.set(data);
       },
       error: (err) => {
-        console.error('Failed to load engineer cards', err);
-      },
+        console.log(err);
+      }
     });
   }
 }

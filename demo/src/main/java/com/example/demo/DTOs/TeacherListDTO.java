@@ -3,5 +3,8 @@ public record TeacherListDTO(
         Long id,
         String firstName,
         String lastName,
-        String email
+        String email,
+        String education,
+        boolean status,
+        Long experience
 ) {}

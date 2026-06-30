@@ -4,7 +4,19 @@
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
+.active{
+  background:#d4edda;
+  color:#155724;
+  padding:4px 10px;
+  border-radius:20px;
+}
 
+.inactive{
+  background:#f8d7da;
+  color:#721c24;
+  padding:4px 10px;
+  border-radius:20px;
+}
 .dashbored {
   display: flex;
   min-height: 100vh;

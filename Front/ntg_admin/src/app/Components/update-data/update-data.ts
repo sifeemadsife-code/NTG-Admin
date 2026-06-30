@@ -1,9 +1,9 @@
-import { Engineer } from './../../Models/engineer';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { EngineerService } from '../../Services/engineer';
-import { Engineer as FullEngineer } from '../../Models/engineer';
+import { Engineer } from '../../Models/engineer';
 
 @Component({
   selector: 'app-update-data',
@@ -13,8 +13,9 @@ import { Engineer as FullEngineer } from '../../Models/engineer';
   styleUrls: ['./update-data.css'],
 })
 export class UpdateDataComponent implements OnInit {
-  engineer: Engineer = {
-    id: 1,
+
+  engineer = signal<Engineer>({
+    id: 0,
     firstName: '',
     lastName: '',
     email: '',
@@ -22,48 +23,43 @@ export class UpdateDataComponent implements OnInit {
     education: '',
     employmentHistory: '',
     numberOfYearsOfExperience: 0,
-  };
-  imageSrc = 'images/avatar.png';
-  private fullEngineer: FullEngineer | null = null;
+  });
 
-  constructor(private engineerService: EngineerService) {}
+  engineer_id!: number;
+
+  constructor(
+    private readonly engineerService: EngineerService,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.engineerService.getEngineer(1).subscribe((data) => {
-      this.fullEngineer = data;
-      this.engineer = {
-        id: 1,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        address: data.address,
-        education: data.education,
-        employmentHistory: data.employmentHistory,
-        numberOfYearsOfExperience: data.numberOfYearsOfExperience,
-      };
-      this.imageSrc = 'assets/images/avatar.png';
+
+    this.engineer_id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.engineerService.getEngineer(this.engineer_id).subscribe({
+      next: (data) => {
+        this.engineer.set(data);
+      },
+      error: (err) => {
+        console.error(err);
+      }
     });
+
   }
 
   saveEngineer(): void {
-    if (!this.fullEngineer) {
-      return;
-    }
 
-    const updatedEngineer: FullEngineer = {
-      ...this.fullEngineer,
-      id: 1,
-      firstName: this.engineer.firstName,
-      lastName: this.engineer.lastName,
-      email: this.engineer.email,
-      address: this.engineer.address,
-      education: this.engineer.education,
-      employmentHistory: this.engineer.employmentHistory,
-      numberOfYearsOfExperience: this.engineer.numberOfYearsOfExperience,
-    };
+    this.engineerService
+      .updateEngineer(this.engineer_id, this.engineer())
+      .subscribe({
+        next: () => {
+          alert('Engineer Updated Successfully');
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
 
-    this.engineerService.updateEngineer(this.engineer.id, updatedEngineer).subscribe(() => {
-      alert('Engineer Updated');
-    });
   }
+
 }

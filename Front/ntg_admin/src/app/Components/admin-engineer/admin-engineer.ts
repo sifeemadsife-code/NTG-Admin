@@ -1,60 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
-
+import { EngineerList } from '../../Models/engineer_list';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-admin-engineer',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './admin-engineer.html',
   styleUrl: './admin-engineer.css',
 })
-export class AdminEngineer {
-engineer: Engineer = {
-    id: 1,
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    education: '',
-    employmentHistory: '',
-    numberOfYearsOfExperience: 0,
-  };
-
-  cards: EngineerCards = {
-    students: 0,
-    reports: 0,
-    rating: 0,
-  };
-Engineers: any;
-
+export class AdminEngineer implements OnInit{
+  engineers = signal<EngineerList[]>([]);
   constructor(private readonly engineerService: EngineerService) {}
-
-
   ngOnInit(): void {
-
-  const engineerId = 1000;
-  this.engineerService.getEngineer(engineerId).subscribe({
-    next: (data) => {
-      console.log("Engineer:", data);
-      this.engineer = data;
-    },
-    error: (err) => {
-      console.log(err);
+    this.loadAllEngineers()
+  }
+  loadAllEngineers(){
+    this.engineerService.getAllEngineers().subscribe({
+      next: (data) => {
+        this.engineers.set(data);
+        console.log(data);
+      },
+      error : (err) => {
+        console.log(err);
+      }
+    })
+  }
+  deleteEngineer(id: number){
+    if(!confirm("Are you sure you want to delete this engineer?")){
+      return;
     }
-  });
-
-  this.engineerService.getEngineerCards(engineerId).subscribe({
-    next: (data) => {
-      console.log("Cards:", data);
-        this.cards = data;
-    },
-    error: (err) => {
-      console.log(err);
-    }
-  });
-}}
-
-
+    this.engineerService.deleteEngineer(id).subscribe({
+      next: () => {
+        alert("Engineer deleted successfully");
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+}

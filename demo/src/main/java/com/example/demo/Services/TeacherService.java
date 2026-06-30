@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -41,7 +42,10 @@ public class TeacherService {
                         t.getId(),
                         t.getUser().getFirstName(),
                         t.getUser().getLastName(),
-                        t.getUser().getEmail()
+                        t.getUser().getEmail(),
+                        t.getEducation(),
+                        t.getUser().getIsdeleted(),
+                        t.getNumberOfYearsOfExperience()
                 ))
                 .toList();
     }
@@ -49,7 +53,6 @@ public class TeacherService {
     public TeacherProfileDTO getTeacherProfile(Long teacherId) {
         var teacher = teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
-
         return new TeacherProfileDTO(
                 teacher.getId(),
                 teacher.getUser().getFirstName(),
@@ -128,5 +131,13 @@ public class TeacherService {
                 savedTeacher.getEmploymentHistory(),
                 savedTeacher.getNumberOfYearsOfExperience()
         );
+    }
+    @Transactional
+    public void deleteEngineer(Long id) {
+        Teacher tacher = teacherRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+        User user = tacher.getUser();
+        user.setIsdeleted(true);
+        teacherRepository.save(tacher);
     }
 }

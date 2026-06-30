@@ -7,14 +7,13 @@
       <div class="avatar-container">
         <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
 
-        <span class="status">
-        </span>
+        <span class="status"> </span>
       </div>
 
-      <h2>{{ engineer.firstName }}</h2>
+      <h2>{{ engineer().firstName }}</h2>
 
       <p class="job">
-        {{ engineer.education }}
+        {{ engineer().education }}
       </p>
     </div>
 
@@ -22,31 +21,22 @@
 
     <div class="info">
       <div class="info-item">
-
         <div class="info-text">
           <strong>Email</strong>
-          <span>{{ engineer.email }}</span>
+          <span>{{ engineer().email }}</span>
         </div>
       </div>
     </div>
 
-    <button class="message-btn">
-
-      Send Message
-    </button>
+    <button class="message-btn">Send Message</button>
   </aside>
   <main class="content">
     <div class="top-bar">
       <div class="search-box">
-
-
         <input type="text" placeholder="Search anything..." />
       </div>
 
-      <button class="back-btn">
-
-        Back
-      </button>
+      <button class="back-btn">Back</button>
     </div>
 
     <h1>Engineers</h1>
@@ -61,7 +51,7 @@
 
         <div class="card-data">
           <h4>Students</h4>
-          <h2>{{ cards.students }}</h2>
+          <h2>{{ cards().students }}</h2>
           <span>Assigned</span>
         </div>
       </div>
@@ -72,7 +62,7 @@
         </div>
         <div class="card-data">
           <h4>Reports</h4>
-          <h2>{{ cards.reports }}</h2>
+          <h2>{{ cards().reports }}</h2>
           <span>Submitted</span>
         </div>
       </div>
@@ -84,56 +74,54 @@
 
         <div class="card-data">
           <h4>Rating</h4>
-          <h2>{{ cards.rating }}</h2>
+          <h2>{{ cards().rating }}</h2>
           <span>Excellent</span>
         </div>
       </div>
     </div>
 
     <div class="tabs">
-      <span > Overview </span>
+      <i routerLink="/"><span> Overview </span></i>
 
-      <span class="active"> Personal Info </span>
+      <i routerLink="/engineerDetailsPersonalInfo"><span class="active"> Personal Info </span></i>
 
-      <span> Documents </span>
+      <i routerLink="/engineerDocumnets"><span> Documents </span></i>
 
-      <span> Reports </span>
+      <i><span> Reports </span></i>
     </div>
     <div class="profile-card" *ngIf="engineer">
       <div class="card-header">
-
         <h2>Personal Information</h2>
+      </div>
+      <div class="info-row">
+        <span class="label">Full Name</span>
+        <span class="value">{{ engineer().firstName }} {{ engineer().lastName }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Email Address</span>
+        <span class="value">{{ engineer().email }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Education</span>
+        <span class="value">{{ engineer().education }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Experience</span>
+        <span class="value">{{ engineer().numberOfYearsOfExperience }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Employment History</span>
+        <span class="value">{{ engineer().employmentHistory }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Address</span>
+        <span class="value">{{ engineer().address }}</span>
+      </div>
     </div>
-    <div class="info-row">
-      <span class="label">Full Name</span>
-      <span class="value">{{ engineer.firstName }} {{ engineer.lastName }}</span>
-    </div>
-
-  <div class="info-row">
-    <span class="label"> Email Address</span>
-    <span class="value">{{ engineer.email }}</span>
-  </div>
-
-  <div class="info-row">
-    <span class="label"> Education</span>
-    <span class="value">{{ engineer.education }}</span>
-  </div>
-
-  <div class="info-row">
-    <span class="label"> Experience</span>
-    <span class="value">{{ engineer.numberOfYearsOfExperience }}</span>
-  </div>
-
-  <div class="info-row">
-    <span class="label"> Employment History</span>
-    <span class="value">{{ engineer.employmentHistory }}</span>
-  </div>
-
-  <div class="info-row">
-    <span class="label"> Address</span>
-    <span class="value">{{ engineer.address }}</span>
-  </div>
-
-
-
-    </div>
+  </main>
+</div>

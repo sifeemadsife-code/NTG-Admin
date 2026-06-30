@@ -1,6 +1,8 @@
 import { EngineerService } from './../../Services/engineer';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Engineer } from '../../Models/engineer';
+import { EngineerCards } from '../../Models/engineer-cards';
 
 @Component({
   selector: 'app-engineer-details-documents',
@@ -11,35 +13,47 @@ import { CommonModule } from '@angular/common';
 })
 export class ngineerDetails implements OnInit {
 
-  engineerData: any = null;
-  documentsList: any[] = [];
+  engineer = signal<Engineer>({
+    id: 1,
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    education: '',
+    employmentHistory: '',
+    numberOfYearsOfExperience: 0,
+  });
 
-  constructor(private EngineerService: EngineerService) {}
+  cards = signal<EngineerCards>({
+    students: 0,
+    reports: 0,
+    rating: 0,
+  });
+
+  constructor(private readonly engineerService: EngineerService) {}
 
   ngOnInit(): void {
-    this.loadDocuments();
-  }
-  loadDocuments(): void {
-    this.EngineerService.getDocuments().subscribe({
+
+    const engineerId = 1000;
+
+    this.engineerService.getEngineer(engineerId).subscribe({
       next: (data) => {
-        this.documentsList = data;
+        console.log('Engineer:', data);
+        this.engineer.set(data);
       },
       error: (err) => {
-        console.error('Error loading documents:', err);
+        console.log(err);
       }
     });
-  }
-
-  onDeleteDocument(id: number): void {
-    if (confirm('Are you sure you want to delete this document?')) {
-      this.EngineerService.deleteDocument(id).subscribe({
-        next: () => {
-          this.loadDocuments();
-        },
-        error: (err) => {
-          console.error('Error deleting document:', err);
-        }
-      });
-    }
+    
+    this.engineerService.getEngineerCards(engineerId).subscribe({
+      next: (data) => {
+        console.log('Cards:', data);
+        this.cards.set(data);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }
