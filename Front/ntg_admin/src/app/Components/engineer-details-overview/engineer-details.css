@@ -33,25 +33,7 @@
 .logo {
   width: 110px;
 }
-.status {
-  position: absolute;
 
-  left: 50%;
-  bottom: -10px;
-
-  transform: translateX(-50%);
-
-  background: #2e7d32;
-  color: white;
-
-  padding: 4px 18px;
-
-  border-radius: 20px;
-
-  font-size: 12px;
-
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
 .profile {
   text-align: center;
   padding: 30px 20px;
@@ -63,10 +45,6 @@
   border-radius: 50%;
 }
 
-.status {
-  border-radius: 20px;
-  background: green;
-}
 
 .profile h2 {
   margin-top: 15px;
@@ -76,11 +54,6 @@
 .job {
   margin-top: 10px;
   font-size: 14px;
-}
-
-.salary {
-  margin-top: 10px;
-  font-size: 28px;
 }
 
 .info {
@@ -169,7 +142,7 @@
   border-radius: 20px;
   border: 1px solid #ddd;
 
-  box-shadow: 0 2px 8px rgba(144, 11, 9, 0.3);
+  box-shadow: 0 2px 8px gray;
 
   outline: none;
 }
@@ -206,7 +179,7 @@ h1 {
   flex: 1;
   background: white;
 
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 20px;
 
   display: flex;
@@ -217,15 +190,15 @@ h1 {
 }
 
 .students {
-  border-left: 5px solid #052c66;
+  border-left: 5px solid #05172F;
 }
 
 .reports {
-  border-left: 5px solid #8b0000;
+  border-left: 5px solid #8F0000;
 }
 
 .rating {
-  border-left: 5px solid orange;
+  border-left: 5px solid #DA7612;
 }
 
 .icon-box {
@@ -240,15 +213,15 @@ h1 {
 }
 
 .blue-box {
-  background: #052c66;
+  background: #05172F;
 }
 
 .red-box {
-  background: #8b0000;
+  background: #8F0000;
 }
 
 .orange-box {
-  background: orange;
+  background: #DA7612;
 }
 
 .card-icon {
@@ -275,15 +248,14 @@ h1 {
   border-bottom: 1px solid #ddd;
 }
 
-.tabs span {
-  padding-bottom: 15px;
-  font-size: 28px;
-  color: gray;
+.tabs a{
+  text-decoration: none;
+  color: #5F5E67;
+  font-size: 25px;
 }
-
 .tabs .active {
-  color: #0b3f85;
-  border-bottom: 4px solid #0b3f85;
+  color: #08356E;
+  border-bottom: 4px solid #08356E;
   font-weight: bold;
 }
 

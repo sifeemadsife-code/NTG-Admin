@@ -21,6 +21,7 @@
 
     <div class="info">
       <div class="info-item">
+        <i class="fa fa-envelope"><img src="images/email_icon.png" alt="" /></i>
         <div class="info-text">
           <strong>Email</strong>
           <span>{{ engineer().email }}</span>
@@ -81,13 +82,9 @@
     </div>
 
     <div class="tabs">
-      <i routerLink="/"><span> Overview </span></i>
+      <a [routerLink]="['/engineers', engineerId]">Overview</a>
 
-      <i routerLink="/engineerDetailsPersonalInfo"><span class="active"> Personal Info </span></i>
-
-      <i routerLink="/engineerDocumnets"><span> Documents </span></i>
-
-      <i><span> Reports </span></i>
+      <a [routerLink]="['/engineers', engineerId, 'personal-info']" class="active"> Personal Info </a>
     </div>
     <div class="profile-card" *ngIf="engineer">
       <div class="card-header">

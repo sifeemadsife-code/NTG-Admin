@@ -13,7 +13,7 @@
     </div>
     <div class="logo-text1">
       <img alt="icon" src="/images/reading.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Students</a></span>
+      <span class="sidebar-text"><a href="" routerLink="/studentsList">Students</a></span>
     </div>
     <div class="logo-text">
       <img alt="icon" src="/images/reports.png" width="25" height="25" />
@@ -69,7 +69,7 @@
           <option>Leave</option>
         </select>
 
-        <button class="add-btn" routerLink="/addEngineer">
+        <button class="add-btn" routerLink="addEngineer">
           <span>+</span>
           Add Engineer
         </button>
@@ -106,14 +106,14 @@
 
               <td>
                 <span [class.active]="!engineer.status" [class.inactive]="engineer.status">
-                  {{ engineer.status ? 'Inactive' : 'Active' }}
+                  {{ engineer.status ? 'Leave' : 'Active' }}
                 </span>
               </td>
               <td>{{ engineer.experience }} Years</td>
               <td class="actions">
-                <button [routerLink]="['/engineers', engineer.id, 'update-engineer']">✏️</button>
-                <button [routerLink]="['/engineers', engineer.id]">👁️</button>
-                <button (click)="deleteEngineer(engineer.id)">🗑️</button>
+                <button [routerLink]="['/engineers', engineer.id, 'update-engineer']"><img src="/images/edit_icon.png" alt=""></button>
+                <button [routerLink]="['/engineers', engineer.id]"><img src="/images/view_icon.png" alt=""></button>
+                <button (click)="deleteEngineer(engineer.id)"><img src="/images/delete_icon.png" alt=""></button>
               </td>
             </tr>
           } @empty {

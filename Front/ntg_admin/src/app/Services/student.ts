@@ -11,7 +11,7 @@ export class Student {
     private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
-  getAllStudents() : Observable<StudentsListInterface>{
-    return this.http.get<StudentsListInterface>(`${this.apiUrl}/students`)
+  getAllStudents() : Observable<StudentsListInterface[]>{
+    return this.http.get<StudentsListInterface[]>(`${this.apiUrl}/students`)
   }
 }

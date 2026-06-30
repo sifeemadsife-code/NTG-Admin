@@ -1,6 +1,7 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../Services/engineer';
+import { Student } from '../../Services/student';
 import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { ActivatedRoute, RouterLink } from "@angular/router";
@@ -31,28 +32,37 @@ export class EngineerDetailsOverView implements OnInit {
     rating: 0,
   });
 
+  totalStudents = signal<number>(0);
+
+  studentsPercentage = computed(() => {
+    const total = this.totalStudents();
+    if (!total) return 0;
+    return (this.cards().students / total) * 100;
+  });
+
   engineer_id = 0;
-  constructor(private readonly engineerService: EngineerService , private route: ActivatedRoute) {}
+  constructor(
+    private readonly engineerService: EngineerService,
+    private readonly studentService: Student,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
     this.engineer_id = Number(this.route.snapshot.paramMap.get('id'));
+
     this.engineerService.getEngineer(this.engineer_id).subscribe({
-      next: (data) => {
-        console.log('Engineer:', data);
-        this.engineer.set(data);
-      },
-      error: (err) => {
-        console.log(err);
-      }
+      next: (data) => this.engineer.set(data),
+      error: (err) => console.log(err)
     });
-    
+
     this.engineerService.getEngineerCards(this.engineer_id).subscribe({
-      next: (data) => {
-        console.log('Cards:', data);
-        this.cards.set(data);
-      },
-      error: (err) => {
-        console.log(err);
-      }
+      next: (data) => this.cards.set(data),
+      error: (err) => console.log(err)
+    });
+
+    this.studentService.getAllStudents().subscribe({
+      next: (data: any) => this.totalStudents.set(Array.isArray(data) ? data.length : 0),
+      error: (err) => console.log(err)
     });
   }
 }

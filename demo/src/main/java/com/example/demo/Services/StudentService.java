@@ -22,7 +22,9 @@ public class StudentService {
                 s.getId(),
                 s.getUser().getFirstName(),
                 s.getUser().getLastName(),
-                s.getStudentClass().getGrade().getName(),
+                s.getStudentClass() != null && s.getStudentClass().getGrade() != null
+                        ? s.getStudentClass().getGrade().getName()
+                        : null,
                 s.getUser().getIsdeleted()
         )).toList();
     }
