@@ -1,0 +1,24 @@
+{
+  "Training": [
+    {
+      "id": 1,
+      "name": "Web Development",
+      "description": "Full stack web development program",
+      "status": "Active",
+      "totalStudents": 35,
+      "assignedEngineers": 2,
+      "attendanceRate": 92,
+      "averageProgress": 75,
+      "averageScore": 4.6,
+      "category": "Technical",
+      "level": "Intermediate",
+      "startDate": "2024-05-15",
+      "endDate": "2024-07-10",
+      "duration": "8 Weeks",
+      "trainingHours": 80,
+      "capacity": 40,
+      "attendanceTrend": [32, 30, 52, 40, 60, 55, 74, 68, 81],
+      "performanceDistribution": [15, 25, 30, 20, 10, 5]
+    }
+  ]
+}

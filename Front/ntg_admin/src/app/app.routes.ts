@@ -7,12 +7,18 @@ import { NotFound } from './Components/not-found/not-found';
 import { UpdateDataComponent } from './Components/update-data/update-data';
 import { AddEngineer } from './Components/add-engineer/add-engineer';
 import { StudentsList } from './Components/students-list/students-list';
+import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
 
 export const routes: Routes = [
   {
     path: '',
+<<<<<<< HEAD
     component: AdminEngineer,
   },
+=======
+    component: TrainingProgramOverveiw
+    },
+>>>>>>> d3a0ebe5e5f71260fa9b81986b984a4a90945faa
   {
     path: 'engineers/:id',
     component: EngineerDetailsOverView,
