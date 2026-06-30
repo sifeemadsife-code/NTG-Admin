@@ -22,7 +22,7 @@ public class StudentService {
                 s.getId(),
                 s.getUser().getFirstName(),
                 s.getUser().getLastName(),
-                s.getStudentClass().getGrade(),
+                s.getStudentClass().getGrade().getName(),
                 s.getUser().getIsdeleted()
         )).toList();
     }

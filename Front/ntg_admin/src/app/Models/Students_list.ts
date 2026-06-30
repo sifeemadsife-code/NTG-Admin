@@ -1,11 +1,7 @@
-export interface StudentsList {
+export interface StudentsListInterface {
   id: number;
-  name: string;
-  email: string;
-  phone: string;
-  experience: number;
-  skills: string[];
-  rating: number;
-  students: number;
-  reports: number;
+  first_name: string;
+  last_name: string;
+  grade: any;
+  status: boolean;
 }
