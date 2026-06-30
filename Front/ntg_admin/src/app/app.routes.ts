@@ -10,25 +10,30 @@ import { AddEngineer } from './Components/add-engineer/add-engineer';
 export const routes: Routes = [
   {
     path: '',
-    component: AddEngineer  },
+    component: AdminEngineer,
+  },
   {
     path: 'engineers/:id',
-    component: EngineerDetailsOverView
+    component: EngineerDetailsOverView,
   },
   {
     path: 'engineers/:id/personal-info',
-    component: EngineerDetailsPersonalInfo
+    component: EngineerDetailsPersonalInfo,
   },
   {
     path: 'engineers/:id/documents',
-    component: ngineerDetails
+    component: ngineerDetails,
   },
   {
-    path : "engineers/:id/update-engineer",
-    component: UpdateDataComponent
+    path: 'engineers/:id/update-engineer',
+    component: UpdateDataComponent,
+  },
+  {
+    path: 'addEngineer',
+    component: AddEngineer
   },
   {
     path: '**',
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ];
