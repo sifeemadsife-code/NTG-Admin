@@ -33,6 +33,10 @@ export const routes: Routes = [
     component: StudentsList
   },
   {
+    path: "trainingProgramDetails",
+    component: TrainingProgramOverveiw
+  },
+  {
     path: '**',
     component: NotFound,
   },

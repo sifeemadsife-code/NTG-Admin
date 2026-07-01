@@ -88,13 +88,14 @@ a {
 
 .page{
   margin-left: 8%;
-  margin-bottm: 2%;
+  margin-bottom: 2%;
   margin-top: 2%;
   display: flex;
-  height: 90vh;
+  height: 80vh;
   border-radius: 20px;
   background-color: white;
   gap: 20px;
+
 }
 .logo-page{
   background-color: #05172F;
@@ -165,4 +166,11 @@ p{
   margin-top:5px;
   margin-bottom: 5px;
 
+}
+.name{
+  display: flex;
+  justify-content: space-between;
+}
+.name input{
+  width: 150px;
 }

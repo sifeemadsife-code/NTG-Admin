@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @Table(name = "TRAINING_PROGRAM")
 public class TrainingProgram {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROGRAM_ID", nullable = false)
     private Long id;
 

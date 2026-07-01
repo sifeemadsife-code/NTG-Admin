@@ -1,5 +1,5 @@
 <div class="dashbored">
-<aside class="sidebar">
+  <aside class="sidebar">
     <div class="logo-section">
       <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
@@ -42,7 +42,7 @@
   </aside>
 
   <div class="engineers-page">
-      <!-- Header -->
+    <!-- Header -->
     <div class="page-header">
       <div>
         <h1>Training Programs</h1>
@@ -50,158 +50,97 @@
       </div>
     </div>
 
-    <div class="page" >
-
-  <div class="header">
-
-      <div class="title">
-
+    <div class="page">
+      <div class="header">
+        <div class="title">
           <div class="icon">
-              <img src="/images/code1.png" alt="Code Icon" width="50" height="45" />
+            <img src="/images/code1.png" alt="Code Icon" width="50" height="45" />
           </div>
 
           <div>
+            <h2>{{ training().programName }}</h2>
 
-              <h2>{{program.name}}</h2>
-
-              <p>{{program.description}}</p>
-
+            <p>{{ training().description }}</p>
           </div>
 
           <span class="status">
-              {{program.status}}
+            {{ training().teacherFirstName }} {{ training().teacherLastName }}
           </span>
+        </div>
 
+        <div class="buttons">
+          <button class="edit">Edit Program</button>
+
+          <button class="assign">+ Assign Student</button>
+        </div>
       </div>
 
-      <div class="buttons">
-
-          <button class="edit">
-              Edit Program
-          </button>
-
-          <button class="assign">
-              + Assign Student
-          </button>
-
-      </div>
-
-  </div>
-
-  <div class="cards">
-
-      <div class="card">
-
-          <h2>{{program.totalStudents}}</h2>
+      <div class="cards">
+        <div class="card">
+          <h2>{{ training().totalStudents }}</h2>
 
           <p>Total Students</p>
+        </div>
 
-      </div>
-
-      <div class="card">
-
-          <h2>{{program.assignedEngineers}}</h2>
+        <div class="card">
+          <h2>1</h2>
 
           <p>Assigned Engineers</p>
-
+        </div>
       </div>
 
-      <div class="card">
-
-          <h2>{{program.attendanceRate}}%</h2>
-
-          <p>Attendance Rate</p>
-
+      <div class="tabs">
+        <a class="active">Overview</a>
+        <a>Students</a>
+        <a>Engineers</a>
+        <a>Reports</a>
+        <a>Assessments</a>
       </div>
 
-      <div class="card">
+      <div class="content">
+        <div class="chart">Attendance Trend Chart</div>
 
-          <h2>{{program.averageProgress}}%</h2>
+        <div class="chart">Student Progress Chart</div>
 
-          <p>Average Progress</p>
+        <div class="chart">Performance Distribution</div>
 
-      </div>
-
-      <div class="card">
-
-          <h2>{{program.averageScore}}</h2>
-
-          <p>Average Score</p>
-
-      </div>
-
-  </div>
-
-  <div class="tabs">
-
-      <a class="active">Overview</a>
-      <a>Students</a>
-      <a>Engineers</a>
-      <a>Reports</a>
-      <a>Assessments</a>
-
-  </div>
-
-  <div class="content">
-
-      <div class="chart">
-          Attendance Trend Chart
-      </div>
-
-      <div class="chart">
-          Student Progress Chart
-      </div>
-
-      <div class="chart">
-          Performance Distribution
-      </div>
-
-      <div class="info">
-
+        <div class="info">
           <h3>Program Information</h3>
 
           <div class="row">
-              <span>Category</span>
-              <strong>{{program.category}}</strong>
+            <span>Program Name</span>
+            <strong>{{ training().programName }}</strong>
+          </div>
+          <div class="row">
+            <span>Duration</span>
+            <strong>{{ training().description }}</strong>
+          </div>
+          <div class="row">
+            <span>Teacher</span>
+            <strong>{{ training().teacherFirstName }} {{ training().teacherLastName }}</strong>
           </div>
 
           <div class="row">
-              <span>Level</span>
-              <strong>{{program.level}}</strong>
+            <span>Start Date</span>
+            <strong>{{ training().startDate }}</strong>
           </div>
 
           <div class="row">
-              <span>Start Date</span>
-              <strong>{{program.startDate}}</strong>
+            <span>End Date</span>
+            <strong>{{ training().endDate }}</strong>
           </div>
 
           <div class="row">
-              <span>End Date</span>
-              <strong>{{program.endDate}}</strong>
+            <span>Location</span>
+            <strong>{{ training().location }}</strong>
           </div>
 
           <div class="row">
-              <span>Duration</span>
-              <strong>{{program.duration}}</strong>
+            <span>Total Students</span>
+            <strong>{{ training().totalStudents }}</strong>
           </div>
-
-          <div class="row">
-              <span>Training Hours</span>
-              <strong>{{program.trainingHours}}</strong>
-          </div>
-
-          <div class="row">
-              <span>Capacity</span>
-              <strong>{{program.capacity}}</strong>
-          </div>
-
+        </div>
       </div>
-
-  </div>
-
-</div>
+    </div>
   </div>
 </div>
-
-
-

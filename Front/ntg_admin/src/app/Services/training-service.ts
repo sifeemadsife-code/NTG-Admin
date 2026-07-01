@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Training } from '../Models/Training';
@@ -8,10 +8,9 @@ import { Training } from '../Models/Training';
 })
 export class TrainingService {
 
-  private apiUrl = 'https://your-api.com/api/programs/1';
+  private apiUrl = 'http://localhost:8080/api/training-programs/1';
 
   constructor(private http: HttpClient) {}
-
   getProgram(): Observable<Training> {
     return this.http.get<Training>(this.apiUrl);
   }

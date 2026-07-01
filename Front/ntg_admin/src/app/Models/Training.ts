@@ -1,23 +1,13 @@
 export interface Training {
   id: number;
-  name: string;
+  teacherId: number;
+  teacherFirstName: string;
+  teacherLastName: string;
+  programName: string;
   description: string;
-  status: string;
-
+  startDate: Date;
+  endDate: Date;
+  location: string;
+  createdAt: Date;
   totalStudents: number;
-  assignedEngineers: number;
-  attendanceRate: number;
-  averageProgress: number;
-  averageScore: number;
-
-  category: string;
-  level: string;
-  startDate: string;
-  endDate: string;
-  duration: string;
-  trainingHours: number;
-  capacity: number;
-
-  attendanceTrend: number[];
-  performanceDistribution: number[];
 }
