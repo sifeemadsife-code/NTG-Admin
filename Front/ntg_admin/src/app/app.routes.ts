@@ -15,7 +15,11 @@ import { CreateTrainingProgramComponent } from './Components/create-training-pro
 export const routes: Routes = [
   {
     path: '',
+<<<<<<< HEAD
     component: AdminEngineer,
+=======
+    component: CreateTrainingProgramComponent,
+>>>>>>> 0f634fccf50305879a34db8a48e9a9c2a2cd73a9
     },
   {
     path: 'engineers/:id',
