@@ -79,7 +79,7 @@
         </button>
 
         <button class="assign">
-            + Assign Student
+            + Assign  Engineer
         </button>
 
     </div>
@@ -109,21 +109,23 @@
 
 <div class="tabs">
 
-    <a>Overview</a>
-    <a class="active">Students</a>
-    <a>Engineers</a>
+    <a >Overview</a>
+    <a>Students</a>
+    <a class="active">Engineers</a>
+
+
 </div>
 
 <div class="table-card">
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Student</th>
-          <th>Grade</th>
-          <th>Attendance</th>
+          <th>Engineer</th>
+          <th>Experience</th>
+          <th>Rating</th>
           <th>Status</th>
           <th>Actions</th>
+
 
         </tr>
       </thead>
@@ -139,15 +141,17 @@
 
             <td></td>
 
-            <td></td>
 
             <td>
               <span [class.active]="" [class.inactive]="">
+
               </span>
             </td>
 
             <td class="actions">
-              <a class="icon-btn"><img src="/images/view_icon.png" alt=""></a>
+              <a class="icon-btn" [routerLink]="['/engineers', 'update-engineer']">✏️</a>
+              <a class="icon-btn" [routerLink]="['/engineers']">👁️</a>
+
             </td>
           </tr>
       </tbody>

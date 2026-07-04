@@ -10,11 +10,19 @@ import { StudentsList } from './Components/students-list/students-list';
 import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
 import { ProgramsList } from './Components/programs-list/programs-list';
 import { TrainingProgramStudents } from './Components/training-program-students/training-program-students';
+<<<<<<< HEAD
 import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
 export const routes: Routes = [
   {
     path: '',
     component: AdminEngineer,
+=======
+import { TrainingProgramEngineer } from './Components/training-program-engineer/training-program-engineer';
+export const routes: Routes = [
+  {
+    path: '',
+    component: TrainingProgramEngineer,
+>>>>>>> bb1a55b5a275b0b34f9b331e2685d7ce5dbae65b
     },
   {
     path: 'engineers/:id',
