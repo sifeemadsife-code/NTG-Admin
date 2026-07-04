@@ -5,7 +5,7 @@ import { Student } from '../../Services/student';
 import { StudentsListInterface } from '../../Models/Students_list';
 @Component({
   selector: 'app-students-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './students-list.html',
   styleUrl: './students-list.css',
 })
