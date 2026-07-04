@@ -1,3 +1,4 @@
+import { TrainingProgramList } from './Models/training_program_list';
 import { Routes } from '@angular/router';
 import { AdminEngineer } from './Components/admin-engineer/admin-engineer';
 import { EngineerDetailsOverView } from './Components/engineer-details-overview/engineer-details';
@@ -9,10 +10,11 @@ import { StudentsList } from './Components/students-list/students-list';
 import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
 import { ProgramsList } from './Components/programs-list/programs-list';
 import { TrainingProgramStudents } from './Components/training-program-students/training-program-students';
+import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
 export const routes: Routes = [
   {
     path: '',
-    component: TrainingProgramStudents,
+    component: AdminEngineer,
     },
   {
     path: 'engineers/:id',
@@ -35,8 +37,16 @@ export const routes: Routes = [
     component: StudentsList
   },
   {
-    path: "trainingProgramDetails",
+    path: "programs/:id",
     component: TrainingProgramOverveiw
+  },
+  {
+    path: "programs/:id/students",
+    component: TrainingProgramStudents
+  },
+  {
+    path: "createProgram",
+    component: CreateTrainingProgramComponent
   },
   {
     path: "trainingProgramsList",

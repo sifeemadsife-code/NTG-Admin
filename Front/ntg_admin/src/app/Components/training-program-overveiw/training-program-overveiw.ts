@@ -4,10 +4,11 @@ import { TrainingService } from '../../Services/training-service';
 import { Training } from '../../Models/Training';
 import { Student } from '../../Services/student';
 import { Chart } from 'chart.js/auto';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-training-program-overveiw',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './training-program-overveiw.html',
   styleUrls: ['./training-program-overveiw.css'],
 })
@@ -15,6 +16,7 @@ export class TrainingProgramOverveiw implements OnInit {
   constructor(
     private service: TrainingService,
     private studentService: Student,
+    private route: ActivatedRoute,
   ) {}
   training = signal<Training>({
     id: 1,
@@ -29,9 +31,11 @@ export class TrainingProgramOverveiw implements OnInit {
     createdAt: new Date('0-0-0'),
     totalStudents: 0,
   });
+  engineer_id = 0;
   studentCount = signal(0);
   ngOnInit() {
-    this.service.getProgram(1).subscribe({
+    this.engineer_id = Number(this.route.snapshot.paramMap.get('id'));
+    this.service.getProgram(this.engineer_id).subscribe({
       next: (data) => {
         (this.training.set(data), console.log(data));
         this.checkDataReady();

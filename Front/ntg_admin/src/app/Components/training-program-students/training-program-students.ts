@@ -2,7 +2,7 @@ import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrainingService } from '../../Services/training-service';
 import { Training } from '../../Models/Training';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { StudentsListInterface } from '../../Models/Students_list';
 import { Student } from '../../Services/student';
@@ -18,7 +18,7 @@ export class TrainingProgramStudents implements OnInit {
 program!: Training;
   loading = true;
 
-  constructor(private service: TrainingService) {}
+  constructor(private service: TrainingService, private route: ActivatedRoute) {}
   training = signal<Training>({
     id: 1,
     teacherId: 1,
@@ -43,8 +43,10 @@ program!: Training;
     if (!total) return 0;
     return (this.cards().students / total) * 100;
   });
+  program_id = 0;
   ngOnInit() {
-    this.service.getProgram(this.training().id).subscribe({
+    this.program_id = Number(this.route.snapshot.paramMap.get('id'))
+    this.service.getProgram(this.program_id).subscribe({
       next: (data) => {
         (this.training.set(data), console.log(data));
       },

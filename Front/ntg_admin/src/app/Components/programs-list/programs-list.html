@@ -41,62 +41,62 @@
     </div>
   </aside>
   <div class="engineers-page">
-  <div class="page-header">
+    <div class="page-header">
       <div>
         <h1>Training Programs</h1>
         <p>Dashboard > Training Programs</p>
       </div>
     </div>
-    <div class="add-e" >
-  <div class="card">
-    <div class="cycle">
-      <img src="images/programs.png" alt="" />
+    <div class="add-e">
+      <div class="card">
+        <div class="cycle">
+          <img src="images/programs.png" alt="" />
+        </div>
+        <div>
+          <h4 class="card-title">Total Programs</h4>
+          <h2 class="card-value">{{ count }}</h2>
+        </div>
+      </div>
+      <button class="add-button" routerLink="/createProgram">
+        <img src="images/add_icon.png" alt="" />
+        + Create Program
+      </button>
     </div>
-    <div>
-      <h4 class="card-title">Total Programs</h4>
-      <h2 class="card-value">20</h2>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Students</th>
+            <th>Engineer</th>
+            <th>Duration</th>
+            <th>Start Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (program of programs(); track program.id) {
+            <tr>
+              <td>{{ program.program_name }}</td>
+              <td>{{ program.total_students }}</td>
+              <td>1</td>
+              <td>{{ program.duration }}</td>
+              <td>{{ program.start_date }}</td>
+              <td class="actions">
+                <button><img src="/images/edit_icon.png" alt="" /></button>
+                <button [routerLink]="['/programs', program.id]">
+                  <img src="/images/view_icon.png" alt="" />
+                </button>
+                <button><img src="/images/delete_icon.png" alt="" /></button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">No Programs</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
-  <button class="add-button">
-    <img src="images/add_icon.png" alt="" />
-    + Create Program
-  </button>
-</div>
-   <div class="table-card">
-<table>
-    <thead>
-      <tr>
-        <th>Program</th>
-        <th>Students</th>
-        <th>Engineer</th>
-        <th>Duration</th>
-        <th>Start Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (program of programs(); track program.id) {
-        <tr>
-          <td>{{ program.program_name }}</td>
-          <td>{{ program.total_students }}</td>
-          <td>1</td>
-          <td>{{ program.duration }}</td>
-          <td>{{ program.start_date }}</td>
-          <td class="actions">
-            <button><img src="/images/edit_icon.png" alt="" /></button>
-            <button><img src="/images/view_icon.png" alt="" /></button>
-            <button><img src="/images/delete_icon.png" alt="" /></button>
-          </td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="6">No Programs</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-   </div>
-
-  </div>
-
 </div>
