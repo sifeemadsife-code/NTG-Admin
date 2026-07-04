@@ -8,10 +8,11 @@ import { AddEngineer } from './Components/add-engineer/add-engineer';
 import { StudentsList } from './Components/students-list/students-list';
 import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
 import { ProgramsList } from './Components/programs-list/programs-list';
+import { TrainingProgramStudents } from './Components/training-program-students/training-program-students';
 export const routes: Routes = [
   {
     path: '',
-    component: AdminEngineer
+    component: TrainingProgramStudents,
     },
   {
     path: 'engineers/:id',
