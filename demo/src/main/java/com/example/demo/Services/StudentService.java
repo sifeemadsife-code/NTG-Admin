@@ -28,4 +28,7 @@ public class StudentService {
                 s.getUser().getIsdeleted()
         )).toList();
     }
+    public Long countStudents() {
+        return studentRepository.count();
+    }
 }

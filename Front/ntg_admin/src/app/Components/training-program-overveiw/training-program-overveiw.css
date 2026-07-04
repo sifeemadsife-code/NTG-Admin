@@ -33,7 +33,7 @@
 .logo-section {
   margin: 10% 0 0 5%;
   width: 100%;
-  height: 6%;
+  height: 8%;
   background: #EEEEEE;
   border-bottom-left-radius: 35px;
   border-top-left-radius: 35px;
@@ -94,7 +94,7 @@ a {
 .engineers-page {
   flex: 1;
   padding: 30px;
-  background: #f7f8fc;
+  background: #EEEEEE;
   min-height: 100vh;
 }
 
@@ -134,7 +134,7 @@ a {
 .icon{
     width:60px;
     height:60px;
-    background:#6246ea;
+    background:#620000;
     color:white;
     border-radius:15px;
     display:flex;
@@ -144,8 +144,8 @@ a {
 }
 
 .status{
-    background:#8dd3a7;
-    color:#fff;
+    background:#620000;
+    color:#ffffff;
     padding:5px 12px;
     border-radius:20px;
     font-size:12px;
@@ -155,7 +155,9 @@ a {
     display:flex;
     gap:15px;
 }
-
+.description{
+  color: gray;
+}
 .edit{
     padding:12px 25px;
     border:1px solid #ccc;
@@ -166,14 +168,14 @@ a {
 .assign{
     padding:12px 25px;
     border:none;
-    background:#11284b;
+    background:#05172F;
     color:white;
     border-radius:10px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:20px;
     margin:25px 0;
 }
@@ -185,11 +187,16 @@ a {
     text-align:center;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
-
+.num{
+  color: #620000;
+  margin: 2%;
+}
 .tabs{
     display:flex;
     gap:40px;
     margin-bottom:25px;
+    border-bottom: 0.2px gray solid;
+    justify-content: space-around;
 }
 
 .tabs a{
@@ -200,8 +207,10 @@ a {
 }
 
 .tabs .active{
-    color:#1d4ed8;
-    border-bottom:3px solid #1d4ed8;
+  border-radius: 0;
+  background-color: transparent;
+  border-bottom: 3px #620000 solid;
+  color: #620000;
 }
 
 .content{

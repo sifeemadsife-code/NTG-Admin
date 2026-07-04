@@ -18,8 +18,16 @@ import java.time.LocalDate;
 @Table(name = "TRAINING_PROGRAM")
 public class TrainingProgram {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PROGRAM_ID", nullable = false)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "training_program_seq"
+    )
+    @SequenceGenerator(
+            name = "training_program_seq",
+            sequenceName = "TRAINING_PROGRAM_SEQ",
+            allocationSize = 1
+    )
+    @Column(name = "PROGRAM_ID")
     private Long id;
 
     @NotNull

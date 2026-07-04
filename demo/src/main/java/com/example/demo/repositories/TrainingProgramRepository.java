@@ -11,9 +11,6 @@ public interface TrainingProgramRepository extends JpaRepository<TrainingProgram
     List<TrainingProgram> findByTeacherId(Long teacherId);
     List<TrainingProgram> findByUserId(Long userId);
 
-    @Query("SELECT COALESCE(MAX(t.id), 0) + 1 FROM TrainingProgram t")
-    Long getNextId();
-
     @Query("SELECT COUNT(DISTINCT m.user.id) FROM Mark m WHERE m.course.teacher.id = :teacherId")
     long countStudentsByTeacherId(@Param("teacherId") Long teacherId);
 }

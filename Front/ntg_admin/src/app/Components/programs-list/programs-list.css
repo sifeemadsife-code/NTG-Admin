@@ -1,0 +1,30 @@
+.list {
+  background-color: #eeeeee;
+  height: 100vh;
+  position: relative;
+}
+.card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 30%;
+  height: 15%;
+  border-radius: 5px;
+  border-left: 5px solid #05172f;
+  justify-self: center;
+  text-align: center;
+  margin-top: 100px;
+  position: absolute;
+}
+
+.cycle{
+  background-color: #05172f;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  align-content: center;
+  margin: 0 50px 0 50px;
+}
+.cycle img{
+  width: 50px;
+}

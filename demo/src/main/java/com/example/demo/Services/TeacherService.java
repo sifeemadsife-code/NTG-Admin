@@ -1,10 +1,6 @@
 package com.example.demo.Services;
 
-import com.example.demo.DTOs.CreateEngineerRequestDTO;
-import com.example.demo.DTOs.EngineerCardsDTO;
-import com.example.demo.DTOs.EngineerFeedbackResponseDTO;
-import com.example.demo.DTOs.TeacherListDTO;
-import com.example.demo.DTOs.TeacherProfileDTO;
+import com.example.demo.DTOs.*;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.Teacher;
 import com.example.demo.entities.User;
@@ -139,5 +135,40 @@ public class TeacherService {
         User user = tacher.getUser();
         user.setIsdeleted(true);
         teacherRepository.save(tacher);
+    }
+    @Transactional
+    public TeacherProfileDTO updateEngineer(Long id, UpdateEngineerRequestDTO request) {
+        Teacher teacher = teacherRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+        User user = teacher.getUser();
+
+        if (userRepository.existsByEmail(request.email())
+                && !user.getEmail().equals(request.email())) {
+            throw new RuntimeException("Email already registered");
+        }
+
+        user.setFirstName(request.firstName());
+        user.setLastName(request.lastName());
+        user.setEmail(request.email());
+        user.setAddress(request.address());
+
+        teacher.setEducation(request.education());
+        teacher.setEmploymentHistory(request.employmentHistory());
+        teacher.setNumberOfYearsOfExperience(request.numberOfYearsOfExperience());
+
+        userRepository.save(user);
+        Teacher savedTeacher = teacherRepository.save(teacher);
+
+        return new TeacherProfileDTO(
+                savedTeacher.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getAddress(),
+                savedTeacher.getEducation(),
+                savedTeacher.getEmploymentHistory(),
+                savedTeacher.getNumberOfYearsOfExperience()
+        );
     }
 }

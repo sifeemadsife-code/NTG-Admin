@@ -1,0 +1,43 @@
+<section class="list">
+  <div class="card">
+    <div class="cycle">
+      <img src="images/programs.png" alt="" />
+    </div>
+    <div>
+      <h4>Total Programs</h4>
+      <h2>20</h2>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Program</th>
+        <th>Students</th>
+        <th>Engineer</th>
+        <th>Duration</th>
+        <th>Start Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (program of programs(); track program.id) {
+        <tr>
+          <td>{{ program.program_name }}</td>
+          <td>{{ program.total_students }}</td>
+          <td>1</td>
+          <td>{{ program.duration }}</td>
+          <td>{{ program.start_date }}</td>
+          <td class="actions">
+            <button><img src="/images/edit_icon.png" alt="" /></button>
+            <button><img src="/images/view_icon.png" alt="" /></button>
+            <button><img src="/images/delete_icon.png" alt="" /></button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="6">No Programs</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

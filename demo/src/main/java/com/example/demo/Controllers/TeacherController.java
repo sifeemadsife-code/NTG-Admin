@@ -1,13 +1,14 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.DTOs.CreateEngineerRequestDTO;
-import com.example.demo.DTOs.EngineerCardsDTO;
-import com.example.demo.DTOs.EngineerFeedbackResponseDTO;
-import com.example.demo.DTOs.TeacherListDTO;
-import com.example.demo.DTOs.TeacherProfileDTO;
+import com.example.demo.DTOs.*;
 import com.example.demo.Services.TeacherService;
+import com.example.demo.entities.Teacher;
+import com.example.demo.entities.User;
+import com.example.demo.repositories.TeacherRepository;
+import com.example.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 public class TeacherController {
 
     private final TeacherService teacherService;
+    private final UserRepository userRepository;
+    private final TeacherRepository teacherRepository;
 
     @GetMapping
     public List<TeacherListDTO> getAllTeachers() {
@@ -50,5 +53,8 @@ public class TeacherController {
     public void deleteEngineer(@PathVariable Long id) {
         teacherService.deleteEngineer(id);
     }
-
+    @PutMapping("/{id}")
+    public TeacherProfileDTO updateEngineer(@RequestBody UpdateEngineerRequestDTO request, @PathVariable Long id) {
+        return teacherService.updateEngineer(id, request);
+    }
 }

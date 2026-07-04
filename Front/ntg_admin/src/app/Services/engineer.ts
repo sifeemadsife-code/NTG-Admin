@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { EngineerCards } from '../Models/engineer-cards';
-import { createEngineer } from '../Models/create_engineer';
+import { CreateEngineer } from '../Models/create_engineer';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class EngineerService {
   deleteEngineer(id: number){
     return this.http.delete(`${this.apiUrl}/teachers/${id}`);
   }
-  addEngineer(engineer : createEngineer): Observable<createEngineer>{
-    return this.http.post<createEngineer>(this.apiUrl, engineer);
+  addEngineer(engineer: CreateEngineer): Observable<Engineer>{
+    return this.http.post<Engineer>(`${this.apiUrl}/teachers`, engineer);
   }
 }

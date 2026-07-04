@@ -7,6 +7,7 @@ import { UpdateDataComponent } from './Components/update-data/update-data';
 import { AddEngineer } from './Components/add-engineer/add-engineer';
 import { StudentsList } from './Components/students-list/students-list';
 import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
+import { ProgramsList } from './Components/programs-list/programs-list';
 export const routes: Routes = [
   {
     path: '',
@@ -35,6 +36,14 @@ export const routes: Routes = [
   {
     path: "trainingProgramDetails",
     component: TrainingProgramOverveiw
+  },
+  {
+    path: "trainingProgramsList",
+    component: ProgramsList
+  },
+  {
+    path: "notfications",
+    component: Notification
   },
   {
     path: '**',

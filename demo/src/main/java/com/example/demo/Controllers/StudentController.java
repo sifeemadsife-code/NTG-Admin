@@ -20,4 +20,8 @@ public class StudentController {
     public List<StudentDTO> getAllStudents() {
         return studentService.findAllStudents();
     }
+    @GetMapping("/count")
+    public Long countStudents() {
+        return studentService.countStudents();
+    }
 }

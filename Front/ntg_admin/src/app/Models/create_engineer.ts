@@ -1,10 +1,9 @@
-export interface createEngineer {
-  id: number;
+export interface CreateEngineer {
   firstName: string;
-  lastName : string;
+  lastName: string;
   email: string;
-  password : number;
-  education : string;
-  employmentHistory : string;
-  numberOfYearsOfExperience : number;
+  password: string;
+  education: string;
+  employmentHistory: string;
+  numberOfYearsOfExperience: number | null;
 }

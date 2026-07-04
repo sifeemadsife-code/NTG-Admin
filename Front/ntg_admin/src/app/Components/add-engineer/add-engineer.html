@@ -13,7 +13,7 @@
     </div>
     <div class="logo-text1">
       <img alt="icon" src="/images/reading.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Students</a></span>
+      <span class="sidebar-text"><a routerLink="/studentsList">Students</a></span>
     </div>
     <div class="logo-text">
       <img alt="icon" src="/images/reports.png" width="25" height="25" />
@@ -43,7 +43,6 @@
 
   <div class="engineers-page">
 
-
     <div class="page-header">
       <div>
         <h1>Engineers</h1>
@@ -51,29 +50,73 @@
       </div>
     </div>
 
-
-
-    <div class="page">
+    <form class="page" (ngSubmit)="addEngineer()" #engineerForm="ngForm">
       <div class="logo-page">
         <img class="image-logo" src="/images/reading.png" alt="image for engineer">
       </div>
       <div class="form">
         <h1>Personal Information</h1>
+
+        @if (errorMessage()) {
+          <p class="error-text">{{ errorMessage() }}</p>
+        }
+
         <div class="name">
           <p class="name-l">First Name</p>
-          <input class="input-form" type="text" placeholder="Enter First Name">
+          <input
+            class="input-form"
+            type="text"
+            name="firstName"
+            placeholder="Enter First Name"
+            [(ngModel)]="newEngineer().firstName"
+            required>
           <p class="name-l">last Name</p>
-          <input class="input-form" type="text" placeholder="Enter Last Name">
+          <input
+            class="input-form"
+            type="text"
+            name="lastName"
+            placeholder="Enter Last Name"
+            [(ngModel)]="newEngineer().lastName"
+            required>
         </div>
         <p>Email</p>
-        <input class="input-form" type="email" placeholder="Enter Email">
+        <input
+          class="input-form"
+          type="email"
+          name="email"
+          placeholder="Enter Email"
+          [(ngModel)]="newEngineer().email"
+          required>
         <p>Password</p>
-        <input class="input-form" type="text" placeholder="Enter Password">
+        <input
+          class="input-form"
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          [(ngModel)]="newEngineer().password"
+          required>
         <h1>Professional Information</h1>
-        <input class="input-form1" type="text" placeholder="Enter Education">
-        <input class="input-form1" type="text" placeholder="Experience(years)">
-        <input class="input-form2" type="text" placeholder="Employment History">
-        <button>Add Engineer</button>
+        <input
+          class="input-form1"
+          type="text"
+          name="education"
+          placeholder="Enter Education"
+          [(ngModel)]="newEngineer().education">
+        <input
+          class="input-form1"
+          type="number"
+          name="numberOfYearsOfExperience"
+          placeholder="Experience(years)"
+          [(ngModel)]="newEngineer().numberOfYearsOfExperience">
+        <input
+          class="input-form2"
+          type="text"
+          name="employmentHistory"
+          placeholder="Employment History"
+          [(ngModel)]="newEngineer().employmentHistory">
+        <button type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Adding...' : 'Add Engineer' }}
+        </button>
       </div>
-    </div>
+    </form>
 </div>

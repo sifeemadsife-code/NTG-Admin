@@ -18,6 +18,8 @@ import java.util.Set;
 @Table(name = "COURSE")
 public class Course {
     @Id
+    @SequenceGenerator(name = "course_seq_gen", sequenceName = "COURSE_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_seq_gen")
     @Column(name = "COURSE_ID", nullable = false)
     private Long id;
 

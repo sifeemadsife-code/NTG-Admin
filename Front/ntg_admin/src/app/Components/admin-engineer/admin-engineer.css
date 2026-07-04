@@ -6,12 +6,15 @@
 }
 .active {
   background: #108039;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 4px 10px;
   border-radius: 20px;
 }
-td{
-    text-align: center;
+td {
+  text-align: center;
+}
+th {
+  text-align: center;
 }
 .inactive {
   background: #900b09;

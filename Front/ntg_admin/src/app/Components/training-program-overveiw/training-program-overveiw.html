@@ -42,7 +42,6 @@
   </aside>
 
   <div class="engineers-page">
-    <!-- Header -->
     <div class="page-header">
       <div>
         <h1>Training Programs</h1>
@@ -60,9 +59,8 @@
           <div>
             <h2>{{ training().programName }}</h2>
 
-            <p>{{ training().description }}</p>
+            <p class="description">{{ training().description }}</p>
           </div>
-
           <span class="status">
             {{ training().teacherFirstName }} {{ training().teacherLastName }}
           </span>
@@ -77,13 +75,13 @@
 
       <div class="cards">
         <div class="card">
-          <h2>{{ training().totalStudents }}</h2>
+          <h2 class="num">{{ training().totalStudents }}</h2>
 
           <p>Total Students</p>
         </div>
 
         <div class="card">
-          <h2>1</h2>
+          <h2 class="num">1</h2>
 
           <p>Assigned Engineers</p>
         </div>
@@ -93,17 +91,12 @@
         <a class="active">Overview</a>
         <a>Students</a>
         <a>Engineers</a>
-        <a>Reports</a>
-        <a>Assessments</a>
       </div>
 
       <div class="content">
-        <div class="chart">Attendance Trend Chart</div>
-
-        <div class="chart">Student Progress Chart</div>
-
-        <div class="chart">Performance Distribution</div>
-
+        <div class="chart">
+          <canvas id="studentsChart"></canvas>
+        </div>
         <div class="info">
           <h3>Program Information</h3>
 

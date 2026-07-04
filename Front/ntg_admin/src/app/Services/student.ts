@@ -14,4 +14,7 @@ export class Student {
   getAllStudents() : Observable<StudentsListInterface[]>{
     return this.http.get<StudentsListInterface[]>(`${this.apiUrl}/students`)
   }
+  getStudentsCount(){
+    return this.http.get(`${this.apiUrl}/students/count`);
+  }
 }
