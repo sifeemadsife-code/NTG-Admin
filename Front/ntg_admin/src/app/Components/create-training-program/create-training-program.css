@@ -23,6 +23,7 @@ body {
   border-radius: 15px;
   padding: 35px;
   box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  height: 80vh;
 }
 
 .header h2 {
@@ -36,17 +37,42 @@ body {
   margin-bottom: 30px;
 }
 
-.row {
-  display: flex;
-  gap: 20px;
+
+
+.page-header {
+
+margin-bottom: 4%;
+margin-left: 5%;
+}
+.page-header h1 {
+    margin: 0;
+    font-size: 38px;
+    font-weight: 700;
+    color: #111;
 }
 
-.half {
-  flex: 1;
+.page-header p {
+    color: gray;
+    margin-top: 6px;
+    font-size: 14px;
 }
+
+.page{
+    padding:30px;
+    background:#f7f8fc;
+    min-height:100vh;
+}
+
+
+
+
+
+
 
 .form-group {
   margin-bottom: 22px;
+  display: flex;
+  gap: 20%;
 }
 
 label {
@@ -59,8 +85,8 @@ label {
 input,
 select,
 textarea {
-  width: 100%;
-  border: 1px  #620000;
+  width: 300px;
+  border: 1px solid #620000;
   border-radius: 10px;
   padding: 14px;
   font-size: 15px;
@@ -68,20 +94,8 @@ textarea {
   transition: .3s;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: #4F46E5;
-}
 
-textarea {
-  resize: none;
-}
 
-input[type=file] {
-  padding: 12px;
-  cursor: pointer;
-}
 
 button {
   width: 100%;
@@ -94,5 +108,93 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
+}
+
+
+
+
+.active{
+
+  padding:4px 20%;
+
+}
+
+.inactive{
+  background:#f8d7da;
+  color:#721c24;
+  padding:4px 10px;
+  border-radius:20px;
+}
+.dashbored {
+  display: flex;
+  min-height: 80vh;
+  background: #EEEEEE;
+}
+.sidebar {
+  width: 285px;
+  background: #620000;
+  color: white;
+  overflow: hidden;
+
+}
+
+.logo-section {
+  margin: 10% 0 0 5%;
+  width: 100%;
+  height: 8%;
+  background: #EEEEEE;
+  border-bottom-left-radius: 35px;
+  border-top-left-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 110px;
+}
+.logo-text{
+  gap: 10px;
+  display: flex;
+ margin-left: 10%;
+  margin-top: 10%;
+  align-items: center;
+}
+.logo-engineer{
+   gap: 10px;
+  display: flex;
+  margin-left: 6%;
+  margin-top: 5%;
+  font-family: 'arial';
+  font-weight: 700;
+  font-size: 17px;
+  font-style: bold;
+  border:#EEEEEE solid 3px;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  margin-right: 10%;
+  align-items: center;
+}
+.logo-text1{
+  gap: 10px;
+  display: flex;
+  margin-left: 10%;
+  margin-top: 6% ;
+  font-family: 'arial';
+  font-weight: 700;
+  font-size: 17px;
+  font-style: bold;
+  margin-right: 10%;
+  align-items: center;
+}
+.sidebar-text{
+  font-family: 'arial';
+  font-weight: 700;
+  font-size: 17px;
+  font-style: bold;
+}
+a {
+  text-decoration: none;
+  color: white;
 }
 

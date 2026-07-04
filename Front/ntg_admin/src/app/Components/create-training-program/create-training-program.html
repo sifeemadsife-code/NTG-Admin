@@ -1,28 +1,63 @@
+<div class="dashbored">
+<aside class="sidebar">
+  <div class="logo-section">
+    <img alt="NTG Logo" src="/images/logo.png" class="logo" />
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Dashboard</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Engineers</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/reading.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Students</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/reports.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Reports</a></span>
+  </div>
+  <div class="logo-engineer">
+    <img alt="icon" src="/images/code.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Training Programs</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/books.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Subjects</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/Setting.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Settings</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/user.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Profile</a></span>
+  </div>
+  <div class="logo-text">
+    <img alt="icon" src="/images/logout.png" width="25" height="25" />
+    <span class="sidebar-text"><a href="">Logout</a></span>
+  </div>
+</aside>
 <div class="page">
-  <div class="form-card">
-    <div class="header">
-      <h2>Create Training Program</h2>
-      <p>Create a new training program for engineers.</p>
+  <div class="page-header">
+    <div>
+      <h1>Create Program</h1>
+      <p>Dashboard > Training Programs > Create Program</p>
     </div>
+  </div>
+  <div class="form-card">
+
 
     <form [formGroup]="trainingForm" (ngSubmit)="createProgram()">
       <div class="form-group">
-        <label>Program Title</label>
+        <div>
+          <label>Program Name</label>
         <input type="text" formControlName="title" placeholder="Enter program title" />
-      </div>
-      <div class="form-group">
-        <label>Location</label>
-        <input type="text" formControlName="location" placeholder="Enter program Location" />
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <textarea rows="4" formControlName="description" placeholder="Enter description">
-        </textarea>
-      </div>
-
-      <div class="row">
-        <div class="form-group half">
-          <label>Engineer</label>
+        </div>
+        <div>
+            <label>Engineer</label>
 
           <select formControlName="engineerId">
             <option value="">Select Engineer</option>
@@ -34,26 +69,38 @@
           </select>
         </div>
 
-        <div class="form-group half"></div>
       </div>
 
-      <div class="row">
-        <div class="form-group half">
+      <div class="form-group">
+
+
+        <div>
+          <label>Location</label>
+        <input type="text" formControlName="location" placeholder="Enter program location" />
+
+        </div>
+        <div>
+        <label>Description</label>
+        <textarea formControlName="description" placeholder="Enter program description"></textarea>
+       </div>
+
+      </div>
+
+      <div class="form-group">
+        <div>
           <label>Start Date</label>
           <input type="date" formControlName="startDate" />
         </div>
-
-        <div class="form-group half">
+        <div>
           <label>End Date</label>
           <input type="date" formControlName="endDate" />
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Training Material (PDF)</label>
-      </div>
 
       <button type="submit">Create Program</button>
     </form>
   </div>
+</div>
+
 </div>
