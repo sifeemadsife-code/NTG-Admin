@@ -40,4 +40,17 @@ export class ProgramsList implements OnInit {
       },
     });
   }
+  deleteEngineer(id: number){
+    if(!confirm("Are you sure you want to delete this Program?")){
+      return;
+    }
+    this.trainingService.deleteProgram(id).subscribe({
+      next: () => {
+        alert("Program deleted successfully");
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
 }

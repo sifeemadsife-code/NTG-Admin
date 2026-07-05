@@ -12,15 +12,12 @@ import { ProgramsList } from './Components/programs-list/programs-list';
 import { TrainingProgramStudents } from './Components/training-program-students/training-program-students';
 import { TrainingProgramEngineer } from './Components/training-program-engineer/training-program-engineer';
 import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
+import { AdminProfile } from './Components/admin-profile/admin-profile';
 export const routes: Routes = [
   {
     path: '',
-<<<<<<< HEAD
     component: AdminEngineer,
-=======
-    component: CreateTrainingProgramComponent,
->>>>>>> 0f634fccf50305879a34db8a48e9a9c2a2cd73a9
-    },
+  },
   {
     path: 'engineers/:id',
     component: EngineerDetailsOverView,
@@ -35,35 +32,39 @@ export const routes: Routes = [
   },
   {
     path: 'addEngineer',
-    component: AddEngineer
+    component: AddEngineer,
   },
   {
-    path: "studentsList",
-    component: StudentsList
+    path: 'studentsList',
+    component: StudentsList,
   },
   {
-    path: "programs/:id",
-    component: TrainingProgramOverveiw
+    path: 'programs/:id',
+    component: TrainingProgramOverveiw,
   },
   {
-    path: "programs/:id/students",
-    component: TrainingProgramStudents
+    path: 'programs/:id/students',
+    component: TrainingProgramStudents,
   },
   {
-    path: "programs/:id/engineers",
-    component: TrainingProgramEngineer
+    path: 'programs/:id/engineers',
+    component: TrainingProgramEngineer,
   },
   {
-    path: "createProgram",
-    component: CreateTrainingProgramComponent
+    path: 'createProgram',
+    component: CreateTrainingProgramComponent,
   },
   {
-    path: "trainingProgramsList",
-    component: ProgramsList
+    path: 'trainingProgramsList',
+    component: ProgramsList,
   },
   {
-    path: "notfications",
-    component: Notification
+    path: 'profile',
+    component: AdminProfile,
+  },
+  {
+    path: 'notfications',
+    component: Notification,
   },
   {
     path: '**',

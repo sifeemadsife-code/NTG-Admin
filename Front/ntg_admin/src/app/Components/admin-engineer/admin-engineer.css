@@ -1,6 +1,4 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
@@ -28,72 +26,69 @@ th {
   background: #eeeeee;
 }
 .sidebar {
-  width: 285px;
-  background: #620000;
-  color: white;
-  overflow: hidden;
+  width: 220px;
   height: 100vh;
+  background: #6d0000;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
 }
-
 .logo-section {
-  margin: 10% 0 0 5%;
-  width: 100%;
-  height: 10%;
+  width: 92%;
+  height: 58px;
   background: #eeeeee;
-  border-bottom-left-radius: 35px;
-  border-top-left-radius: 35px;
+  border-top-left-radius: 28px;
+  border-bottom-left-radius: 28px;
+  margin-left: auto;
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 70px;
+}
+.menu {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.menu-item {
+  width: 115px;
+  margin-left: 30px;
+  padding: 9px 10px;
+
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+
+  border-radius: 10px;
+
+  transition: 0.25s;
+}
+.menu-item img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.menu-item.active1 {
+  border: 2px solid #fff;
+}
+.menu-item:last-child {
+  margin-top: auto;
+  margin-bottom: 20px;
 }
 
-.logo {
-  width: 110px;
-}
-.logo-text {
-  gap: 10px;
-  display: flex;
-  margin-left: 10%;
-  margin-top: 10%;
-  align-items: center;
-}
-.logo-engineer {
-  gap: 10px;
-  display: flex;
-  margin-left: 6%;
-  margin-top: 5%;
-  font-family: 'arial';
-  font-weight: 700;
-  font-size: 17px;
-  font-style: bold;
-  border: #eeeeee solid 3px;
-  border-radius: 10px;
-  padding: 10px 10px 10px 10px;
-  margin-right: 10%;
-  align-items: center;
-}
-.logo-text1 {
-  gap: 10px;
-  display: flex;
-  margin-left: 10%;
-  margin-top: 6%;
-  font-family: 'arial';
-  font-weight: 700;
-  font-size: 17px;
-  font-style: bold;
-  margin-right: 10%;
-  align-items: center;
-}
-.sidebar-text {
-  font-family: 'arial';
-  font-weight: 700;
-  font-size: 17px;
-  font-style: bold;
-}
-a {
-  text-decoration: none;
-  color: white;
-}
 
 .engineers-page {
   padding: 30px;

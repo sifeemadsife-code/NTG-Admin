@@ -1,44 +1,60 @@
 <div class="dashbored">
   <aside class="sidebar">
     <div class="logo-section">
-      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
+      <img src="/images/logo.png" class="logo" alt="NTG Logo" />
     </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Dashboard</a></span>
-    </div>
-    <div class="logo-engineer">
-      <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Engineers</a></span>
-    </div>
-    <div class="logo-text1">
-      <img alt="icon" src="/images/reading.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="" routerLink="/studentsList">Students</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/reports.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Reports</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/code.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="" routerLink="/trainingProgramsList">Training Programs</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/books.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Subjects</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/Setting.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Settings</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/user.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="" routerLink="/notfications">Notfications</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/logout.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Logout</a></span>
-    </div>
+
+    <nav class="menu">
+      <a routerLink="/dashboard" class="menu-item">
+        <img src="/images/dashboard.png" />
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/" class="menu-item active1">
+        <img src="/images/adminstrator.png" />
+        <span>Engineers</span>
+      </a>
+
+      <a routerLink="/studentsList" class="menu-item">
+        <img src="/images/reading.png" />
+        <span>Students</span>
+      </a>
+
+      <a routerLink="/reports" class="menu-item">
+        <img src="/images/reports.png" />
+        <span>Reports</span>
+      </a>
+
+      <a routerLink="/trainingProgramsList" class="menu-item">
+        <img src="/images/code.png" />
+        <span>Training Program</span>
+      </a>
+
+      <a routerLink="/subjects" class="menu-item">
+        <img src="/images/books.png" />
+        <span>Subjects</span>
+      </a>
+
+      <a routerLink="/notfications" class="menu-item">
+        <img src="/images/notification.png" />
+        <span>Notification</span>
+      </a>
+
+      <a routerLink="/settings" class="menu-item">
+        <img src="/images/Setting.png" />
+        <span>Settings</span>
+      </a>
+
+      <a routerLink="/profile" class="menu-item">
+        <img src="/images/user.png" />
+        <span>Profile</span>
+      </a>
+
+      <a routerLink="/logout" class="menu-item">
+        <img src="/images/logout.png" />
+        <span>Log Out</span>
+      </a>
+    </nav>
   </aside>
 
   <div class="engineers-page">
@@ -95,7 +111,7 @@
           @for (engineer of engineers(); track engineer.id) {
             <tr>
               <td class="engineer-info">
-                <span>{{ engineer.firstName }} {{engineer.lastName}}</span>
+                <span>{{ engineer.firstName }} {{ engineer.lastName }}</span>
               </td>
 
               <td>{{ engineer.id }}</td>
@@ -111,9 +127,15 @@
               </td>
               <td>{{ engineer.experience }} Years</td>
               <td class="actions">
-                <button [routerLink]="['/engineers', engineer.id, 'update-engineer']"><img src="/images/edit_icon.png" alt=""></button>
-                <button [routerLink]="['/engineers', engineer.id]"><img src="/images/view_icon.png" alt=""></button>
-                <button (click)="deleteEngineer(engineer.id)"><img src="/images/delete_icon.png" alt=""></button>
+                <button [routerLink]="['/engineers', engineer.id, 'update-engineer']">
+                  <img src="/images/edit_icon.png" alt="" />
+                </button>
+                <button [routerLink]="['/engineers', engineer.id]">
+                  <img src="/images/view_icon.png" alt="" />
+                </button>
+                <button (click)="deleteEngineer(engineer.id)">
+                  <img src="/images/delete_icon.png" alt="" />
+                </button>
               </td>
             </tr>
           } @empty {

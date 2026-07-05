@@ -1,0 +1,212 @@
+
+.notification-page{
+
+    padding:30px;
+
+    background:#F5F5F5;
+
+    min-height:100vh;
+
+}
+
+
+.page-header h2{
+
+    font-size:28px;
+
+    color:#222;
+
+    margin-bottom:5px;
+
+}
+
+.page-header p{
+
+    color:#888;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+
+}
+
+
+.notification-card{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    padding:10px 25px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+
+.notification-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px 0;
+
+    border-bottom:1px solid #ECECEC;
+
+}
+
+.notification-item:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.icon-container{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-right:18px;
+
+}
+
+.icon-container .material-icons{
+
+    font-size:28px;
+
+    color:#555;
+
+}
+
+
+.notification-content{
+
+    flex:1;
+
+}
+
+.notification-content h4{
+
+    font-size:16px;
+
+    color:#222;
+
+    margin-bottom:6px;
+
+}
+
+.notification-content p{
+
+    color:#8A8A8A;
+
+    font-size:14px;
+
+}
+
+
+.notification-time{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#888;
+
+    font-size:13px;
+
+}
+
+.status{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#47C96F;
+
+}
+
+
+.pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:25px;
+
+}
+
+.pagination button{
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#F3F3F3;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.pagination button:hover{
+
+    background:#DDD;
+
+}
+
+.pagination .active{
+
+    background:#8B0000;
+
+    color:white;
+
+}
+
+
+@media(max-width:768px){
+
+.notification-item{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.notification-time{
+
+    align-self:flex-end;
+
+}
+
+}

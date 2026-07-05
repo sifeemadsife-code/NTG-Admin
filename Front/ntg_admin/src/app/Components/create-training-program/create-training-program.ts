@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Engineer } from '../../Models/engineer';
 import { TrainingService } from '../../Services/training-service';
 import { EngineerService } from '../../Services/engineer';
+
 @Component({
   selector: 'app-create-training-program',
   standalone: true,
@@ -20,52 +21,58 @@ export class CreateTrainingProgramComponent implements OnInit {
     private service: TrainingService,
     private engineerService: EngineerService,
   ) {}
+
   loadAllEngineers() {
     this.engineerService.getAllEngineers().subscribe({
       next: (data) => {
         this.engineers.set(data);
-        console.log(data);
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
+
   ngOnInit(): void {
     this.loadAllEngineers();
     this.trainingForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       engineerId: ['', Validators.required],
+      location: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
     });
   }
 
   createProgram(): void {
-    if (this.trainingForm.invalid) {
-      this.trainingForm.markAllAsTouched();
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('title', this.trainingForm.value.title);
-    formData.append('description', this.trainingForm.value.description);
-    formData.append('engineerId', this.trainingForm.value.engineerId);
-    formData.append('startDate', this.trainingForm.value.startDate);
-    formData.append('endDate', this.trainingForm.value.endDate);
-    this.service.createProgram(formData).subscribe({
-      next: (res) => {
-        console.log(res);
-
-        alert('Training Program Created Successfully');
-
-        this.trainingForm.reset();
-      },
-
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  if (this.trainingForm.invalid) {
+    this.trainingForm.markAllAsTouched();
+    return;
   }
+
+  const formValue = this.trainingForm.value;
+  const engineerId = Number(formValue.engineerId);
+
+  const payload = {
+    programName: formValue.title,
+    description: formValue.description,
+    teacherId: engineerId,
+    userId: engineerId,
+    location: formValue.location,
+    startDate: formValue.startDate,
+    endDate: formValue.endDate,
+  };
+
+  this.service.createProgram(payload).subscribe({
+    next: (res) => {
+      console.log(res);
+      alert('Training Program Created Successfully');
+      this.trainingForm.reset();
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
 }
