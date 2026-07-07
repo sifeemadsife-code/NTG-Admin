@@ -15,9 +15,10 @@ import lombok.Setter;
 @Table(name = "TEACHER")
 public class Teacher {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TEACHER_ID", nullable = false)
     private Long id;
-
+    
     @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false, unique = true)

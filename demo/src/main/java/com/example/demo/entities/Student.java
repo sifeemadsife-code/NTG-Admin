@@ -58,13 +58,5 @@ public class Student {
     )
     private Set<Team> teams = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "Training_Student",
-            joinColumns = @JoinColumn(name = "PROGRAM_ID"),
-            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID")
-    )
-    private Set<Team> teams = new LinkedHashSet<>();
-
 
 }

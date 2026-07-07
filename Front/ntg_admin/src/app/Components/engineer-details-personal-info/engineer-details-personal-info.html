@@ -76,7 +76,17 @@
         <div class="card-data">
           <h4>Rating</h4>
           <h2>{{ cards().rating }}</h2>
-          <span>Excellent</span>
+          {{
+          cards().rating >= 4.5
+          ? 'Excellent'
+          : cards().rating >= 3.5
+          ? 'Very Good'
+          : cards().rating >= 2.5
+          ? 'Good'
+          : cards().rating >= 1.5
+          ? 'Fair'
+          : 'Poor'
+          }}
         </div>
       </div>
     </div>
