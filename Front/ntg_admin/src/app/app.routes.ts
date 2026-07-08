@@ -13,10 +13,11 @@ import { TrainingProgramStudents } from './Components/training-program-students/
 import { TrainingProgramEngineer } from './Components/training-program-engineer/training-program-engineer';
 import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
 import { AdminProfile } from './Components/admin-profile/admin-profile';
+import { Sendemail } from './Components/sendemail/sendemail';
 export const routes: Routes = [
   {
     path: '',
-    component: AdminEngineer,
+    component: Sendemail,
   },
   {
     path: 'engineers/:id',
