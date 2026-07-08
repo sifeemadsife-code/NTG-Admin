@@ -57,7 +57,12 @@ public class TeacherService {
                 teacher.getUser().getAddress(),
                 teacher.getEducation(),
                 teacher.getEmploymentHistory(),
-                teacher.getNumberOfYearsOfExperience()
+                teacher.getNumberOfYearsOfExperience(),
+                teacher.getUser().getBirthDate(),
+                teacher.getUser().getGender(),
+                teacher.getUser().getReligion(),
+                teacher.getUser().getNationalNumber(),
+                teacher.getUser().getIsdeleted()
         );
     }
 
@@ -89,6 +94,7 @@ public class TeacherService {
 
     @Transactional
     public TeacherProfileDTO createEngineer(CreateEngineerRequestDTO request) {
+        System.out.println(request);
 
         if (userRepository.existsByEmail(request.email())) {
             throw new RuntimeException("Email already registered");
@@ -100,6 +106,14 @@ public class TeacherService {
         User user = User.builder()
                 .firstName(request.firstName())
                 .lastName(request.lastName())
+                .firstNameInArabic(request.firstNameInArabic())
+                .lastNameInArabic(request.lastNameInArabic())
+                .address(request.address())
+                .gender(request.gender())
+                .nationality(request.nationality())
+                .birthDate(request.birthDate())
+                .nationalNumber(request.nationalNumber())
+                .religion(request.religion())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .role(engineerRole)
@@ -109,7 +123,6 @@ public class TeacherService {
         User savedUser = userRepository.save(user);
 
         Teacher teacher = new Teacher();
-        teacher.setId(savedUser.getId());
         teacher.setUser(savedUser);
         teacher.setEducation(request.education());
         teacher.setEmploymentHistory(request.employmentHistory());
@@ -118,14 +131,19 @@ public class TeacherService {
         Teacher savedTeacher = teacherRepository.save(teacher);
 
         return new TeacherProfileDTO(
-                savedTeacher.getId(),
-                savedUser.getFirstName(),
-                savedUser.getLastName(),
-                savedUser.getEmail(),
-                savedUser.getAddress(),
-                savedTeacher.getEducation(),
-                savedTeacher.getEmploymentHistory(),
-                savedTeacher.getNumberOfYearsOfExperience()
+                teacher.getId(),
+                teacher.getUser().getFirstName(),
+                teacher.getUser().getLastName(),
+                teacher.getUser().getEmail(),
+                teacher.getUser().getAddress(),
+                teacher.getEducation(),
+                teacher.getEmploymentHistory(),
+                teacher.getNumberOfYearsOfExperience(),
+                teacher.getUser().getBirthDate(),
+                teacher.getUser().getGender(),
+                teacher.getUser().getReligion(),
+                teacher.getUser().getNationalNumber(),
+                teacher.getUser().getIsdeleted()
         );
     }
     @Transactional
@@ -161,14 +179,19 @@ public class TeacherService {
         Teacher savedTeacher = teacherRepository.save(teacher);
 
         return new TeacherProfileDTO(
-                savedTeacher.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getAddress(),
-                savedTeacher.getEducation(),
-                savedTeacher.getEmploymentHistory(),
-                savedTeacher.getNumberOfYearsOfExperience()
+                teacher.getId(),
+                teacher.getUser().getFirstName(),
+                teacher.getUser().getLastName(),
+                teacher.getUser().getEmail(),
+                teacher.getUser().getAddress(),
+                teacher.getEducation(),
+                teacher.getEmploymentHistory(),
+                teacher.getNumberOfYearsOfExperience(),
+                teacher.getUser().getBirthDate(),
+                teacher.getUser().getGender(),
+                teacher.getUser().getReligion(),
+                teacher.getUser().getNationalNumber(),
+                teacher.getUser().getIsdeleted()
         );
     }
 }

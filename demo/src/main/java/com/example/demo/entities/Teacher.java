@@ -15,10 +15,11 @@ import lombok.Setter;
 @Table(name = "TEACHER")
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TEACHER_ID", nullable = false)
-    private Long id;
-    
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_seq")
+    @SequenceGenerator(name = "teacher_seq", sequenceName = "TEACHER_SEQ", allocationSize = 1)
+    @Column(name = "teacher_id")
+    private Long Id;
+
     @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false, unique = true)

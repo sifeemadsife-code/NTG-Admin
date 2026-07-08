@@ -15,6 +15,14 @@ export class AddEngineer {
   newEngineer = signal<CreateEngineer>({
     firstName: '',
     lastName: '',
+    firstNameInArabic: '',
+    lastNameInArabic: '',
+    address: '',
+    gender: '',
+    nationality: '',
+    birthDate: '',
+    nationalNumber: null,
+    religion: '',
     email: '',
     password: '',
     education: '',
@@ -27,14 +35,24 @@ export class AddEngineer {
 
   constructor(
     private readonly engineerService: EngineerService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   addEngineer(): void {
     const engineer = this.newEngineer();
-
-    if (!engineer.firstName || !engineer.lastName || !engineer.email || !engineer.password) {
-      this.errorMessage.set('Please fill in first name, last name, email and password');
+    if (
+      !engineer.firstName ||
+      !engineer.lastName ||
+      !engineer.email ||
+      !engineer.password ||
+      !engineer.employmentHistory ||
+      !engineer.numberOfYearsOfExperience ||
+      !engineer.education ||
+      !engineer.firstNameInArabic ||
+      !engineer.lastNameInArabic ||
+      !engineer.nationalNumber
+    ) {
+      alert('Please Fill All Required Fildes');
       return;
     }
 
@@ -50,7 +68,11 @@ export class AddEngineer {
       error: (err) => {
         this.submitting.set(false);
         this.errorMessage.set('Failed to add engineer. Please try again');
-        console.error(err);
+        if (err.status === 500) {
+          alert('The email you entered is already in use.');
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
       },
     });
   }

@@ -1,11 +1,11 @@
 <div class="dashbored">
   <aside class="sidebar">
-  <div class="logo-section">
+    <div class="logo-section">
       <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
     <div class="logo-text">
       <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
-      <span  class="sidebar-text"><a href="">Dashboard</a></span>
+      <span class="sidebar-text"><a href="">Dashboard</a></span>
     </div>
     <div class="logo-engineer">
       <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
@@ -42,7 +42,6 @@
   </aside>
 
   <div class="engineers-page">
-    <!-- Header -->
     <div class="page-header">
       <div>
         <h1>Engineers</h1>
@@ -50,19 +49,18 @@
       </div>
     </div>
 
-    <!-- Top Controls -->
     <div class="toolbar">
       <div class="search-box">
-        <input type="text" placeholder="Search by name,ID,subject..." />
+        <input type="text" placeholder="Search by name,ID,subject..." [value]="searchTerm()"
+          (input)="onSearchChange($any($event.target).value)" />
       </div>
 
       <div class="filters">
-       
 
-        <select title="DDD">
-          <option>Status</option>
-          <option>Active</option>
-          <option>Leave</option>
+        <select title="Status filter" [value]="statusFilter()" (change)="onStatusChange($any($event.target).value)">
+          <option value="active">Active</option>
+          <option value="leave">Leave</option>
+          <option value="all">All Engineers</option>
         </select>
 
         <button class="add-btn" routerLink="addEngineer">
@@ -77,8 +75,8 @@
       <table>
         <thead>
           <tr>
-            <th>Engineer</th>
             <th>ID</th>
+            <th>Engineer</th>
             <th class="edu">Education</th>
             <th class="emal">Email</th>
             <th>Status</th>
@@ -88,38 +86,30 @@
         </thead>
 
         <tbody>
-          @for (engineer of engineers(); track engineer.id) {
-            <tr>
-              <td class="engineer-info">
-                <span>{{ engineer.firstName }} {{ engineer.lastName }}</span>
-              </td>
+          @for (engineer of filteredEngineers(); track engineer.id) {
+          <tr>
+            <td>{{ engineer.id }}</td>
+            <td class="engineer-info">
+              <span>{{ engineer.firstName }} {{engineer.lastName}}</span>
+            </td>
+            <td>{{ engineer.education }}</td>
+            <td>{{ engineer.email }}</td>
 
-              <td>{{ engineer.id }}</td>
-
-              <td>{{ engineer.education }}</td>
-
-              <td>{{ engineer.email }}</td>
-
-              <td>
-                <span [class.active]="!engineer.status" [class.inactive]="engineer.status">
-                  {{ engineer.status ? 'Leave' : 'Active' }}
-                </span>
-              </td>
-              <td>{{ engineer.experience }} Years</td>
-              <td class="actions">
-                <button [routerLink]="['/engineers', engineer.id, 'update-engineer']">
-                  <img src="/images/edit_icon.png" alt="" />
-                </button>
-                <button [routerLink]="['/engineers', engineer.id]">
-                  <img src="/images/view_icon.png" alt="" />
-                </button>
-                <button (click)="deleteEngineer(engineer.id)">
-                  <img src="/images/delete_icon.png" alt="" />
-                </button>
-              </td>
-            </tr>
+            <td>
+              <span [class.active]="!engineer.status" [class.inactive]="engineer.status">
+                {{ engineer.status ? 'Leave' : 'Active' }}
+              </span>
+            </td>
+            <td>{{ engineer.experience }} Years</td>
+            <td class="actions">
+              <button [routerLink]="['/engineers', engineer.id, 'update-engineer']"><img src="/images/edit_icon.png"
+                  alt=""></button>
+              <button [routerLink]="['/engineers', engineer.id]"><img src="/images/view_icon.png" alt=""></button>
+              <button (click)="deleteEngineer(engineer.id)"><img src="/images/delete_icon.png" alt=""></button>
+            </td>
+          </tr>
           } @empty {
-            <h1>No Engineers</h1>
+          <h1>No Engineers found</h1>
           }
         </tbody>
       </table>

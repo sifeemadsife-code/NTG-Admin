@@ -1,11 +1,11 @@
 <div class="dashbored">
-    <aside class="sidebar">
-  <div class="logo-section">
+  <aside class="sidebar">
+    <div class="logo-section">
       <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
     <div class="logo-text">
       <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
-      <span  class="sidebar-text"><a href="">Dashboard</a></span>
+      <span class="sidebar-text"><a href="">Dashboard</a></span>
     </div>
     <div class="logo-engineer">
       <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
@@ -54,69 +54,101 @@
       <div class="logo-page">
         <img class="image-logo" src="/images/reading.png" alt="image for engineer">
       </div>
+
       <div class="form">
         <h1>Personal Information</h1>
 
         @if (errorMessage()) {
-          <p class="error-text">{{ errorMessage() }}</p>
+        <p class="error-text">{{ errorMessage() }}</p>
         }
 
         <div class="name">
-          <p class="name-l">First Name</p>
-          <input
-            class="input-form"
-            type="text"
-            name="firstName"
-            placeholder="Enter First Name"
-            [(ngModel)]="newEngineer().firstName"
-            required>
-          <p class="name-l">last Name</p>
-          <input
-            class="input-form"
-            type="text"
-            name="lastName"
-            placeholder="Enter Last Name"
-            [(ngModel)]="newEngineer().lastName"
-            required>
+          <div class="name-group">
+            <p class="name-l">First Name</p>
+            <input class="input-form" type="text" name="firstName" placeholder="Enter First Name"
+              [(ngModel)]="newEngineer().firstName" required>
+          </div>
+          <div class="name-group">
+            <p class="name-l">Last Name</p>
+            <input class="input-form" type="text" name="lastName" placeholder="Enter Last Name"
+              [(ngModel)]="newEngineer().lastName" required>
+          </div>
         </div>
+
+        <div class="name">
+          <div class="name-group">
+            <p class="name-l">First Name In Arabic</p>
+            <input class="input-form" type="text" name="firstNameInArabic" placeholder="Enter First Name"
+              [(ngModel)]="newEngineer().firstNameInArabic" required>
+          </div>
+          <div class="name-group">
+            <p class="name-l">Last Name In Arabic</p>
+            <input class="input-form" type="text" name="lastNameInArabic" placeholder="Enter Last Name"
+              [(ngModel)]="newEngineer().lastNameInArabic" required>
+          </div>
+        </div>
+
         <p>Email</p>
-        <input
-          class="input-form"
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          [(ngModel)]="newEngineer().email"
+        <input class="input-form" type="email" name="email" placeholder="Enter Email" [(ngModel)]="newEngineer().email"
           required>
+
         <p>Password</p>
-        <input
-          class="input-form"
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          [(ngModel)]="newEngineer().password"
-          required>
+        <input class="input-form" type="password" name="password" placeholder="Enter Password"
+          [(ngModel)]="newEngineer().password" required>
+
+        <p>Address</p>
+        <input class="input-form" name="address" placeholder="Enter Engineer Address"
+          [(ngModel)]="newEngineer().address" required>
+
+        <div class="name">
+          <div class="name-group">
+            <p class="name-l">Nationality</p>
+            <input class="input-form" name="nationality" placeholder="Enter Engineer Nationality"
+              [(ngModel)]="newEngineer().nationality" required>
+          </div>
+          <div class="name-group">
+            <p class="name-l">Birth Date</p>
+            <input class="input-form" type="date" name="birthDate" placeholder="Enter Engineer BirthDate"
+              [(ngModel)]="newEngineer().birthDate" required>
+          </div>
+        </div>
+
+        <div class="name">
+          <div class="name-group">
+            <p class="name-l">National Number</p>
+            <input class="input-form" name="nationalNumber" placeholder="Enter Engineer National Number"
+              [(ngModel)]="newEngineer().nationalNumber" required>
+          </div>
+          <div class="name-group">
+            <p class="name-l">Religion</p>
+            <select class="input-form" name="religion" [(ngModel)]="newEngineer().religion" required>
+              <option value="" disabled selected>Select Religion</option>
+              <option value="Muslim">Muslim</option>
+              <option value="Christian">Christian</option>
+            </select>
+          </div>
+        </div>
+
+        <p>Gender</p>
+        <select class="input-form" name="gender" [(ngModel)]="newEngineer().gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="M">M</option>
+          <option value="F">F</option>
+        </select>
+
         <h1>Professional Information</h1>
-        <input
-          class="input-form1"
-          type="text"
-          name="education"
-          placeholder="Enter Education"
+
+        <input class="input-form1" type="text" name="education" placeholder="Enter Education"
           [(ngModel)]="newEngineer().education">
-        <input
-          class="input-form1"
-          type="number"
-          name="numberOfYearsOfExperience"
-          placeholder="Experience(years)"
+        <input class="input-form1" type="number"  name="numberOfYearsOfExperience" placeholder="Experience(years)"
           [(ngModel)]="newEngineer().numberOfYearsOfExperience">
-        <input
-          class="input-form2"
-          type="text"
-          name="employmentHistory"
-          placeholder="Employment History"
+        <input class="input-form2" type="text" name="employmentHistory" placeholder="Employment History"
           [(ngModel)]="newEngineer().employmentHistory">
+
         <button type="submit" [disabled]="submitting()">
           {{ submitting() ? 'Adding...' : 'Add Engineer' }}
         </button>
       </div>
     </form>
+  </div>
 </div>
