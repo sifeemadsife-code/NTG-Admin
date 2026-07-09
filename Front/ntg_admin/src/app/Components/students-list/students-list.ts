@@ -1,29 +1,49 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from '@angular/router';
 import { Student } from '../../Services/student';
 import { StudentsListInterface } from '../../Models/Students_list';
 @Component({
   selector: 'app-students-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './students-list.html',
   styleUrl: './students-list.css',
 })
 export class StudentsList {
-students = signal<StudentsListInterface[]>([]);
+  students = signal<StudentsListInterface[]>([]);
+  searchTerm = signal('');
+  statusFilter = signal('all');
   constructor(private readonly studentService: Student) {}
-  ngOnInit(): void {
-    this.loadAllEngineers()
+  private router = inject(Router);
+  menuItems = [
+    { icon: 'fas fa-home', label: 'Dashboard', route: '/' },
+    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
+    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList', active: true },
+    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
+    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
+    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
+    { icon: 'fas fa-bell', label: 'Notification', route: '/notification' },
+    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
+    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
+  ];
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('name');
+    this.router.navigate(['/']);
   }
-  loadAllEngineers(){
+  ngOnInit(): void {
+    this.loadAllEngineers();
+  }
+  loadAllEngineers() {
     this.studentService.getAllStudents().subscribe({
       next: (data) => {
         this.students.set(data);
         console.log(data);
       },
-      error : (err) => {
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
 }

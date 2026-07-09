@@ -1,10 +1,10 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerList } from '../../Models/engineer_list';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-engineer',
@@ -16,7 +16,24 @@ export class AdminEngineer implements OnInit {
   engineers = signal<EngineerList[]>([]);
   searchTerm = signal<string>('');
   statusFilter = signal<string>('active');
-
+  private router = inject(Router);
+  menuItems = [
+    { icon: 'fas fa-home', label: 'Dashboard', route: '/' },
+    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList', active: true },
+    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
+    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
+    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
+    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
+    { icon: 'fas fa-bell', label: 'Notification', route: '/notification' },
+    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
+    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
+  ];
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('name');
+    this.router.navigate(['/']);
+  }
   filteredEngineers = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
     const status = this.statusFilter();
@@ -29,8 +46,8 @@ export class AdminEngineer implements OnInit {
         (engineer.education ?? '').toLowerCase().includes(term);
 
       let matchesStatus = true;
-      switch(status){
-        case 'active' :
+      switch (status) {
+        case 'active':
           matchesStatus = engineer.status === false;
           break;
         case 'leave':

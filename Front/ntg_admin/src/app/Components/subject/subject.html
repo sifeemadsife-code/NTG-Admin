@@ -1,0 +1,65 @@
+<div class="dashboard">
+     <div class="sidebar">
+    <div class="logo">
+      <div class="header">
+        <div class="header-white">
+          <img src="/images/logo.png" alt="NTG">
+        </div>
+      </div>
+    </div>
+    <nav class="menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log Out</span>
+      </a>
+    </nav>
+  </div>
+  <div class="subject-page">
+    <div class="head">
+
+      <div>
+        <h1>Subjects</h1>
+        <p>Dashboard > Subjects</p>
+
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" placeholder="Search by name,ID,subject..." />
+      </div>
+       <div class="filters">
+        <button class="add-bth" routerLink="/add-subject">
+          <span>+</span>
+          Add Subject
+        </button>
+      </div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th> Name</th>
+            <th>Engineer</th>
+            <th>Term </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+  <tr *ngFor="let course of courses()">
+  <td>{{ course.courseName }}</td>
+  <td>{{ getTeacherFullName(course) }}</td>
+  <td>{{ course.termId }}</td>
+  <td>
+    <button class="btn1" (click)="editCourse(course.id)">Edit</button>
+    <button class="btn2" (click)="deleteCourse(course.id)">Delete</button>
+  </td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>

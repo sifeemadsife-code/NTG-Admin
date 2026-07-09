@@ -19,9 +19,9 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     public AuthResponseDTO register(RegisterRequestDTO request) {
-        if (userRepository.existsByEmail(request.email())) {
-            throw new RuntimeException("Email already registered");
-        }
+//        if (userRepository.existsByEmail(request.email())) {
+//            throw new RuntimeException("Email already registered");
+//        }
 
         Role role = roleRepository.findById(request.roleId())
                 .orElseThrow(() -> new RuntimeException("Role not found"));

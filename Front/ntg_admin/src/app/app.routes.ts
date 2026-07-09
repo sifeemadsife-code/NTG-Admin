@@ -14,10 +14,19 @@ import { TrainingProgramEngineer } from './Components/training-program-engineer/
 import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
 import { AdminProfile } from './Components/admin-profile/admin-profile';
 import { Sendemail } from './Components/sendemail/sendemail';
+import { Subject } from './Components/subject/subject';
+import { AddSubject } from './Components/add-subject/add-subject';
+import { Dashboard } from './Components/dashboard/dashboard';
+import { NotificationComponent } from './Components/notification/notification';
+import { Login } from './Components/login/login';
 export const routes: Routes = [
   {
     path: '',
-    component: Sendemail,
+    component: Login,
+  },
+  {
+    path: 'dashboard',
+    component: Dashboard
   },
   {
     path: 'engineers/:id',
@@ -30,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'engineers/:id/update-engineer',
     component: UpdateDataComponent,
+  },
+  {
+    path: 'subjects',
+    component: Subject
   },
   {
     path: 'addEngineer',
@@ -60,12 +73,20 @@ export const routes: Routes = [
     component: ProgramsList,
   },
   {
+    path: 'engineersList',
+    component: AdminEngineer
+  },
+  {
     path: 'profile',
     component: AdminProfile,
   },
   {
     path: 'notfications',
-    component: Notification,
+    component: NotificationComponent,
+  },
+  {
+    path: 'add-subject',
+    component: AddSubject
   },
   {
     path: '**',

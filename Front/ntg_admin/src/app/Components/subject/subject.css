@@ -1,29 +1,9 @@
-.active {
-  background: #108039;
-  color: #ffffff;
-  padding: 4px 10px;
-  border-radius: 20px;
-}
-td {
-  text-align: center;
-}
-th {
-  text-align: center;
-}
-.inactive {
-  background: #900b09;
-  color: #ffffff;
-  padding: 4px 10px;
-  border-radius: 20px;
-}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
-
-.dashbored {
+.dashboard {
   display: flex;
   min-height: 100vh;
   background: #eeeeee;
@@ -45,7 +25,7 @@ th {
   width: 230px;
 }
 .header-white {
-  width: 230px;
+  width: 300px;
   height: 65px;
   background: #fff;
   border-radius: 30px 0 0px 30px;
@@ -57,6 +37,10 @@ th {
   text-align: center;
   padding: 20px;
   margin-bottom: 20px;
+}
+.logo img {
+  width: 80px;
+  height: auto;
 }
 .logo img {
   width: 80px;
@@ -89,198 +73,114 @@ th {
   margin-left: 10px;
   font-size: 14px;
 }
-.main-content {
-  margin-left: 250px;
-  flex: 1;
-  padding: 30px;
-}
-.content {
-  margin-left: 250px;
-  padding: 35px;
-  background-color: #fff;
-  width: 100%;
-}
 a {
   text-decoration: none;
   color: white;
-  display: flex;
   font-family: 'Segoe UI', sans-serif;
 }
-
-.emal {
-  text-align: center;
+.subject-page{
+    margin-left:0%;
+    background:white;
+    width: 100% ;
+   
 }
-.edu {
-  text-align: center;
-}
-
-.engineers-page {
-  margin-left: 250px; 
-  width: calc(100% - 250px);
-
-  padding: 30px;
-  background: #f5f5f5;
-  min-height: 100vh;
-}
-
-.page-header h1 {
-  margin: 0;
+.head h1 {
+  margin-left: 20%;
   font-size: 38px;
   font-weight: 700;
   color: #111;
+  margin-top: 3%;
 }
 
-.page-header p {
+.head p {
   color: gray;
   margin-top: 6px;
   font-size: 14px;
+  margin-left: 20%;
 }
-
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 0;
   flex-wrap: wrap;
+  margin-top: 5%;
   gap: 20px;
 }
-
 .search-box input {
   width: 320px;
   height: 45px;
-
   border: 1px solid #d8d8d8;
   border-radius: 10px;
-
   padding: 0 15px;
   outline: none;
-
   font-size: 14px;
+  margin-left: 90%;
 }
-
-.filters {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.filters select {
-  width: 160px;
-  height: 45px;
-
-  border: 1px solid #ddd;
-  border-radius: 10px;
-
-  padding: 0 12px;
-  cursor: pointer;
-}
-
-.add-btn {
+.add-bth {
+  margin-top: 2%;
   height: 45px;
   padding: 0 25px;
-
   border: none;
   border-radius: 10px;
-
   background: black;
   color: white;
-
   font-weight: 600;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
-.add-btn span {
-  width: 22px;
-  height: 22px;
-
+.filters {
   display: flex;
+  gap: 15px;
   align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-  background: #111;
-  color: white;
+  margin-right: 3%;
 }
-
-.table-card {
+.filters select {
+  width: 160px;
+  height: 45px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+ .table-card {
   background: white;
   border-radius: 10px;
-
-  overflow: hidden;
-
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-left: 20%;
+  margin-top: 20px;
+  margin-right: 20px;
+  overflow-x: auto;
 }
-
 table {
   width: 100%;
   border-collapse: collapse;
-}
 
+}
 thead {
   background: black;
   color: white;
+ 
 }
-
 th {
   padding: 18px;
   text-align: left;
   font-size: 20px;
 }
-
 td {
   padding: 16px;
   border-bottom: 1px solid #ececec;
 }
 
-.engineer-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
 
-.engineer-info img {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.status {
-  display: inline-block;
-
-  min-width: 70px;
-  text-align: center;
-
-  padding: 6px 16px;
-
-  border-radius: 20px;
-
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  padding: 8px;
-  background-color: rgb(10, 9, 17);
-  border-radius: 25px;
-  justify-content: center;
-  align-self: center;
-  margin-top: 18px;
-  margin-right: 9px;
-}
-
-.actions button {
+.btn1,.btn2{
+  background-color: #111;
   border: none;
-  background: transparent;
-
-  cursor: pointer;
-  font-size: 18px;
+  padding: 8px;
+  border-radius: 5px;
+  color: #ffffff;
+  
+}
+.btn2{
+margin-left: 10px;
 }

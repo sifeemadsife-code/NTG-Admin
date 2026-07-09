@@ -1,61 +1,21 @@
 <div class="dashbored">
-  <aside class="sidebar">
-    <div class="logo-section">
-      <img src="/images/logo.png" class="logo" alt="NTG Logo" />
+  <div class="sidebar">
+    <div class="logo">
+      <div class="header-white">
+        <img src="/images/logo.png" alt="NTG">
+      </div>
     </div>
-
     <nav class="menu">
-      <a routerLink="/dashboard" class="menu-item">
-        <img src="/images/dashboard.png" />
-        <span>Dashboard</span>
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
       </a>
-
-      <a routerLink="/" class="menu-item">
-        <img src="/images/adminstrator.png" />
-        <span>Engineers</span>
-      </a>
-
-      <a routerLink="/studentsList" class="menu-item active1">
-        <img src="/images/reading.png" />
-        <span>Students</span>
-      </a>
-
-      <a routerLink="/reports" class="menu-item">
-        <img src="/images/reports.png" />
-        <span>Reports</span>
-      </a>
-
-      <a routerLink="/trainingProgramsList" class="menu-item">
-        <img src="/images/code.png" />
-        <span>Training Program</span>
-      </a>
-
-      <a routerLink="/subjects" class="menu-item">
-        <img src="/images/books.png" />
-        <span>Subjects</span>
-      </a>
-
-      <a routerLink="/notifications" class="menu-item">
-        <img src="/images/notification.png" />
-        <span>Notification</span>
-      </a>
-
-      <a routerLink="/settings" class="menu-item">
-        <img src="/images/Setting.png" />
-        <span>Settings</span>
-      </a>
-
-      <a routerLink="/profile" class="menu-item">
-        <img src="/images/user.png" />
-        <span>Profile</span>
-      </a>
-
-      <a routerLink="/logout" class="menu-item">
-        <img src="/images/logout.png" />
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
         <span>Log Out</span>
       </a>
     </nav>
-  </aside>
+  </div>
 
   <div class="engineers-page">
     <!-- Header -->

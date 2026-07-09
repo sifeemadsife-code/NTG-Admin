@@ -1,0 +1,107 @@
+<div class="dashboard">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="header-white">
+        <img src="/images/logo.png" alt="NTG">
+      </div>
+    </div>
+    <nav class="menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log Out</span>
+      </a>
+    </nav>
+  </div>
+  <div class="content">
+    <div class="page-header">
+      <div>
+        <h1>Add New Subject</h1>
+        <p>
+          Dashboard >
+          Subjects >
+          Add New Subject
+        </p>
+
+      </div>
+
+      <button class="back-btn" routerLink="/subject">
+        <i class="fas fa-arrow-left"></i>
+
+        Back to Subjects
+
+      </button>
+
+    </div>
+
+    <form [formGroup]="subjectForm" (ngSubmit)="saveSubject()">
+      <div class="card">
+        <h3>Subject Information</h3>
+        <div class="grid">
+          <div class="form-group">
+            <label>
+              Subject Name <span>*</span>
+            </label>
+
+            <input type="text" formControlName="courseName" placeholder="Enter subject name">
+
+          </div>
+          <div class="form-group">
+
+            <label>
+              Engineer <span>*</span>
+
+            </label>
+
+            <select formControlName="teacherId">
+              <option value="">
+                Select engineer
+              </option>
+
+              <option *ngFor="let teacher of engineers()" [value]="teacher.id">
+                {{teacher.firstName}}
+                {{teacher.lastName}}
+
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+
+            <label>
+
+              Description <span>*</span>
+
+            </label>
+
+            <textarea rows="5" formControlName="description" placeholder="Enter subject description">
+            </textarea>
+          </div>
+          <div class="form-group">
+            <label>
+              Term ID
+            </label>
+            <select formControlName="termId">
+              <option [ngValue]="null">Select Term</option>
+              <option [ngValue]="1">First Term</option>
+              <option [ngValue]="2">Second Term</option>
+            </select>
+          </div>
+        </div>
+        <div class="buttons">
+          <button type="button" class="cancel" routerLink="/subject">
+            Cancel
+          </button>
+          <button type="submit" class="save" [disabled]="saving()">
+
+            {{ saving() ? 'Saving...' : 'Save Subject' }}
+
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -17,6 +17,9 @@ export class EngineerService {
   getAllEngineers() : Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/teachers`)
   }
+  getAllEngineersCount() : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/teachers/count`)
+  }
   getEngineer(id: number): Observable<Engineer> {
     return this.http.get<Engineer>(`${this.apiUrl}/teachers/${id}`);
   }

@@ -28,6 +28,11 @@ public class TeacherController {
         return teacherService.getAllTeachers();
     }
 
+    @GetMapping("/count")
+    public Long countAllTeachers() {
+        return teacherRepository.count();
+    }
+
     @GetMapping("/{id}")
     public TeacherProfileDTO getTeacherProfile(@PathVariable Long id) {
         return teacherService.getTeacherProfile(id);

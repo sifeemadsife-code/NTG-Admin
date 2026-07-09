@@ -4,288 +4,274 @@
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-.active{
-  background:#d4edda;
-  color:#155724;
-  padding:4px 10px;
-  border-radius:20px;
+.active {
+  background: #d4edda;
+  color: #155724;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
-.inactive{
-  background:#f8d7da;
-  color:#721c24;
-  padding:4px 10px;
-  border-radius:20px;
+.inactive {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 .dashbored {
   display: flex;
   min-height: 100vh;
-  background: #EEEEEE;
+  background: #eeeeee;
 }
 .sidebar {
-  width: 260px;
-  font-size: large;
-  background: #6d0000;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
+  width: 250px;
+  background: #620000;
+  color: white;
+  padding: 20px 0;
+  position: fixed;
+  height: 100vh;
 }
-
-
-.logo-section {
-  width: 92%;
-  height: 58px;
-  background: #eeeeee;
-  border-top-left-radius: 28px;
-  border-bottom-left-radius: 28px;
-  margin-left: auto;
-  margin-top: 20px;
-
+.header {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: 0;
+  width: 230px;
+}
+.header-white {
+  width: 230px;
+  height: 65px;
+  background: #fff;
+  border-radius: 30px 0 0px 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .logo {
-  width: 70px;
-}
-
-
-.menu {
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.menu-item {
-  width: 130px;
-  margin-left: 30px;
-  padding: 9px 10px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  color: #fff;
-  text-decoration: none;
-  font-size: 17px;
-  font-weight: 600;
-
-  border-radius: 10px;
-
-  transition: 0.25s;
-}
-
-.menu-item img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.menu-item:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-
-.menu-item.active1 {
-  border: 2px solid #fff;
-  padding-right: 4  0px;
-}
-
-
-.menu-item:last-child {
-  margin-top: auto;
+  text-align: center;
+  padding: 20px;
   margin-bottom: 20px;
 }
-
-
-
+.logo img {
+  width: 80px;
+  height: auto;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.menu-item {
+  padding: 13px 25px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-item:hover,
+.menu-item.active {
+  background: rgba(87, 23, 23, 50%);
+  border: 1px solid white;
+  color: #ffffff;
+  list-style: none;
+}
+.menu-item i {
+  width: 30px;
+  font-size: 18px;
+}
+.menu-item span {
+  margin-left: 10px;
+  font-size: 14px;
+}
+.main-content {
+  margin-left: 250px;
+  flex: 1;
+  padding: 30px;
+}
+.content {
+  margin-left: 250px;
+  padding: 35px;
+  background-color: #fff;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  font-family: 'Segoe UI', sans-serif;
+}
 
 .engineers-page {
-    padding: 30px;
-    background: #f5f5f5;
-    min-height: 100vh;
-    width: 100%;
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 30px;
+  background: #f5f5f5;
+  min-height: 100vh;
 }
 
 .page-header h1 {
-    margin: 0;
-    font-size: 38px;
-    font-weight: 700;
-    color: #111;
+  margin: 0;
+  font-size: 38px;
+  font-weight: 700;
+  color: #111;
 }
 
 .page-header p {
-    color: gray;
-    margin-top: 6px;
-    font-size: 14px;
+  color: gray;
+  margin-top: 6px;
+  font-size: 14px;
 }
 
 .toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 30px 0;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .search-box input {
+  width: 320px;
+  height: 45px;
 
-    width: 320px;
-    height: 45px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
 
-    border: 1px solid #d8d8d8;
-    border-radius: 10px;
+  padding: 0 15px;
+  outline: none;
 
-    padding: 0 15px;
-    outline: none;
-
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .filters {
-    display: flex;
-    gap: 15px;
-    align-items: center;
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
 
 .filters select {
+  width: 160px;
+  height: 45px;
 
-    width: 160px;
-    height: 45px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
 
-    border: 1px solid #ddd;
-    border-radius: 10px;
-
-    padding: 0 12px;
-    cursor: pointer;
+  padding: 0 12px;
+  cursor: pointer;
 }
 
 .add-btn {
+  height: 45px;
+  padding: 0 25px;
 
-    height: 45px;
-    padding: 0 25px;
+  border: none;
+  border-radius: 10px;
 
-    border: none;
-    border-radius: 10px;
+  background: black;
+  color: white;
 
-    background: black;
-    color: white;
+  font-weight: 600;
+  cursor: pointer;
 
-    font-weight: 600;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .add-btn span {
+  width: 22px;
+  height: 22px;
 
-    width: 22px;
-    height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    background: #111;
-    color: white;
+  border-radius: 50%;
+  background: #111;
+  color: white;
 }
 
 .table-card {
+  background: white;
+  border-radius: 10px;
 
-    background: white;
-    border-radius: 10px;
+  overflow: hidden;
 
-    overflow: hidden;
-
-    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 table {
-
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 thead {
-
-    background: black;
-    color: white;
+  background: black;
+  color: white;
 }
 
 th {
-
-    padding: 18px;
-    text-align: left;
-    font-size: 20px;
+  padding: 18px;
+  text-align: left;
+  font-size: 20px;
 }
 
 td {
-
-    padding: 16px;
-    border-bottom: 1px solid #ececec;
+  padding: 16px;
+  border-bottom: 1px solid #ececec;
 }
 
 .Student-info {
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .Student-info img {
+  width: 42px;
+  height: 42px;
 
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-    object-fit: cover;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .status {
+  display: inline-block;
 
-    display: inline-block;
+  min-width: 70px;
+  text-align: center;
 
-    min-width: 70px;
-    text-align: center;
+  padding: 6px 16px;
 
-    padding: 6px 16px;
+  border-radius: 20px;
 
-    border-radius: 20px;
-
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .active {
-    background: #14923c;
+  background: #14923c;
 }
 
 .leave {
-    background: #9e1414;
+  background: #9e1414;
 }
 
 .actions {
-
-    display: flex;
-    gap: 10px;
-    padding:20px ;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
 }
 
 .actions button {
+  border: none;
+  background: transparent;
+  background-color: #111;
+  padding: 10px 30px;
+  border-radius: 15px;
 
-    border: none;
-    background: transparent;
-    background-color: #111;
-    padding: 10px 30px;
-    border-radius: 15px;
-
-    cursor: pointer;
-    font-size: 18px;
+  cursor: pointer;
+  font-size: 18px;
 }

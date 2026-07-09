@@ -1,27 +1,24 @@
 package com.example.demo.Security;
 
-import com.example.demo.entities.User;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import com.example.demo.entities.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 import java.util.List;
-
 @RequiredArgsConstructor
-public class CustomUserDetails implements UserDetails {
-
+@Getter
+public class CustomUserDetails  implements UserDetails{
     private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().getRoleName()));
-    }
-
-    @Override
-    public String getPassword() {
-        return user.getPassword();
+        return List.of(
+                new SimpleGrantedAuthority(user.getRole().getRoleName())
+        );
     }
 
     @Override
@@ -30,12 +27,17 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
+    public String getPassword(){
+        return user.getPassword();
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public boolean isAccountNonLocked(){
         return true;
     }
 
@@ -46,14 +48,10 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getIsdeleted() == null || !user.getIsdeleted();
+        return !Boolean.TRUE.equals(user.getIsdeleted());
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public Long getUserId() {
+    public Long getId() {
         return user.getId();
     }
 }
