@@ -8,6 +8,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,23 +33,18 @@ public class AuthenticationService {
     private Long jwtExpiryMs;
 
     public UserDetails authenticate(String email, String password) {
-        System.out.println("=== AUTH SERVICE ===");
-        System.out.println("Email: [" + email + "]");
-        List<User> all = userRepository.findAll();
-        System.out.println("Total users via findAll: " + all.size());
-        for (User u : all) {
-            System.out.println("User: [" + u.getEmail() + "]");
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(email, password)
+            );
+        } catch (Exception e) {
+            throw new BadCredentialsException("Invalid email or password");
         }
-        Optional<User> found = userRepository.findByEmail(email);
-        System.out.println("Found by email: " + found.isPresent());
 
-        UserDetails user = userDetailsService.loadUserByUsername(email);
-        System.out.println("UserDetails: " + user.getUsername());
-        return user;
+        return userDetailsService.loadUserByUsername(email);
     }
 
-    // ✅ وحدة فقط — تستخدم Base64
-    private SecretKey getSigningKey(){
+    private SecretKey getSigningKey() {
         byte[] keyBytes = Base64.getDecoder().decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
@@ -63,7 +60,7 @@ public class AuthenticationService {
                 .compact();
     }
 
-    private String getSubject(String token){
+    private String getSubject(String token) {
         return Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
@@ -73,15 +70,8 @@ public class AuthenticationService {
     }
 
     public UserDetails validateToken(String token) {
-        System.out.println("Received Token: " + token);
-
         String email = getSubject(token);
-        System.out.println("Email From Token: " + email);
-
-        UserDetails user = userDetailsService.loadUserByUsername(email);
-        System.out.println("User Loaded: " + user.getUsername());
-
-        return user;
+        return userDetailsService.loadUserByUsername(email);
     }
 
     public User getUser() {

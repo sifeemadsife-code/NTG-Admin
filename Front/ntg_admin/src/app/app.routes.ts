@@ -1,4 +1,3 @@
-import { TrainingProgramList } from './Models/training_program_list';
 import { Routes } from '@angular/router';
 import { AdminEngineer } from './Components/admin-engineer/admin-engineer';
 import { EngineerDetailsOverView } from './Components/engineer-details-overview/engineer-details';
@@ -13,7 +12,6 @@ import { TrainingProgramStudents } from './Components/training-program-students/
 import { TrainingProgramEngineer } from './Components/training-program-engineer/training-program-engineer';
 import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
 import { AdminProfile } from './Components/admin-profile/admin-profile';
-import { Sendemail } from './Components/sendemail/sendemail';
 import { Subject } from './Components/subject/subject';
 import { AddSubject } from './Components/add-subject/add-subject';
 import { Dashboard } from './Components/dashboard/dashboard';

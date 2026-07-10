@@ -13,14 +13,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class SecurityExceptionHandler implements AuthenticationEntryPoint, AccessDeniedHandler {
-    private final ObjectMapper objectMapper;
+    private final tools.jackson.databind.ObjectMapper objectMapper;
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
