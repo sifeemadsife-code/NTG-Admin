@@ -2,9 +2,6 @@ import { Student } from './../../Services/student';
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { DashboardService } from './dashboardService';
-import { ActivityService } from './activity_sevice';
-import { Activity } from './Activity';
 import { TrainingService } from '../../Services/training-service';
 import { EngineerService } from '../../Services/engineer';
 
@@ -16,7 +13,6 @@ import { EngineerService } from '../../Services/engineer';
   styleUrls: ['./dashboard.css'],
 })
 export class Dashboard implements OnInit {
-  activities = signal<Activity[]>([]);
   loading = signal(true);
   error = signal<string | null>(null);
   programsCount = signal<number>(0);
@@ -24,43 +20,30 @@ export class Dashboard implements OnInit {
   studentCount = signal<number>(0);
 
   profile = signal({
-    image: 'assets/images/profile.png',
     name: localStorage.getItem('name') || 'Admin',
-    role: localStorage.getItem('role') || 'Administrator',
-  });
-
-  stats = signal({
-    totalStudents: 0,
-    totalStudentsChange: 0,
-    totalEngineers: 0,
-    totalEngineersChange: 0,
-    trainingPrograms: 0,
-    trainingProgramsChange: 0,
+    role: localStorage.getItem('role') || 'Admin',
   });
 
   menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/', active: true },
+    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard', active: true },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
     { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
     { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
     { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
     { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notfications' },
+    { icon: 'fas fa-bell', label: 'Notification', route: '/notifications' },
     { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
     { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
   ];
 
   constructor(
-    private dashboardService: DashboardService,
     private router: Router,
-    private activityService: ActivityService,
     private programsService: TrainingService,
     private engineersService: EngineerService,
     private studentsService: Student
   ) {}
 
   ngOnInit(): void {
-    this.loadStats();
     this.loadActivities();
     this.getProgramsCount();
     this.getEngineersCount();
@@ -96,33 +79,10 @@ export class Dashboard implements OnInit {
       },
     });
   }
-  loadStats(): void {
-    this.dashboardService.getStats().subscribe({
-      next: (res) => {
-        this.stats.set(res);
-        console.log('Stats loaded:', res);
-      },
-      error: (err) => {
-        console.error('Error loading stats:', err);
-      },
-    });
-  }
 
   loadActivities(): void {
     this.loading.set(true);
     this.error.set(null);
-
-    this.activityService.getRecentActivities().subscribe({
-      next: (data) => {
-        this.activities.set(data);
-        this.loading.set(false);
-      },
-      error: (err) => {
-        this.error.set('Failed to load activities');
-        this.loading.set(false);
-        console.error('Error loading activities:', err);
-      },
-    });
   }
 
   handleMenuClick(item: any): void {

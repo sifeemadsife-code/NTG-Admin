@@ -18,7 +18,7 @@ export class AdminEngineer implements OnInit {
   statusFilter = signal<string>('active');
   private router = inject(Router);
   menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/' },
+    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList', active: true },
     { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
     { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },

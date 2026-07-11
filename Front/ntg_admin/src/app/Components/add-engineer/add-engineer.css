@@ -8,64 +8,95 @@
 .dashbored {
   display: flex;
   min-height: 100vh;
-  background: #eeeeee;
 }
+  
 
-.sidebar {
-  width: 285px;
-  flex-shrink: 0;
-  background: #620000;
-  color: white;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  overflow-y: auto;
-}
 
-.logo-section {
-  margin: 10% 0 0 5%;
-  width: 90%;
-  height: auto;
-  padding: 15px 0;
-  background: #eeeeee;
-  border-bottom-left-radius: 35px;
-  border-top-left-radius: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.logo {
-  width: 110px;
-  max-width: 100%;
-}
 
-.logo-text,
-.logo-text1,
-.logo-engineer {
-  gap: 10px;
-  display: flex;
-  align-items: center;
-  margin: 8% 5%;
-}
 
-.logo-engineer {
-  border: #eeeeee solid 3px;
-  border-radius: 10px;
-  padding: 10px;
-}
 
-.sidebar-text {
-  font-family: 'Arial', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  white-space: nowrap;
-}
 
-a {
+a{
   text-decoration: none;
   color: white;
 }
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f5f5;
+}
+.sidebar {
+  width: 250px;
+  background: #620000;
+  color: white;
+  padding: 20px 0;
+  position: fixed;
+  height: 100vh;
+}
+.header {
+  
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left:0;
+  width: 230px;
+}
+.header-white {
+  width: 300px;
+  height: 65px;
+  background: #fff;
+  border-radius: 30px 0 0px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.logo img {
+  width: 80px;
+  height: auto;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.menu-item {
+  padding: 13px 25px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-item:hover,
+.menu-item.active {
+ background: rgba(87, 23, 23, 50%);
+  border: 1px solid white;
+  color: #ffffff;
+  list-style: none;
+
+}
+.menu-item i {
+  width: 30px;
+  font-size: 18px;
+}
+
+.menu-item span {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+
+
+
+
+
 
 /* ===== Main content ===== */
 
@@ -73,6 +104,7 @@ a {
   flex: 1;
   min-width: 0;
   padding: 2% 3%;
+  margin-left: 250px;
 }
 
 .page-header {
@@ -90,12 +122,11 @@ a {
 
 .page {
   display: flex;
-  align-items: stretch;
-  min-height: 80vh;
   border-radius: 20px;
-  background-color: white;
+  background: white;
   gap: 20px;
-  overflow: hidden;
+  padding: 20px;
+  align-items: flex-start;
 }
 
 .logo-page {
@@ -124,8 +155,6 @@ a {
   flex: 1;
   min-width: 0;
   padding: 25px 30px;
-  max-height: 80vh;
-  overflow-y: auto;
 }
 
 .form h1 {

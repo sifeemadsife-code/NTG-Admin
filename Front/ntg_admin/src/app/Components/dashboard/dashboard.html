@@ -1,26 +1,23 @@
 <div class="dashboard-container">
   <div class="sidebar">
     <div class="logo">
-    <div class="header">
-      <div class="header-white">
+      <div class="header">
+        <div class="header-white">
           <img src="\images\logo.png" alt="NTG">
+        </div>
       </div>
     </div>
-    </div>
-    
-<nav class="menu">
-  <a *ngFor="let item of menuItems" 
-     [routerLink]="item.route"
-     [class.active]="item.active"
-     class="menu-item">
-    <i [class]="item.icon"></i>
-    <span>{{ item.label }}</span>
-  </a>
-     <a class="menu-item logout" (click)="logout()">
-    <i class="fas fa-sign-out-alt"></i>
-    <span>Log Out</span>
-  </a>  
-</nav>
+
+    <nav class="menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log Out</span>
+      </a>
+    </nav>
   </div>
 
   <main class="main-content">
@@ -32,7 +29,7 @@
           <span>{{ profile().role }}</span>
         </div>
       </div>
-      
+
       <div class="search-box">
         <i class="fas fa-search"></i>
         <input type="text" placeholder="Search anything...">
@@ -48,43 +45,43 @@
         <img src="/images/image.png" alt="Welcome">
       </div>
     </section>
-    
+
     <section class="stats">
-<div class="stat-card-wrapper">
-  <div class="stat-left-bar1"></div>  
-  <div class="stat-card">
-    <div class="stat-icon students">
-      <i class="fas fa-graduation-cap"><img src="/images/stud.png" alt=""></i>
-    </div>
-    <div class="stat-info1">  
-      <h3>Total Students</h3>
-      <p class="stat-number1">{{ studentCount() }}</p>
-    </div>
-  </div>
-</div>
-<div class="stat-card-wrapper">
-      <div class="stat-card">
-        <div class="stat-left-bar2"></div>
-        <div class="stat-icon engineers">
-          <i class="fas fa-user-tie"><img src="/images/eng.png" alt=""></i>
+      <div class="stat-card-wrapper">
+        <div class="stat-left-bar1"></div>
+        <div class="stat-card">
+          <div class="stat-icon students">
+            <i class="fas fa-graduation-cap"><img src="/images/stud.png" alt=""></i>
+          </div>
+          <div class="stat-info1">
+            <h3>Total Students</h3>
+            <p class="stat-number1">{{ studentCount() }}</p>
+          </div>
         </div>
-        <div class="stat-info2">
-          <h3>Total Engineers</h3>
-          <p class="stat-number2">{{ engineersCount() }}</p>
-        </div>
-      </div>
       </div>
       <div class="stat-card-wrapper">
-      <div class="stat-card">
-        <div class="stat-left-bar3"></div>
-        <div class="stat-icon training">
-          <i class="fas fa-book-open"><img src="/images/prog.png" alt=""></i>
-        </div>
-        <div class="stat-info3">
-          <h3>Training program</h3>
-          <p class="stat-number3">{{ programsCount() }}</p>
+        <div class="stat-card">
+          <div class="stat-left-bar2"></div>
+          <div class="stat-icon engineers">
+            <i class="fas fa-user-tie"><img src="/images/eng.png" alt=""></i>
+          </div>
+          <div class="stat-info2">
+            <h3>Total Engineers</h3>
+            <p class="stat-number2">{{ engineersCount() }}</p>
+          </div>
         </div>
       </div>
+      <div class="stat-card-wrapper">
+        <div class="stat-card">
+          <div class="stat-left-bar3"></div>
+          <div class="stat-icon training">
+            <i class="fas fa-book-open"><img src="/images/prog.png" alt=""></i>
+          </div>
+          <div class="stat-info3">
+            <h3>Training program</h3>
+            <p class="stat-number3">{{ programsCount() }}</p>
+          </div>
+        </div>
       </div>
     </section>
     <section class="charts">
@@ -101,65 +98,32 @@
         <h3>Students Overview</h3>
         <div class="donut-chart">
           <div class="chart-center">
-            <span class="chart-number">{{ stats().totalStudents | number }}</span>
+            <span class="chart-number">{{ studentCount() }}</span>
             <span class="chart-label">Total Students</span>
           </div>
         </div>
-        <div class="chart-legend">
-          <div class="legend-item">
-            <span class="dot grade-10"></span>
-            <span>Grade 10 - 0%</span>
-          </div>
-          <div class="legend-item">
-            <span class="dot grade-9"></span>
-            <span>Grade 9 - 0%</span>
-          </div>
-          <div class="legend-item">
-            <span class="dot grade-8"></span>
-            <span>Grade 8 - 0%</span>
+      </div>
+      <div class="chart-card activities">
+        <div class="chart-header">
+          <h3>Recent Activities</h3>
+          <a href="#" (click)="$event.preventDefault(); loadActivities()">View All</a>
+        </div>
+        <div *ngIf="loading" class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading activities...</p>
+        </div>
+        <div *ngIf="error() && !loading" class="error-state">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>{{ error }}</p>
+          <button (click)="loadActivities()">Retry</button>
+        </div>
+
+        <div *ngIf="!loading && !error" class="activity-list">
+          <div class="activity-content">
           </div>
         </div>
-      </div>
-<div class="chart-card activities">
-  <div class="chart-header">
-    <h3>Recent Activities</h3>
-    <a href="#" (click)="$event.preventDefault(); loadActivities()">View All</a>
-  </div>
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading activities...</p>
-  </div>
-  <div *ngIf="error() && !loading" class="error-state">
-    <i class="fas fa-exclamation-triangle"></i>
-    <p>{{ error }}</p>
-    <button (click)="loadActivities()">Retry</button>
-  </div>
 
-  <div *ngIf="!loading && !error" class="activity-list">
-    <div 
-      *ngFor="let activity of activities()" 
-      class="activity-item"
-      [attr.data-type]="activity.type"
-    >
-      <div 
-        class="icon-wrapper"
-        [style.background-color]="getIconColor(activity.color) + '20'"
-        [style.color]="getIconColor(activity.color)"
-      >
-        <i [class]="getIconClass(activity.icon)"></i>
       </div>
-      <div class="activity-content">
-        <p class="activity-title">{{ activity.title }}</p>
-        <span class="activity-time">{{ getTimeAgo(activity.timestamp) }}</span>
-      </div>
-    </div>
-    
-    <div *ngIf="activities.length === 0" class="empty-state">
-      <i class="fas fa-inbox"></i>
-      <p>No recent activities</p>
-    </div>
-  </div>
-</div>
     </section>
   </main>
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Student } from '../../Services/student';
@@ -12,11 +12,11 @@ import { StudentsListInterface } from '../../Models/Students_list';
 export class StudentsList {
   students = signal<StudentsListInterface[]>([]);
   searchTerm = signal('');
-  statusFilter = signal('all');
+  statusFilter = signal('active');
   constructor(private readonly studentService: Student) {}
   private router = inject(Router);
   menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/' },
+    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
     { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList', active: true },
     { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
@@ -46,4 +46,19 @@ export class StudentsList {
       },
     });
   }
+  filteredStudents = computed(() => {
+    const search = this.searchTerm().trim();
+    const status = this.statusFilter();
+
+    return this.students().filter((student) => {
+      // Search by ID
+      const matchesSearch = search === '' || student.id.toString().includes(search);
+
+      // Filter by status
+      const matchesStatus =
+        status === 'all' ? true : status === 'active' ? !student.status : student.status;
+
+      return matchesSearch && matchesStatus;
+    });
+  });
 }
