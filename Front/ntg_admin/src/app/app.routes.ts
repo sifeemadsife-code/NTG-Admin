@@ -24,7 +24,7 @@ import { ComposeReport } from './Components/compose-report/compose-report';
 export const routes: Routes = [
   {
     path: '',
-    component: Login,
+    component: Dashboard,
   },
   {
     path: 'dashboard',

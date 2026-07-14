@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   imports: [RouterLink, CommonModule],
 })
 export class SettingComponent implements OnInit {
+  isSidebarOpen = false;
   settings = {
     language: 'English',
     appearance: 'Light',
