@@ -75,6 +75,7 @@
         </div>
 
         <div class="buttons">
+          <button class="edit" routerLink="/evaluate-student">Evaluate Student</button>
           <button class="edit">Edit Program</button>
         </div>
       </div>
@@ -97,7 +98,7 @@
         <a>Engineers</a>
       </div>
 
-      <div class="search-box" style="margin-bottom: 15px;">
+      <div class="search-box">
         <input type="text" placeholder="Search by student name..." [value]="searchTerm()"
           (input)="onSearchChange($any($event.target).value)" />
       </div>
@@ -110,6 +111,7 @@
               <th>Student</th>
               <th>Grade</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -130,14 +132,13 @@
                 </span>
               </td>
               <td>
-                <span class="actions">
-                  <img src="/images/view_icon" alt="">
-                </span>
+                <button class="action-butt" [routerLink]="['/students', student.id, 'evaluations']">View
+                  Evaluation</button>
               </td>
             </tr>
             } @empty {
             <tr>
-              <td colspan="4">No Students in this Grade</td>
+              <td colspan="5">No Students in This Training</td>
             </tr>
             }
           </tbody>

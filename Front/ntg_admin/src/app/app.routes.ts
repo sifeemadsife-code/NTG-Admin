@@ -21,6 +21,8 @@ import { SettingComponent } from './Components/setting/setting';
 import { WriteReportComponent } from './Components/repot-wight/repot-wight';
 import { Reports } from './Components/reports/reports';
 import { ComposeReport } from './Components/compose-report/compose-report';
+import { EvaluateStudent } from './Components/evaluate-student/evaluate-student';
+import { StudentEvaluationsView } from './Components/student-evaluations-view/student-evaluations-view';
 export const routes: Routes = [
   {
     path: '',
@@ -37,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'engineers/:id/personal-info',
     component: EngineerDetailsPersonalInfo,
+  },
+  {
+    path: 'students/:id/evaluations',
+    component: StudentEvaluationsView,
   },
   {
     path: 'engineers/:id/update-engineer',
@@ -65,6 +71,10 @@ export const routes: Routes = [
   {
     path: 'compose-report',
     component: ComposeReport,
+  },
+  {
+    path: 'evaluate-student',
+    component: EvaluateStudent,
   },
   {
     path: 'programs/:id/students',

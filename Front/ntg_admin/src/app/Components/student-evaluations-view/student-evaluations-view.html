@@ -1,0 +1,52 @@
+<div class="page">
+    <div class="page-header">
+        <div>
+            <h1>Student Evaluations</h1>
+            <p>Dashboard > Students > Evaluations</p>
+        </div>
+        <div class="header-buttons">
+            <a class="add-btn" [routerLink]="['/evaluate-student']">+ New Evaluation</a>
+        </div>
+    </div>
+
+    @if (loading()) {
+    <p class="status-text">Loading evaluations...</p>
+    } @else if (error()) {
+    <p class="status-text error-text">{{ error() }}</p>
+    } @else {
+
+    @if (evaluations().length > 0) {
+    <div class="student-name-card">
+        <h3>{{ evaluations()[0].studentFirstName }} {{ evaluations()[0].studentLastName }}</h3>
+    </div>
+    }
+
+    <div class="evaluations-list">
+        @for (evaluation of evaluations(); track evaluation.id) {
+        <div class="evaluation-card">
+            <div class="evaluation-header">
+                <span class="eval-date">{{ evaluation.evaluationDate }}</span>
+                <span class="eval-score" [class.high]="(evaluation.score ?? 0) >= 75"
+                    [class.mid]="(evaluation.score ?? 0) >= 50 && (evaluation.score ?? 0) < 75"
+                    [class.low]="(evaluation.score ?? 0) < 50">
+                    {{ evaluation.score ?? '-' }} / 100
+                    <small>{{ ratingLabel(evaluation.score) }}</small>
+                </span>
+            </div>
+
+            <p class="eval-text">{{ evaluation.evaluationText }}</p>
+
+            @if (evaluation.evaluationNote) {
+            <p class="eval-note"><strong>Note:</strong> {{ evaluation.evaluationNote }}</p>
+            }
+
+            <p class="eval-by">Evaluated by: {{ evaluation.userFirstName }} {{ evaluation.userLastName }}</p>
+        </div>
+        } @empty {
+        <div class="empty-state">
+            <p>No evaluations found for this student yet.</p>
+        </div>
+        }
+    </div>
+    }
+</div>
