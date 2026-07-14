@@ -1,0 +1,55 @@
+<div class="sidebar">
+    <div class="logo">
+        <div class="header">
+            <div class="header-white">
+                <img src="\images\logo.png" alt="NTG">
+            </div>
+        </div>
+    </div>
+
+    <nav class="menu">
+        <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+        </a>
+        <a class="menu-item logout" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+        </a>
+    </nav>
+</div>
+<p>Dashboard > Reports</p>
+
+<div class="page">
+    <div class="page-header">
+        <div>
+            <h1>Compose Report</h1>
+            <p>Dashboard > Reports > Compose Report</p>
+        </div>
+        <a class="back-btn" routerLink="/reports">Back</a>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+        @if (error()) {
+        <p class="error-text">{{ error() }}</p>
+        }
+
+        <label>Send To</label>
+        <select formControlName="sentToId">
+            <option value="">Select Recipient</option>
+            @for (engineer of engineers(); track engineer.id) {
+            <option [value]="engineer.id">{{ engineer.firstName }} {{ engineer.lastName }}</option>
+            }
+        </select>
+
+        <label>Content</label>
+        <textarea rows="6" formControlName="content" placeholder="Write your report content..."></textarea>
+
+        <label>Attachment Link (optional)</label>
+        <input type="text" formControlName="fileLink" placeholder="Paste a file URL if any" />
+
+        <button type="submit" [disabled]="saving()">
+            {{ saving() ? 'Sending...' : 'Send Report' }}
+        </button>
+    </form>
+</div>

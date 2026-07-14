@@ -46,7 +46,7 @@
         <thead>
           <tr>
             <th>Program</th>
-            <th>Students</th>
+            <th>Grade</th>
             <th>Engineer</th>
             <th>Duration</th>
             <th>Start Date</th>
@@ -57,7 +57,7 @@
           @for (program of programs(); track program.id) {
           <tr>
             <td class="namest">{{ program.program_name }}</td>
-            <td>{{ program.total_students }}</td>
+            <td>{{ program.grade_name }}</td>
             <td>1</td>
             <td>{{ program.duration }}</td>
             <td>{{ program.start_date }}</td>

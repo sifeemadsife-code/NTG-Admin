@@ -33,6 +33,8 @@ export class TrainingProgramEngineer implements OnInit {
     teacherId: 1,
     teacherFirstName: '',
     teacherLastName: '',
+    gradeId:0,
+    gradeName: '',
     programName: '',
     description: '',
     startDate: new Date('0-0-0'),

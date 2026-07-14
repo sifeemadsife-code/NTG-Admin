@@ -40,6 +40,11 @@ public class TrainingProgram {
     @JoinColumn(name = "USER_ID", nullable = false)
     private com.example.demo.entities.User user;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "GRADE_ID", nullable = false)
+    private Grade grade;
+
     @Size(max = 255)
     @NotNull
     @Column(name = "PROGRAM_NAME", nullable = false)
@@ -63,6 +68,4 @@ public class TrainingProgram {
     @NotNull
     @Column(name = "CREATED_AT", nullable = false)
     private Instant createdAt;
-
-
 }

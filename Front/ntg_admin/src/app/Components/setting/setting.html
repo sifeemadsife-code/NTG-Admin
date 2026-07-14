@@ -1,0 +1,119 @@
+<div class="dashboard">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="header">
+        <div class="header-white">
+          <img src="\images\logo.png" alt="NTG">
+        </div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log Out</span>
+      </a>
+    </nav>
+  </div>
+
+  <main class="content">
+    <div class="page-header">
+      <div>
+        <h1>Setting</h1>
+        <p class="breadcrumb">
+          Dashboard > Setting
+        </p>
+      </div>
+    </div>
+    <div class="settings-card">
+      <div class="setting-item">
+        <div class="left">
+          <img src="/images/lang.png" class="setting-icon">
+          <span>
+            Language
+          </span>
+        </div>
+        <div class="right">
+          English
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="left">
+          <img src="/images/appea.png" class="setting-icon">
+          <span>
+            Appearance
+          </span>
+        </div>
+        <div class="right">
+          Light
+        </div>
+      </div>
+      <div class="setting-item">
+
+        <div class="left">
+
+          <img src="/images/supp.png" class="setting-icon">
+
+          <span>
+            Support
+          </span>
+
+        </div>
+
+        <div class="right">
+
+          Need help?
+
+        </div>
+
+      </div>
+
+
+
+      <div class="setting-item">
+
+        <div class="left">
+
+          <img src="/images/change.png" class="setting-icon">
+
+          <span>
+            Change Password
+          </span>
+
+        </div>
+
+        <div class="right">
+
+        </div>
+
+      </div>
+
+
+
+      <div class="setting-item">
+
+        <div class="left">
+
+          <img src="/images/about.png" class="setting-icon">
+
+          <span>
+            About
+          </span>
+
+        </div>
+
+        <div class="right">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

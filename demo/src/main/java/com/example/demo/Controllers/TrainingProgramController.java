@@ -1,9 +1,6 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.DTOs.CreateTrainingProgramRequestDTO;
-import com.example.demo.DTOs.TrainingProgramResponseDTO;
-import com.example.demo.DTOs.TrainingProgramsList;
-import com.example.demo.DTOs.UpdateTrainingProgramRequestDTO;
+import com.example.demo.DTOs.*;
 import com.example.demo.Services.TrainingProgramService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +26,11 @@ public class TrainingProgramController {
     @GetMapping("/count")
     public Long count(){
         return trainingProgramService.getTrainingProgramsCount();
+    }
+    // NEW: students belonging to this program's grade
+    @GetMapping("/{id}/students")
+    public List<StudentDTO> getProgramStudents(@PathVariable Long id) {
+        return trainingProgramService.getStudentsInProgram(id);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,158 +1,148 @@
 <div class="dashbored">
-<aside class="sidebar">
-  <div class="logo-section">
-    <img alt="NTG Logo" src="/images/logo.png" class="logo" />
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Dashboard</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Engineers</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/reading.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Students</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/reports.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Reports</a></span>
-  </div>
-  <div class="logo-engineer">
-    <img alt="icon" src="/images/code.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Training Programs</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/books.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Subjects</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/Setting.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Settings</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/user.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Profile</a></span>
-  </div>
-  <div class="logo-text">
-    <img alt="icon" src="/images/logout.png" width="25" height="25" />
-    <span class="sidebar-text"><a href="">Logout</a></span>
-  </div>
-</aside>
-
-
-<div class="engineers-page">
-
-  <div class="page-header">
-    <div>
-      <h1>Training Programs</h1>
-      <p>Dashboard > Training Programs > Training Program Details</p>
+  <aside class="sidebar">
+    <div class="logo-section">
+      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
     </div>
-  </div>
 
-  <div class="page" >
+    <div class="logo-text">
+      <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Dashboard</a></span>
+    </div>
 
-<div class="header">
+    <div class="logo-text">
+      <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Engineers</a></span>
+    </div>
 
-    <div class="title">
+    <div class="logo-text">
+      <img alt="icon" src="/images/reading.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Students</a></span>
+    </div>
 
-        <div class="icon">
+    <div class="logo-text">
+      <img alt="icon" src="/images/reports.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Reports</a></span>
+    </div>
+
+    <div class="logo-engineer">
+      <img alt="icon" src="/images/code.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Training Programs</a></span>
+    </div>
+
+    <div class="logo-text">
+      <img alt="icon" src="/images/books.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Subjects</a></span>
+    </div>
+
+    <div class="logo-text">
+      <img alt="icon" src="/images/Setting.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Settings</a></span>
+    </div>
+
+    <div class="logo-text">
+      <img alt="icon" src="/images/user.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Profile</a></span>
+    </div>
+
+    <div class="logo-text">
+      <img alt="icon" src="/images/logout.png" width="25" height="25" />
+      <span class="sidebar-text"><a href="">Logout</a></span>
+    </div>
+  </aside>
+
+  <div class="engineers-page">
+
+    <div class="page-header">
+      <div>
+        <h1>Training Programs</h1>
+        <p>Dashboard > Training Programs > Training Program Details</p>
+      </div>
+    </div>
+
+    <div class="page">
+
+      <div class="header">
+        <div class="title">
+          <div class="icon">
             <img src="/images/code1.png" alt="Code Icon" width="50" height="45" />
+          </div>
+
+          <div>
+            <h2>{{ training().programName }}</h2>
+            <p>{{ training().description }}</p>
+            <p>Grade: {{ training().gradeName }}</p>
+          </div>
         </div>
 
-        <div>
+        <div class="buttons">
+          <button class="edit">Edit Program</button>
+        </div>
+      </div>
 
-            <h2>{{training().programName}}</h2>
-
-            <p>{{training().description}}</p>
-
+      <div class="cards">
+        <div class="card">
+          <h2>{{ filteredStudents().length }}</h2>
+          <p>Total Students in {{ training().gradeName }}</p>
         </div>
 
+        <div class="card">
+          <h2>1</h2>
+          <p>Assigned Engineers</p>
+        </div>
+      </div>
 
+      <div class="tabs">
+        <a>Overview</a>
+        <a class="active">Students</a>
+        <a>Engineers</a>
+      </div>
+
+      <div class="search-box" style="margin-bottom: 15px;">
+        <input type="text" placeholder="Search by student name..." [value]="searchTerm()"
+          (input)="onSearchChange($any($event.target).value)" />
+      </div>
+
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Student</th>
+              <th>Grade</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (student of filteredStudents(); track student.id) {
+            <tr>
+              <td>{{ student.id }}</td>
+
+              <td>
+                {{ student.first_name }} {{ student.last_name }}
+              </td>
+
+              <td>{{ student.grade }}</td>
+
+              <td>
+                <span [class.active]="!student.status" [class.inactive]="student.status">
+                  {{ student.status ? 'Inactive' : 'Active' }}
+                </span>
+              </td>
+              <td>
+                <span class="actions">
+                  <img src="/images/view_icon" alt="">
+                </span>
+              </td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="4">No Students in this Grade</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
-
-    <div class="buttons">
-
-        <button class="edit">
-            Edit Program
-        </button>
-
-        <button class="assign">
-            + Assign Student
-        </button>
-
-    </div>
-
-</div>
-
-  <div class="cards">
-
-    <div class="card">
-
-        <h2>{{training().totalStudents}}</h2>
-
-        <p>Total Students</p>
-
-    </div>
-
-    <div class="card">
-
-        <h2>1</h2>
-
-        <p>Assigned Engineers</p>
-
-    </div>
-
-
-</div>
-
-<div class="tabs">
-
-    <a>Overview</a>
-    <a class="active">Students</a>
-    <a>Engineers</a>
-</div>
-
-<div class="table-card">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Student</th>
-          <th>Grade</th>
-          <th>Attendance</th>
-          <th>Status</th>
-          <th>Actions</th>
-
-        </tr>
-      </thead>
-
-      <tbody>
-
-          <tr>
-            <td class="Student-info">
-              <span>{{ training().id }}</span>
-            </td>
-
-            <td></td>
-
-            <td></td>
-
-            <td></td>
-
-            <td>
-              <span [class.active]="" [class.inactive]="">
-              </span>
-            </td>
-
-            <td class="actions">
-              <a class="icon-btn"><img src="/images/view_icon.png" alt=""></a>
-            </td>
-          </tr>
-      </tbody>
-    </table>
   </div>
-
 </div>
-
