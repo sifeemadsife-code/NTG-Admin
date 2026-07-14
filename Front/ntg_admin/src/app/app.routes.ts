@@ -17,6 +17,10 @@ import { AddSubject } from './Components/add-subject/add-subject';
 import { Dashboard } from './Components/dashboard/dashboard';
 import { NotificationComponent } from './Components/notification/notification';
 import { Login } from './Components/login/login';
+import { SettingComponent } from './Components/setting/setting';
+import { WriteReportComponent } from './Components/repot-wight/repot-wight';
+import { Reports } from './Components/reports/reports';
+import { ComposeReport } from './Components/compose-report/compose-report';
 export const routes: Routes = [
   {
     path: '',
@@ -24,7 +28,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
   },
   {
     path: 'engineers/:id',
@@ -40,7 +44,7 @@ export const routes: Routes = [
   },
   {
     path: 'subjects',
-    component: Subject
+    component: Subject,
   },
   {
     path: 'addEngineer',
@@ -53,6 +57,14 @@ export const routes: Routes = [
   {
     path: 'programs/:id',
     component: TrainingProgramOverveiw,
+  },
+  {
+    path: 'reports',
+    component: Reports,
+  },
+  {
+    path: 'compose-report',
+    component: ComposeReport,
   },
   {
     path: 'programs/:id/students',
@@ -72,7 +84,7 @@ export const routes: Routes = [
   },
   {
     path: 'engineersList',
-    component: AdminEngineer
+    component: AdminEngineer,
   },
   {
     path: 'profile',
@@ -84,7 +96,11 @@ export const routes: Routes = [
   },
   {
     path: 'add-subject',
-    component: AddSubject
+    component: AddSubject,
+  },
+  {
+    path: 'settings',
+    component: SettingComponent,
   },
   {
     path: '**',

@@ -1,0 +1,78 @@
+<div class="sidebar">
+    <div class="logo">
+        <div class="header">
+            <div class="header-white">
+                <img src="\images\logo.png" alt="NTG">
+            </div>
+        </div>
+    </div>
+
+    <nav class="menu">
+        <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+        </a>
+        <a class="menu-item logout" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+        </a>
+    </nav>
+</div>
+<div class="reports-page">
+    <div class="page-header">
+        <div>
+            <h1>Reports</h1>
+            <p>Dashboard > Reports</p>
+        </div>
+        <a class="add-btn" routerLink="/compose-report">
+            <span>+</span>
+            Compose Report
+        </a>
+    </div>
+
+    <div class="toolbar">
+        <div class="search-box">
+            <input type="text" placeholder="Search by sender or content..." [value]="searchTerm()"
+                (input)="onSearchChange($any($event.target).value)" />
+        </div>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Content</th>
+                    <th>Date</th>
+                    <th>File</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (report of filteredReports(); track report.id) {
+                <tr>
+                    <td>{{ report.userFirstName }} {{ report.userLastName }}</td>
+                    <td>{{ report.sentToFirstName }} {{ report.sentToLastName }}</td>
+                    <td>{{ report.content }}</td>
+                    <td>{{ report.createdAt }}</td>
+                    <td>
+                        @if (report.fileLink) {
+                        <a [href]="report.fileLink" target="_blank">View File</a>
+                        } @else {
+                        <span>-</span>
+                        }
+                    </td>
+                    <td class="actions">
+                        <button (click)="deleteReport(report.id)">Delete</button>
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="6">No reports found</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

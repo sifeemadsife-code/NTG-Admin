@@ -8,6 +8,8 @@ public record TrainingProgramResponseDTO(
         Long teacherId,
         String teacherFirstName,
         String teacherLastName,
+        Long gradeId,
+        String gradeName,
         String programName,
         String description,
         LocalDate startDate,

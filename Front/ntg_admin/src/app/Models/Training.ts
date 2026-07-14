@@ -3,6 +3,8 @@ export interface Training {
   teacherId: number;
   teacherFirstName: string;
   teacherLastName: string;
+  gradeId: number;
+  gradeName: string;
   programName: string;
   description: string;
   startDate: Date;

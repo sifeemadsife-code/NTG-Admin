@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Training } from '../Models/Training';
 import { TrainingProgramList } from '../Models/training_program_list';
+import { StudentsListInterface } from '../Models/Students_list';
 
 export interface CreateTrainingProgramRequest {
   teacherId: number;
   userId: number;
+  gradeId: number;
   programName: string;
   description?: string;
   startDate: string;
@@ -32,6 +34,10 @@ export class TrainingService {
 
   getProgramsCount(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/count`);
+  }
+
+  getProgramStudents(id: number): Observable<StudentsListInterface[]> {
+    return this.http.get<StudentsListInterface[]>(`${this.apiUrl}/${id}/students`);
   }
 
   createProgram(data: CreateTrainingProgramRequest): Observable<any> {

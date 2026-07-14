@@ -1,0 +1,362 @@
+<div class="dashboard">
+
+  <!-- ================= SIDEBAR ================= -->
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="header">
+        <div class="header-white">
+          <img src="\images\logo.png" alt="NTG">
+        </div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log Out</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ================= CONTENT ================= -->
+
+  <main class="content">
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+      <div>
+
+        <h1>Write Report</h1>
+
+        <p class="breadcrumb">
+          Dashboard > Reports > Write Report
+        </p>
+
+      </div>
+
+      <button class="draft-btn">
+        Save Draft
+      </button>
+
+    </div>
+
+    <!-- Form Card -->
+
+    <div class="report-card">
+
+      <form>
+
+        <div class="row">
+
+          <!-- Report Type -->
+
+          <div class="form-group">
+
+            <label>Report Type *</label>
+
+            <select
+              name="reportType"
+              [(ngModel)]="report.reportTypeId">
+
+              <option
+                value=""
+                disabled
+                selected>
+
+                Select Report Type
+
+              </option>
+
+              <option
+                *ngFor="let type of reportTypes"
+                [value]="type.id">
+
+                {{ type.name }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+          <!-- Student -->
+
+          <div class="form-group">
+
+            <label>Student *</label>
+
+            <select
+              name="student"
+              [(ngModel)]="report.studentId">
+
+              <option
+                value=""
+                disabled
+                selected>
+
+                Select Student
+
+              </option>
+
+              <option
+                *ngFor="let student of students"
+                [value]="student.id">
+
+                {{ student.fullName }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <!-- Engineer -->
+
+          <div class="form-group">
+
+            <label>Engineer *</label>
+
+            <select
+              name="engineer"
+              [(ngModel)]="report.engineerId">
+
+              <option
+                value=""
+                disabled
+                selected>
+
+                Select Engineer
+
+              </option>
+
+              <option
+                *ngFor="let engineer of engineers"
+                [value]="engineer.id">
+
+                {{ engineer.fullName }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+          <!-- Training Program -->
+
+          <div class="form-group">
+
+            <label>Training Program *</label>
+
+            <select
+              name="program"
+              [(ngModel)]="report.programId">
+
+              <option
+                value=""
+                disabled
+                selected>
+
+                Select Program
+
+              </option>
+
+              <option
+                *ngFor="let program of programs"
+                [value]="program.id">
+
+                {{ program.programName }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+                <!-- ================= TITLE ================= -->
+
+        <div class="row">
+
+          <div class="form-group full-width">
+
+            <label>Report Title *</label>
+
+            <input
+              type="text"
+              name="title"
+              placeholder="Enter Report Title"
+              [(ngModel)]="report.title">
+
+          </div>
+
+        </div>
+
+        <!-- ================= SUBJECT ================= -->
+
+        <div class="row">
+
+          <div class="form-group full-width">
+
+            <label>Subject</label>
+
+            <input
+              type="text"
+              name="subject"
+              placeholder="Enter Subject"
+              [(ngModel)]="report.subject">
+
+          </div>
+
+        </div>
+
+        <!-- ================= ATTACHMENTS ================= -->
+
+        <div class="row">
+
+          <div class="form-group full-width">
+
+            <label>Attachments</label>
+
+            <div class="upload-box">
+
+              <input
+                #fileInput
+                type="file"
+                multiple
+                hidden
+                (change)="onFileSelected($event)">
+
+              <button
+                type="button"
+                class="upload-btn"
+                (click)="fileInput.click()">
+
+                Upload Files
+
+              </button>
+
+              <p>
+
+                Drag & Drop files here or click Upload
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= FILES ================= -->
+
+        <div
+          class="uploaded-files"
+          *ngIf="uploadedFiles.length > 0">
+
+          <div
+            class="file-item"
+            *ngFor="let file of uploadedFiles; let i=index">
+
+            <div class="file-info">
+
+              <i class="fa fa-file"></i>
+
+              <span>
+
+                {{file.name}}
+
+              </span>
+
+            </div>
+
+            <button
+              type="button"
+              class="delete-btn"
+              (click)="removeFile(i)">
+
+              <i class="fa fa-trash"></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- ================= REPORT ================= -->
+
+        <div class="row">
+
+          <div class="form-group full-width">
+
+            <label>Report Details *</label>
+
+            <textarea
+
+              rows="12"
+
+              name="description"
+
+              placeholder="Write report here..."
+
+              [(ngModel)]="report.description">
+
+            </textarea>
+
+          </div>
+
+        </div>
+                <!-- ================= ACTION BUTTONS ================= -->
+
+        <div class="button-group">
+
+          <button
+            type="button"
+            class="preview-btn"
+            (click)="previewReport()">
+
+            <i class="fa fa-eye"></i>
+
+            Preview
+
+          </button>
+
+          <button
+            type="button"
+            class="draft-btn">
+
+            <i class="fa fa-save"></i>
+
+            Save Draft
+
+          </button>
+
+          <button
+            type="submit"
+            class="submit-btn">
+
+            <i class="fa fa-paper-plane"></i>
+
+            Submit Report
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </main>
+
+</div>

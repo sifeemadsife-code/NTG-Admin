@@ -1,0 +1,143 @@
+.reports-page {
+  font-family: Arial, sans-serif;
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 30px;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f5f5;
+}
+.sidebar {
+  width: 250px;
+  background: #620000;
+  color: white;
+  padding: 20px 0;
+  position: fixed;
+  height: 100vh;
+}
+.header {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: 0;
+  width: 230px;
+}
+.header-white {
+  width: 300px;
+  height: 65px;
+  background: #fff;
+  border-radius: 30px 0 0px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.logo img {
+  width: 80px;
+  height: auto;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.menu-item {
+  padding: 13px 25px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-item:hover,
+.menu-item.active {
+  background: rgba(87, 23, 23, 50%);
+  border: 1px solid white;
+  color: #ffffff;
+  list-style: none;
+}
+.menu-item i {
+  width: 30px;
+  font-size: 18px;
+}
+
+.menu-item span {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.page-header h1 {
+  font-size: 34px;
+}
+.page-header p {
+  color: gray;
+  margin-top: 6px;
+  font-size: 14px;
+}
+.add-btn {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  text-decoration: none;
+}
+.toolbar {
+  margin-bottom: 20px;
+}
+.search-box input {
+  width: 320px;
+  height: 45px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 0 15px;
+  outline: none;
+}
+.table-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead {
+  background: black;
+  color: white;
+}
+th,
+td {
+  padding: 16px;
+  text-align: left;
+}
+td {
+  border-bottom: 1px solid #ececec;
+}
+.actions button {
+  border: none;
+  background: #8f0000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}

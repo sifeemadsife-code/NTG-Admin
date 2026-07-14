@@ -15,4 +15,7 @@ public interface EngineerFeedbackRepository extends JpaRepository<EngineerFeedba
 
     @Query("SELECT AVG(f.rate) FROM EngineerFeedback f WHERE f.teacher.id = :teacherId AND f.rate IS NOT NULL")
     Double findAverageRateByTeacherId(@Param("teacherId") Long teacherId);
+
+    @Query("SELECT COALESCE(MAX(f.id), 0) + 1 FROM EngineerFeedback f")
+    Long getNextId();
 }
