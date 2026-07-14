@@ -10,6 +10,7 @@ import { StudentsListInterface } from '../../Models/Students_list';
   styleUrl: './students-list.css',
 })
 export class StudentsList {
+      isSidebarOpen = false;
   students = signal<StudentsListInterface[]>([]);
   searchTerm = signal('');
   statusFilter = signal('active');

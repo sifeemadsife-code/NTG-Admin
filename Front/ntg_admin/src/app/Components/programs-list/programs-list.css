@@ -238,3 +238,176 @@ td {
   cursor: pointer;
   font-size: 18px;
 }
+
+
+
+/* ================= MENU BUTTON ================= */
+
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 8px;
+  background: #620000;
+  color: white;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* ================= TABLET ================= */
+
+@media screen and (max-width: 1024px) {
+    .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    transition: 0.3s ease;
+    z-index: 1500;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .header,
+  .menu-item span {
+    display: block;
+  }
+
+  .logo img {
+    width: 50px;
+  }
+
+  .engineers-page,
+  .main-content,
+  .content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+    padding: 20px;
+  }
+
+  .card {
+    width: 45%;
+  }
+
+  .add-e {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .table-card {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 850px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    transition: 0.3s ease;
+    z-index: 1500;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .header,
+  .menu-item span {
+    display: block;
+  }
+
+  .engineers-page,
+  .main-content,
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 80px 15px 20px;
+  }
+
+  .list {
+    height: auto;
+  }
+
+  .add-e {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .cycle {
+    margin: 0 15px 0 0;
+    width: 45px;
+    height: 45px;
+  }
+
+  .cycle img {
+    width: 30px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .table-card {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 850px;
+  }
+}
+
+/* ================= SMALL PHONES ================= */
+
+@media screen and (max-width: 480px) {
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .card-title,
+  .card-value {
+    font-size: 16px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-engineer.css',
 })
 export class AddEngineer {
+    isSidebarOpen = false;
   newEngineer = signal<CreateEngineer>({
     firstName: '',
     lastName: '',

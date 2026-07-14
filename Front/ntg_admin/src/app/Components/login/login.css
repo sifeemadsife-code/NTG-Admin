@@ -162,3 +162,42 @@ button {
     margin-left: 8px;
     display: block;
 }
+
+
+
+
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+
+    .left-side {
+        display: none;
+    }
+
+    .right-side {
+        width: 100%;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .logo {
+        width: 110px;
+        top: 15px;
+        right: 15px;
+    }
+
+    .login-box h2 {
+        font-size: 30px;
+    }
+
+    .options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
