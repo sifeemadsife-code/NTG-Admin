@@ -14,6 +14,8 @@ import { CourseResponseDTO, CourseService } from '../../Services/course-service'
   styleUrls: ['./subject.css'],
 })
 export class Subject implements OnInit {
+      isSidebarOpen = false;
+
   private courseService = inject(CourseService);
   courses = signal<CourseResponseDTO[]>([]);
   loading = signal(false);

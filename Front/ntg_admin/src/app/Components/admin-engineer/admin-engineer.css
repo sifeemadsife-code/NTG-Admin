@@ -115,7 +115,7 @@ a {
 }
 
 .engineers-page {
-  margin-left: 250px; 
+  margin-left: 250px;
   width: calc(100% - 250px);
 
   padding: 30px;
@@ -283,4 +283,183 @@ td {
 
   cursor: pointer;
   font-size: 18px;
+}
+
+
+
+
+
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 8px;
+  background: #620000;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    transition: 0.3s;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .header,
+  .menu-item span {
+    display: block;
+  }
+
+  .main-content,
+  .content,
+  .engineers-page {
+    margin-left: 0;
+    width: 100%;
+    padding: 80px 15px 20px;
+  }
+
+    .main-content,
+    .content,
+    .engineers-page {
+      margin-left: 80px;
+      width: calc(100% - 80px);
+      padding: 20px;
+    }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  .filters select,
+  .add-btn {
+    width: 100%;
+  }
+
+  th {
+    font-size: 16px;
+  }
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    transition: 0.3s;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .header,
+  .menu-item span {
+    display: block;
+  }
+
+  .main-content,
+  .content,
+  .engineers-page {
+    margin-left: 0;
+    width: 100%;
+    padding: 80px 15px 20px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filters select,
+  .add-btn {
+    width: 100%;
+  }
+
+  .table-card {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 900px;
+  }
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .engineer-info {
+    gap: 8px;
+  }
+
+  .engineer-info img {
+    width: 35px;
+    height: 35px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .actions {
+    padding: 6px;
+    gap: 6px;
+  }
 }

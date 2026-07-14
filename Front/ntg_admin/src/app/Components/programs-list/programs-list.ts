@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './programs-list.css',
 })
 export class ProgramsList implements OnInit {
+      isSidebarOpen = false;
+
   programs = signal<TrainingProgramList[]>([]);
 
   constructor(private trainingService: TrainingService) {}

@@ -26,7 +26,7 @@ import { StudentEvaluationsView } from './Components/student-evaluations-view/st
 export const routes: Routes = [
   {
     path: '',
-    component: Login,
+    component: Dashboard,
   },
   {
     path: 'dashboard',

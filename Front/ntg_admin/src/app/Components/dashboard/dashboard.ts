@@ -13,6 +13,7 @@ import { EngineerService } from '../../Services/engineer';
   styleUrls: ['./dashboard.css'],
 })
 export class Dashboard implements OnInit {
+  isSidebarOpen = false;
   loading = signal(true);
   error = signal<string | null>(null);
   programsCount = signal<number>(0);

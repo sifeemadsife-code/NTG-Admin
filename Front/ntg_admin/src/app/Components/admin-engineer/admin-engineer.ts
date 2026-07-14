@@ -13,6 +13,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './admin-engineer.css',
 })
 export class AdminEngineer implements OnInit {
+    isSidebarOpen = false;
   engineers = signal<EngineerList[]>([]);
   searchTerm = signal<string>('');
   statusFilter = signal<string>('active');

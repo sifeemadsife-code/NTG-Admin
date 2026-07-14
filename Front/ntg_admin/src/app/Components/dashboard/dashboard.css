@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
- 
+
 }
 a{
   text-decoration: none;
@@ -23,7 +23,7 @@ a{
   height: 100vh;
 }
 .header {
-  
+
   height: 40px;
   display: flex;
   justify-content: flex-end;
@@ -158,7 +158,7 @@ a{
 .welcome-image img {
   width: 250px;
   height: auto;
- 
+
 }
 .stat-left-bar2 {
   position: absolute;
@@ -212,7 +212,7 @@ position: absolute;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 10px;
-  gap: 10px; 
+  gap: 10px;
 }
 .stat-card-wrapper {
   position: relative;
@@ -324,10 +324,10 @@ select{
   height: 150px;
   margin: 20px auto;
   border-radius: 50%;
-  background: 
+  background:
     #28964d 45% 75%
-   
-  
+
+
 }
 
 .chart-center {
@@ -538,4 +538,155 @@ select{
   to {
     transform: rotate(30deg);
   }
+}
+
+
+
+
+
+
+/* Menu button */
+
+.menu-btn {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: #620000;
+    color: white;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+/* Tablet */
+
+@media screen and (max-width: 1024px) {
+
+    .search-box {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-image img {
+        width: 180px;
+    }
+}
+
+/* Mobile */
+
+@media screen and (max-width: 768px) {
+
+    .menu-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 80px 15px 20px;
+    }
+
+    .headers {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .profile-section {
+        justify-content: center;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .welcome {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .welcome-image img {
+        width: 150px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        padding: 15px;
+    }
+
+    .stat-number1,
+    .stat-number2,
+    .stat-number3 {
+        font-size: 22px;
+    }
+
+    .header {
+        display: none;
+    }
+}
+
+/* Small phones */
+
+@media screen and (max-width: 480px) {
+
+    .main-content {
+        padding: 80px 10px 15px;
+    }
+
+    .welcome-text h1 {
+        font-size: 20px;
+    }
+
+    .welcome-text h2 {
+        font-size: 24px;
+    }
+
+    .search-box {
+        padding: 8px 12px;
+    }
+
+    .donut-chart {
+        width: 120px;
+        height: 120px;
+    }
+
+    .chart-center {
+        width: 80px;
+        height: 80px;
+    }
 }
