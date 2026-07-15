@@ -26,6 +26,11 @@ export class TrainingProgramEngineer implements OnInit {
     education: '',
     employmentHistory: '',
     numberOfYearsOfExperience: 0,
+    birthDate: new Date('0-0-0'),
+    gender: '',
+    religion: '',
+    nationalNumber: 0,
+    status: true,
   });
 
   training = signal<Training>({

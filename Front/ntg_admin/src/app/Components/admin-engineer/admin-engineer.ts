@@ -4,16 +4,16 @@ import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerList } from '../../Models/engineer_list';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin-engineer',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './admin-engineer.html',
   styleUrl: './admin-engineer.css',
 })
 export class AdminEngineer implements OnInit {
-    isSidebarOpen = false;
+  isSidebarOpen = false;
   engineers = signal<EngineerList[]>([]);
   searchTerm = signal<string>('');
   statusFilter = signal<string>('active');
@@ -34,6 +34,9 @@ export class AdminEngineer implements OnInit {
     localStorage.removeItem('role');
     localStorage.removeItem('name');
     this.router.navigate(['/']);
+  }
+  toggleMenu() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
   filteredEngineers = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();

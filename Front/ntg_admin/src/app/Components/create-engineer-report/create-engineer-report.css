@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*=========================
+SIDEBAR
+=========================*/
+
+a {
+  text-decoration: none;
+  color: white;
+}
+.sidebar {
+  width: 250px;
+  background: #620000;
+  color: white;
+  padding: 20px 0;
+  position: fixed;
+  height: 100vh;
+}
+.header {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: 0;
+  width: 230px;
+}
+.header-white {
+  width: 230px;
+  height: 65px;
+  background: white;
+  border-radius: 30px 0 0px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.logo img {
+  width: 80px;
+  height: auto;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.menu-item {
+  padding: 13px 25px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-item:hover,
+.menu-item.active {
+  background: rgba(87, 23, 23, 50%);
+  border: 1px solid white;
+  color: #ffffff;
+  list-style: none;
+}
+.menu-item i {
+  width: 30px;
+  font-size: 18px;
+}
+.menu-item span {
+  margin-left: 10px;
+  font-size: 14px;
+}
+/*=========================
+MENU BUTTON
+=========================*/
+
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background: #620000;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+/*=========================
+PAGE
+=========================*/
+
+.page {
+  margin-left: 260px;
+  min-height: 100vh;
+  padding: 35px;
+  background: white;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.page-header h1 {
+  font-size: 30px;
+  color: #222;
+}
+
+.page-header p {
+  color: #777;
+  margin-top: 6px;
+}
+
+.back-btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #620000;
+  color: #fff;
+}
+
+/*=========================
+FORM
+=========================*/
+
+.form-card {
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+label {
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #620000;
+  box-shadow: 0 0 0 3px rgba(98, 0, 0, 0.15);
+}
+
+button[type='submit'] {
+  margin-top: 30px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background: #05172f;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button[type='submit']:hover {
+  background: #620000;
+}
+
+.error-text {
+  color: #d50000;
+  margin-bottom: 10px;
+}
+
+/*=========================
+TABLET
+=========================*/
+
+@media (max-width: 992px) {
+  .page {
+    margin-left: 220px;
+    padding: 25px;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
+}
+
+/*=========================
+MOBILE
+=========================*/
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar {
+    left: -260px;
+    transition: 0.3s;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .page {
+    margin-left: 0;
+    padding: 80px 20px 20px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .form-card {
+    padding: 22px;
+  }
+}

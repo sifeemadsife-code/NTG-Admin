@@ -39,7 +39,7 @@
         <input type="text" placeholder="Search anything..." />
       </div>
 
-      <button class="back-btn">
+      <button class="back-btn" routerLink="/engineersList">
         <i class="fa fa-chevron-left"></i>
         Back
       </button>
@@ -67,8 +67,8 @@
           <img alt="Reports Icon" src="/images/reports.png" class="card-icon" />
         </div>
         <div class="card-data">
-          <h4>Reports</h4>
-          <h2>{{ cards().reports }}</h2>
+          <h4>FeedBacks</h4>
+          <h2>{{ feedbacksCount() }}</h2>
           <span>Submitted</span>
         </div>
       </div>
@@ -84,15 +84,15 @@
 
           <span>
             {{
-              cards().rating >= 4.5
-                ? 'Excellent'
-                : cards().rating >= 3.5
-                  ? 'Very Good'
-                  : cards().rating >= 2.5
-                    ? 'Good'
-                    : cards().rating >= 1.5
-                      ? 'Fair'
-                      : 'Poor'
+            cards().rating >= 4.5
+            ? 'Excellent'
+            : cards().rating >= 3.5
+            ? 'Very Good'
+            : cards().rating >= 2.5
+            ? 'Good'
+            : cards().rating >= 1.5
+            ? 'Fair'
+            : 'Poor'
             }}
           </span>
         </div>
@@ -128,9 +128,9 @@
         <div class="stat">
           <div class="row">
             <span>Reports</span>
-            <span>{{ cards().reports }}%</span>
+            <span>{{ feedbacksCount() }}</span>
           </div>
-          <div class="bar green-bar" [style.width.%]="cards().reports"></div>
+          <div class="bar green-bar" [style.width.%]="feedbacksCount()"></div>
         </div>
 
         <div class="stat">
@@ -141,6 +141,46 @@
           <div class="bar orange-bar" [style.width.%]="(cards().rating || 0) * 20"></div>
         </div>
       </div>
+    </div>
+    <div class="feedbacks">
+      @if (feedbacks().length === 0) {
+      <div class="empty-feedback">
+        <p>No feedback available.</p>
+      </div>
+      } @else {
+      @for (feedback of feedbacks(); track feedback.id) {
+      <div class="feedback-card">
+        <div class="feedback-header">
+          <div class="user-info">
+            <div class="avatar">
+              {{ feedback.byUserFirstName.charAt(0) }}{{ feedback.byUserLastName.charAt(0) }}
+            </div>
+
+            <div>
+              <h4>
+                {{ feedback.byUserFirstName }}
+                {{ feedback.byUserLastName }}
+              </h4>
+              <span>
+                {{ feedback.feedbackDate | date:'MMM d, y • h:mm a' }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feedback-body">
+          <p>{{ feedback.feedback }}</p>
+        </div>
+
+        @if (feedback.notes) {
+        <div class="feedback-notes">
+          <strong>Notes</strong>
+          <p>{{ feedback.notes }}</p>
+        </div>
+        }
+      </div>
+      }
+      }
     </div>
   </main>
 </div>

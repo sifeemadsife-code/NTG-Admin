@@ -36,6 +36,12 @@ export class Dashboard implements OnInit {
     { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
     { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
   ];
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('name');
+    this.router.navigate(['/']);
+  }
 
   constructor(
     private router: Router,
@@ -93,14 +99,6 @@ export class Dashboard implements OnInit {
       this.router.navigate([item.route]);
     }
   }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
-
   getTimeAgo(timestamp: string): string {
     const now = new Date();
     const activityTime = new Date(timestamp);

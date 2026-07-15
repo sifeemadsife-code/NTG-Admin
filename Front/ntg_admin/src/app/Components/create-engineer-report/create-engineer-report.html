@@ -1,1 +1,59 @@
-<p>create-engineer-report works!</p>
+<div class="sidebar" [class.open]="isSidebarOpen">  
+  <div class="logo">
+    <div class="header-white">
+      <img src="/images/logo.png" alt="NTG">
+    </div>
+  </div>
+  <nav class="menu">
+    <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+      <i [class]="item.icon"></i>
+      <span>{{ item.label }}</span>
+    </a>
+    <a class="menu-item logout" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Log Out</span>
+    </a>
+  </nav>
+  <button class="menu-btn" (click)="toggleMenu()">
+    ☰
+  </button>
+</div>
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1>Create Engineer Report</h1>
+      <p>Dashboard > Engineers > Create Report</p>
+    </div>
+    <a class="back-btn" routerLink="/engineersList">Back</a>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+    @if (error()) {
+    <p class="error-text">{{ error() }}</p>
+    }
+
+    <label>Engineer</label>
+    <select formControlName="teacherId">
+      <option value="">Select Engineer</option>
+      @for (engineer of engineers(); track engineer.id) {
+      <option [value]="engineer.id">{{ engineer.firstName }} {{ engineer.lastName }}</option>
+      }
+    </select>
+
+    <label>Report Date</label>
+    <input type="date" formControlName="feedbackDate" />
+
+    <label>Rating (0-5)</label>
+    <input type="number" min="0" max="5" step="0.5" formControlName="rate" placeholder="Enter rating" />
+
+    <label>Feedback</label>
+    <textarea rows="4" formControlName="feedback" placeholder="Evaluate the engineer's performance..."></textarea>
+
+    <label>Notes</label>
+    <textarea rows="3" formControlName="notes" placeholder="Additional notes..."></textarea>
+
+    <button type="submit" [disabled]="saving()">
+      {{ saving() ? 'Saving...' : 'Save Report' }}
+    </button>
+  </form>
+</div>

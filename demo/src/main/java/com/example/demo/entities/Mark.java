@@ -48,5 +48,8 @@ public class Mark {
     @Column(name = "NOTES")
     private String notes;
 
+    @Column(name = "SCORE")
+    private Double score;
+
 
 }

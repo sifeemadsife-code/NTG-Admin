@@ -19,6 +19,7 @@ export class CreateTrainingProgramComponent implements OnInit {
   engineers = signal<Engineer[]>([]);
   grades = signal<GradeModel[]>([]);
   trainingForm!: FormGroup;
+  isSidebarOpen = false;
 
   constructor(
     private fb: FormBuilder,

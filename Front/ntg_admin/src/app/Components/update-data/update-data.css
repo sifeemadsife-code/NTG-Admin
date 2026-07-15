@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #EEEEEE;
+  background: #eeeeee;
   font-family: Arial, sans-serif;
 }
 
@@ -14,70 +14,84 @@ body {
   min-height: 100vh;
 }
 
-.sidebar {
-  width: 280px;
-  background: #620000;
+::placeholder {
+  color: #8e8e93;
 }
 
-.logo-section {
-  margin: 10% 0 0 5%;
-  width: 100%;
-  height: 10%;
-  background: white;
-  border-bottom-left-radius: 35px;
-  border-top-left-radius: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  width: 110px;
-}
-::placeholder{
-  color: #8E8E93;
-}
-.profile-section {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.profile-section h2 {
+a {
+  text-decoration: none;
   color: white;
-  margin-bottom: 30px;
 }
-
-.avatar-box {
+.sidebar {
+  width: 250px;
+  background: #620000;
+  color: white;
+  padding: 20px 0;
+  position: fixed;
+  height: 100vh;
+}
+.header {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: 0;
+  width: 230px;
+}
+.header-white {
+  width: 300px;
+  height: 65px;
+  background: #fff;
+  border-radius: 30px 0 0px 30px;
   display: flex;
   justify-content: center;
-}
-
-.avatar {
-  width: 220px;
-  height: 220px;
-
-  border-radius: 50%;
-
-  object-fit: cover;
-}
-
-.change-photo{
-  margin-top: 20px;
-  width: 200px;
-  height: 40px;
-  border: 0;
-  border-radius: 10px;
   align-items: center;
+}
+.logo {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.logo img {
+  width: 80px;
+  height: auto;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.menu-item {
+  padding: 13px 25px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-item:hover,
+.menu-item.active {
+  background: rgba(87, 23, 23, 50%);
+  border: 1px solid white;
+  color: #ffffff;
+  list-style: none;
+}
+.menu-item i {
+  width: 30px;
+  font-size: 18px;
+}
+.menu-item span {
+  margin-left: 10px;
+  font-size: 14px;
 }
 /* CONTENT */
 
 .content {
+  margin-left: 250px;
   flex: 1;
-
-  padding: 35px;
+  padding: 30px;
 }
 
-.header {
+.page-header {
   display: flex;
 
   justify-content: space-between;
@@ -89,6 +103,7 @@ body {
 
 .header h1 {
   font-size: 38px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .breadcrumb {
@@ -125,7 +140,7 @@ body {
 
   gap: 40px;
 
-  box-shadow: 0 3px 15px rgba(0,0,0,.06);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
 }
 
 .form-section {
@@ -165,7 +180,7 @@ body {
 
   outline: none;
 
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .form-group input:focus {
@@ -225,9 +240,152 @@ body {
 
   cursor: pointer;
 
-  transition: .3s;
+  transition: 0.3s;
+  margin-top: 50px;
 }
 
 .save-btn:hover {
   background: #02256f;
+}
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+/* Laptop */
+
+@media (max-width: 1200px) {
+  .edit-card {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+  }
+
+  .header {
+    width: 100%;
+  }
+
+  .header-white {
+    width: 95%;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .back-btn {
+    width: 100%;
+  }
+
+  .edit-card {
+    flex-direction: column;
+    padding: 25px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px;
+  }
+
+  .page-header h1 {
+    font-size: 30px;
+  }
+
+  .breadcrumb {
+    font-size: 14px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .edit-card {
+    padding: 20px;
+  }
+
+  .form-section h3 {
+    font-size: 20px;
+  }
+
+  .menu {
+    padding: 0 15px;
+  }
+
+  .menu-item {
+    padding: 12px 18px;
+  }
+
+  .save-btn {
+    margin-top: 30px;
+  }
+}
+
+/* Small Mobile */
+
+@media (max-width: 576px) {
+  .content {
+    padding: 15px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .breadcrumb {
+    font-size: 13px;
+  }
+
+  .logo img {
+    width: 65px;
+  }
+
+  .header-white {
+    height: 55px;
+  }
+
+  .edit-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .form-group label,
+  .small-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .small-group input {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .save-btn {
+    height: 42px;
+    font-size: 15px;
+  }
 }

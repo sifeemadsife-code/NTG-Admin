@@ -1,33 +1,29 @@
 <div class="dashboard">
 
-  <aside class="sidebar">
-
-    <div class="logo-section">
-      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
-    </div>
-
-    <div class="profile-section">
-
-      <h2>Profile Photo</h2>
-
-      <div class="avatar-box">
-        <img
-          src="/images/avatar.png"
-          class="avatar"
-          alt="Avatar"
-        >
+  <div class="sidebar" [class.open]="isSidebarOpen">
+    <div class="logo">
+      <div class="header">
+        <div class="header-white">
+          <img src="\images\logo.png" alt="NTG">
+        </div>
       </div>
-      <button title="Change The Photo" class="change-photo">
-        <img src="/images/camera.png" alt="Camera Image">
-        Change Photo
-      </button>
     </div>
 
-  </aside>
+    <nav class="menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+      <a class="menu-item logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log Out</span>
+      </a>
+    </nav>
+  </div>
 
   <main class="content">
 
-    <div class="header">
+    <div class="page-header">
 
       <div>
         <h1>Engineers</h1>
@@ -37,99 +33,100 @@
         </p>
       </div>
 
-      <button class="back-btn">
+      <button class="back-btn" type="button" routerLink='/engineersList'>
         <i class="fa fa-chevron-left"></i>
         Back
       </button>
 
     </div>
 
-    <div class="edit-card">
+    @if (loading()) {
+    <p>Loading engineer data...</p>
+    } @else {
 
-      <!-- LEFT -->
+    @if (errorMessage()) {
+    <p class="error-text">{{ errorMessage() }}</p>
+    }
 
-      <div class="form-section">
+    <form (ngSubmit)="saveEngineer()" #engineerForm="ngForm">
 
-        <h3>Personal Information</h3>
+      <div class="edit-card">
 
-        <div class="form-group">
-          <label>Full Name*</label>
-          <input
-          title="DDD"
-          placeholder=""
-            type="text"
-            [(ngModel)]="engineer().firstName">
-        </div>
+        <!-- LEFT -->
 
-        <div class="form-group">
-          <label>Email*</label>
+        <div class="form-section">
 
-          <input
-          title="DDD"
-          placeholder=""
-            type="email"
-            [(ngModel)]="engineer().email">
-        </div>
+          <h3>Personal Information</h3>
 
-        <div class="form-group">
-          <label>Phone*</label>
-
-          <input
-          title="DDD"
-          placeholder=""
-            type="text"
-            [(ngModel)]="engineer().address">
-        </div>
-
-      </div>
-
-      <!-- RIGHT -->
-
-      <div class="form-section">
-
-        <h3>Professional Information</h3>
-
-        <div class="form-group">
-          <label>Subject*</label>
-
-          <input
-          title="DDD"
-          placeholder=""
-            type="text"
-            [(ngModel)]="engineer().education">
-        </div>
-
-        <div class="row">
-
-          <div class="small-group">
-            <label>Experience*</label>
-
-            <input
-            title="DDD"
-          placeholder=""
-              type="text"
-              [(ngModel)]="engineer().employmentHistory">
+          <div class="form-group">
+            <label>First Name*</label>
+            <input name="firstName" title="First Name" placeholder="Enter first name" type="text" required
+              [(ngModel)]="engineer().firstName">
           </div>
 
-          <div class="small-group">
-            <label>Join Date*</label>
+          <div class="form-group">
+            <label>Last Name*</label>
+            <input name="lastName" title="Last Name" placeholder="Enter last name" type="text" required
+              [(ngModel)]="engineer().lastName">
+          </div>
 
-            <input
-            title="DDD"
-          placeholder=""
-              type="date"
-              [(ngModel)]="engineer().numberOfYearsOfExperience">
+          <div class="form-group">
+            <label>Email*</label>
+
+            <input name="email" title="Email" placeholder="Enter email" type="email" required
+              [(ngModel)]="engineer().email">
+          </div>
+
+          <div class="form-group">
+            <label>Address*</label>
+
+            <input name="address" title="Address" placeholder="Enter address" type="text"
+              [(ngModel)]="engineer().address">
           </div>
 
         </div>
 
-        <button class="save-btn">
-          Save Change
-        </button>
+        <!-- RIGHT -->
+
+        <div class="form-section">
+
+          <h3>Professional Information</h3>
+
+          <div class="form-group">
+            <label>Education*</label>
+
+            <input name="education" title="Education" placeholder="Enter education/subject" type="text"
+              [(ngModel)]="engineer().education">
+          </div>
+
+          <div class="row">
+
+            <div class="small-group">
+              <label>Employment History</label>
+
+              <input name="employmentHistory" title="Employment History" placeholder="Enter employment history"
+                type="text" [(ngModel)]="engineer().employmentHistory">
+            </div>
+
+            <div class="small-group">
+              <label>Experience (years)</label>
+
+              <input name="numberOfYearsOfExperience" title="Years of experience" placeholder="0" type="number" min="0"
+                [(ngModel)]="engineer().numberOfYearsOfExperience">
+            </div>
+
+          </div>
+
+          <button class="save-btn" type="submit" [disabled]="saving() || engineerForm.invalid">
+            {{ saving() ? 'Saving...' : 'Save Change' }}
+          </button>
+
+        </div>
 
       </div>
 
-    </div>
+    </form>
+    }
 
   </main>
 

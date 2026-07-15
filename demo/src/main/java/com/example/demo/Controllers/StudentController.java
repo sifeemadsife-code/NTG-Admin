@@ -1,12 +1,11 @@
+// demo/src/main/java/com/example/demo/Controllers/StudentController.java
 package com.example.demo.Controllers;
 
 import com.example.demo.DTOs.StudentDTO;
+import com.example.demo.DTOs.StudentDetailsDTO;
 import com.example.demo.Services.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,12 +15,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
+
     @GetMapping
     public List<StudentDTO> getAllStudents() {
         return studentService.findAllStudents();
     }
+
     @GetMapping("/count")
     public Long countStudents() {
         return studentService.countStudents();
+    }
+
+    @GetMapping("/{id}/details")
+    public StudentDetailsDTO getStudentDetails(@PathVariable Long id) {
+        return studentService.getStudentDetails(id);
     }
 }

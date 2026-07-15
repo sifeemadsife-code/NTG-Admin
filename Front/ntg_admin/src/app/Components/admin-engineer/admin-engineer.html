@@ -1,8 +1,8 @@
 <button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
-    <i class="fa-solid fa-bars"></i>
+  <i>&#9776;</i>
 </button>
 <div class="dashbored">
-  <div class="sidebar" [class.open]="isSidebarOpen">
+  <div class="sidebar" [class.show]="isSidebarOpen">
     <div class="logo">
       <div class="header-white">
         <img src="/images/logo.png" alt="NTG">
@@ -46,6 +46,9 @@
           <span>+</span>
           Add Engineer
         </button>
+        <button class="add-btn" routerLink="/engineerReport">
+          Create Engineer Report
+        </button>
       </div>
     </div>
 
@@ -53,15 +56,13 @@
     <div class="table-card">
       <table>
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Engineer</th>
-            <th class="edu">Education</th>
-            <th class="emal">Email</th>
-            <th>Status</th>
-            <th>Experience</th>
-            <th>Actions</th>
-          </tr>
+          <th>ID</th>
+          <th>Engineer</th>
+          <th class="edu">Education</th>
+          <th class="emal">Email</th>
+          <th>Status</th>
+          <th>Experience</th>
+          <th>Actions</th>
         </thead>
 
         <tbody>

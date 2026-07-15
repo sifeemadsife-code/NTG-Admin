@@ -28,7 +28,7 @@
 
       </div>
 
-      <button class="back-btn" routerLink="/subject">
+      <button class="back-btn" routerLink="/subjects">
         <i class="fas fa-arrow-left"></i>
 
         Back to Subjects
@@ -57,7 +57,7 @@
             </label>
 
             <select formControlName="teacherId">
-              <option value="">
+              <option [ngValue]="null">
                 Select engineer
               </option>
 
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div class="buttons">
-          <button type="button" class="cancel" routerLink="/subject">
+          <button type="button" class="cancel" routerLink="/subjects">
             Cancel
           </button>
           <button type="submit" class="save" [disabled]="saving()">

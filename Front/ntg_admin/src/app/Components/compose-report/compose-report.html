@@ -1,4 +1,8 @@
-<div class="sidebar">
+<button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
+    <i>&#9776;</i>
+</button>
+
+<div class="sidebar" [class.open]="isSidebarOpen">
     <div class="logo">
         <div class="header">
             <div class="header-white">
@@ -18,8 +22,6 @@
         </a>
     </nav>
 </div>
-<p>Dashboard > Reports</p>
-
 <div class="page">
     <div class="page-header">
         <div>

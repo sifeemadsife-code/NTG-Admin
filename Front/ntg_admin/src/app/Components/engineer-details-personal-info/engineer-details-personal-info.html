@@ -37,7 +37,7 @@
         <input type="text" placeholder="Search anything..." />
       </div>
 
-      <button class="back-btn">Back</button>
+      <button class="back-btn" routerLink="/engineersList">Back</button>
     </div>
 
     <h1>Engineers</h1>
@@ -62,8 +62,8 @@
           <img alt="Reports Icon" src="/images/reports.png" class="card-icon" />
         </div>
         <div class="card-data">
-          <h4>Reports</h4>
-          <h2>{{ cards().reports }}</h2>
+          <h4>FeedBacks</h4>
+          <h2>{{ feedbacksCount() }}</h2>
           <span>Submitted</span>
         </div>
       </div>
@@ -101,33 +101,53 @@
         <h2>Personal Information</h2>
       </div>
       <div class="info-row">
-        <span class="label">Full Name</span>
-        <span class="value">{{ engineer().firstName }} {{ engineer().lastName }}</span>
+        <span class="label"> Full Name</span>
+        <span class="value"> : {{ engineer().firstName }} {{ engineer().lastName }}</span>
       </div>
 
       <div class="info-row">
         <span class="label"> Email Address</span>
-        <span class="value">{{ engineer().email }}</span>
+        <span class="value"> : {{ engineer().email }}</span>
       </div>
 
       <div class="info-row">
         <span class="label"> Education</span>
-        <span class="value">{{ engineer().education }}</span>
+        <span class="value"> : {{ engineer().education }}</span>
       </div>
 
       <div class="info-row">
         <span class="label"> Experience</span>
-        <span class="value">{{ engineer().numberOfYearsOfExperience }}</span>
+        <span class="value"> : {{ engineer().numberOfYearsOfExperience }}</span>
       </div>
 
       <div class="info-row">
         <span class="label"> Employment History</span>
-        <span class="value">{{ engineer().employmentHistory }}</span>
+        <span class="value"> : {{ engineer().employmentHistory }}</span>
       </div>
 
       <div class="info-row">
         <span class="label"> Address</span>
-        <span class="value">{{ engineer().address }}</span>
+        <span class="value"> : {{ engineer().address }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> BirthDate</span>
+        <span class="value"> : {{ engineer().birthDate }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> Gender</span>
+        <span class="value"> : {{ engineer().gender == "M" ? 'Male' : 'Female' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> Religion</span>
+        <span class="value"> : {{ engineer().address }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> NationalNumber</span>
+        <span class="value"> : {{ engineer().nationalNumber }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> Status</span>
+        <span class="value"> : {{ engineer().status ? 'Leave' : 'Active' }}</span>
       </div>
     </div>
   </main>

@@ -1,0 +1,107 @@
+<button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
+    <i>&#9776;</i>
+</button>
+
+<div class="dashboard">
+    <div class="sidebar" [class.open]="isSidebarOpen">
+        <div class="logo">
+            <div class="header">
+                <div class="header-white">
+                    <img src="\images\logo.png" alt="NTG">
+                </div>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
+                <i [class]="item.icon"></i>
+                <span>{{ item.label }}</span>
+            </a>
+            <a class="menu-item logout" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Log Out</span>
+            </a>
+        </nav>
+    </div>
+
+
+    <main class="content">
+        <div class="page-header">
+            <h1>Students</h1>
+            <p class="breadcrumb">Dashboard &gt; Students &gt; Student Details</p>
+        </div>
+
+        <div *ngIf="loading()" class="state-message">Loading student details...</div>
+        <div *ngIf="error()" class="state-message error">{{ error() }}</div>
+
+        <ng-container *ngIf="!loading() && !error()">
+            <div class="profile-row">
+                <img src="/images/avatar.png" alt="Student" class="avatar" />
+
+                <div class="profile-info">
+                    <h2>
+                        {{ student().firstName }} {{ student().lastName }}
+                        <span class="student-id">{{ student().studentNumber }}</span>
+                    </h2>
+                    <p>{{ student().email }}</p>
+                    <p>Grade {{ student().grade || '-' }}</p>
+                    <p>{{ student().studentNumber }}</p>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card black">
+                    <h2>{{ student().attendanceRate }}%</h2>
+                    <p>Attendance rate</p>
+                </div>
+
+                <div class="stat-card red">
+                    <h2>{{ student().violationsCount }}</h2>
+                    <p>Violations</p>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Midterm</th>
+                            <th>final</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (subject of paginatedSubjects(); track subject.subjectName) {
+                        <tr>
+                            <td>{{ subject.subjectName }}</td>
+                            <td>{{ subject.midterm ?? '-' }}</td>
+                            <td>{{ subject.finalScore ?? '-' }}</td>
+                            <td>{{ subject.total }}</td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="4">No subjects found</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="pagination" *ngIf="totalPages() > 1">
+                    <button (click)="prevPage()" [disabled]="currentPage() === 1">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
+                    <button *ngFor="let page of pages()" [class.active]="page === currentPage()"
+                        (click)="goToPage(page)">
+                        {{ page }}
+                    </button>
+
+                    <button (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </main>
+</div>

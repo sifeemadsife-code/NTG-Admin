@@ -18,15 +18,16 @@ import { Dashboard } from './Components/dashboard/dashboard';
 import { NotificationComponent } from './Components/notification/notification';
 import { Login } from './Components/login/login';
 import { SettingComponent } from './Components/setting/setting';
-import { WriteReportComponent } from './Components/repot-wight/repot-wight';
 import { Reports } from './Components/reports/reports';
 import { ComposeReport } from './Components/compose-report/compose-report';
 import { EvaluateStudent } from './Components/evaluate-student/evaluate-student';
 import { StudentEvaluationsView } from './Components/student-evaluations-view/student-evaluations-view';
+import { CreateEngineerReport } from './Components/create-engineer-report/create-engineer-report';
+import { StudentDetailsComponent } from './Components/student-details/student-details';
 export const routes: Routes = [
   {
     path: '',
-    component: Dashboard,
+    component: Login,
   },
   {
     path: 'dashboard',
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'students/:id/evaluations',
     component: StudentEvaluationsView,
+  },
+  {
+    path: 'students/:id',
+    component: StudentDetailsComponent,
   },
   {
     path: 'engineers/:id/update-engineer',
@@ -99,6 +104,10 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: AdminProfile,
+  },
+  {
+    path: 'engineerReport',
+    component: CreateEngineerReport,
   },
   {
     path: 'notfications',

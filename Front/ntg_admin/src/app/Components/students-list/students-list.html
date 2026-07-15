@@ -1,5 +1,5 @@
 <button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
-    <i class="fa-solid fa-bars"></i>
+  <i class="fa-solid fa-bars">&#9776;</i>
 </button>
 <div class="dashbored">
   <div class="sidebar" [class.open]="isSidebarOpen">
@@ -74,7 +74,7 @@
               </span>
             </td>
             <td class="actions">
-              <button><img src="/images/view_icon.png" alt="" /></button>
+              <button [routerLink]="['/students', student.id]"><img src="/images/view_icon.png" alt="" /></button>
             </td>
           </tr>
           } @empty {

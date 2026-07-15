@@ -18,4 +18,5 @@ public interface EngineerFeedbackRepository extends JpaRepository<EngineerFeedba
 
     @Query("SELECT COALESCE(MAX(f.id), 0) + 1 FROM EngineerFeedback f")
     Long getNextId();
+
 }

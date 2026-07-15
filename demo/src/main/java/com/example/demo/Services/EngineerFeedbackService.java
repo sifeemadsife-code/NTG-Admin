@@ -53,6 +53,9 @@ public class EngineerFeedbackService {
         }
         engineerFeedbackRepository.deleteById(id);
     }
+    public long getCountByTeacher(Long teacherId) {
+        return engineerFeedbackRepository.countByTeacherId(teacherId);
+    }
 
     private EngineerFeedbackResponseDTO toResponse(EngineerFeedback f) {
         return new EngineerFeedbackResponseDTO(

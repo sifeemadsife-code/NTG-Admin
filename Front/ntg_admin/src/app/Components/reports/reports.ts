@@ -13,6 +13,7 @@ import { ReportModel } from '../../Models/report';
 })
 export class Reports implements OnInit {
   private reportService = inject(ReportService);
+  isSidebarOpen = false;
   constructor(private router: Router) {}
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },

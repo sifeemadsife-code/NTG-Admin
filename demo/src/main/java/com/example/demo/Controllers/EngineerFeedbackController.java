@@ -33,4 +33,8 @@ public class EngineerFeedbackController {
     public void delete(@PathVariable Long id) {
         engineerFeedbackService.delete(id);
     }
+    @GetMapping("/teacher/{teacherId}/count")
+    public long getCountByTeacher(@PathVariable Long teacherId) {
+        return engineerFeedbackService.getCountByTeacher(teacherId);
+    }   
 }

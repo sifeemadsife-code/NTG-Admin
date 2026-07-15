@@ -18,6 +18,7 @@ export class ComposeReport implements OnInit {
   private reportService = inject(ReportService);
   private engineerService = inject(EngineerService);
   private router = inject(Router);
+  isSidebarOpen = false;
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },

@@ -20,4 +20,7 @@ export class EngineerFeedbackService {
   delete(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  getFeedbackCount(id: number) {
+    return this.http.get<number>(`${this.apiUrl}/teacher/${id}/count`);
+  }
 }

@@ -8,21 +8,22 @@
 .dashboard {
   display: flex;
   min-height: 100vh;
-  background: #EEEEEE;
+  background: white;
 }
 
 .sidebar {
   width: 285px;
   background: #620000;
   color: white;
-  overflow: hidden;
+  position: fixed;
+  height: 100%;
 }
 
 .logo-section {
   margin: 10% 0 0 5%;
   width: 100%;
   height: 10%;
-  background: #EEEEEE;
+  background: white;
   border-bottom-left-radius: 35px;
   border-top-left-radius: 35px;
   display: flex;
@@ -44,7 +45,6 @@
   height: 120px;
   border-radius: 50%;
 }
-
 
 .profile h2 {
   margin-top: 15px;
@@ -114,6 +114,7 @@
 .content {
   flex: 1;
   padding: 30px;
+  margin-left: 300px;
 }
 
 .top-bar {
@@ -191,15 +192,15 @@ h1 {
 }
 
 .students {
-  border-left: 5px solid #05172F;
+  border-left: 5px solid #05172f;
 }
 
 .reports {
-  border-left: 5px solid #8F0000;
+  border-left: 5px solid #8f0000;
 }
 
 .rating {
-  border-left: 5px solid #DA7612;
+  border-left: 5px solid #da7612;
 }
 
 .icon-box {
@@ -214,15 +215,15 @@ h1 {
 }
 
 .blue-box {
-  background: #05172F;
+  background: #05172f;
 }
 
 .red-box {
-  background: #8F0000;
+  background: #8f0000;
 }
 
 .orange-box {
-  background: #DA7612;
+  background: #da7612;
 }
 
 .card-icon {
@@ -249,14 +250,14 @@ h1 {
   border-bottom: 1px solid #ddd;
 }
 
-.tabs a{
+.tabs a {
   text-decoration: none;
-  color: #5F5E67;
+  color: #5f5e67;
   font-size: 25px;
 }
 .tabs .active {
-  color: #08356E;
-  border-bottom: 4px solid #08356E;
+  color: #08356e;
+  border-bottom: 4px solid #08356e;
   font-weight: bold;
 }
 
@@ -380,12 +381,10 @@ h1 {
   background: orange;
 }
 
-/* profile card styles */
-
 .profile-card {
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
@@ -436,4 +435,224 @@ h1 {
 
 .value {
   color: #888;
+}
+
+@media (max-width: 1200px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bottom {
+    flex-direction: column;
+  }
+
+  .about,
+  .performance,
+  .statistics {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 992px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .logo-section {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .search-box,
+  .search-box input,
+  .back-btn {
+    width: 100%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  .profile {
+    padding: 20px;
+  }
+
+  .profile h2 {
+    font-size: 24px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .info {
+    padding: 0 20px;
+  }
+
+  .message-btn {
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 25px;
+    padding-bottom: 10px;
+  }
+
+  .tabs::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .tabs a {
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .progress-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .progress-circle::before {
+    width: 90px;
+    height: 90px;
+  }
+
+  .progress-circle span {
+    font-size: 24px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .card-header h2 {
+    font-size: 26px;
+  }
+
+  .card-header i {
+    font-size: 24px;
+  }
+}
+
+/* Small Mobile */
+
+@media (max-width: 576px) {
+  .content {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .breadcrumb {
+    font-size: 13px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .profile h2 {
+    font-size: 20px;
+  }
+
+  .job {
+    font-size: 13px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .icon-box {
+    width: 55px;
+    height: 55px;
+  }
+
+  .card-icon {
+    width: 30px;
+  }
+
+  .about,
+  .performance,
+  .statistics {
+    padding: 18px;
+  }
+
+  .profile-card {
+    border-radius: 10px;
+  }
+
+  .card-header {
+    padding: 18px;
+  }
+
+  .card-header h2 {
+    font-size: 22px;
+  }
+
+  .info-row {
+    padding: 16px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .value {
+    font-size: 14px;
+    word-break: break-word;
+  }
 }

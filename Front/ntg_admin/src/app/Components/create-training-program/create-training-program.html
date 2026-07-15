@@ -1,5 +1,9 @@
+<button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
+  <i>&#9776;</i>
+</button>
 <div class="dashbored">
-<div class="sidebar">
+
+  <div class="sidebar" [class.open]="isSidebarOpen">
     <div class="logo">
       <div class="header">
         <div class="header-white">
@@ -19,81 +23,81 @@
       </a>
     </nav>
   </div>
-<div class="page">
-  <div class="page-header">
-    <div>
-      <h1>Create Program</h1>
-      <p>Dashboard > Training Programs > Create Program</p>
+  <div class="page">
+    <div class="page-header">
+      <div>
+        <h1>Create Program</h1>
+        <p>Dashboard > Training Programs > Create Program</p>
+      </div>
     </div>
-  </div>
-  <div class="form-card">
+    <div class="form-card">
 
 
-    <form [formGroup]="trainingForm" (ngSubmit)="createProgram()">
-      <div class="form-group">
-        <div>
-          <label>Program Name</label>
-        <input type="text" formControlName="title" placeholder="Enter program name" />
-        </div>
-        <div>
+      <form [formGroup]="trainingForm" (ngSubmit)="createProgram()">
+        <div class="form-group">
+          <div>
+            <label>Program Name</label>
+            <input type="text" formControlName="title" placeholder="Enter program name" />
+          </div>
+          <div>
             <label>Engineer</label>
 
-          <select formControlName="engineerId">
-            <option value="">Select Engineer</option>
-            @for (engineer of engineers(); track engineer.id) {
+            <select formControlName="engineerId">
+              <option value="">Select Engineer</option>
+              @for (engineer of engineers(); track engineer.id) {
               <option [value]="engineer.id">
                 {{ engineer.firstName }} {{ engineer.lastName }}
               </option>
-            }
-          </select>
+              }
+            </select>
+          </div>
+
         </div>
 
-      </div>
-
-      <div class="form-group">
-        <div>
-          <label>Grade</label>
-          <select formControlName="gradeId">
-            <option value="">Select Grade</option>
-            @for (grade of grades(); track grade.id) {
+        <div class="form-group">
+          <div>
+            <label>Grade</label>
+            <select formControlName="gradeId">
+              <option value="">Select Grade</option>
+              @for (grade of grades(); track grade.id) {
               <option [value]="grade.id">
                 {{ grade.name }}
               </option>
-            }
-          </select>
+              }
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
+        <div class="form-group">
 
 
-        <div>
-          <label>Location</label>
-        <input type="text" formControlName="location" placeholder="Enter program location" />
+          <div>
+            <label>Location</label>
+            <input type="text" formControlName="location" placeholder="Enter program location" />
+
+          </div>
+          <div>
+            <label>Description</label>
+            <textarea formControlName="description" placeholder="Enter program description"></textarea>
+          </div>
 
         </div>
-        <div>
-        <label>Description</label>
-        <textarea formControlName="description" placeholder="Enter program description"></textarea>
-       </div>
 
-      </div>
-
-      <div class="form-group">
-        <div>
-          <label>Start Date</label>
-          <input type="date" formControlName="startDate" />
+        <div class="form-group">
+          <div>
+            <label>Start Date</label>
+            <input type="date" formControlName="startDate" />
+          </div>
+          <div>
+            <label>End Date</label>
+            <input type="date" formControlName="endDate" />
+          </div>
         </div>
-        <div>
-          <label>End Date</label>
-          <input type="date" formControlName="endDate" />
-        </div>
-      </div>
 
 
-      <button type="submit">Create Program</button>
-    </form>
+        <button type="submit">Create Program</button>
+      </form>
+    </div>
   </div>
-</div>
 
 </div>
