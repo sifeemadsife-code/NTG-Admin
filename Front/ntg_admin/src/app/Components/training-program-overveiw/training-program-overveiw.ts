@@ -8,11 +8,12 @@ import { Student } from '../../Services/student';
 
 import { Training } from '../../Models/Training';
 import { StudentsListInterface } from '../../Models/Students_list';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-training-program-overveiw',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './training-program-overveiw.html',
   styleUrls: ['./training-program-overveiw.css'],
 })

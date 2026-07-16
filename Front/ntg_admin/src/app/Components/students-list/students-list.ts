@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Student } from '../../Services/student';
 import { StudentsListInterface } from '../../Models/Students_list';
+import { SidebarComponent } from "../sidebar/sidebar";
 @Component({
   selector: 'app-students-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './students-list.html',
   styleUrl: './students-list.css',
 })

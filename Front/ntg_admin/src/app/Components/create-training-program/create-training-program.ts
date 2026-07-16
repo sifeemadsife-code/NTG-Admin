@@ -7,11 +7,12 @@ import { TrainingService } from '../../Services/training-service';
 import { EngineerService } from '../../Services/engineer';
 import { GradeService } from '../../Services/grade';
 import { Router, RouterLink } from '@angular/router';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-create-training-program',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
   templateUrl: './create-training-program.html',
   styleUrl: './create-training-program.css',
 })

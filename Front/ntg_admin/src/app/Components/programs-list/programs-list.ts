@@ -3,10 +3,11 @@ import { TrainingService } from '../../Services/training-service';
 import { TrainingProgramList } from '../../Models/training_program_list';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-programs-list',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, SidebarComponent],
   templateUrl: './programs-list.html',
   styleUrl: './programs-list.css',
 })

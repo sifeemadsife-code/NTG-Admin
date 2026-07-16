@@ -4,11 +4,12 @@ import { TrainingService } from '../../Services/training-service';
 import { Training } from '../../Models/Training';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentsListInterface } from '../../Models/Students_list';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-training-program-students',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './training-program-students.html',
   styleUrls: ['./training-program-students.css']
 })

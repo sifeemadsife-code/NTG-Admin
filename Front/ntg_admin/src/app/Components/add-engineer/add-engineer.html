@@ -1,28 +1,6 @@
 
 <div class="dashbored">
-<button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
-    <i class="fa-solid fa-bars"></i>
-</button>
-  <div class="sidebar" [class.open]="isSidebarOpen">
-    <div class="logo">
-      <div class="header">
-        <div class="header-white">
-          <img src="\images\logo.png" alt="NTG">
-        </div>
-      </div>
-    </div>
-
-    <nav class="menu">
-      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
-        <i [class]="item.icon"></i>
-        <span>{{ item.label }}</span>
-      </a>
-      <a class="menu-item logout" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Log Out</span>
-      </a>
-    </nav>
-  </div>
+<app-sidebar></app-sidebar>
   <div class="engineers-page">
 
     <div class="page-header">

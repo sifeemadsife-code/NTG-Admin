@@ -6,11 +6,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-training-program-students',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './training-program-engineer.html',
   styleUrls: ['./training-program-engineer.css'],
 })

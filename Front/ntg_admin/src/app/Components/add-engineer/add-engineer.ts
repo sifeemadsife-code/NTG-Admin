@@ -4,11 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import { EngineerService } from '../../Services/engineer';
 import { CreateEngineer } from '../../Models/create_engineer';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-add-engineer',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, RouterLink, CommonModule, SidebarComponent],
   templateUrl: './add-engineer.html',
   styleUrl: './add-engineer.css',
 })

@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-update-data',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, SidebarComponent],
   templateUrl: './update-data.html',
   styleUrls: ['./update-data.css'],
 })

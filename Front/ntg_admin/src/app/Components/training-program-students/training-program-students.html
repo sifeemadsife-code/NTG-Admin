@@ -1,54 +1,5 @@
 <div class="dashbored">
-  <aside class="sidebar">
-    <div class="logo-section">
-      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Dashboard</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Engineers</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/reading.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Students</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/reports.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Reports</a></span>
-    </div>
-
-    <div class="logo-engineer">
-      <img alt="icon" src="/images/code.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Training Programs</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/books.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Subjects</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/Setting.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Settings</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/user.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Profile</a></span>
-    </div>
-
-    <div class="logo-text">
-      <img alt="icon" src="/images/logout.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Logout</a></span>
-    </div>
-  </aside>
+  <app-sidebar></app-sidebar>
 
   <div class="engineers-page">
 
@@ -69,38 +20,54 @@
 
           <div>
             <h2>{{ training().programName }}</h2>
-            <p>{{ training().description }}</p>
-            <p>Grade: {{ training().gradeName }}</p>
+
+            <p class="description">{{ training().description }}</p>
           </div>
+          <span class="status">
+            {{ training().teacherFirstName }} {{ training().teacherLastName }}
+          </span>
         </div>
 
         <div class="buttons">
-          <button class="edit" routerLink="/evaluate-student">Evaluate Student</button>
           <button class="edit">Edit Program</button>
+          <button class="edit" routerLink="/evaluate-student">Evaluate Student</button>
+
         </div>
       </div>
 
+
       <div class="cards">
         <div class="card">
-          <h2>{{ filteredStudents().length }}</h2>
+          <h2 class="num">{{ filteredStudents().length }}</h2>
           <p>Total Students in {{ training().gradeName }}</p>
         </div>
 
         <div class="card">
-          <h2>1</h2>
+          <h2 class="num">1</h2>
           <p>Assigned Engineers</p>
         </div>
       </div>
 
       <div class="tabs">
-        <a>Overview</a>
-        <a class="active">Students</a>
-        <a>Engineers</a>
-      </div>
 
+        <a [routerLink]="['/programs',training().id]">
+          Overview
+        </a>
+
+        <a class="active">
+          Students
+        </a>
+
+        <a [routerLink]="['/programs',training().id,'engineers']">
+          Engineers
+        </a>
+
+      </div>
       <div class="search-box">
-        <input type="text" placeholder="Search by student name..." [value]="searchTerm()"
-          (input)="onSearchChange($any($event.target).value)" />
+
+        <input type="text" placeholder="Search student..." [value]="searchTerm()"
+          (input)="onSearchChange($any($event.target).value)">
+
       </div>
 
       <div class="table-card">

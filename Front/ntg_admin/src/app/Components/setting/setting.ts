@@ -2,12 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.html',
   styleUrls: ['./setting.css'],
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, SidebarComponent],
 })
 export class SettingComponent implements OnInit {
   isSidebarOpen = false;

@@ -15,6 +15,13 @@ export interface CreateTrainingProgramRequest {
   endDate?: string;
   location?: string;
 }
+export interface UpdateTrainingProgramRequest {
+  programName: string;
+  description?: string;
+  startDate: string;
+  endDate?: string;
+  location?: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +50,12 @@ export class TrainingService {
   createProgram(data: CreateTrainingProgramRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}`, data);
   }
-  deleteProgram(id:number){
+
+  updateProgram(id: number, data: UpdateTrainingProgramRequest): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
+  }
+
+  deleteProgram(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

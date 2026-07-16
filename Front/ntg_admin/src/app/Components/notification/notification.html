@@ -1,53 +1,54 @@
 <div class="notification-page">
-  <!-- Header -->
+  <app-sidebar></app-sidebar>
 
-  <div class="page-header">
-    <h2>Notification</h2>
-
-    <p>Dashboard > Notification</p>
-  </div>
-
-  <!-- Notification Card -->
-
-  <div class="notification-card">
-    <div class="notification-item" *ngFor="let item of notifications">
-      <!-- Left -->
-
-      <div class="icon-container" [style.background]="">
-        <span class="material-icons">
-          {{ item.icon }}
-        </span>
+  <div class="content">
+    <div class="page-header">
+      <div>
+        <h2>Notification</h2>
+        <p>Dashboard > Notification</p>
       </div>
-
-      <!-- Center -->
-
-      <div class="notification-content">
-        <h4>{{ item.title }}</h4>
-      </div>
-
-      <!-- Right -->
-
-      <div class="notification-time">
-        <span class="status"></span>
-      </div>
+      <a class="add-btn" routerLink="/send-notification">
+        <span>+</span>
+        Send Notification
+      </a>
     </div>
-  </div>
 
-  <!-- Pagination -->
+    <div class="notification-card">
+      @for (item of paginatedNotifications(); track item.id) {
+      <div class="notification-item">
+        <div class="icon-container">
+          <span class="material-icons">{{ getIcon(item.type) }}</span>
+        </div>
 
-  <div class="pagination">
-    <button>
-      <span class="material-icons"> chevron_left </span>
-    </button>
+        <div class="notification-content">
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.body }}</p>
+        </div>
 
-    <button class="active">1</button>
+        <div class="notification-time">
+          <span>{{ item.sentAt }}</span>
+          <button class="delete-btn" (click)="deleteNotification(item.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      } @empty {
+      <p class="empty">No notifications yet</p>
+      }
+    </div>
 
-    <button>2</button>
+    <div class="pagination">
+      <button (click)="prevPage()">
+        <span class="material-icons"> ← </span>
+      </button>
 
-    <button>3</button>
+      @for (page of pages(); track page) {
+      <button [class.active]="page === currentPage()" (click)="goToPage(page)">{{ page }}</button>
+      }
 
-    <button>
-      <span class="material-icons"> chevron_right </span>
-    </button>
+      <button (click)="nextPage()">
+        <span class="material-icons"> → </span>
+      </button>
+    </div>
   </div>
 </div>

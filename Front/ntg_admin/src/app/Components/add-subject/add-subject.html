@@ -1,21 +1,5 @@
 <div class="dashboard">
-  <div class="sidebar">
-    <div class="logo">
-      <div class="header-white">
-        <img src="/images/logo.png" alt="NTG">
-      </div>
-    </div>
-    <nav class="menu">
-      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
-        <i [class]="item.icon"></i>
-        <span>{{ item.label }}</span>
-      </a>
-      <a class="menu-item logout" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Log Out</span>
-      </a>
-    </nav>
-  </div>
+  <app-sidebar></app-sidebar>
   <div class="content">
     <div class="page-header">
       <div>

@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import { CourseResponseDTO, CourseService } from '../../Services/course-service';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, SidebarComponent],
   templateUrl: './subject.html',
   styleUrls: ['./subject.css'],
 })

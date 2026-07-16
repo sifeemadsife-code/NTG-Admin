@@ -11,9 +11,10 @@ import { ProgramsList } from './Components/programs-list/programs-list';
 import { TrainingProgramStudents } from './Components/training-program-students/training-program-students';
 import { TrainingProgramEngineer } from './Components/training-program-engineer/training-program-engineer';
 import { CreateTrainingProgramComponent } from './Components/create-training-program/create-training-program';
+import { EditTrainingProgram } from './Components/edit-training-program/edit-training-program';
 import { AdminProfile } from './Components/admin-profile/admin-profile';
 import { Subject } from './Components/subject/subject';
-import { AddSubject } from './Components/add-subject/add-subject';
+import { EditSubject } from './Components/edit-subject/edit-subject';
 import { Dashboard } from './Components/dashboard/dashboard';
 import { NotificationComponent } from './Components/notification/notification';
 import { Login } from './Components/login/login';
@@ -24,6 +25,8 @@ import { EvaluateStudent } from './Components/evaluate-student/evaluate-student'
 import { StudentEvaluationsView } from './Components/student-evaluations-view/student-evaluations-view';
 import { CreateEngineerReport } from './Components/create-engineer-report/create-engineer-report';
 import { StudentDetailsComponent } from './Components/student-details/student-details';
+import { AddSubject } from './Components/add-subject/add-subject';
+import { Sendemail } from './Components/sendemail/sendemail';
 export const routes: Routes = [
   {
     path: '',
@@ -94,6 +97,10 @@ export const routes: Routes = [
     component: CreateTrainingProgramComponent,
   },
   {
+    path: 'edit-training-program/:id',
+    component: EditTrainingProgram,
+  },
+  {
     path: 'trainingProgramsList',
     component: ProgramsList,
   },
@@ -110,12 +117,20 @@ export const routes: Routes = [
     component: CreateEngineerReport,
   },
   {
-    path: 'notfications',
+    path: 'notifications',
     component: NotificationComponent,
   },
   {
     path: 'add-subject',
     component: AddSubject,
+  },
+  {
+    path: 'edit-course/:id',
+    component: EditSubject,
+  },
+  {
+    path: 'sendEmail',
+    component: Sendemail
   },
   {
     path: 'settings',

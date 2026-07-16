@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { StudentEvaluationService } from '../../Services/student-evaluation';
 import { Student } from '../../Services/student';
 import { StudentsListInterface } from '../../Models/Students_list';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-evaluate-student',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
   templateUrl: './evaluate-student.html',
   styleUrl: './evaluate-student.css',
 })

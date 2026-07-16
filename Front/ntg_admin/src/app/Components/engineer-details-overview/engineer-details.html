@@ -5,7 +5,11 @@
     </div>
     <div class="profile">
       <div class="avatar-container">
+        @if (engineer().gender == "M") {
+        <img alt="Enginner Image" src="/images/man.png" class="avatar" />
+        }@else {
         <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
+        }
       </div>
       <h2>{{ engineer().firstName }}</h2>
       <p class="job">

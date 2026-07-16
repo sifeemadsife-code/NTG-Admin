@@ -1,28 +1,5 @@
-<button class="menu-btn" (click)="isSidebarOpen = !isSidebarOpen">
-    <i>&#9776;</i>
-</button>
 <div class="dashboard-container">
-  <div class="sidebar" [class.open]="isSidebarOpen">
-    <div class="logo">
-      <div class="header">
-        <div class="header-white">
-          <img src="\images\logo.png" alt="NTG">
-        </div>
-      </div>
-    </div>
-
-    <nav class="menu">
-      <a *ngFor="let item of menuItems" [routerLink]="item.route" [class.active]="item.active" class="menu-item">
-        <i [class]="item.icon"></i>
-        <span>{{ item.label }}</span>
-      </a>
-      <a class="menu-item logout" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Log Out</span>
-      </a>
-    </nav>
-  </div>
-
+  <app-sidebar></app-sidebar>
   <main class="main-content">
     <header class="headers">
       <div class="profile-section">
@@ -96,36 +73,42 @@
             <option>Last Year</option>
           </select>
         </div>
-      </div>
-      <div class="chart-card">
-        <h3>Students Overview</h3>
-        <div class="donut-chart">
-          <div class="chart-center">
-            <span class="chart-number">{{ studentCount() }}</span>
-            <span class="chart-label">Total Students</span>
-          </div>
+        <div class="chart-canvas-wrap">
+          <canvas #performanceChart></canvas>
         </div>
       </div>
+
+      <div class="chart-card">
+        <h3>Students Overview</h3>
+        <div class="chart-canvas-wrap">
+          <canvas #studentsChart></canvas>
+        </div>
+        <div class="chart-legend-note">
+          <span class="chart-number">{{ studentCount() }}</span>
+          <span class="chart-label">Total Students</span>
+        </div>
+      </div>
+
       <div class="chart-card activities">
         <div class="chart-header">
           <h3>Recent Activities</h3>
           <a href="#" (click)="$event.preventDefault(); loadActivities()">View All</a>
         </div>
-        <div *ngIf="loading" class="loading-state">
+
+        <div *ngIf="loading()" class="loading-state">
           <div class="spinner"></div>
           <p>Loading activities...</p>
         </div>
-        <div *ngIf="error() && !loading" class="error-state">
+
+        <div *ngIf="error() && !loading()" class="error-state">
           <i class="fas fa-exclamation-triangle"></i>
-          <p>{{ error }}</p>
+          <p>{{ error() }}</p>
           <button (click)="loadActivities()">Retry</button>
         </div>
 
-        <div *ngIf="!loading && !error" class="activity-list">
-          <div class="activity-content">
-          </div>
+        <div *ngIf="!loading() && !error()" class="activity-list">
+          <p style="color:#9ca3af; text-align:center; padding:20px 0;">No recent activities yet</p>
         </div>
-
       </div>
     </section>
   </main>

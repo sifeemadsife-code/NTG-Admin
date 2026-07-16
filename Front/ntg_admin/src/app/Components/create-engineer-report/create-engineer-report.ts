@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { EngineerFeedbackService } from '../../Services/engineer-feedback';
 import { EngineerService } from '../../Services/engineer';
 import { EngineerList } from '../../Models/engineer_list';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-create-engineer-report',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
   templateUrl: './create-engineer-report.html',
   styleUrl: './create-engineer-report.css',
 })

@@ -5,11 +5,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { EngineerService } from '../../Services/engineer';
 import { CourseService } from '../../Services/course-service';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-add-subject',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
   templateUrl: './add-subject.html',
   styleUrls: ['./add-subject.css'],
 })

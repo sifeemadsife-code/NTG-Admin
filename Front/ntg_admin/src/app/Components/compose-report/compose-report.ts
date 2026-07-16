@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { ReportService } from '../../Services/report';
 import { EngineerService } from '../../Services/engineer';
 import { EngineerList } from '../../Models/engineer_list';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-compose-report',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
   templateUrl: './compose-report.html',
   styleUrl: './compose-report.css',
 })

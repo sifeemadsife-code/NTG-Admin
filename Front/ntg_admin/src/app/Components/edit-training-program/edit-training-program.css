@@ -1,0 +1,305 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f5f7fb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dashbored {
+  display: flex;
+  min-height: 100vh;
+  background: #eeeeee;
+}
+
+/* ===== Page ===== */
+
+.page {
+  flex: 1;
+  min-width: 0;
+  padding: 2% 3%;
+  margin-left: 250px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4%;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 38px;
+  font-weight: 700;
+  color: #111;
+}
+
+.page-header p {
+  color: gray;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.back-btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: #fff;
+  color: #333 !important;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.back-btn:hover {
+  background: #620000;
+  color: #fff !important;
+}
+
+.status-text {
+  color: #666;
+  font-size: 15px;
+}
+
+.error-text {
+  color: #c00000;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* ===== Form ===== */
+
+.form-card {
+  max-width: 900px;
+  background: white;
+  border-radius: 15px;
+  padding: 35px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 22px;
+  display: flex;
+  gap: 20px;
+}
+
+.form-group > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-group .full {
+  flex: 1 1 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #620000;
+  box-shadow: 0 0 0 3px rgba(98, 0, 0, 0.12);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button[type='submit'] {
+  width: 100%;
+  background: #05172f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button[type='submit']:hover {
+  background: #620000;
+}
+
+button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 8px;
+  background: #620000;
+  color: white;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* Laptop */
+
+@media (max-width: 1200px) {
+  .form-card {
+    max-width: 100%;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1500;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .header,
+  .menu-item span {
+    display: block;
+  }
+
+  .page {
+    margin-left: 0;
+    width: 100%;
+    padding: 80px 25px 25px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .back-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .form-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 80px 20px 20px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .form-card {
+    padding: 20px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  button[type='submit'] {
+    width: 100%;
+  }
+}
+
+/* Small Mobile */
+
+@media (max-width: 576px) {
+  .page {
+    padding: 75px 15px 15px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .header-white {
+    width: 95%;
+    height: 55px;
+  }
+
+  .logo img {
+    width: 70px;
+  }
+
+  .form-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  button[type='submit'] {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

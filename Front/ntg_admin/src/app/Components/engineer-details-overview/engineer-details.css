@@ -38,13 +38,15 @@
 
 .profile {
   text-align: center;
+  align-items: center;
   padding: 30px 20px;
 }
-
-.avatar {
+.avatar-container{
+  padding-left: 65px;
+}
+.avatar-container img{
   width: 120px;
   height: 120px;
-  border-radius: 50%;
 }
 
 .profile h2 {

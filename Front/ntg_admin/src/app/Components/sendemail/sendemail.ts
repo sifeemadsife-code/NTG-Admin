@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import emailjs from '@emailjs/browser';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from "../sidebar/sidebar";
+import { RouterLink } from "@angular/router";
 @Component({
   selector: 'app-sendemail',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SidebarComponent, RouterLink],
   templateUrl: './sendemail.html',
   styleUrl: './sendemail.css',
 })

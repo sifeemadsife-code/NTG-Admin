@@ -1,95 +1,38 @@
 <div class="dashbored">
-    <aside class="sidebar">
-  <div class="logo-section">
-      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/dashboard.png" width="25" height="25" />
-      <span  class="sidebar-text"><a href="">Dashboard</a></span>
-    </div>
-    <div class="logo-engineer">
-      <img alt="icon" src="/images/adminstrator.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Engineers</a></span>
-    </div>
-    <div class="logo-text1">
-      <img alt="icon" src="/images/reading.png" width="25" height="25" />
-      <span class="sidebar-text"><a routerLink="/studentsList">Students</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/reports.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Reports</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/code.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="" routerLink="/trainingProgramsList">Training Programs</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/books.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Subjects</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/Setting.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Settings</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/user.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Profile</a></span>
-    </div>
-    <div class="logo-text">
-      <img alt="icon" src="/images/logout.png" width="25" height="25" />
-      <span class="sidebar-text"><a href="">Logout</a></span>
-    </div>
-  </aside>
+  <app-sidebar></app-sidebar>
 
 
   <div class="email-page">
 
     <div class="header">
-        <div>
-            <h2>Send Email</h2>
-            <p>Dashboard > Send Email</p>
-        </div>
-
-        <button class="send-btn">
-            <i class="fa-solid fa-paper-plane"></i>
-            Send Email
-        </button>
+      <div>
+        <h2>Send Email</h2>
+        <p>Dashboard > Send Email</p>
+      </div>
     </div>
 
     <div class="card">
       <div [formGroup]="form" class="left">
-          <form action="javascript:void(0)" (submit)="send()">
-            <label> name</label>
-            <input formControlName="name" type="text" placeholder="Enter your name..." >
-            <label> To email</label>
-            <input formControlName="ToEmail" type="text" placeholder="Enter the email of reciver..." >
-            <label> To name</label>
-            <input formControlName="toname" type="text" placeholder="Enter the name of reciver..." >
+        <form action="javascript:void(0)" (submit)="send()">
+          <label> name</label>
+          <input formControlName="name" type="text" placeholder="Enter your name...">
+          <label> To email</label>
+          <input formControlName="ToEmail" type="text" placeholder="Enter the email of reciver...">
+          <label> To name</label>
+          <input formControlName="toname" type="text" placeholder="Enter the name of reciver...">
 
-            <label>Subject</label>
-            <input
-                formControlName="subject"
-                type="text"
-                placeholder="Enter Subject"
-                >
+          <label>Subject</label>
+          <input formControlName="subject" type="text" placeholder="Enter Subject">
 
-            <label>Email</label>
+          <label>Email</label>
 
-            <input
-                formControlName="email"
-                type="text"
-                placeholder="Enter the email"
-                >
+          <input formControlName="email" type="text" placeholder="Enter the email">
 
-            <label>Message</label>
+          <label>Message</label>
 
-            <textarea
-            formControlName="message"
-                rows="10"
-                placeholder="Write your email..."
-                >
+          <textarea formControlName="message" rows="10" placeholder="Write your email...">
             </textarea>
-            <button type="submit" class="send">  
+          <button type="submit" class="send">
             Send Email
           </button>
         </form>
@@ -103,5 +46,5 @@
 
     </div>
 
-</div>
+  </div>
 </div>

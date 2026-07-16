@@ -5,10 +5,11 @@ import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerList } from '../../Models/engineer_list';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-admin-engineer',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, SidebarComponent],
   templateUrl: './admin-engineer.html',
   styleUrl: './admin-engineer.css',
 })

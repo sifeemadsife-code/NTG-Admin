@@ -19,7 +19,7 @@
 .dashbored {
   display: flex;
   min-height: 100vh;
-  background: #eeeeee;
+  background: white;
 }
 .sidebar {
   width: 250px;
@@ -104,7 +104,7 @@ a {
   margin-left: 250px;
   width: calc(100% - 250px);
   padding: 30px;
-  background: #f5f5f5;
+  background: white;
   min-height: 100vh;
 }
 

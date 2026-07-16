@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentEvaluationService } from '../../Services/student-evaluation';
 import { StudentEvaluationModel } from '../../Models/student-evaluation';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-student-evaluations-view',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './student-evaluations-view.html',
   styleUrl: './student-evaluations-view.css',
 })

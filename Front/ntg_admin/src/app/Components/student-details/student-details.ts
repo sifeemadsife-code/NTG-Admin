@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Student } from '../../Services/student';
 import { StudentDetails } from '../../Models/StudentSubject ';
+import { SidebarComponent } from "../sidebar/sidebar";
 
 @Component({
   selector: 'app-student-details',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './student-details.html',
   styleUrls: ['./student-details.css'],
 })
