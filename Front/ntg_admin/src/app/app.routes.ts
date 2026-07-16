@@ -27,6 +27,7 @@ import { CreateEngineerReport } from './Components/create-engineer-report/create
 import { StudentDetailsComponent } from './Components/student-details/student-details';
 import { AddSubject } from './Components/add-subject/add-subject';
 import { Sendemail } from './Components/sendemail/sendemail';
+import { SendNotification } from './Components/send-notification/send-notification';
 export const routes: Routes = [
   {
     path: '',
@@ -119,6 +120,10 @@ export const routes: Routes = [
   {
     path: 'notifications',
     component: NotificationComponent,
+  },
+  {
+    path: 'sendNotification',
+    component: SendNotification
   },
   {
     path: 'add-subject',

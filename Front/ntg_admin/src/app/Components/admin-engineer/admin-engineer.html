@@ -65,7 +65,11 @@
               <button [routerLink]="['/engineers', engineer.id, 'update-engineer']"><img src="/images/edit_icon.png"
                   alt=""></button>
               <button [routerLink]="['/engineers', engineer.id]"><img src="/images/view_icon.png" alt=""></button>
+              @if (engineer.status) {
+              <button (click)="restoreEngineer(engineer.id)"><img src="/images/restore_eng.png" alt=""></button>
+              }@else {
               <button (click)="deleteEngineer(engineer.id)"><img src="/images/delete_icon.png" alt=""></button>
+              }
             </td>
           </tr>
           } @empty {

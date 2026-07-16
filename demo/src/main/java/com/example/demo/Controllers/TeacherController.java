@@ -8,6 +8,7 @@ import com.example.demo.repositories.TeacherRepository;
 import com.example.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +58,11 @@ public class TeacherController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEngineer(@PathVariable Long id) {
         teacherService.deleteEngineer(id);
+    }
+    @PutMapping("/restore/{id}")
+    public ResponseEntity<String> restoreEngineer(@PathVariable Long id) {
+        teacherService.restoreEngineer(id);
+        return ResponseEntity.ok("Engineer restored successfully");
     }
     @PutMapping("/{id}")
     public TeacherProfileDTO updateEngineer(@RequestBody UpdateEngineerRequestDTO request, @PathVariable Long id) {

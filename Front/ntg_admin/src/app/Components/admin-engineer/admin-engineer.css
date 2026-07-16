@@ -125,7 +125,9 @@ a {
   background: white;
   min-height: 100vh;
 }
-
+.actions button img{
+  width: 15px;
+}
 .page-header h1 {
   margin: 0;
   font-size: 38px;

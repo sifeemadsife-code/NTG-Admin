@@ -99,7 +99,10 @@ a {
   display: flex;
   font-family: 'Segoe UI', sans-serif;
 }
-
+.fle{
+  display: flex;
+  gap: 10px;
+}
 .engineers-page {
   margin-left: 250px;
   width: calc(100% - 250px);

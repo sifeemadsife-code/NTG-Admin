@@ -5,7 +5,7 @@ import { Engineer } from '../../Models/engineer';
 import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerList } from '../../Models/engineer_list';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
 
 @Component({
   selector: 'app-admin-engineer',
@@ -19,23 +19,6 @@ export class AdminEngineer implements OnInit {
   searchTerm = signal<string>('');
   statusFilter = signal<string>('active');
   private router = inject(Router);
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList', active: true },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notification' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
   toggleMenu() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
@@ -98,6 +81,18 @@ export class AdminEngineer implements OnInit {
       error: (err) => {
         console.log(err);
       },
+    });
+  }
+  restoreEngineer(id: number) {
+    if (!confirm('Are you sure you want to Restore this engineer?')) {
+      return;
+    }
+    this.engineerService.restoreEngineer(id).subscribe({
+      next: () => {
+        alert('Engineer restored successfully');
+        this.loadAllEngineers();
+      },
+      error: (err) => console.error(err),
     });
   }
 }

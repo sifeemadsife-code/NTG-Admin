@@ -11,9 +11,10 @@
     </div>
     <div class="toolbar">
       <div class="search-box">
-        <input type="text" placeholder="Search by name,ID,subject..." />
+        <input type="text" placeholder="Search by Subject Name, Type, Engineer..." [value]="searchText()"
+          (input)="searchText.set(($any($event.target)).value); currentPage.set(1)" />
       </div>
-       <div class="filters">
+      <div class="filters">
         <button class="add-bth" routerLink="/add-subject">
           <span>+</span>
           Add Subject
@@ -31,17 +32,23 @@
           </tr>
         </thead>
         <tbody>
-  <tr *ngFor="let course of courses()">
-  <td>{{ course.courseName }}</td>
-  <td>{{ getTeacherFullName(course) }}</td>
-  <td>{{ course.termId }}</td>
-  <td>
-    <button class="btn1" [routerLink]="['edit-course', course.id]" (click)="editCourse(course.id)">Edit</button>
-    <button class="btn2" (click)="deleteCourse(course.id)">Delete</button>
-  </td>
-</tr>
+          <tr *ngFor="let course of paginatedCourses()">
+            <td>{{ course.courseName }}</td>
+            <td>{{ getTeacherFullName(course) }}</td>
+            <td>{{ course.termId }}</td>
+            <td>
+              <button class="btn1" [routerLink]="['edit-course', course.id]"
+                (click)="editCourse(course.id)">Edit</button>
+              <button class="btn2" (click)="deleteCourse(course.id)">Delete</button>
+            </td>
+          </tr>
+          <tr *ngIf="paginatedCourses().length === 0">
+            <td colspan="4" style="text-align:center">
+              No subjects found.
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
-    </div>
   </div>
+</div>

@@ -16,12 +16,23 @@
 
       </div>
 
-      <div class="filters">
-        <select [value]="statusFilter()" (change)="statusFilter.set($any($event.target).value)">
-          <option value="active">Active</option>
-          <option value="all">All Students</option>
-          <option value="inactive">Inactive</option>
-        </select>
+      <div class="fle">
+        <div class="filters">
+          <select [value]="statusFilter()" (change)="statusFilter.set($any($event.target).value)">
+            <option value="active">Active</option>
+            <option value="all">All Students</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="filters">
+          <select [value]="gradeFilter()" (change)="gradeFilter.set(($any($event.target)).value)">
+            <option value="all">All Grades</option>
+    
+            <option *ngFor="let grade of grades()" [value]="grade.name">
+              {{ grade.name }}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
 

@@ -1,9 +1,11 @@
+import { GradeService } from './../../Services/grade';
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Student } from '../../Services/student';
 import { StudentsListInterface } from '../../Models/Students_list';
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
+import { GradeModel } from '../../Models/grade';
 @Component({
   selector: 'app-students-list',
   imports: [CommonModule, RouterLink, SidebarComponent],
@@ -11,31 +13,19 @@ import { SidebarComponent } from "../sidebar/sidebar";
   styleUrl: './students-list.css',
 })
 export class StudentsList {
-      isSidebarOpen = false;
+  isSidebarOpen = false;
   students = signal<StudentsListInterface[]>([]);
   searchTerm = signal('');
   statusFilter = signal('active');
-  constructor(private readonly studentService: Student) {}
-  private router = inject(Router);
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList', active: true },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notification' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
+  gradeFilter = signal('all');
+  grades = signal<GradeModel[]>([]);
+  constructor(
+    private readonly studentService: Student,
+    private readonly gradeService: GradeService,
+  ) {}
   ngOnInit(): void {
     this.loadAllEngineers();
+    this.loadGrades();
   }
   loadAllEngineers() {
     this.studentService.getAllStudents().subscribe({
@@ -48,19 +38,22 @@ export class StudentsList {
       },
     });
   }
+  loadGrades() {
+    this.gradeService.getAllGrades().subscribe({
+      next: (data) => this.grades.set(data),
+      error: (err) => console.error(err),
+    });
+  }
   filteredStudents = computed(() => {
-    const search = this.searchTerm().trim();
+    const search = this.searchTerm().trim().toLowerCase();
     const status = this.statusFilter();
-
+    const grade = this.gradeFilter();
     return this.students().filter((student) => {
-      // Search by ID
       const matchesSearch = search === '' || student.id.toString().includes(search);
-
-      // Filter by status
       const matchesStatus =
         status === 'all' ? true : status === 'active' ? !student.status : student.status;
-
-      return matchesSearch && matchesStatus;
+      const matchesGrade = grade === 'all' || student.grade === grade;
+      return matchesSearch && matchesStatus && matchesGrade;
     });
   });
 }

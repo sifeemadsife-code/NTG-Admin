@@ -1,4 +1,3 @@
-
 <div class="dashbored">
   <app-sidebar></app-sidebar>
   <div class="engineers-page">
@@ -23,6 +22,10 @@
         + Create Program
       </button>
     </div>
+    <div class="search-box">
+      <input type="text" placeholder="Search by Program Name..." [value]="searchTerm()"
+        (input)="searchTerm.set(($any($event.target)).value)" />
+    </div>
     <div class="table-card">
       <table>
         <thead>
@@ -36,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (program of programs(); track program.id) {
+          @for (program of filteredPrograms(); track program.id) {
           <tr>
             <td class="namest">{{ program.program_name }}</td>
             <td>{{ program.grade_name }}</td>
@@ -44,7 +47,8 @@
             <td>{{ program.duration }}</td>
             <td>{{ program.start_date }}</td>
             <td class="actions">
-              <button  [routerLink]="['/edit-training-program', program.id]" ><img src="/images/edit_icon.png" alt="" /></button>
+              <button [routerLink]="['/edit-training-program', program.id]"><img src="/images/edit_icon.png"
+                  alt="" /></button>
               <button [routerLink]="['/programs', program.id]">
                 <img src="/images/view_icon.png" alt="" />
               </button>

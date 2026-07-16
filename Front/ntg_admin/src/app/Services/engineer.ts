@@ -14,11 +14,11 @@ export class EngineerService {
   private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
-  getAllEngineers() : Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/teachers`)
+  getAllEngineers(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/teachers`);
   }
-  getAllEngineersCount() : Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/teachers/count`)
+  getAllEngineersCount(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/teachers/count`);
   }
   getEngineer(id: number): Observable<Engineer> {
     return this.http.get<Engineer>(`${this.apiUrl}/teachers/${id}`);
@@ -29,10 +29,13 @@ export class EngineerService {
   getEngineerCards(id: number): Observable<EngineerCards> {
     return this.http.get<EngineerCards>(`${this.apiUrl}/teachers/${id}/dashboard`);
   }
-  deleteEngineer(id: number){
+  deleteEngineer(id: number) {
     return this.http.delete(`${this.apiUrl}/teachers/${id}`);
   }
-  addEngineer(engineer: CreateEngineer): Observable<Engineer>{
+  restoreEngineer(id: number) {
+    return this.http.put(`${this.apiUrl}/teachers/restore/${id}`, {});
+  }
+  addEngineer(engineer: CreateEngineer): Observable<Engineer> {
     return this.http.post<Engineer>(`${this.apiUrl}/teachers`, engineer);
   }
 }

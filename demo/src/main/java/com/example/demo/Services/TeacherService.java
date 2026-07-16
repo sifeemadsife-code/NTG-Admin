@@ -155,6 +155,16 @@ public class TeacherService {
         teacherRepository.save(tacher);
     }
     @Transactional
+    public void restoreEngineer(Long id) {
+        Teacher teacher = teacherRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+        User user = teacher.getUser();
+        user.setIsdeleted(false);
+
+        userRepository.save(user);
+    }
+    @Transactional
     public TeacherProfileDTO updateEngineer(Long id, UpdateEngineerRequestDTO request) {
         Teacher teacher = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
