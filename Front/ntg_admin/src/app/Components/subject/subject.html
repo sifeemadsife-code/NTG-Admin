@@ -11,7 +11,7 @@
     </div>
     <div class="toolbar">
       <div class="search-box">
-        <input type="text" placeholder="Search by Subject Name, Type, Engineer..." [value]="searchText()"
+        <input type="text" placeholder="Search by Subject Name, Engineer..." [value]="searchText()"
           (input)="searchText.set(($any($event.target)).value); currentPage.set(1)" />
       </div>
       <div class="filters">

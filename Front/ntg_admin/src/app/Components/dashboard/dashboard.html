@@ -3,7 +3,11 @@
   <main class="main-content">
     <header class="headers">
       <div class="profile-section">
+        @if (profile2()?.gender == "M") {
+          <img src="/images/man.png" alt="Profile" class="profile-img">
+        }@else {
         <img src="/images/avatar.png" alt="Profile" class="profile-img">
+        }
         <div class="profile-info">
           <h4>{{ profile().name }}</h4>
           <span>{{ profile().role }}</span>
@@ -89,25 +93,21 @@
         </div>
       </div>
 
-      <div class="chart-card activities">
-        <div class="chart-header">
-          <h3>Recent Activities</h3>
-          <a href="#" (click)="$event.preventDefault(); loadActivities()">View All</a>
+      <div class="chart-card">
+        <h3>Engineers by Experience</h3>
+        <div class="chart-canvas-wrap">
+          <canvas #engineersChart></canvas>
         </div>
-
         <div *ngIf="loading()" class="loading-state">
           <div class="spinner"></div>
-          <p>Loading activities...</p>
+          <p>Loading engineer data...</p>
         </div>
-
         <div *ngIf="error() && !loading()" class="error-state">
           <i class="fas fa-exclamation-triangle"></i>
           <p>{{ error() }}</p>
-          <button (click)="loadActivities()">Retry</button>
         </div>
-
-        <div *ngIf="!loading() && !error()" class="activity-list">
-          <p style="color:#9ca3af; text-align:center; padding:20px 0;">No recent activities yet</p>
+        <div *ngIf="!loading() && !error() && engineerExperience().length === 0" class="empty-state">
+          <p style="color:#9ca3af; text-align:center; padding:20px 0;">No engineer data yet</p>
         </div>
       </div>
     </section>

@@ -4,22 +4,32 @@
       <img src="/images/logo.png" alt="" />
     </div>
     <div class="profile-image">
-      <img src="/images/adminstrator.png" alt="" />
+      @if (profile()?.gender == "M") {
+      <img src="/images/man.png" alt="Profile" class="profile-img">
+      }@else {
+      <img src="/images/avatar.png" alt="Profile" class="profile-img">
+      }
     </div>
-    <h2>Saif Emad</h2>
+    <h2>{{ profile()?.firstName }} {{ profile()?.lastName }}</h2>
   </div>
+
   <main class="main">
     <header>
       <div class="header-right">
         <div class="user">
-          <img src="/images/adminstrator.png" />
+          @if (profile()?.gender == "M") {
+          <img src="/images/man.png" alt="Profile" class="profile-img">
+        }@else {
+        <img src="/images/avatar.png" alt="Profile" class="profile-img">
+        }
           <div>
-            <h4>Saif Emad</h4>
-            <small>Administrator</small>
+            <h4>{{ profile()?.firstName }} {{ profile()?.lastName }}</h4>
+            <small>{{ profile()?.roleName }}</small>
           </div>
         </div>
       </div>
     </header>
+
     <div class="title">
       <div>
         <h1>Profile</h1>
@@ -30,40 +40,97 @@
         Back
       </button>
     </div>
+
+    @if (loading()) {
+    <p class="status-text">Loading profile...</p>
+    } @else {
+
     <section class="card">
       <h2>Personal Information</h2>
-      <form>
+
+      @if (error()) {
+      <p class="error-text">{{ error() }}</p>
+      }
+      @if (successMessage()) {
+      <p class="success-text">{{ successMessage() }}</p>
+      }
+
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
         <div class="form-group">
-          <label>Full name*</label>
-          <input type="text" value="" />
+          <label>First Name*</label>
+          <input type="text" formControlName="firstName" />
         </div>
         <div class="form-group">
-          <label>Type*</label>
-          <input type="text" value="" />
+          <label>Last Name*</label>
+          <input type="text" formControlName="lastName" />
         </div>
+
+        <div class="form-group">
+          <label>First Name (Arabic)</label>
+          <input type="text" formControlName="firstNameInArabic" />
+        </div>
+        <div class="form-group">
+          <label>Last Name (Arabic)</label>
+          <input type="text" formControlName="lastNameInArabic" />
+        </div>
+
         <div class="form-group">
           <label>Email*</label>
-          <input type="email" value="" />
+          <input type="email" formControlName="email" />
         </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" formControlName="address" />
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select formControlName="gender">
+            <option value="">Select Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nationality</label>
+          <input type="text" formControlName="nationality" />
+        </div>
+
+        <div class="form-group">
+          <label>Birth Date</label>
+          <input type="date" formControlName="birthDate" />
+        </div>
+        <div class="form-group">
+          <label>Religion</label>
+          <input type="text" formControlName="religion" />
+        </div>
+
+        <div class="form-group">
+          <label>National Number</label>
+          <input type="number" formControlName="nationalNumber" />
+        </div>
+
         <div class="double">
           <div class="form-group">
-            <label>Experience*</label>
-            <input type="text" value="" />
+            <label>Role</label>
+            <input type="text" [value]="profile()?.roleName" disabled />
           </div>
           <div class="form-group">
-            <label>Join Date*</label>
-            <input type="date" />
+            <label>Joined</label>
+            <input type="text" [value]="profile()?.createdAt" disabled />
           </div>
         </div>
+
         <div class="form-group">
-          <label>Phone*</label>
-          <input type="text" value="" />
+          <label>Last Login</label>
+          <input type="text" [value]="profile()?.lastLogin" disabled />
         </div>
-        <div class="form-group">
-          <label>Password*</label>
-          <input type="password" value="" />
-        </div>
+
+        <button type="submit" class="save-btn" [disabled]="saving()">
+          {{ saving() ? 'Saving...' : 'Save Changes' }}
+        </button>
       </form>
     </section>
+    }
   </main>
 </div>

@@ -77,6 +77,7 @@ export class AdminEngineer implements OnInit {
     this.engineerService.deleteEngineer(id).subscribe({
       next: () => {
         alert('Engineer deleted successfully');
+        window.location.reload();
       },
       error: (err) => {
         console.log(err);
@@ -90,7 +91,7 @@ export class AdminEngineer implements OnInit {
     this.engineerService.restoreEngineer(id).subscribe({
       next: () => {
         alert('Engineer restored successfully');
-        this.loadAllEngineers();
+        window.location.reload();
       },
       error: (err) => console.error(err),
     });

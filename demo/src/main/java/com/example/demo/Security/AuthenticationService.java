@@ -6,9 +6,12 @@ import com.example.demo.repositories.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.*;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -37,7 +40,21 @@ public class AuthenticationService {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password)
             );
+        } catch (BadCredentialsException e) {
+            log.warn("Login failed for '{}': wrong password", email);
+            throw new BadCredentialsException("Invalid email or password");
+        } catch (DisabledException e) {
+            log.warn("Login failed for '{}': account is disabled (isdeleted=true)", email);
+            throw new BadCredentialsException("This account has been disabled");
+        } catch (UsernameNotFoundException e) {
+            log.warn("Login failed for '{}': no such user", email);
+            throw new BadCredentialsException("Invalid email or password");
+        } catch (IncorrectResultSizeDataAccessException e) {
+            log.error("Login failed for '{}': DUPLICATE EMAIL in USERS table! {} rows found",
+                    email, e.getActualSize());
+            throw new BadCredentialsException("Account configuration error - contact support");
         } catch (Exception e) {
+            log.error("Login failed for '{}': unexpected error", email, e); // بيطبع الـ stack trace كامل
             throw new BadCredentialsException("Invalid email or password");
         }
 

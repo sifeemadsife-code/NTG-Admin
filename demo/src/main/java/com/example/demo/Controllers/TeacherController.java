@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/teachers")
@@ -62,7 +63,7 @@ public class TeacherController {
     @PutMapping("/restore/{id}")
     public ResponseEntity<String> restoreEngineer(@PathVariable Long id) {
         teacherService.restoreEngineer(id);
-        return ResponseEntity.ok("Engineer restored successfully");
+        return ResponseEntity.ok().build();
     }
     @PutMapping("/{id}")
     public TeacherProfileDTO updateEngineer(@RequestBody UpdateEngineerRequestDTO request, @PathVariable Long id) {

@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, HttpClientModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrls: ['./login.css'],
 })
 export class Login {
-
   loginForm: FormGroup;
 
   hidePassword = true;
@@ -19,58 +18,46 @@ export class Login {
   constructor(
     private forms: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) {
-
     this.loginForm = this.forms.group({
+      email: ['', [Validators.required, Validators.email]],
 
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
-
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6)
-        ]
-      ]
-
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
-
   }
   isPassword() {
     this.hidePassword = !this.hidePassword;
   }
 
-login() {
-  console.log('Login button clicked');
+  login() {
+    console.log('Login button clicked');
 
-  if (this.loginForm.invalid) {
-    this.loginForm.markAllAsTouched();
-    return;
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const body = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
+
+    this.http
+      .post('http://localhost:8080/api/auth/login', body, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .subscribe({
+        next: (res: any) => {
+          console.log('Login Success', res);
+
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.role);
+          localStorage.setItem('userId', String(res.userId));
+          localStorage.setItem('name', `${res.firstName} ${res.lastName}`);
+
+          this.router.navigate(['/dashboard']);
+        },
+      });
   }
-
-  const body = {
-    email: this.loginForm.value.email,      // <-- email
-    password: this.loginForm.value.password
-  };
-
-  this.http.post('http://localhost:8080/api/auth/login', body, {
-    headers: { 'Content-Type': 'application/json' }
-  }).subscribe({
-next: (res: any) => {
-  console.log("Login Success", res);
-
-  localStorage.setItem('token', res.token);
-  localStorage.setItem('role', res.role);
-
-  this.router.navigate(['/dashboard']);
-}
-  });
-}
 }

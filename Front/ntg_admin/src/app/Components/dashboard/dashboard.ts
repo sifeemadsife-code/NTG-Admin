@@ -1,11 +1,21 @@
 import { Student } from './../../Services/student';
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  signal,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TrainingService } from '../../Services/training-service';
 import { EngineerService } from '../../Services/engineer';
 import { Chart, registerables } from 'chart.js';
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
+import { AdminProfile } from '../../Models/admin-profile';
+import { ProfileService } from '../../Services/profile';
 
 Chart.register(...registerables);
 
@@ -19,42 +29,52 @@ Chart.register(...registerables);
 export class Dashboard implements OnInit, AfterViewInit {
   @ViewChild('performanceChart') performanceChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('studentsChart') studentsChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('engineersChart') engineersChartRef!: ElementRef<HTMLCanvasElement>;
 
   private performanceChart?: Chart;
   private studentsChart?: Chart;
+  private engineersChart?: Chart;
   private viewReady = false;
 
-  isSidebarOpen = false;
   loading = signal(true);
   error = signal<string | null>(null);
   programsCount = signal<number>(0);
   engineersCount = signal<number>(0);
   studentCount = signal<number>(0);
+  profile2 = signal<AdminProfile | null>(null);
   gradeDistribution = signal<{ grade: string; count: number }[]>([]);
+  private profileService = inject(ProfileService);
+  engineerExperience = signal<{ level: string; count: number }[]>([]);
 
   profile = signal({
     name: localStorage.getItem('name') || 'Admin',
     role: localStorage.getItem('role') || 'Admin',
   });
 
-
   constructor(
     private programsService: TrainingService,
     private engineersService: EngineerService,
-    private studentsService: Student
+    private studentsService: Student,
   ) {}
 
   ngOnInit(): void {
-    this.loadActivities();
     this.getProgramsCount();
     this.getEngineersCount();
     this.getStudentsCount();
     this.loadStudentsByGrade();
+    this.loadEngineersByExperience();
+    this.loadProfile();
   }
 
   ngAfterViewInit(): void {
     this.viewReady = true;
     this.renderPerformanceChart();
+    if (this.gradeDistribution().length) {
+      this.renderStudentsChart(this.gradeDistribution());
+    }
+    if (this.engineerExperience().length) {
+      this.renderEngineersChart(this.engineerExperience());
+    }
   }
 
   getProgramsCount(): void {
@@ -86,7 +106,6 @@ export class Dashboard implements OnInit, AfterViewInit {
       error: (err) => console.log(err),
     });
   }
-
   loadStudentsByGrade(): void {
     this.studentsService.getAllStudents().subscribe({
       next: (students: any[]) => {
@@ -100,6 +119,40 @@ export class Dashboard implements OnInit, AfterViewInit {
         this.renderStudentsChart(dist);
       },
       error: (err) => console.log(err),
+    });
+  }
+
+  loadEngineersByExperience(): void {
+    this.loading.set(true);
+    this.engineersService.getAllEngineers().subscribe({
+      next: (engineers: any[]) => {
+        const buckets = [
+          { level: '0-2 yrs', min: 0, max: 2, count: 0 },
+          { level: '3-5 yrs', min: 3, max: 5, count: 0 },
+          { level: '6-10 yrs', min: 6, max: 10, count: 0 },
+          { level: '10+ yrs', min: 11, max: Infinity, count: 0 },
+        ];
+
+        (engineers || []).forEach((e) => {
+          const exp = Number(e.experience ?? e.numberOfYearsOfExperience ?? 0);
+          const bucket = buckets.find((b) => exp >= b.min && exp <= b.max);
+          if (bucket) bucket.count++;
+        });
+
+        const dist = buckets
+          .filter((b) => b.count > 0)
+          .map((b) => ({ level: b.level, count: b.count }));
+
+        this.engineerExperience.set(dist);
+        this.loading.set(false);
+        this.error.set(null);
+        this.renderEngineersChart(dist);
+      },
+      error: (err) => {
+        console.log(err);
+        this.loading.set(false);
+        this.error.set('Failed to load engineer data');
+      },
     });
   }
 
@@ -141,20 +194,25 @@ export class Dashboard implements OnInit, AfterViewInit {
 
   private renderStudentsChart(dist: { grade: string; count: number }[]): void {
     if (!this.viewReady || !this.studentsChartRef) {
-      // view lessa msh gahza, jarrab tany 3ala microtask
       setTimeout(() => this.renderStudentsChart(dist), 100);
       return;
     }
-
-    const palette = ['#05172F', '#8F0000', '#DA7612', '#28964d', '#4a90d9', '#a855f7', '#f59e0b', '#14b8a6'];
-
+    const palette = [
+      '#05172F',
+      '#8F0000',
+      '#DA7612',
+      '#28964d',
+      '#4a90d9',
+      '#a855f7',
+      '#f59e0b',
+      '#14b8a6',
+    ];
     if (this.studentsChart) {
       this.studentsChart.data.labels = dist.map((d) => d.grade);
       this.studentsChart.data.datasets[0].data = dist.map((d) => d.count);
       this.studentsChart.update();
       return;
     }
-
     this.studentsChart = new Chart(this.studentsChartRef.nativeElement, {
       type: 'doughnut',
       data: {
@@ -178,14 +236,53 @@ export class Dashboard implements OnInit, AfterViewInit {
     });
   }
 
-  loadActivities(): void {
-    this.loading.set(true);
-    this.error.set(null);
-    // TODO: connect this to a real activities endpoint when available
-    this.loading.set(false);
+  private renderEngineersChart(dist: { level: string; count: number }[]): void {
+    if (!this.viewReady || !this.engineersChartRef) {
+      setTimeout(() => this.renderEngineersChart(dist), 100);
+      return;
+    }
+    const palette = ['#05172F', '#0b2202', '#5b1717', '#DA7612'];
+    if (this.engineersChart) {
+      this.engineersChart.data.labels = dist.map((d) => d.level);
+      this.engineersChart.data.datasets[0].data = dist.map((d) => d.count);
+      this.engineersChart.update();
+      return;
+    }
+    this.engineersChart = new Chart(this.engineersChartRef.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: dist.map((d) => d.level),
+        datasets: [
+          {
+            data: dist.map((d) => d.count),
+            backgroundColor: dist.map((_, i) => palette[i % palette.length]),
+            borderWidth: 0,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+        },
+      },
+    });
   }
 
-  getIconClass(icon: string): string {
-    return `fas ${icon}`;
+  loadProfile(): void {
+    this.loading.set(true);
+    this.error.set('');
+
+    this.profileService.getMyProfile().subscribe({
+      next: (data) => {
+        this.profile2.set(data);
+      },
+      error: (err) => {
+        this.error.set('Failed to load profile.');
+        console.log(err);
+      },
+    });
   }
 }

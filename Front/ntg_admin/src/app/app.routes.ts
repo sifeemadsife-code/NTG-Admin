@@ -28,6 +28,7 @@ import { StudentDetailsComponent } from './Components/student-details/student-de
 import { AddSubject } from './Components/add-subject/add-subject';
 import { Sendemail } from './Components/sendemail/sendemail';
 import { SendNotification } from './Components/send-notification/send-notification';
+import { ResetPassword } from './Components/reset-password/reset-password';
 export const routes: Routes = [
   {
     path: '',
@@ -123,7 +124,7 @@ export const routes: Routes = [
   },
   {
     path: 'sendNotification',
-    component: SendNotification
+    component: SendNotification,
   },
   {
     path: 'add-subject',
@@ -135,11 +136,15 @@ export const routes: Routes = [
   },
   {
     path: 'sendEmail',
-    component: Sendemail
+    component: Sendemail,
   },
   {
     path: 'settings',
     component: SettingComponent,
+  },
+  {
+    path: 'resetPassword',
+    component: ResetPassword
   },
   {
     path: '**',

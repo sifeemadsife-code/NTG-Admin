@@ -2,7 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.DTOs.AuthenticationResponse;
 import com.example.demo.Security.AuthenticationService;
+import com.example.demo.Security.CustomUserDetails;
 import com.example.demo.DTOs.LoginRequestDTO;
+import com.example.demo.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,25 +26,28 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
-
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequestDTO request) {
-        UserDetails user = authService.authenticate(request.email(), request.password());
+        UserDetails userDetails = authService.authenticate(request.email(), request.password());
 
-        String token = authService.generateToken(user);
-        String role = user.getAuthorities()
+        String token = authService.generateToken(userDetails);
+        String role = userDetails.getAuthorities()
                 .stream()
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
                 .orElse(null);
+
+        User user = ((CustomUserDetails) userDetails).getUser();
 
         return ResponseEntity.ok(
                 AuthenticationResponse.builder()
                         .token(token)
                         .role(role)
                         .expiresAt(expiresAt)
+                        .userId(user.getId())
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .email(user.getEmail())
                         .build());
-
-
     }
 }
