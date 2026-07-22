@@ -349,3 +349,8 @@ SETTING ROW
     height: 32px;
   }
 }
+
+
+.setting-item {
+  cursor: pointer;
+}

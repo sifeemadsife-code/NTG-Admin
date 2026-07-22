@@ -9,8 +9,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule
   ],
-  templateUrl: './support.component.html',
-  styleUrls: ['./support.component.scss']
+  templateUrl: './support.html',
+  styleUrls: ['./support.css']
 })
 export class SupportComponent {
 

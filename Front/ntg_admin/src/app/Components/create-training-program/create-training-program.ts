@@ -21,6 +21,9 @@ export class CreateTrainingProgramComponent implements OnInit {
   grades = signal<GradeModel[]>([]);
   trainingForm!: FormGroup;
   isSidebarOpen = false;
+successMessage = signal('');
+showSuccess = signal(false);
+
 
   constructor(
     private fb: FormBuilder,
@@ -107,7 +110,14 @@ export class CreateTrainingProgramComponent implements OnInit {
     this.service.createProgram(payload).subscribe({
       next: (res) => {
         console.log(res);
-        alert('Training Program Created Successfully');
+        this.successMessage.set('Training Program created successfully!');
+this.showSuccess.set(true);
+
+this.trainingForm.reset();
+
+setTimeout(() => {
+  this.showSuccess.set(false);
+}, 3000);
         this.trainingForm.reset();
       },
       error: (err) => {

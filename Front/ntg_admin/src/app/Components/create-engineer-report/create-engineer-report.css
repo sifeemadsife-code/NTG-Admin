@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -263,5 +264,49 @@ MOBILE
 
   .form-card {
     padding: 22px;
+  }
+}
+
+
+
+
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 320px;
+
+  background-color: #28a745;
+  color: white;
+
+  padding: 14px 20px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  z-index: 9999;
+  animation: slideIn 0.3s ease;
+}
+
+.success-message i {
+  font-size: 20px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

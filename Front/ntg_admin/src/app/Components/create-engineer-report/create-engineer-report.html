@@ -1,3 +1,9 @@
+@if (showSuccess()) {
+  <div class="success-message">
+    <i class="fas fa-check-circle"></i>
+    <span>{{ successMessage() }}</span>
+  </div>
+}
 <app-sidebar></app-sidebar>
 <div class="page">
   <div class="page-header">

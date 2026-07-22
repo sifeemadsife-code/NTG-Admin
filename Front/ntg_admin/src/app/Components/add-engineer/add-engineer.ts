@@ -14,6 +14,10 @@ import { SidebarComponent } from "../sidebar/sidebar";
   styleUrl: './add-engineer.css',
 })
 export class AddEngineer {
+
+
+
+
     isSidebarOpen = false;
   newEngineer = signal<CreateEngineer>({
     firstName: '',
@@ -35,6 +39,8 @@ export class AddEngineer {
 
   submitting = signal(false);
   errorMessage = signal<string | null>(null);
+  successMessage = signal<string | null>(null);
+  showSuccess = signal(false);
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard'},
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' , active: true },
@@ -80,11 +86,19 @@ export class AddEngineer {
     this.errorMessage.set(null);
 
     this.engineerService.addEngineer(engineer).subscribe({
-      next: () => {
-        this.submitting.set(false);
-        alert('Engineer added successfully');
-        this.router.navigate(['/']);
-      },
+     next: () => {
+  this.submitting.set(false);
+
+  this.successMessage.set('Engineer added successfully!');
+  this.showSuccess.set(true);
+
+
+
+  setTimeout(() => {
+    this.showSuccess.set(false);
+    this.router.navigate(['/engineersList']);
+  }, 2000);
+},
       error: (err) => {
         this.submitting.set(false);
         this.errorMessage.set('Failed to add engineer. Please try again');
