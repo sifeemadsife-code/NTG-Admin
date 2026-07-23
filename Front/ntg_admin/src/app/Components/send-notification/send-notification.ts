@@ -29,7 +29,7 @@ export class SendNotification implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       title: ['', Validators.required],
-      type: ['SYSTEM', Validators.required],
+      type: ['ALERT', Validators.required],
       priority: ['NORMAL', Validators.required],
       body: ['', Validators.required],
       sentToId: ['', Validators.required],

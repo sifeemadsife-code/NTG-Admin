@@ -35,23 +35,6 @@ export class AddEngineer {
 
   submitting = signal(false);
   errorMessage = signal<string | null>(null);
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard'},
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' , active: true },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notfications' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
 
   constructor(
     private readonly engineerService: EngineerService,
@@ -83,7 +66,7 @@ export class AddEngineer {
       next: () => {
         this.submitting.set(false);
         alert('Engineer added successfully');
-        this.router.navigate(['/']);
+        this.router.navigate(['/engineersList']);
       },
       error: (err) => {
         this.submitting.set(false);
