@@ -6,6 +6,7 @@ import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerList } from '../../Models/engineer_list';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-admin-engineer',
@@ -19,6 +20,7 @@ export class AdminEngineer implements OnInit {
   searchTerm = signal<string>('');
   statusFilter = signal<string>('active');
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
   toggleMenu() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
@@ -70,30 +72,34 @@ export class AdminEngineer implements OnInit {
   onStatusChange(value: string) {
     this.statusFilter.set(value);
   }
-  deleteEngineer(id: number) {
-    if (!confirm('Are you sure you want to delete this engineer?')) {
+  async deleteEngineer(id: number): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to delete this engineer?', 'Delete engineer?'))) {
       return;
     }
     this.engineerService.deleteEngineer(id).subscribe({
       next: () => {
-        alert('Engineer deleted successfully');
-        window.location.reload();
+        this.successMessage.show('Engineer deleted successfully');
+        this.loadAllEngineers();
       },
       error: (err) => {
         console.log(err);
+        this.successMessage.showError('Failed to delete engineer. Please try again.');
       },
     });
   }
-  restoreEngineer(id: number) {
-    if (!confirm('Are you sure you want to Restore this engineer?')) {
+  async restoreEngineer(id: number): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to restore this engineer?', 'Restore engineer?'))) {
       return;
     }
     this.engineerService.restoreEngineer(id).subscribe({
       next: () => {
-        alert('Engineer restored successfully');
-        window.location.reload();
+        this.successMessage.show('Engineer restored successfully');
+        this.loadAllEngineers();
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        console.error(err);
+        this.successMessage.showError('Failed to restore engineer. Please try again.');
+      },
     });
   }
 }

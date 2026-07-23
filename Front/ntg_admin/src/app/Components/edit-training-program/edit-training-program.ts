@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TrainingService } from '../../Services/training-service';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-edit-training-program',
@@ -44,6 +45,7 @@ export class EditTrainingProgram implements OnInit {
     private service: TrainingService,
     private route: ActivatedRoute,
     private router: Router,
+    private successMessage: SuccessMessageService,
   ) {}
 
   logout(): void {
@@ -119,7 +121,7 @@ export class EditTrainingProgram implements OnInit {
     this.service.updateProgram(this.programId, payload).subscribe({
       next: () => {
         this.saving.set(false);
-        alert('Training Program updated successfully');
+        this.successMessage.show('Training Program updated successfully');
         this.router.navigate(['/programs', this.programId]);
       },
       error: (err) => {

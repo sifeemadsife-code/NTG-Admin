@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminProfile as AdminProfileModel } from '../../Models/admin-profile';
 import { ProfileService } from '../../Services/profile';
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-admin-profile',
@@ -15,11 +16,11 @@ import { ProfileService } from '../../Services/profile';
 export class AdminProfile implements OnInit {
   private fb = inject(FormBuilder);
   private profileService = inject(ProfileService);
+  private successMessageService = inject(SuccessMessageService);
 
   loading = signal(true);
   saving = signal(false);
   error = signal('');
-  successMessage = signal('');
 
   profile = signal<AdminProfileModel | null>(null);
 
@@ -85,13 +86,12 @@ export class AdminProfile implements OnInit {
 
     this.saving.set(true);
     this.error.set('');
-    this.successMessage.set('');
 
     this.profileService.updateMyProfile(this.profileForm.value).subscribe({
       next: (data) => {
         this.profile.set(data);
         this.saving.set(false);
-        this.successMessage.set('Profile updated successfully.');
+        this.successMessageService.show('Profile updated successfully.');
         localStorage.setItem('name', `${data.firstName} ${data.lastName}`);
       },
       error: (err) => {

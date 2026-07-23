@@ -4,6 +4,7 @@ import { TrainingProgramList } from '../../Models/training_program_list';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-programs-list',
@@ -16,7 +17,10 @@ export class ProgramsList implements OnInit {
 
   programs = signal<TrainingProgramList[]>([]);
 
-  constructor(private trainingService: TrainingService) {}
+  constructor(
+    private trainingService: TrainingService,
+    private successMessage: SuccessMessageService,
+  ) {}
   private router = inject(Router);
   searchTerm = signal('');
   ngOnInit(): void {
@@ -45,16 +49,18 @@ export class ProgramsList implements OnInit {
       },
     });
   }
-  deleteEngineer(id: number) {
-    if (!confirm('Are you sure you want to delete this Program?')) {
+  async deleteEngineer(id: number): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to delete this program?', 'Delete program?'))) {
       return;
     }
     this.trainingService.deleteProgram(id).subscribe({
       next: () => {
-        alert('Program deleted successfully');
+        this.successMessage.show('Program deleted successfully');
+        this.getAllPrograms();
       },
       error: (err) => {
         console.log(err);
+        this.successMessage.showError('Failed to delete program. Please try again.');
       },
     });
   }

@@ -6,6 +6,7 @@ import { ReportService } from '../../Services/report';
 import { EngineerService } from '../../Services/engineer';
 import { EngineerList } from '../../Models/engineer_list';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-compose-report',
@@ -19,6 +20,7 @@ export class ComposeReport implements OnInit {
   private reportService = inject(ReportService);
   private engineerService = inject(EngineerService);
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
   isSidebarOpen = false;
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
@@ -76,7 +78,7 @@ export class ComposeReport implements OnInit {
     this.reportService.create(payload).subscribe({
       next: () => {
         this.saving.set(false);
-        alert('Report sent successfully');
+        this.successMessage.show('Report sent successfully');
         this.router.navigate(['/reports']);
       },
       error: (err) => {

@@ -5,6 +5,7 @@ import { ReportService } from '../../Services/report';
 import { ReportModel } from '../../Models/report';
 import { Sendemail } from "../sendemail/sendemail";
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-reports',
@@ -15,6 +16,7 @@ import { SidebarComponent } from "../sidebar/sidebar";
 })
 export class Reports implements OnInit {
   private reportService = inject(ReportService);
+  private successMessage = inject(SuccessMessageService);
   isSidebarOpen = false;
   constructor(private router: Router) {}
   menuItems = [
@@ -63,11 +65,17 @@ export class Reports implements OnInit {
     this.searchTerm.set(value);
   }
 
-  deleteReport(id: number): void {
-    if (!confirm('Are you sure you want to delete this report?')) return;
+  async deleteReport(id: number): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to delete this report?', 'Delete report?'))) return;
     this.reportService.delete(id).subscribe({
-      next: () => this.reports.update((list) => list.filter((r) => r.id !== id)),
-      error: (err) => console.log(err),
+      next: () => {
+        this.reports.update((list) => list.filter((r) => r.id !== id));
+        this.successMessage.show('Report deleted successfully');
+      },
+      error: (err) => {
+        console.log(err);
+        this.successMessage.showError('Failed to delete report. Please try again.');
+      },
     });
   }
 }

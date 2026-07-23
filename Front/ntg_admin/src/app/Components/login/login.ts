@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class Login {
     private forms: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    private successMessage: SuccessMessageService,
   ) {
     this.loginForm = this.forms.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,7 +58,15 @@ export class Login {
           localStorage.setItem('userId', String(res.userId));
           localStorage.setItem('name', `${res.firstName} ${res.lastName}`);
 
+          this.successMessage.show('Logged in successfully!');
           this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          const message =
+            error.status === 401
+              ? 'Invalid email or password.'
+              : error.error?.message || 'Login failed. Please try again.';
+          this.successMessage.showError(message);
         },
       });
   }

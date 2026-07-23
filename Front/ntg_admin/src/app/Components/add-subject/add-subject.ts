@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { EngineerService } from '../../Services/engineer';
 import { CourseService } from '../../Services/course-service';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-add-subject',
@@ -19,6 +20,7 @@ export class AddSubject implements OnInit {
   private teacherService = inject(EngineerService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private successMessage = inject(SuccessMessageService);
 
   engineers = signal<any[]>([]);
   loading = signal(false);
@@ -88,7 +90,7 @@ export class AddSubject implements OnInit {
     this.courseService.create(this.subjectForm.value).subscribe({
       next: () => {
         this.saving.set(false);
-
+        this.successMessage.show('Subject created successfully!');
         this.router.navigate(['/subjects']);
       },
 

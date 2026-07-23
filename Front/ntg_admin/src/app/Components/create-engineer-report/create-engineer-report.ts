@@ -6,6 +6,7 @@ import { EngineerFeedbackService } from '../../Services/engineer-feedback';
 import { EngineerService } from '../../Services/engineer';
 import { EngineerList } from '../../Models/engineer_list';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-create-engineer-report',
@@ -19,10 +20,12 @@ export class CreateEngineerReport implements OnInit {
   private engineerFeedbackService = inject(EngineerFeedbackService);
   private engineerService = inject(EngineerService);
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
 
   engineers = signal<EngineerList[]>([]);
   saving = signal(false);
   error = signal('');
+
   isSidebarOpen = false;
   form!: FormGroup;
   menuItems = [
@@ -76,11 +79,14 @@ export class CreateEngineerReport implements OnInit {
     };
 
     this.engineerFeedbackService.create(payload).subscribe({
-      next: () => {
-        this.saving.set(false);
-        alert('Engineer report saved successfully');
-        this.router.navigate(['/engineersList']);
-      },
+     next: () => {
+  this.saving.set(false);
+
+  this.successMessage.show('Engineer report saved successfully');
+
+  this.form.reset();
+
+},
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to save report');

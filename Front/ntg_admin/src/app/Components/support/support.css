@@ -1,0 +1,323 @@
+
+
+/* =====================================================
+   SUPPORT PAGE
+===================================================== */
+
+.support-content {
+    margin-left: 280px;
+    margin-right: 30px;
+}
+
+/* =====================================================
+   WELCOME CARD
+===================================================== */
+
+.support-welcome {
+    width: 100%;
+    background: #620000;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(98, 0, 0, 0.15);
+}
+
+.welcome-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.welcome-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.welcome-icon i {
+    font-size: 32px;
+}
+
+.support-welcome h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.support-welcome p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+/* =====================================================
+   SUPPORT CARDS
+===================================================== */
+
+.support-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.support-card {
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    transition: all 0.3s ease;
+}
+
+.support-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+}
+
+/* =====================================================
+   SUPPORT CARD ICON
+===================================================== */
+
+.support-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.support-card-icon i {
+    font-size: 25px;
+}
+
+.support-card-icon.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.support-card-icon.green {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.support-card-icon.yellow {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+/* =====================================================
+   SUPPORT CARD CONTENT
+===================================================== */
+
+.support-card-content {
+    flex: 1;
+}
+
+.support-card-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 10px;
+}
+
+.support-card-content p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.7;
+    margin: 0 0 20px;
+}
+
+/* =====================================================
+   SUPPORT BUTTON
+===================================================== */
+
+.support-btn {
+    height: 44px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 11px;
+    background: #620000;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+}
+
+.support-btn:hover {
+    background: #7d0000;
+    transform: translateX(3px);
+}
+
+.support-btn i {
+    font-size: 12px;
+}
+
+/* =====================================================
+   CONTACT SECTION
+===================================================== */
+
+.contact-section {
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    margin-bottom: 30px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+}
+
+.section-title p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* =====================================================
+   CONTACT CARDS
+===================================================== */
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    background: #f8fafc;
+    border: 1px solid #eef2f7;
+    border-radius: 15px;
+    transition: 0.25s ease;
+}
+
+.contact-card:hover {
+    border-color: #620000;
+    transform: translateY(-3px);
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #620000;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    font-size: 18px;
+}
+
+.contact-card span {
+    display: block;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-bottom: 5px;
+}
+
+.contact-card h4 {
+    margin: 0;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.contact-card small {
+    display: block;
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .support-cards,
+    .contact-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .support-cards,
+    .contact-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .support-welcome {
+        padding: 25px;
+    }
+
+    .welcome-text {
+        align-items: flex-start;
+    }
+
+    .support-welcome h2 {
+        font-size: 22px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .support-welcome {
+        padding: 20px;
+    }
+
+    .welcome-text {
+        flex-direction: column;
+    }
+
+    .welcome-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+    .support-welcome h2 {
+        font-size: 20px;
+    }
+
+    .support-card,
+    .contact-section {
+        padding: 20px;
+    }
+
+}

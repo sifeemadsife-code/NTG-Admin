@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../../Services/notification';
 import { NotificationModel } from '../../Models/notification';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-notification',
@@ -15,6 +16,7 @@ import { SidebarComponent } from "../sidebar/sidebar";
 export class NotificationComponent implements OnInit {
   private notificationService = inject(NotificationService);
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
 
   notifications = signal<NotificationModel[]>([]);
   currentPage = signal(1);
@@ -68,11 +70,17 @@ export class NotificationComponent implements OnInit {
     }
   }
 
-  deleteNotification(id: number): void {
-    if (!confirm('Are you sure you want to delete this notification?')) return;
+  async deleteNotification(id: number): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to delete this notification?', 'Delete notification?'))) return;
     this.notificationService.delete(id).subscribe({
-      next: () => this.loadNotifications(),
-      error: (err) => console.log(err),
+      next: () => {
+        this.loadNotifications();
+        this.successMessage.show('Notification deleted successfully');
+      },
+      error: (err) => {
+        console.log(err);
+        this.successMessage.showError('Failed to delete notification. Please try again.');
+      },
     });
   }
 }

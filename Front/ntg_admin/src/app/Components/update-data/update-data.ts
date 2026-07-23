@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../Services/engineer';
 import { Engineer } from '../../Models/engineer';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-update-data',
@@ -52,6 +53,7 @@ export class UpdateDataComponent implements OnInit {
     private readonly engineerService: EngineerService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly successMessage: SuccessMessageService,
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +80,7 @@ export class UpdateDataComponent implements OnInit {
     this.engineerService.updateEngineer(this.engineer_id, this.engineer()).subscribe({
       next: () => {
         this.saving.set(false);
-        alert('Engineer Updated Successfully');
+        this.successMessage.show('Engineer updated successfully');
         this.router.navigate(['/engineersList']);
       },
       error: (err) => {

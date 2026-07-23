@@ -4,6 +4,7 @@ import { ProfileService } from '../../Services/profile';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "../sidebar/sidebar";
 import { RouterLink } from '@angular/router';
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-reset-password',
@@ -14,7 +15,10 @@ import { RouterLink } from '@angular/router';
 export class ResetPassword {
   passwordError = signal('');
   changingPassword = signal(false);
-  constructor(private profileService: ProfileService) {}
+  constructor(
+    private profileService: ProfileService,
+    private successMessage: SuccessMessageService,
+  ) {}
   private fb = inject(FormBuilder);
   passwordForm: FormGroup = this.fb.group({
     currentPassword: ['', Validators.required],
@@ -41,7 +45,7 @@ export class ResetPassword {
       next: () => {
         this.changingPassword.set(false);
         this.passwordForm.reset();
-        alert('Password changed successfully.');
+        this.successMessage.show('Password changed successfully.');
       },
       error: (err) => {
         this.changingPassword.set(false);

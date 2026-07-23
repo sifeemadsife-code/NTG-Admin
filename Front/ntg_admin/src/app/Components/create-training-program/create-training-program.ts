@@ -8,6 +8,7 @@ import { EngineerService } from '../../Services/engineer';
 import { GradeService } from '../../Services/grade';
 import { Router, RouterLink } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-create-training-program',
@@ -22,12 +23,14 @@ export class CreateTrainingProgramComponent implements OnInit {
   trainingForm!: FormGroup;
   isSidebarOpen = false;
 
+
   constructor(
     private fb: FormBuilder,
     private service: TrainingService,
     private engineerService: EngineerService,
     private gradeService: GradeService,
-    private router: Router
+    private router: Router,
+    private successMessage: SuccessMessageService,
   ) {}
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
@@ -107,7 +110,7 @@ export class CreateTrainingProgramComponent implements OnInit {
     this.service.createProgram(payload).subscribe({
       next: (res) => {
         console.log(res);
-        alert('Training Program Created Successfully');
+        this.successMessage.show('Training Program created successfully!');
         this.trainingForm.reset();
       },
       error: (err) => {

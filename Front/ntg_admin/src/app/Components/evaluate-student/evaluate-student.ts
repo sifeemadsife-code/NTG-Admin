@@ -6,6 +6,7 @@ import { StudentEvaluationService } from '../../Services/student-evaluation';
 import { Student } from '../../Services/student';
 import { StudentsListInterface } from '../../Models/Students_list';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-evaluate-student',
@@ -19,6 +20,7 @@ export class EvaluateStudent implements OnInit {
   private evaluationService = inject(StudentEvaluationService);
   private studentService = inject(Student);
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
@@ -84,7 +86,7 @@ export class EvaluateStudent implements OnInit {
     this.evaluationService.create(payload).subscribe({
       next: () => {
         this.saving.set(false);
-        alert('Evaluation saved successfully');
+        this.successMessage.show('Evaluation saved successfully');
         this.router.navigate(['/studentsList']);
       },
       error: (err) => {

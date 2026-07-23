@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CourseService, UpdateCourseRequestDTO } from '../../Services/course-service';
 import { EngineerService } from '../../Services/engineer';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-edit-subject',
@@ -30,6 +31,7 @@ export class EditSubject implements OnInit {
     private engineerService: EngineerService,
     private route: ActivatedRoute,
     private router: Router,
+    private successMessage: SuccessMessageService,
   ) {}
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.paramMap.get('id'));
@@ -87,7 +89,7 @@ export class EditSubject implements OnInit {
     this.courseService.update(this.courseId, payload).subscribe({
       next: () => {
         this.saving.set(false);
-        alert('Subject updated successfully');
+        this.successMessage.show('Subject updated successfully');
         this.router.navigate(['/subjects']);
       },
       error: (err) => {

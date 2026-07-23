@@ -6,6 +6,7 @@ import { NotificationService } from '../../Services/notification';
 import { EngineerService } from '../../Services/engineer';
 import { EngineerList } from '../../Models/engineer_list';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-send-notification',
@@ -19,6 +20,7 @@ export class SendNotification implements OnInit {
   private notificationService = inject(NotificationService);
   private engineerService = inject(EngineerService);
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
 
   engineers = signal<EngineerList[]>([]);
   saving = signal(false);
@@ -62,7 +64,7 @@ export class SendNotification implements OnInit {
     this.notificationService.create(payload).subscribe({
       next: () => {
         this.saving.set(false);
-        alert('Notification sent successfully');
+        this.successMessage.show('Notification sent successfully');
         this.router.navigate(['/notifications']);
       },
       error: (err) => {

@@ -29,6 +29,8 @@ import { AddSubject } from './Components/add-subject/add-subject';
 import { Sendemail } from './Components/sendemail/sendemail';
 import { SendNotification } from './Components/send-notification/send-notification';
 import { ResetPassword } from './Components/reset-password/reset-password';
+import { About } from './Components/about/about';
+import { SupportComponent } from './Components/support/support';
 export const routes: Routes = [
   {
     path: '',
@@ -107,6 +109,10 @@ export const routes: Routes = [
     component: ProgramsList,
   },
   {
+    path: 'support',
+    component: SupportComponent
+  },
+  {
     path: 'engineersList',
     component: AdminEngineer,
   },
@@ -142,6 +148,10 @@ export const routes: Routes = [
     path: 'settings',
     component: SettingComponent,
   },
+   {
+    path: 'about',
+    component: About,
+  },
   {
     path: 'resetPassword',
     component: ResetPassword
@@ -150,4 +160,5 @@ export const routes: Routes = [
     path: '**',
     component: NotFound,
   },
+
 ];

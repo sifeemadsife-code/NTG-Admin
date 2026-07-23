@@ -6,11 +6,15 @@ export class AuthService {
   private router = inject(Router);
 
   logout(): void {
+    this.clearSession();
+    this.router.navigate(['/']);
+  }
+
+  clearSession(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('name');
     localStorage.removeItem('userId');
-    this.router.navigate(['/']);
   }
 
   getToken(): string | null {
@@ -27,6 +31,18 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    if (!token) return false;
+
+    const payload = token.split('.')[1];
+    if (!payload) return true;
+
+    try {
+      const normalizedPayload = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const { exp } = JSON.parse(atob(normalizedPayload));
+      return !exp || exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
   }
 }

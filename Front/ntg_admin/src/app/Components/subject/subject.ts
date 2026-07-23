@@ -6,6 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { CourseResponseDTO, CourseService } from '../../Services/course-service';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-courses',
@@ -18,6 +19,7 @@ export class Subject implements OnInit {
       isSidebarOpen = false;
 
   private courseService = inject(CourseService);
+  private successMessage = inject(SuccessMessageService);
   courses = signal<CourseResponseDTO[]>([]);
   loading = signal(false);
   error = signal('');
@@ -108,16 +110,18 @@ export class Subject implements OnInit {
     return `${course.teacherFirstName} ${course.teacherLastName}`;
   }
 
-  deleteCourse(id: number): void {
-    if (!confirm('Are you sure you want to delete this course?')) return;
+  async deleteCourse(id: number): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to delete this course?', 'Delete course?'))) return;
 
     this.courseService.delete(id).subscribe({
       next: () => {
         this.courses.update((courses) => courses.filter((c) => c.id !== id));
+        this.successMessage.show('Course deleted successfully');
       },
 
       error: (err) => {
         this.error.set(err.message);
+        this.successMessage.showError('Failed to delete course. Please try again.');
       },
     });
   }
