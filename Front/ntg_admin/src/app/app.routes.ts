@@ -1,3 +1,4 @@
+// Front/ntg_admin/src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { AdminEngineer } from './Components/admin-engineer/admin-engineer';
 import { EngineerDetailsOverView } from './Components/engineer-details-overview/engineer-details';
@@ -31,134 +32,170 @@ import { SendNotification } from './Components/send-notification/send-notificati
 import { ResetPassword } from './Components/reset-password/reset-password';
 import { About } from './Components/about/about';
 import { SupportComponent } from './Components/support/support';
+import { UnauthorizedComponent } from './Components/unauthorized/unauthorized';
+import { authGuard } from './Services/auth.guard';
+
 export const routes: Routes = [
   {
     path: '',
     component: Login,
   },
   {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+  },
+  {
     path: 'dashboard',
     component: Dashboard,
+    canActivate: [authGuard],
   },
   {
     path: 'engineers/:id',
     component: EngineerDetailsOverView,
+    canActivate: [authGuard],
   },
   {
     path: 'engineers/:id/personal-info',
     component: EngineerDetailsPersonalInfo,
+    canActivate: [authGuard],
   },
   {
     path: 'students/:id/evaluations',
     component: StudentEvaluationsView,
+    canActivate: [authGuard],
   },
   {
     path: 'students/:id',
     component: StudentDetailsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'engineers/:id/update-engineer',
     component: UpdateDataComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'subjects',
     component: Subject,
+    canActivate: [authGuard],
   },
   {
     path: 'addEngineer',
     component: AddEngineer,
+    canActivate: [authGuard],
   },
   {
     path: 'studentsList',
     component: StudentsList,
+    canActivate: [authGuard],
   },
   {
     path: 'programs/:id',
     component: TrainingProgramOverveiw,
+    canActivate: [authGuard],
   },
   {
     path: 'reports',
     component: Reports,
+    canActivate: [authGuard],
   },
   {
     path: 'compose-report',
     component: ComposeReport,
+    canActivate: [authGuard],
   },
   {
     path: 'evaluate-student',
     component: EvaluateStudent,
+    canActivate: [authGuard],
   },
   {
     path: 'programs/:id/students',
     component: TrainingProgramStudents,
+    canActivate: [authGuard],
   },
   {
     path: 'programs/:id/engineers',
     component: TrainingProgramEngineer,
+    canActivate: [authGuard],
   },
   {
     path: 'createProgram',
     component: CreateTrainingProgramComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'edit-training-program/:id',
     component: EditTrainingProgram,
+    canActivate: [authGuard],
   },
   {
     path: 'trainingProgramsList',
     component: ProgramsList,
+    canActivate: [authGuard],
   },
   {
     path: 'support',
-    component: SupportComponent
+    component: SupportComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'engineersList',
     component: AdminEngineer,
+    canActivate: [authGuard],
   },
   {
     path: 'profile',
     component: AdminProfile,
+    canActivate: [authGuard],
   },
   {
     path: 'engineerReport',
     component: CreateEngineerReport,
+    canActivate: [authGuard],
   },
   {
     path: 'notifications',
     component: NotificationComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'sendNotification',
     component: SendNotification,
+    canActivate: [authGuard],
   },
   {
     path: 'add-subject',
     component: AddSubject,
+    canActivate: [authGuard],
   },
   {
     path: 'edit-course/:id',
     component: EditSubject,
+    canActivate: [authGuard],
   },
   {
     path: 'sendEmail',
     component: Sendemail,
+    canActivate: [authGuard],
   },
   {
     path: 'settings',
     component: SettingComponent,
+    canActivate: [authGuard],
   },
-   {
+  {
     path: 'about',
     component: About,
+    canActivate: [authGuard],
   },
   {
     path: 'resetPassword',
-    component: ResetPassword
+    component: ResetPassword,
+    canActivate: [authGuard],
   },
   {
     path: '**',
     component: NotFound,
   },
-
 ];
