@@ -63,6 +63,9 @@ export class CreateEngineerReport implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
+        teacherId: 'Engineer', feedbackDate: 'Report Date', feedback: 'Feedback', rate: 'Rating',
+      }));
       return;
     }
 

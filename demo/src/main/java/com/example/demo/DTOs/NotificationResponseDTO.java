@@ -9,6 +9,9 @@ public record NotificationResponseDTO(
         String priority,
         String body,
         LocalDate sentAt,
+        Long senderId,
+        String senderFirstName,
+        String senderLastName,
         Long sentToId,
         String sentToFirstName,
         String sentToLastName

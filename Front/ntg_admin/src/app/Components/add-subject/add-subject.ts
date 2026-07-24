@@ -26,21 +26,7 @@ export class AddSubject implements OnInit {
   loading = signal(false);
   saving = signal(false);
   error = signal('');
-
   subjectForm!: FormGroup;
-
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/' },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects', active: true },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notification' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
-
   ngOnInit(): void {
     this.subjectForm = this.fb.group({
       courseName: ['', Validators.required],
@@ -50,54 +36,40 @@ export class AddSubject implements OnInit {
       teacherId: [null, Validators.required],
       termId: [null, Validators.required],
     });
-
     this.loadTeachers();
   }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
-
   loadTeachers(): void {
     this.loading.set(true);
-
     this.teacherService.getAllEngineers().subscribe({
       next: (data: any[]) => {
         this.engineers.set(data);
         this.loading.set(false);
       },
-
       error: (err: any) => {
         this.error.set(err.message);
         this.loading.set(false);
-
         console.log(err);
       },
     });
   }
-
   saveSubject(): void {
     if (this.subjectForm.invalid) {
       this.subjectForm.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.subjectForm, {
+        courseName: 'Subject Name', description: 'Description', teacherId: 'Engineer', termId: 'Term',
+      }));
       return;
     }
-
     this.saving.set(true);
-
     this.courseService.create(this.subjectForm.value).subscribe({
       next: () => {
         this.saving.set(false);
         this.successMessage.show('Subject created successfully!');
         this.router.navigate(['/subjects']);
       },
-
       error: (err: any) => {
         this.error.set(err.message);
         this.saving.set(false);
-
         console.log(err);
       },
     });

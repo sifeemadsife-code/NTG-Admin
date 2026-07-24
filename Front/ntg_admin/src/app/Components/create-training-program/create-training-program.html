@@ -1,4 +1,3 @@
-
 <div class="dashbored">
 
   <app-sidebar></app-sidebar>
@@ -24,9 +23,9 @@
             <select formControlName="engineerId">
               <option value="">Select Engineer</option>
               @for (engineer of engineers(); track engineer.id) {
-              <option [value]="engineer.id">
-                {{ engineer.firstName }} {{ engineer.lastName }}
-              </option>
+              @if(engineer.status == false){
+              <option [value]="engineer.id">{{ engineer.firstName }} {{ engineer.lastName }}</option>
+              }
               }
             </select>
           </div>

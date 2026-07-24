@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { EngineerService } from '../../Services/engineer';
 import { CreateEngineer } from '../../Models/create_engineer';
@@ -64,21 +64,34 @@ export class AddEngineer {
     private readonly successMessage: SuccessMessageService,
   ) {}
 
-  addEngineer(): void {
+  addEngineer(engineerForm: NgForm): void {
     const engineer = this.newEngineer();
-    if (
-      !engineer.firstName ||
-      !engineer.lastName ||
-      !engineer.email ||
-      !engineer.password ||
-      !engineer.employmentHistory ||
-      !engineer.numberOfYearsOfExperience ||
-      !engineer.education ||
-      !engineer.firstNameInArabic ||
-      !engineer.lastNameInArabic ||
-      !engineer.nationalNumber
-    ) {
-      this.successMessage.showError('Please fill in all required fields.');
+    const missingFields = [
+      !engineer.firstName && 'First Name', !engineer.lastName && 'Last Name',
+      !engineer.firstNameInArabic && 'First Name in Arabic', !engineer.lastNameInArabic && 'Last Name in Arabic',
+      !engineer.email && 'Email', !engineer.password && 'Password', !engineer.address && 'Address',
+      !engineer.nationality && 'Nationality', !engineer.birthDate && 'Birth Date',
+      engineer.nationalNumber == null && 'National Number', !engineer.religion && 'Religion', !engineer.gender && 'Gender',
+      !engineer.education && 'Education', engineer.numberOfYearsOfExperience == null && 'Years of Experience',
+      !engineer.employmentHistory && 'Employment History',
+    ].filter(Boolean) as string[];
+
+    if (engineerForm.invalid || missingFields.length) {
+      engineerForm.control.markAllAsTouched();
+      const fieldLabels: Record<string, string> = {
+        firstName: 'First Name', lastName: 'Last Name', firstNameInArabic: 'First Name in Arabic',
+        lastNameInArabic: 'Last Name in Arabic', email: 'Email', password: 'Password', address: 'Address',
+        nationality: 'Nationality', birthDate: 'Birth Date', nationalNumber: 'National Number', religion: 'Religion',
+        gender: 'Gender', education: 'Education', numberOfYearsOfExperience: 'Years of Experience',
+        employmentHistory: 'Employment History',
+      };
+      const invalidFields = Object.entries(engineerForm.controls)
+        .filter(([, control]) => control.invalid)
+        .map(([name]) => fieldLabels[name] ?? name);
+      const fields = [...new Set([...missingFields, ...invalidFields])];
+      this.successMessage.showError(
+        fields.length ? `Please complete the following fields: ${fields.join(', ')}.` : 'Please review the form fields and try again.',
+      );
       return;
     }
 

@@ -1,12 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { SuccessMessageService } from './success-message';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
 
-  logout(): void {
+  async logout(): Promise<void> {
+    if (!(await this.successMessage.confirm('Are you sure you want to log out?', 'Log out?'))) return;
+
     this.clearSession();
+    this.successMessage.show('Logged out successfully.');
     this.router.navigate(['/']);
   }
 

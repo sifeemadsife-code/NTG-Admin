@@ -27,7 +27,7 @@
     <p class="error-text">{{ errorMessage() }}</p>
     }
 
-    <form (ngSubmit)="saveEngineer()" #engineerForm="ngForm">
+    <form (ngSubmit)="saveEngineer(engineerForm)" #engineerForm="ngForm">
 
       <div class="edit-card">
 
@@ -59,7 +59,7 @@
           <div class="form-group">
             <label>Address*</label>
 
-            <input name="address" title="Address" placeholder="Enter address" type="text"
+            <input name="address" title="Address" placeholder="Enter address" type="text" required
               [(ngModel)]="engineer().address">
           </div>
 
@@ -74,7 +74,7 @@
           <div class="form-group">
             <label>Education*</label>
 
-            <input name="education" title="Education" placeholder="Enter education/subject" type="text"
+            <input name="education" title="Education" placeholder="Enter education/subject" type="text" required
               [(ngModel)]="engineer().education">
           </div>
 
@@ -96,7 +96,7 @@
 
           </div>
 
-          <button class="save-btn" type="submit" [disabled]="saving() || engineerForm.invalid">
+          <button class="save-btn" type="submit" [disabled]="saving()">
             {{ saving() ? 'Saving...' : 'Save Change' }}
           </button>
 

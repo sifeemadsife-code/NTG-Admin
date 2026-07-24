@@ -17,7 +17,9 @@
     <select formControlName="teacherId">
       <option value="">Select Engineer</option>
       @for (engineer of engineers(); track engineer.id) {
+      @if(engineer.status == false){
       <option [value]="engineer.id">{{ engineer.firstName }} {{ engineer.lastName }}</option>
+      }
       }
     </select>
 

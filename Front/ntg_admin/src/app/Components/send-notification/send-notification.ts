@@ -5,8 +5,9 @@ import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../../Services/notification';
 import { EngineerService } from '../../Services/engineer';
 import { EngineerList } from '../../Models/engineer_list';
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
 import { SuccessMessageService } from '../../Services/success-message';
+import { RecipientModel, UserRecipientsService } from '../../Services/user-recipients';
 
 @Component({
   selector: 'app-send-notification',
@@ -21,8 +22,8 @@ export class SendNotification implements OnInit {
   private engineerService = inject(EngineerService);
   private router = inject(Router);
   private successMessage = inject(SuccessMessageService);
-
-  engineers = signal<EngineerList[]>([]);
+  private recipientsService = inject(UserRecipientsService);
+  recipients = signal<RecipientModel[]>([]);
   saving = signal(false);
   error = signal('');
 
@@ -37,8 +38,8 @@ export class SendNotification implements OnInit {
       sentToId: ['', Validators.required],
     });
 
-    this.engineerService.getAllEngineers().subscribe({
-      next: (data) => this.engineers.set(data),
+    this.recipientsService.getRecipients().subscribe({
+      next: (data) => this.recipients.set(data),
       error: (err) => console.log(err),
     });
   }
@@ -46,6 +47,9 @@ export class SendNotification implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
+        sentToId: 'Recipient', title: 'Title', type: 'Type', priority: 'Priority', body: 'Message',
+      }));
       return;
     }
 

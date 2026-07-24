@@ -33,6 +33,28 @@
   font-size: 31px;
 }
 
+.message-ok-button {
+  flex: 0 0 auto;
+  min-width: 76px;
+  margin-left: auto;
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 7px;
+  background: #198754;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error-message .message-ok-button {
+  background: #dc3545;
+}
+
+.message-ok-button:hover {
+  filter: brightness(0.92);
+}
+
 .error-message {
   border-color: rgba(132, 32, 41, 0.18);
   color: #842029;

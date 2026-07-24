@@ -89,6 +89,10 @@ export class CreateTrainingProgramComponent implements OnInit {
   createProgram(): void {
     if (this.trainingForm.invalid) {
       this.trainingForm.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.trainingForm, {
+        title: 'Program Name', description: 'Description', engineerId: 'Engineer', gradeId: 'Grade',
+        location: 'Location', startDate: 'Start Date', endDate: 'End Date',
+      }));
       return;
     }
 

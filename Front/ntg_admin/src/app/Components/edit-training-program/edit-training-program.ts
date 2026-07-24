@@ -104,6 +104,9 @@ export class EditTrainingProgram implements OnInit {
   saveProgram(): void {
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.editForm, {
+        programName: 'Program Name', startDate: 'Start Date',
+      }));
       return;
     }
 

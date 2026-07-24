@@ -11,6 +11,7 @@ import { SuccessMessageService } from '../../Services/success-message';
           [attr.role]="successMessage.messageKind() === 'error' ? 'alert' : 'status'" aria-live="polite">
           <i [class]="successMessage.messageKind() === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle'" aria-hidden="true"></i>
           <span>{{ message }}</span>
+          <button type="button" class="message-ok-button" (click)="successMessage.dismissMessage()">OK</button>
         </div>
       </div>
     }

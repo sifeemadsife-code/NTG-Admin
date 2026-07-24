@@ -68,6 +68,9 @@ export class EvaluateStudent implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
+        studentId: 'Student', evaluationDate: 'Evaluation Date', score: 'Score', evaluationText: 'Evaluation',
+      }));
       return;
     }
 

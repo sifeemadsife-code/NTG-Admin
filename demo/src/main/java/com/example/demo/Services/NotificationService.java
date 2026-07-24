@@ -80,6 +80,9 @@ public class NotificationService {
                 n.getPriority(),
                 n.getBody(),
                 n.getSentAt(),
+                un.getUser().getId(),
+                un.getUser().getFirstName(),
+                un.getUser().getLastName(),
                 un.getSentTo().getId(),
                 un.getSentTo().getFirstName(),
                 un.getSentTo().getLastName()

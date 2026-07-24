@@ -62,6 +62,9 @@ export class ComposeReport implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
+        sentToId: 'Recipient', content: 'Report Content',
+      }));
       return;
     }
 

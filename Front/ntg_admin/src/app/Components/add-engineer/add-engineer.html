@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <form class="page" (ngSubmit)="addEngineer()" #engineerForm="ngForm">
+    <form class="page" (ngSubmit)="addEngineer(engineerForm)" #engineerForm="ngForm">
       <div class="logo-page">
         <img class="image-logo" src="/images/reading.png" alt="image for engineer">
       </div>
@@ -98,11 +98,11 @@
         <h1>Professional Information</h1>
 
         <input class="input-form1" type="text" name="education" placeholder="Enter Education"
-          [(ngModel)]="newEngineer().education">
+          [(ngModel)]="newEngineer().education" required>
         <input class="input-form1" type="number"  name="numberOfYearsOfExperience" placeholder="Experience(years)"
-          [(ngModel)]="newEngineer().numberOfYearsOfExperience">
+          [(ngModel)]="newEngineer().numberOfYearsOfExperience" required>
         <input class="input-form2" type="text" name="employmentHistory" placeholder="Employment History"
-          [(ngModel)]="newEngineer().employmentHistory">
+          [(ngModel)]="newEngineer().employmentHistory" required>
 
         <button type="submit" [disabled]="submitting()">
           {{ submitting() ? 'Adding...' : 'Add Engineer' }}

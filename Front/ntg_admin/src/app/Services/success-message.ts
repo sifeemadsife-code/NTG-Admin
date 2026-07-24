@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 type MessageKind = 'success' | 'error';
 
@@ -13,14 +14,26 @@ export class SuccessMessageService {
   readonly message = signal<string | null>(null);
   readonly messageKind = signal<MessageKind>('success');
   readonly confirmation = signal<ConfirmationMessage | null>(null);
-  private hideTimer?: ReturnType<typeof setTimeout>;
-
-  show(message: string, duration = 3000): void {
-    this.showMessage(message, 'success', duration);
+  show(message: string, _duration?: number): void {
+    this.showMessage(message, 'success');
   }
 
-  showError(message: string, duration = 4000): void {
-    this.showMessage(message, 'error', duration);
+  showError(message: string, _duration?: number): void {
+    this.showMessage(message, 'error');
+  }
+
+  dismissMessage(): void {
+    this.message.set(null);
+  }
+
+  validationMessage(form: FormGroup, labels: Record<string, string>): string {
+    const invalidFields = Object.entries(form.controls)
+      .filter(([, control]) => control.invalid)
+      .map(([name]) => labels[name] ?? name);
+
+    return invalidFields.length
+      ? `Please complete the following fields: ${invalidFields.join(', ')}.`
+      : 'Please review the form fields and try again.';
   }
 
   confirm(message: string, title = 'Are you sure?'): Promise<boolean> {
@@ -38,10 +51,8 @@ export class SuccessMessageService {
     confirmation?.resolve(confirmed);
   }
 
-  private showMessage(message: string, kind: MessageKind, duration: number): void {
-    clearTimeout(this.hideTimer);
+  private showMessage(message: string, kind: MessageKind): void {
     this.messageKind.set(kind);
     this.message.set(message);
-    this.hideTimer = setTimeout(() => this.message.set(null), duration);
   }
 }

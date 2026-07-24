@@ -22,6 +22,8 @@ export class NotificationComponent implements OnInit {
   currentPage = signal(1);
   itemsPerPage = signal(6);
 
+  // Currently open detail modal, null when closed.
+  selectedNotification = signal<NotificationModel | null>(null);
 
   totalPages = computed(() =>
     Math.max(1, Math.ceil(this.notifications().length / this.itemsPerPage()))
@@ -70,12 +72,28 @@ export class NotificationComponent implements OnInit {
     }
   }
 
+  // Normalizes priority text so it can be safely used as a CSS class suffix.
+  priorityClass(priority: string): string {
+    return (priority || 'normal').toLowerCase();
+  }
+
+  openNotificationDetails(item: NotificationModel): void {
+    this.selectedNotification.set(item);
+  }
+
+  closeNotificationDetails(): void {
+    this.selectedNotification.set(null);
+  }
+
   async deleteNotification(id: number): Promise<void> {
     if (!(await this.successMessage.confirm('Are you sure you want to delete this notification?', 'Delete notification?'))) return;
     this.notificationService.delete(id).subscribe({
       next: () => {
         this.loadNotifications();
         this.successMessage.show('Notification deleted successfully');
+        if (this.selectedNotification()?.id === id) {
+          this.closeNotificationDetails();
+        }
       },
       error: (err) => {
         console.log(err);

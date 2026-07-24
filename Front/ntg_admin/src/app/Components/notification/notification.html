@@ -15,8 +15,8 @@
 
     <div class="notification-card">
       @for (item of paginatedNotifications(); track item.id) {
-      <div class="notification-item">
-        <div class="icon-container">
+      <div class="notification-item" (click)="openNotificationDetails(item)">
+        <div class="icon-container" [class]="'priority-' + priorityClass(item.priority)">
           <span class="material-icons">{{ getIcon(item.type) }}</span>
         </div>
 
@@ -27,7 +27,7 @@
 
         <div class="notification-time">
           <span>{{ item.sentAt }}</span>
-          <button class="delete-btn" (click)="deleteNotification(item.id)">
+          <button class="delete-btn" (click)="$event.stopPropagation(); deleteNotification(item.id)">
             <i class="fas fa-trash"></i>
           </button>
         </div>
@@ -51,4 +51,41 @@
       </button>
     </div>
   </div>
+
+  @if (selectedNotification(); as notif) {
+  <div class="modal-backdrop" (click)="closeNotificationDetails()">
+    <div class="notification-modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" type="button" (click)="closeNotificationDetails()" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="modal-icon-wrapper" [class]="'priority-' + priorityClass(notif.priority)">
+        <span class="material-icons">{{ getIcon(notif.type) }}</span>
+      </div>
+
+      <span class="modal-priority-badge" [class]="'badge-' + priorityClass(notif.priority)">
+        {{ notif.priority }}
+      </span>
+
+      <h3 class="modal-title">{{ notif.title }}</h3>
+
+      <p class="modal-body">{{ notif.body }}</p>
+
+      <div class="modal-meta">
+        <div class="meta-row">
+          <i class="fas fa-user"></i>
+          <span><strong>From:</strong> {{ notif.senderFirstName }} {{ notif.senderLastName }}</span>
+        </div>
+        <div class="meta-row">
+          <i class="fas fa-tag"></i>
+          <span><strong>Type:</strong> {{ notif.type }}</span>
+        </div>
+        <div class="meta-row">
+          <i class="fas fa-calendar"></i>
+          <span><strong>Date:</strong> {{ notif.sentAt }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
 </div>

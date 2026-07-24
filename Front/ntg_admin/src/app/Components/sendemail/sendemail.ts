@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import emailjs from '@emailjs/browser';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SidebarComponent } from "../sidebar/sidebar";
 import { RouterLink } from "@angular/router";
 import { SuccessMessageService } from '../../Services/success-message';
@@ -16,12 +16,12 @@ export class Sendemail {
 
   ngOnInit() {
    this.form = this.fb.group({
-    name: ['Admin'],
-    subject: [''],
-    message: [''],
-    email: [''],
-    ToEmail: [''],
-    toname: ['']
+    name: ['Admin', Validators.required],
+    subject: ['', Validators.required],
+    message: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    ToEmail: ['', [Validators.required, Validators.email]],
+    toname: ['', Validators.required],
   });
   }
 
@@ -30,6 +30,15 @@ export class Sendemail {
 
 
 async send() {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    this.successMessage.showError(this.successMessage.validationMessage(this.form, {
+      name: 'Sender Name', ToEmail: 'Recipient Email', toname: 'Recipient Name',
+      subject: 'Subject', email: 'Sender Email', message: 'Message',
+    }));
+    return;
+  }
+
   try {
     emailjs.init('lWZpFiHTYw-gy86rP');
     await emailjs.send("service_hvxs5dw","template_pygwnbu",{

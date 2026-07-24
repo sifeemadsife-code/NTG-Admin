@@ -5,6 +5,9 @@ export interface NotificationModel {
   priority: string;
   body: string;
   sentAt: string;
+  senderId: number;
+  senderFirstName: string;
+  senderLastName: string;
   sentToId: number;
   sentToFirstName: string;
   sentToLastName: string;
@@ -18,4 +21,3 @@ export interface CreateNotificationRequest {
   body: string;
   sentToIds: number[];
 }
-

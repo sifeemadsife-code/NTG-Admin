@@ -37,6 +37,9 @@ export class Login {
 
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.loginForm, {
+        email: 'Email', password: 'Password',
+      }));
       return;
     }
 

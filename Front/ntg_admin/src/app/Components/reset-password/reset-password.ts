@@ -28,6 +28,9 @@ export class ResetPassword {
   changePassword(): void {
     if (this.passwordForm.invalid) {
       this.passwordForm.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.passwordForm, {
+        currentPassword: 'Current Password', newPassword: 'New Password', confirmPassword: 'Confirm New Password',
+      }));
       return;
     }
 

@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, OnInit, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { EngineerService } from '../../Services/engineer';
@@ -73,7 +73,19 @@ export class UpdateDataComponent implements OnInit {
     });
   }
 
-  saveEngineer(): void {
+  saveEngineer(engineerForm: NgForm): void {
+    if (engineerForm.invalid) {
+      engineerForm.control.markAllAsTouched();
+      const fieldLabels: Record<string, string> = {
+        firstName: 'First Name', lastName: 'Last Name', email: 'Email', address: 'Address', education: 'Education',
+      };
+      const invalidFields = Object.entries(engineerForm.controls)
+        .filter(([, control]) => control.invalid)
+        .map(([name]) => fieldLabels[name] ?? name);
+      this.successMessage.showError(`Please complete the following fields: ${invalidFields.join(', ')}.`);
+      return;
+    }
+
     this.saving.set(true);
     this.errorMessage.set(null);
 

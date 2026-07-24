@@ -40,32 +40,37 @@ export class CourseService {
     const token = localStorage.getItem('token') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
   }
 
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl, { headers: this.getAuthHeaders() })
+    return this.http
+      .get<any[]>(this.apiUrl, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   getById(id: number): Observable<CourseResponseDTO> {
-    return this.http.get<CourseResponseDTO>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() })
+    return this.http
+      .get<CourseResponseDTO>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   create(course: CreateCourseRequestDTO): Observable<CourseResponseDTO> {
-    return this.http.post<CourseResponseDTO>(this.apiUrl, course, { headers: this.getAuthHeaders() })
+    return this.http
+      .post<CourseResponseDTO>(this.apiUrl, course, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   update(id: number, course: UpdateCourseRequestDTO): Observable<CourseResponseDTO> {
-    return this.http.put<CourseResponseDTO>(`${this.apiUrl}/${id}`, course, { headers: this.getAuthHeaders() })
+    return this.http
+      .put<CourseResponseDTO>(`${this.apiUrl}/${id}`, course, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() })
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 

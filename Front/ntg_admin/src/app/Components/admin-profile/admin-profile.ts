@@ -81,6 +81,9 @@ export class AdminProfile implements OnInit {
   saveProfile(): void {
     if (this.profileForm.invalid) {
       this.profileForm.markAllAsTouched();
+      this.successMessageService.showError(this.successMessageService.validationMessage(this.profileForm, {
+        firstName: 'First Name', lastName: 'Last Name', email: 'Email',
+      }));
       return;
     }
 

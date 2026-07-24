@@ -75,6 +75,9 @@ export class EditSubject implements OnInit {
   saveCourse(): void {
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
+      this.successMessage.showError(this.successMessage.validationMessage(this.editForm, {
+        courseName: 'Subject Name', description: 'Description', teacherId: 'Engineer', termId: 'Term',
+      }));
       return;
     }
     this.saving.set(true);
