@@ -1,0 +1,32 @@
+<button class="menu-btn" (click)="toggle()" aria-label="Toggle menu" type="button">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+<aside class="sidebar" [class.open]="isOpen()">
+    <div class="logo">
+        <div class="header-white">
+            <img src="/images/logo.png" alt="NTG">
+        </div>
+    </div>
+
+    <nav class="menu">
+        <!--
+      routerLinkActive="active" is the whole answer to "how do I tell the
+      sidebar which link is active": nothing to tell it. It reads the
+      browser's current URL itself and slaps the "active" class on
+      whichever <a> matches it. Works identically on every page, forever.
+    -->
+        <a *ngFor="let item of navItems" [routerLink]="item.route" routerLinkActive="active" class="menu-item"
+            (click)="close()">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+        </a>
+
+        <a class="menu-item logout" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+        </a>
+    </nav>
+</aside>
+
+<div class="overlay" *ngIf="isOpen()" (click)="close()"></div>

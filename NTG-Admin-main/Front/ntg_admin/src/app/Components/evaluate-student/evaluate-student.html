@@ -1,0 +1,40 @@
+<div class="page">
+    <app-sidebar></app-sidebar>
+    <div class="page-header">
+        <div>
+            <h2>Evaluate Student</h2>
+            <p>Dashboard > Students > Evaluate</p>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+        @if (error()) {
+        <p class="error-text">{{ error() }}</p>
+        }
+
+        <label>Student</label>
+        <select formControlName="studentId">
+            <option value="">Select Student</option>
+            @for (student of students(); track student.id) {
+            <option [value]="student.id">{{ student.first_name }} {{ student.last_name }}</option>
+            }
+        </select>
+
+        <label>Evaluation Date</label>
+        <input type="date" formControlName="evaluationDate" />
+
+        <label>Score (0-100)</label>
+        <input type="number" min="0" max="100" formControlName="score" placeholder="Enter score" />
+
+        <label>Evaluation</label>
+        <textarea rows="4" formControlName="evaluationText"
+            placeholder="Describe the student's training performance..."></textarea>
+
+        <label>Notes</label>
+        <textarea rows="3" formControlName="evaluationNote" placeholder="Additional notes..."></textarea>
+
+        <button type="submit" [disabled]="saving()">
+            {{ saving() ? 'Saving...' : 'Save Evaluation' }}
+        </button>
+    </form>
+</div>

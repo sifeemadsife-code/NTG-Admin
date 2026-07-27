@@ -1,0 +1,128 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <main class="main">
+    <div class="notification-card">
+      <h2>Notification Preferences</h2>
+      <p class="subtitle">Choose how you want to receive notifications and stay updated about important activities.</p>
+      <div class="section">
+        <h3>Notification Channels</h3>        
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <h4>Email Notifications</h4>
+              <p>Receive notifications via email for important updates.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="emailNotifications" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+            <div>
+              <h4>Push Notifications</h4>
+              <p>Receive push notifications on your device.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="pushNotifications" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <div>
+              <h4>SMS Notifications</h4>
+              <p>Receive SMS notifications for urgent updates.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="smsNotifications" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="section">
+        <h3>Notification Types</h3>
+
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <div>
+              <h4>New Engineer Added</h4>
+              <p>Get notified when a new engineer is added to the system.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="newEngineerAdded" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <div>
+              <h4>New Student Added</h4>
+              <p>Get notified when a new student is registered.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="newStudentAdded" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <div>
+              <h4>New Report Generated</h4>
+              <p>Get notified when a new report is generated.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="newReportGenerated" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="notification-item">
+          <div class="notification-info">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div>
+              <h4>System Updates</h4>
+              <p>Receive important system updates and announcements.</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="systemUpdates" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn-save" (click)="savePreferences()">
+          Save Preferences
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

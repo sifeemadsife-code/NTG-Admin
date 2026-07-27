@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.page {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 20px 20px;
+  min-height: 100vh;
+}
+.form-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px ;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 232, 232);
+  margin-top: 30px;
+
+}
+
+.page-header p {
+color: gray;
+  margin-top: 4px;
+  font-size: 14px;
+
+}
+.page {
+
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+ 
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 30px;
+  margin-bottom: 22px;
+}
+
+
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 15px;
+  outline: none;
+  transition: .3s;
+}
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  
+}
+.form-group:has(textarea) {
+  grid-template-columns: 1fr;
+}
+button {
+  width: 100%;
+  background: #011229;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+.dashbored {
+  display: flex;
+  min-height: 80vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+@media (max-width: 1200px) {
+  .form-card {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .form-group {
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+  .menu-btn {
+    display: flex;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: #620000;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    transition: 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .page {
+    margin-left: 0;
+    width: 100%;
+    padding: 80px 25px 25px;
+  }
+
+  .form-card {
+    height: auto;
+    padding: 25px;
+  }
+
+  .form-group {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group > div {
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 80px 20px 20px;
+  }
+
+  .page-header {
+    margin-left: 0;
+    margin-bottom: 25px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .form-card {
+    padding: 20px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Small Mobile */
+
+@media (max-width: 576px) {
+  .page {
+    padding: 75px 15px 15px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .header-white {
+    width: 95%;
+    height: 55px;
+  }
+
+  .logo img {
+    width: 70px;
+  }
+
+  .menu-item {
+    padding: 12px 18px;
+  }
+
+  .menu-item span {
+    font-size: 13px;
+  }
+
+  .form-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

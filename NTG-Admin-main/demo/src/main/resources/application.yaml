@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@//192.168.26.128:1521/FREEPDB1
+    url: jdbc:oracle:thin:@//localhost:1521/orcl
+    username: c##appuser
+    password: password123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: 4a8f2c1d7e9b6f3a5c8d1e7f9b2a4c6d8e1f3a5b7c9d2e4f
+  expiry: 86400000

@@ -1,0 +1,61 @@
+
+<div class="reports-page">
+    <app-sidebar></app-sidebar>
+    <div class="page-header">
+        <div>
+            <h2>Reports</h2>
+            <p>Dashboard > Reports</p>
+        </div>
+ 
+    </div>
+
+    <div class="toolbar">
+        <div class="search-box">
+            <input type="text" placeholder="Search by sender or content..." [value]="searchTerm()"
+                (input)="onSearchChange($any($event.target).value)" />
+        </div>
+               <a class="add-btn" routerLink="/compose-report">
+            <span>+</span>
+            Send Report
+        </a>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Content</th>
+                    <th>Date</th>
+                    <th>File</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (report of filteredReports(); track report.id) {
+                <tr>
+                    <td>{{ report.userFirstName }} {{ report.userLastName }}</td>
+                    <td>{{ report.sentToFirstName }} {{ report.sentToLastName }}</td>
+                    <td>{{ report.content }}</td>
+                    <td>{{ report.createdAt }}</td>
+                    <td>
+                        @if (report.fileLink) {
+                        <a [href]="report.fileLink" target="_blank">View File</a>
+                        } @else {
+                        <span>-</span>
+                        }
+                    </td>
+                    <td class="actions">
+                        <button (click)="deleteReport(report.id)"><i class="fa-solid fa-trash" style="color: rgb(236, 21, 21); font-size: 13px; margin-bottom: 7px;"></i></button>
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="6">No reports found</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

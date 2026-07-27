@@ -1,0 +1,101 @@
+<div class="dashboard">
+  <app-sidebar></app-sidebar>
+  <main class="content">
+
+    <div class="page-header">
+      <div>
+        <h2>Engineers</h2>
+        <p class="breadcrumb">
+          Dashboard > Engineers > Edit Engineer
+        </p>
+      </div>
+      <button class="back-btn" type="button" routerLink='/engineersList'>
+        Back
+      </button>
+
+    </div>
+
+    @if (loading()) {
+    <p>Loading engineer data...</p>
+    } @else {
+
+    @if (errorMessage()) {
+    <p class="error-text">{{ errorMessage() }}</p>
+    }
+
+    <form (ngSubmit)="saveEngineer()" #engineerForm="ngForm">
+      <div class="edit-card">
+        <div class="form-section">
+          <h3>Personal Information</h3>
+          <div class="form-group">
+            <label>First Name*</label>
+            <input name="firstName" title="First Name" placeholder="Enter first name" type="text" required
+              [(ngModel)]="engineer().firstName">
+          </div>
+
+          <div class="form-group">
+            <label>Last Name*</label>
+            <input name="lastName" title="Last Name" placeholder="Enter last name" type="text" required
+              [(ngModel)]="engineer().lastName">
+          </div>
+
+          <div class="form-group">
+            <label>Email*</label>
+
+            <input name="email" title="Email" placeholder="Enter email" type="email" required
+              [(ngModel)]="engineer().email">
+          </div>
+
+          <div class="form-group">
+            <label>Address*</label>
+
+            <input name="address" title="Address" placeholder="Enter address" type="text"
+              [(ngModel)]="engineer().address">
+          </div>
+
+        </div>
+
+        
+        <div class="form-section">
+
+          <h3>Professional Information</h3>
+
+          <div class="form-group">
+            <label>Education*</label>
+
+            <input name="education" title="Education" placeholder="Enter education/subject" type="text"
+              [(ngModel)]="engineer().education">
+          </div>
+
+          <div class="row">
+
+            <div class="small-group">
+              <label>Employment History</label>
+
+              <input name="employmentHistory" title="Employment History" placeholder="Enter employment history"
+                type="text" [(ngModel)]="engineer().employmentHistory">
+            </div>
+
+            <div class="small-group">
+              <label>Experience (years)</label>
+
+              <input name="numberOfYearsOfExperience" title="Years of experience" placeholder="0" type="number" min="0"
+                [(ngModel)]="engineer().numberOfYearsOfExperience">
+            </div>
+
+          </div>
+
+          <button class="save-btn" type="submit" [disabled]="saving() || engineerForm.invalid">
+            {{ saving() ? 'Saving...' : 'Save Change' }}
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+    }
+
+  </main>
+
+</div>

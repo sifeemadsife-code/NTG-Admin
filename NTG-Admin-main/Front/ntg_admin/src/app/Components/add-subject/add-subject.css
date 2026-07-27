@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #eeeeee;
+    font-family: 'Segoe UI', sans-serif;
+
+}
+.description {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.content {
+  margin-left: 250px;
+  padding: 25px 20px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+
+.page-header p {
+  color: #888;
+  font-size: 14px;
+}
+
+.back-btn {
+  background: #06152f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 22px;
+  cursor: pointer;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 35px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 232, 232);
+
+}
+
+.card h3 {
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-group span {
+  color: red;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.upload-box {
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  height: 180px;
+  cursor: pointer;
+}
+
+.upload-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+}
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 35px;
+}
+
+.cancel {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+}
+
+.save {
+ background: #020d20;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.save:hover {
+  background: #03062e;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .back-btn {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .content {
+    padding: 15px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .content {
+    padding: 10px;
+  }
+
+  .page-header h1 {
+    font-size: 20px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .back-btn,
+  .save,
+  .cancel {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 13px;
+  }
+}

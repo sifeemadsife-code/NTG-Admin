@@ -1,0 +1,68 @@
+<div class="dashbored">
+  <app-sidebar></app-sidebar>
+  <div class="engineers-page">
+    <div class="page-header">
+      <div>
+        <h2>Training Programs</h2>
+        <p>Dashboard > Training Programs</p>
+      </div>
+    </div>
+    <div class="add-e">
+          <div class="search-box">
+      <input type="text" placeholder="Search by Program Name..." [value]="searchTerm()"
+        (input)="searchTerm.set(($any($event.target)).value)" />
+    </div>
+      <button class="add-button" routerLink="/createProgram">
+        <img src="images/add_icon.png" alt="" />
+        + Create Program
+      </button>
+  
+
+      </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Grade</th>
+            <th>Engineer</th>
+            <th>Duration</th>
+            <th>Start Date</th>
+            <th class="actio">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (program of filteredPrograms(); track program.id) {
+          <tr>
+            <td class="namest">{{ program.program_name }}</td>
+            <td>{{ program.grade_name }}</td>
+            <td>1</td>
+            <td>{{ program.duration }}</td>
+            <td>{{ program.start_date }}</td>
+            <td class="actions">
+              <button [routerLink]="['/edit-training-program', program.id]"><i class="fa-solid fa-pen" style="color:rgb(175, 174, 174);font-size: 13px; margin-bottom: 7px;"></i>
+                  </button>
+              <button [routerLink]="['/programs', program.id]">
+                <i class="fa-regular fa-address-card" style="color:rgb(175, 174, 174);font-size: 13px; margin-bottom: 7px;"></i>
+              </button>
+              <button (click)="deleteEngineer(program.id)">
+                <i class="fa-solid fa-trash" style="color: rgb(236, 21, 21); font-size: 13px; margin-bottom: 7px;"></i>
+              </button>
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Engineers" class="empty-image">
+                <h3>No Tranining Program Found</h3>
+                <p>There are no Program to display.</p>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

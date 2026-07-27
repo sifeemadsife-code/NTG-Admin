@@ -1,0 +1,157 @@
+<div class="dashboard">
+  <aside class="sidebar">
+<div class="logo">
+        <div class="header-white">
+            <img src="/images/logo.png" alt="NTG">
+        </div>
+    </div>
+    <div class="profile">
+      <div class="avatar-container">
+        @if (engineer().gender == "M") {
+        <img alt="Enginner Image" src="/images/man.png" class="avatar" />
+        }@else {
+        <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
+        }
+      </div>
+      <h2>{{ engineer().firstName }}</h2>
+      <p class="job">
+        {{ engineer().education }}
+      </p>
+    </div>
+
+    <div class="divider"></div>
+       <div class="info">
+      <div class="info-item">
+       <img src="images/email_icon.png" alt="" />
+        <div class="info-text">
+          <h4>Email</h4>
+          <span>{{ engineer().email }}</span>
+        </div>
+      </div>
+    </div>
+    <button class="message-btn" routerLink="/sendemail">
+      <i class="fa fa-paper-plane"></i>
+      Send Message
+    </button>  
+  </aside>
+  <main class="content">
+       <div class="top-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search anything..." />
+      </div>
+       <button class="back-btn" routerLink="/engineersList">
+        Back
+      </button>
+    </div>
+  
+    <h2>Engineers</h2>
+    <p class="breadcrumb">Dashboard>Engineers>Engineer Details</p>
+    <div class="cards">
+      <div class="card students">
+        <div class="icon-box blue-box">
+          <i class="fa-solid fa-children" style="color: rgb(250, 248, 248); font-size: 20px;"></i>
+        </div>
+        <div class="card-data">
+          <h3>Students</h3>
+          <h4>{{ cards().students }}</h4>
+          <span>Assigned</span>
+        </div>
+      </div>
+      <div class="card reports">
+        <div class="icon-box red-box">
+       <i class="fa-solid fa-file" style="color: rgb(252, 251, 251); font-size: 20px;"></i>     
+        </div>
+   <div class="card-data">
+          <h3>Feedback</h3>
+          <h4>{{ feedbacksCount() }}</h4>
+          <span>Submitted</span>
+        </div>
+      </div>
+
+      <div class="card rating">
+        <div class="icon-box orange-box">
+          <img alt="Rating Icon" src="/images/rating.png" class="card-icon" />
+        </div>
+
+        <div class="card-data">
+          <h3>Rating</h3>
+          <h4>{{ cards().rating }}</h4>
+          <span>
+            {{
+            cards().rating >= 4.5
+            ? 'Excellent'
+            : cards().rating >= 3.5
+            ? 'Very Good'
+            : cards().rating >= 2.5
+            ? 'Good'
+            : cards().rating >= 1.5
+            ? 'Bad'
+            : 'Not Rating'
+            }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <a [routerLink]="['/engineers', engineerId]" >Overview</a>
+      <a [routerLink]="['/engineers', engineerId]"class="active"> Personal Info </a>
+    </div>
+    <div class="profile-card" *ngIf="engineer">
+      <div class="card-header">
+        <i class="fa-solid fa-user" style="color: rgb(4, 15, 63);"></i>
+        <h2>Personal Information</h2>
+      </div>
+      <div class="info-row">
+        <span class="label"> Full Name</span>
+        <span class="value"> : {{ engineer().firstName }} {{ engineer().lastName }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Email Address</span>
+        <span class="value"> : {{ engineer().email }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Education</span>
+        <span class="value"> : {{ engineer().education }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Experience</span>
+        <span class="value"> : {{ engineer().numberOfYearsOfExperience }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Employment History</span>
+        <span class="value"> : {{ engineer().employmentHistory }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Address</span>
+        <span class="value"> : {{ engineer().address }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> BirthDate</span>
+        <span class="value"> : {{ engineer().birthDate }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> Gender</span>
+        <span class="value"> : {{ engineer().gender == "M" ? 'Male' : 'Female' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> Religion</span>
+        <span class="value"> : {{ engineer().address }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> NationalNumber</span>
+        <span class="value"> : {{ engineer().nationalNumber }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label"> Status</span>
+        <span class="value"> : {{ engineer().status ? 'Leave' : 'Active' }}</span>
+      </div>
+    </div>
+  </main>
+</div>

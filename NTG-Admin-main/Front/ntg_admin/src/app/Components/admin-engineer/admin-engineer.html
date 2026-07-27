@@ -1,0 +1,84 @@
+<div class="dashbored">
+  <app-sidebar></app-sidebar>
+  <div class="engineers-page">
+    <div class="page-header">
+      <div>
+        <h2>Engineers</h2>
+        <p>Dashboard > Engineers</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" placeholder="Search by name,ID,subject..." [value]="searchTerm()"
+          (input)="onSearchChange($any($event.target).value)" />
+      </div>
+      <div class="filters">
+        <select title="Status filter" [value]="statusFilter()" (change)="onStatusChange($any($event.target).value)">
+          <option value="active">Active</option>
+          <option value="leave">Leave</option>
+          <option value="all">All Engineers</option>
+        </select>
+
+        <button class="add-btn" routerLink="/addEngineer">
+          +
+          Add Engineer
+        </button>
+        <button class="add-btn" routerLink="/engineerReport">
+          Create Engineer Report
+        </button>
+      </div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <th>ID</th>
+          <th>Engineer</th>
+          <th class="edu">Education</th>
+          <th class="emal">Email</th>
+          <th>Status</th>
+          <th>Experience</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          @for (engineer of filteredEngineers(); track engineer.id) {
+          <tr>
+            <td>{{ engineer.id }}</td>
+            <td class="engineer-info">
+              <span>{{ engineer.firstName }} {{engineer.lastName}}</span>
+            </td>
+            <td>{{ engineer.education }}</td>
+            <td>{{ engineer.email }}</td>
+
+            <td>
+              <span [class.active]="!engineer.status" [class.inactive]="engineer.status">
+                {{ engineer.status ? 'Leave' : 'Active' }}
+              </span>
+            </td>
+            <td>{{ engineer.experience }} Years</td>
+            <td class="actions">
+              <button [routerLink]="['/engineers', engineer.id, 'update-engineer']"><i class="fa-solid fa-pen" style="color:rgb(175, 174, 174);font-size: 13px; margin-bottom: 7px;"></i>
+                </button>
+              <button [routerLink]="['/engineers', engineer.id]"><i class="fa-regular fa-address-card" style="color:rgb(175, 174, 174);font-size: 13px; margin-bottom: 7px;"></i></button>
+              @if (engineer.status) {
+              <button (click)="restoreEngineer(engineer.id)"><i class="fa-solid fa-arrow-rotate-right"  style="color: rgb(231, 9, 9); font-size: 13px; margin-bottom: 7px;"></i></button>
+              }@else {
+              <button (click)="deleteEngineer(engineer.id)"><i class="fa-solid fa-trash" style="color: rgb(236, 21, 21); font-size: 13px; margin-bottom: 7px;"></i></button>
+              }
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Engineers" class="empty-image">
+                <h3>No Engineers Found</h3>
+                <p>There are no engineers to display.</p>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

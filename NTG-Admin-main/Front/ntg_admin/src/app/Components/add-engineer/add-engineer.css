@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+.dashbored {
+  display: flex;
+  min-height: 100vh;
+}
+.engineers-page {
+  flex: 1;
+  min-width: 0;
+  padding: 2% 3%;
+  margin-left: 250px;
+}
+
+.page-header {
+  margin-bottom: 2%;
+}
+.page-header p {
+  color: gray;
+  margin-top: 5px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+   border: 1px solid rgb(233, 232, 232);
+
+}
+
+.section h2 {
+  color: #05172f;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #efefef;
+  margin-top: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.name {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.name-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-form {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 0 15px;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.input-form:focus {
+  border-color: #727171;
+}
+
+.textarea-form {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 14px;
+}
+.button-area {
+  display: flex;
+  justify-content: center;
+}
+button {
+  width: 100%;
+  height: 48px;
+  background: #03112c;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.error-text {
+  color: red;
+  text-align: center;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .name {
+    grid-template-columns: 1fr;
+  }
+  button {
+    width: 100%;
+  }
+}

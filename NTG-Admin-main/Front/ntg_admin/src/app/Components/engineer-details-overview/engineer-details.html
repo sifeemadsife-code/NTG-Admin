@@ -1,0 +1,177 @@
+<div class="dashboard">
+  <aside class="sidebar">
+<div class="logo">
+        <div class="header-white">
+            <img src="/images/logo.png" alt="NTG">
+        </div>
+    </div>
+    <div class="profile">
+      <div class="avatar-container">
+        @if (engineer().gender == "M") {
+        <img alt="Enginner Image" src="/images/man.png" class="avatar" />
+        }@else {
+        <img alt="Enginner Image" src="/images/avatar.png" class="avatar" />
+        }
+      </div>
+      <h2>{{ engineer().firstName }}</h2>
+      <p class="job">
+        {{ engineer().education }}
+      </p>
+    </div>
+    <div class="divider"></div>
+    <div class="info">
+      <div class="info-item">
+       <img src="images/email_icon.png" alt="" />
+        <div class="info-text">
+          <h4>Email</h4>
+          <span>{{ engineer().email }}</span>
+        </div>
+      </div>
+    </div>
+    <button class="message-btn" routerLink="/sendemail">
+      <i class="fa fa-paper-plane"></i>
+      Send Message
+    </button>  
+  </aside>
+
+  <main class="content">
+    <div class="top-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search anything..." />
+      </div>
+       <button class="back-btn" routerLink="/engineersList">
+        Back
+      </button>
+    </div>
+  
+    <h2>Engineers</h2>
+    <p class="breadcrumb">Dashboard>Engineers>Engineer Details</p>
+    <div class="cards">
+      <div class="card students">
+        <div class="icon-box blue-box">
+          <i class="fa-solid fa-children" style="color: rgb(250, 248, 248); font-size: 20px;"></i>
+        </div>
+        <div class="card-data">
+          <h3>Students</h3>
+          <h4>{{ cards().students }}</h4>
+          <span>Assigned</span>
+        </div>
+      </div>
+      <div class="card reports">
+        <div class="icon-box red-box">
+       <i class="fa-solid fa-file" style="color: rgb(252, 251, 251); font-size: 20px;"></i>     
+        </div>
+   <div class="card-data">
+          <h3>Feedback</h3>
+          <h4>{{ feedbacksCount() }}</h4>
+          <span>Submitted</span>
+        </div>
+      </div>
+
+      <div class="card rating">
+        <div class="icon-box orange-box">
+          <img alt="Rating Icon" src="/images/rating.png" class="card-icon" />
+        </div>
+
+        <div class="card-data">
+          <h3>Rating</h3>
+          <h4>{{ cards().rating }}</h4>
+          <span>
+            {{
+            cards().rating >= 4.5
+            ? 'Excellent'
+            : cards().rating >= 3.5
+            ? 'Very Good'
+            : cards().rating >= 2.5
+            ? 'Good'
+            : cards().rating >= 1.5
+            ? 'Bad'
+            : 'Not Rating'
+            }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <a [routerLink]="['/engineers', engineer_id]" class="active">Overview</a>
+      <a [routerLink]="['/engineers', engineer_id, 'personal-info']"> Personal Info </a>
+    </div>
+
+    <div class="bottom">
+      <div class="about">
+        <h3>About</h3>
+        <p>Education :{{ engineer().education }}</p>
+        <p>Employment History :{{ engineer().employmentHistory }}</p>
+        <p>Experience :{{ engineer().numberOfYearsOfExperience }}</p>
+      </div>
+      <div class="statistics">
+        <h4>Statistics</h4>
+
+        <div class="stat">
+          <div class="row">
+            <span>Students</span>
+            <span>{{ cards().students }} / {{ totalStudents() }}</span>
+          </div>
+          <div class="bar blue-bar" [style.width.%]="studentsPercentage()"></div>
+        </div>
+
+        <div class="stat">
+          <div class="row">
+            <span>Reports</span>
+            <span>{{ feedbacksCount() }}</span>
+          </div>
+          <div class="bar green-bar" [style.width.%]="feedbacksCount()"></div>
+        </div>
+
+        <div class="stat">
+          <div class="row">
+            <span>Rating</span>
+            <span>{{ cards().rating }} / 5</span>
+          </div>
+          <div class="bar orange-bar" [style.width.%]="(cards().rating || 0) * 20"></div>
+        </div>
+      </div>
+    </div>
+    <div class="feedbacks">
+      @if (feedbacks().length === 0) {
+      <div class="empty-feedback">
+        <p>No Feedback</p>
+      </div>
+      } @else {
+      @for (feedback of feedbacks(); track feedback.id) {
+      <div class="feedback-card">
+        <div class="feedback-header">
+          <div class="user-info">
+            <div class="avatar">
+              {{ feedback.byUserFirstName.charAt(0) }}{{ feedback.byUserLastName.charAt(0) }}
+            </div>
+            <div>
+              <h4>
+                {{ feedback.byUserFirstName }}
+                {{ feedback.byUserLastName }}
+              </h4>
+              <span>
+                {{ feedback.feedbackDate | date:'MMM d, y • h:mm a' }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feedback-body">
+          <p>{{ feedback.feedback }}</p>
+        </div>
+
+        @if (feedback.notes) {
+        <div class="feedback-notes">
+          <strong>Notes</strong>
+          <p>{{ feedback.notes }}</p>
+        </div>
+        }
+      </div>
+      }
+      }
+    </div>
+  </main>
+</div>

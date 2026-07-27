@@ -1,0 +1,83 @@
+<div class="dashboard"> 
+    <app-sidebar></app-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h2>Edit Subject</h2>
+                <p>Dashboard &gt; Subjects &gt; Edit Subject</p>
+            </div>
+
+            <button class="back-btn" routerLink="/subjects">
+                
+                Back to Subjects
+            </button>
+        </div>
+
+        @if (loading()) {
+        <p class="status-text">Loading subject...</p>
+        } @else {
+
+        <form [formGroup]="editForm" (ngSubmit)="saveCourse()">
+            <div class="card">
+                <h3>Subject Information</h3>
+
+                @if (error()) {
+                <p class="error-text">{{ error() }}</p>
+                }
+
+                <div class="grid">
+                    <div class="form-group">
+                        <label>
+                            Subject Name <span>*</span>
+                        </label>
+                        <input type="text" formControlName="courseName" placeholder="Enter subject name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Engineer <span>*</span>
+                        </label>
+                        <select formControlName="teacherId">
+                            <option [ngValue]="null">Select engineer</option>
+                            <option *ngFor="let teacher of engineers()" [value]="teacher.id">
+                                {{ teacher.firstName }} {{ teacher.lastName }}
+                            </option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label>Term</label>
+                        <select formControlName="termId">
+                            <option [ngValue]="null">Select Term</option>
+                            <option [ngValue]="1">First Term</option>
+                            <option [ngValue]="2">Second Term</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Study Plan</label>
+                        <input type="text" formControlName="studyPlan" placeholder="Enter study plan">
+                    </div>
+                </div>
+                    <div class="form-group-d">
+                        <label>
+                            Description <span>*</span>
+                        </label>
+                        <textarea rows="5" formControlName="description"
+                            placeholder="Enter subject description"></textarea>
+                    </div>
+                <div class="buttons">
+                    <button type="button" class="cancel" routerLink="/subjects">
+                        Cancel
+                    </button>
+                    <button type="submit" class="save" [disabled]="saving()">
+                        {{ saving() ? 'Saving...' : 'Save Changes' }}
+                    </button>
+                </div>
+            </div>
+        </form>
+        }
+    </div>
+</div>

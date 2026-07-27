@@ -1,0 +1,52 @@
+<div class="dashbored">
+    <app-sidebar></app-sidebar>
+
+    <div class="page">
+        <div class="page-header">
+            <div>
+                <h1>Send Notification</h1>
+                <p>Dashboard > Notification > Send Notification</p>
+            </div>
+            <a class="back-btn" routerLink="/notifications">Back</a>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+            @if (error()) {
+            <p class="error-text">{{ error() }}</p>
+            }
+
+            <label>Send To</label>
+            <select formControlName="sentToId">
+                <option value="">Select Recipient</option>
+                @for (engineer of engineers(); track engineer.id) {
+                <option [value]="engineer.id">{{ engineer.firstName }} {{ engineer.lastName }}</option>
+                }
+            </select>
+
+            <label>Title</label>
+            <input type="text" formControlName="title" placeholder="Notification title" />
+
+            <label>Type</label>
+            <select formControlName="type">
+                <option value="SYSTEM">System</option>
+                <option value="REPORT">Report</option>
+                <option value="ALERT">Alert</option>
+                <option value="MESSAGE">Message</option>
+            </select>
+
+            <label>Priority</label>
+            <select formControlName="priority">
+                <option value="LOW">Low</option>
+                <option value="NORMAL">Normal</option>
+                <option value="HIGH">High</option>
+            </select>
+
+            <label>Message</label>
+            <textarea rows="6" formControlName="body" placeholder="Write your notification message..."></textarea>
+
+            <button type="submit" [disabled]="saving()">
+                {{ saving() ? 'Sending...' : 'Send Notification' }}
+            </button>
+        </form>
+    </div>
+</div>

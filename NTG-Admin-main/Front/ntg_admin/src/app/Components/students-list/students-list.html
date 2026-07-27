@@ -1,0 +1,83 @@
+<div class="dashbored">
+  <app-sidebar></app-sidebar>
+  <div class="engineers-page">
+    <div class="page-header">
+      <div>
+        <h2>Students</h2>
+        <p>Dashboard > Students</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <input placeholder="Search by Student ID..." [value]="searchTerm()"
+          (input)="searchTerm.set($any($event.target).value)" />
+
+      </div>
+      <div class="fle">
+        <div class="filters">
+          <select [value]="statusFilter()" (change)="statusFilter.set($any($event.target).value)">
+            <option value="active">Active</option>
+            <option value="all">All Students</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="filters">
+          <select [value]="gradeFilter()" (change)="gradeFilter.set(($any($event.target)).value)">
+            <option value="all">All Grades</option>
+    
+            <option *ngFor="let grade of grades()" [value]="grade.name">
+              {{ grade.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          
+            <th>ID</th>
+            <th>Student</th>
+            <th>Grade</th>
+            <th>Status</th>
+            <th>Actions</th>
+          
+        </thead>
+
+        <tbody>
+          @for (student of filteredStudents(); track student.id) {
+          <tr>
+            <td class="Student-info">
+              <span>{{ student.id }}</span>
+            </td>
+
+            <td>{{ student.first_name }} {{ student.last_name }}</td>
+
+            <td>{{ student.grade }}</td>
+
+            <td>
+              <span [class.active]="!student.status" [class.inactive]="student.status">
+                {{ student.status ? 'Inactive' : 'Active' }}
+              </span>
+            </td>
+            <td class="actions">
+              <button [routerLink]="['/students', student.id]"><img src="/images/view_icon.png" alt="" /></button>
+            </td>
+          </tr>
+          } @empty {
+         <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Engineers" class="empty-image">
+                 <h3>No Students Found</h3>
+                <p>There are no Students to display.</p>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

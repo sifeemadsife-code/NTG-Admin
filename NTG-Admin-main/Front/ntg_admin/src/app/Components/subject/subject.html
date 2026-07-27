@@ -1,0 +1,54 @@
+<div class="dashboard">
+  <app-sidebar></app-sidebar>
+  <div class="subject-page">
+    <div class="head">
+
+      <div>
+        <h2>Subjects</h2>
+        <p>Dashboard > Subjects</p>
+
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" placeholder="Search by Subject Name, Engineer..." [value]="searchText()"
+          (input)="searchText.set(($any($event.target)).value); currentPage.set(1)" />
+      </div>
+      <div class="filters">
+        <button class="add-bth" routerLink="/add-subject">
+          <span>+</span>
+          Add Subject
+        </button>
+      </div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th> Name</th>
+            <th>Engineer</th>
+            <th>Term </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of paginatedCourses()">
+            <td>{{ course.courseName }}</td>
+            <td>{{ getTeacherFullName(course) }}</td>
+            <td>{{ course.termId }}</td>
+            <td>
+              <button class="btn1" [routerLink]="['edit-course', course.id]"
+                (click)="editCourse(course.id)"><i class="fa-solid fa-pen" style="color:rgb(175, 174, 174);font-size: 13px; margin-bottom: 7px;"></i></button>
+              <button class="btn2" (click)="deleteCourse(course.id)"><i class="fa-solid fa-trash" style="color: rgb(236, 21, 21); font-size: 13px; margin-bottom: 7px;"></i></button>
+            </td>
+          </tr>
+          <tr *ngIf="paginatedCourses().length === 0">
+            <td colspan="4" style="text-align:center">
+              No subjects found.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

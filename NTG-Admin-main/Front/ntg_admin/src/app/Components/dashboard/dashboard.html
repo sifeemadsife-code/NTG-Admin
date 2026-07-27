@@ -1,0 +1,110 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+  <main class="main-content">
+    <header class="headers">
+      <div class="profile-section">
+        @if (profile2()?.gender == "M") {
+          <img src="/images/man.png" alt="Profile" class="profile-img">
+        }@else {
+        <img src="/images/avatar.png" alt="Profile" class="profile-img">
+        }
+        <div class="profile-info">
+          <h4>{{ profile().name }}</h4>
+          <span>{{ profile().role }}</span>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search anything...">
+      </div>
+    </header>
+    <section class="welcome">
+      <div class="welcome-text">
+        <h1>👋 Welcome Back!</h1>
+        <h2>{{ profile().name }}</h2>
+        <p>Here's what's happening with your system today.</p>
+      </div>
+      <div class="welcome-image">
+        <img src="/images/image.png" alt="Welcome">
+      </div>
+    </section>
+    <section class="stats">
+      <div class="stat-card-wrapper">
+        <div class="stat-left-bar1"></div>
+        <div class="stat-card">
+          <div class="stat-icon students">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="stat-info1">
+            <h3>Total Students</h3>
+            <p class="stat-number1">{{ studentCount() }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <div class="stat-card">
+          <div class="stat-left-bar2"></div>
+          <div class="stat-icon engineers">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="stat-info2">
+            <h3>Total Engineers</h3>
+            <p class="stat-number2">{{ engineersCount() }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <div class="stat-card">
+          <div class="stat-left-bar3"></div>
+          <div class="stat-icon training">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="stat-info3">
+            <h3>Training program</h3>
+            <p class="stat-number3">{{ programsCount() }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="charts">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Performance Overview</h3>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas #performanceChart></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+         <div class="chart-header">
+        <h3>Students Overview</h3>
+         </div>
+        <div class="chart-canvas-wrap">
+          <canvas #studentsChart></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+         <div class="chart-header">
+        <h3>Engineers by Experience</h3>
+         </div>
+        <div class="chart-canvas-wrap">
+          <canvas #engineersChart></canvas>
+        </div>
+        <div *ngIf="loading()" class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading engineer data...</p>
+        </div>
+        <div *ngIf="error() && !loading()" class="error-state">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>{{ error() }}</p>
+        </div>
+        <div *ngIf="!loading() && !error() && engineerExperience().length === 0" class="empty-state">
+          <p style="color:#9ca3af; text-align:center; padding:20px 0;">No engineer data yet</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

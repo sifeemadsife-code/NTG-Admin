@@ -1,0 +1,59 @@
+<div class="page">
+    <app-sidebar></app-sidebar>
+    <div class="page-header">
+        <div>
+            <h2>Student Evaluations</h2>
+            <p>Dashboard > Students > Evaluations</p>
+        </div>
+        <div class="header-buttons">
+            <a class="add-btn" [routerLink]="['/evaluate-student']">+ New Evaluation</a>
+        </div>
+    </div>
+
+    @if (loading()) {
+    <p class="status-text">Loading evaluations...</p>
+    } @else if (error()) {
+    <p class="status-text error-text">{{ error() }}</p>
+    } @else {
+
+    @if (evaluations().length > 0) {
+    <div class="student-name-card">
+        <h3>{{ evaluations()[0].studentFirstName }} {{ evaluations()[0].studentLastName }}</h3>
+    </div>
+    }
+
+    <div class="evaluations-list">
+        @for (evaluation of evaluations(); track evaluation.id) {
+        <div class="evaluation-card">
+            <div class="evaluation-header">
+                <span class="eval-date">{{ evaluation.evaluationDate }}</span>
+                <span class="eval-score" [class.high]="(evaluation.score ?? 0) >= 75"
+                    [class.mid]="(evaluation.score ?? 0) >= 50 && (evaluation.score ?? 0) < 75"
+                    [class.low]="(evaluation.score ?? 0) < 50">
+                    {{ evaluation.score ?? '-' }} / 100
+                    <small>{{ ratingLabel(evaluation.score) }}</small>
+                </span>
+            </div>
+
+            <p class="eval-text">{{ evaluation.evaluationText }}</p>
+
+            @if (evaluation.evaluationNote) {
+            <p class="eval-note"><strong>Note:</strong> {{ evaluation.evaluationNote }}</p>
+            }
+
+            <p class="eval-by">Evaluated by: {{ evaluation.userFirstName }} {{ evaluation.userLastName }}</p>
+        </div>
+        }@empty {
+          <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Engineers" class="empty-image">
+                <h3>No Evaluation Found</h3>
+                <p>There are no evaluation to display.</p>
+              </div>
+            </td>
+          </tr>
+          }
+    </div>
+    }
+</div>

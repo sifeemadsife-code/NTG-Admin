@@ -1,0 +1,22 @@
+export interface StudentEvaluationModel {
+  id: number;
+  studentId: number;
+  studentFirstName: string;
+  studentLastName: string;
+  userId: number;
+  userFirstName: string;
+  userLastName: string;
+  evaluationDate: string;
+  score: number | null;
+  evaluationText: string;
+  evaluationNote: string | null;
+}
+
+export interface CreateStudentEvaluationRequest {
+  studentId: number;
+  userId: number;
+  evaluationDate: string;
+  score: number | null;
+  evaluationText: string;
+  evaluationNote?: string;
+}

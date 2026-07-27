@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.dashbored {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.email-page {
+  flex: 1;
+  margin-left: 250px;
+  padding: 25px 19px;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+.header p {
+  color: #7b8794;
+  font-size: 14px;
+}
+
+
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 233, 233);
+}
+
+/* ==========================
+   Form
+========================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #d6dce5;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  background: #fff;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #727171;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 180px;
+}
+
+
+.send {
+  margin-top: 30px;
+  align-self: flex-end;
+  background: #04173a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.send:hover {
+  background: #032564;
+  transform: translateY(-2px);
+}
+
+.send:active {
+  transform: translateY(0);
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 992px) {
+  .email-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .card {
+    padding: 25px;
+  }
+
+  .header h2 {
+    font-size: 26px;
+  }
+
+  .send {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .email-page {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .header h2 {
+    font-size: 22px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

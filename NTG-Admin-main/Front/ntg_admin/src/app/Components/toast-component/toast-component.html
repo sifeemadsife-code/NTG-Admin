@@ -1,0 +1,37 @@
+<!-- toast-component.html -->
+@if (toast()) {
+<div class="toast-container" [class]="toast()?.type">
+  <div class="toast-header">
+    <div class="toast-icon">
+      @if (toast()?.type === 'success') {
+        <i class="fa-solid fa-circle-check"></i>
+      } @else if (toast()?.type === 'error') {
+        <i class="fa-solid fa-circle-xmark"></i>
+      } @else if (toast()?.type === 'warning') {
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      } @else {
+        <i class="fa-solid fa-circle-info"></i>
+      }
+    </div>
+    <h4>{{ toast()?.title }}</h4>
+    <button class="toast-close" (click)="clearToast(); $event.stopPropagation()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  
+  <div class="toast-body">
+    <p>{{ toast()?.message }}</p>
+  </div>
+
+  @if (toast()?.action) {
+  <div class="toast-footer">
+    <button class="btn-close" (click)="clearToast(); $event.stopPropagation()">
+      Close
+    </button>
+    <button class="btn-action" (click)="handleAction(); $event.stopPropagation()">
+      {{ toast()?.action?.label }}
+    </button>
+  </div>
+  }
+</div>
+}
