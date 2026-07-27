@@ -22,6 +22,8 @@ export class Sendemail {
     email: ['', [Validators.required, Validators.email]],
     ToEmail: ['', [Validators.required, Validators.email]],
     toname: ['', Validators.required],
+    bcc: ['', [Validators.email]],
+    cc: ['', [Validators.email]],
   });
   }
 
