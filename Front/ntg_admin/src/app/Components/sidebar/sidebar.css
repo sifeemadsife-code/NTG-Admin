@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
+  
 }
-
 .menu-btn {
   display: none;
   position: fixed;
@@ -17,12 +17,13 @@
   z-index: 2000;
   font-size: 18px;
 }
-
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
 .sidebar {
   width: 250px;
   background: #620000;
   color: white;
-  padding: 20px 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -34,7 +35,8 @@
 .logo {
   text-align: center;
   padding: 20px 0 20px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+
 }
 
 .header-white {

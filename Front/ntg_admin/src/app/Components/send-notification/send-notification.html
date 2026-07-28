@@ -18,9 +18,11 @@
             <label>Send To</label>
             <select formControlName="sentToId">
                 <option value="">Select Recipient</option>
-                @for (user of recipients(); track user.id) {
-                <option [value]="user.id">{{ user.firstName }} {{ user.lastName }} ({{ user.roleName }})</option>
-                }
+                @for (recipient of recipients(); track recipient.id) {
+            <option [value]="recipient.id">
+                {{ recipient.firstName }} {{ recipient.lastName }} ({{ recipient.roleName }})
+            </option>
+            }
             </select>
 
             <label>Title</label>

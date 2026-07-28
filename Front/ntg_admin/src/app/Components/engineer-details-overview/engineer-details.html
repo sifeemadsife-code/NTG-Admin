@@ -1,7 +1,9 @@
 <div class="dashboard">
   <aside class="sidebar">
-    <div class="logo-section">
-      <img alt="NTG Logo" src="/images/logo.png" class="logo" />
+<div class="logo">
+        <div class="header-white">
+            <img src="/images/logo.png" alt="NTG">
+        </div>
     </div>
     <div class="profile">
       <div class="avatar-container">
@@ -16,63 +18,53 @@
         {{ engineer().education }}
       </p>
     </div>
-
     <div class="divider"></div>
-
     <div class="info">
       <div class="info-item">
-        <i class="fa fa-envelope"><img src="images/email_icon.png" alt="" /></i>
+       <img src="images/email_icon.png" alt="" />
         <div class="info-text">
-          <strong>Email</strong>
+          <h4>Email</h4>
           <span>{{ engineer().email }}</span>
         </div>
       </div>
     </div>
-
-    <button class="message-btn">
+    <button class="message-btn" routerLink="/sendemail">
       <i class="fa fa-paper-plane"></i>
       Send Message
-    </button>
+    </button>  
   </aside>
 
   <main class="content">
     <div class="top-bar">
       <div class="search-box">
-        <i class="fa fa-search"></i>
-
+        <i class="fas fa-search"></i>
         <input type="text" placeholder="Search anything..." />
       </div>
-
-      <button class="back-btn" routerLink="/engineersList">
-        <i class="fa fa-chevron-left"></i>
+       <button class="back-btn" routerLink="/engineersList">
         Back
       </button>
     </div>
-
-    <h1>Engineers</h1>
-
-    <p class="breadcrumb">Dashboard > Engineers > Engineer Details</p>
-
+  
+    <h2>Engineers</h2>
+    <p class="breadcrumb">Dashboard>Engineers>Engineer Details</p>
     <div class="cards">
       <div class="card students">
         <div class="icon-box blue-box">
-          <img alt="Student Image" src="/images/students.png" class="card-icon" />
+          <i class="fa-solid fa-children" style="color: rgb(250, 248, 248); font-size: 20px;"></i>
         </div>
-
         <div class="card-data">
-          <h4>Students</h4>
-          <h2>{{ cards().students }}</h2>
+          <h3>Students</h3>
+          <h4>{{ cards().students }}</h4>
           <span>Assigned</span>
         </div>
       </div>
-
       <div class="card reports">
         <div class="icon-box red-box">
-          <img alt="Reports Icon" src="/images/reports.png" class="card-icon" />
+       <i class="fa-solid fa-file" style="color: rgb(252, 251, 251); font-size: 20px;"></i>     
         </div>
-        <div class="card-data">
-          <h4>FeedBacks</h4>
-          <h2>{{ feedbacksCount() }}</h2>
+   <div class="card-data">
+          <h3>Feedback</h3>
+          <h4>{{ feedbacksCount() }}</h4>
           <span>Submitted</span>
         </div>
       </div>
@@ -83,9 +75,8 @@
         </div>
 
         <div class="card-data">
-          <h4>Rating</h4>
-          <h2>{{ cards().rating }}</h2>
-
+          <h3>Rating</h3>
+          <h4>{{ cards().rating }}</h4>
           <span>
             {{
             cards().rating >= 4.5
@@ -95,8 +86,8 @@
             : cards().rating >= 2.5
             ? 'Good'
             : cards().rating >= 1.5
-            ? 'Fair'
-            : 'Poor'
+            ? 'Bad'
+            : 'Not Rating'
             }}
           </span>
         </div>
@@ -105,19 +96,16 @@
 
     <div class="tabs">
       <a [routerLink]="['/engineers', engineer_id]" class="active">Overview</a>
-
       <a [routerLink]="['/engineers', engineer_id, 'personal-info']"> Personal Info </a>
     </div>
 
     <div class="bottom">
       <div class="about">
-        <h2>About</h2>
-
-        <p>Education : {{ engineer().education }}</p>
-        <p>Employment History : {{ engineer().employmentHistory }}</p>
-        <p>Experience : {{ engineer().numberOfYearsOfExperience }}</p>
+        <h3>About</h3>
+        <p>Education :{{ engineer().education }}</p>
+        <p>Employment History :{{ engineer().employmentHistory }}</p>
+        <p>Experience :{{ engineer().numberOfYearsOfExperience }}</p>
       </div>
-
       <div class="statistics">
         <h4>Statistics</h4>
 
@@ -149,7 +137,7 @@
     <div class="feedbacks">
       @if (feedbacks().length === 0) {
       <div class="empty-feedback">
-        <p>No feedback available.</p>
+        <p>No Feedback</p>
       </div>
       } @else {
       @for (feedback of feedbacks(); track feedback.id) {
@@ -159,7 +147,6 @@
             <div class="avatar">
               {{ feedback.byUserFirstName.charAt(0) }}{{ feedback.byUserLastName.charAt(0) }}
             </div>
-
             <div>
               <h4>
                 {{ feedback.byUserFirstName }}

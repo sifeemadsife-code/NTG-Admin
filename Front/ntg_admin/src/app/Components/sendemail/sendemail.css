@@ -2,57 +2,35 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
 }
-
-body {
-  background: #f4f6f9;
-}
-
 .dashbored {
   display: flex;
   min-height: 100vh;
-  background: #f4f6f9;
+  font-family: 'Segoe UI', sans-serif;
 }
-
-/* ==========================
-   Main Content
-========================== */
 
 .email-page {
   flex: 1;
   margin-left: 250px;
-  padding: 35px;
+  padding: 25px 19px;
 }
-
-/* ==========================
-   Header
-========================== */
 
 .header {
   margin-bottom: 30px;
 }
-
-.header h2 {
-  font-size: 32px;
-  color: black;
-  margin-bottom: 6px;
-}
-
 .header p {
   color: #7b8794;
   font-size: 14px;
 }
 
-/* ==========================
-   Card
-========================== */
+
 
 .card {
   background: #fff;
   border-radius: 18px;
   padding: 35px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 233, 233);
 }
 
 /* ==========================
@@ -86,8 +64,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #091d40;
-  box-shadow: 0 0 0 3px rgba(9, 29, 64, 0.12);
+  border-color: #727171;
 }
 
 textarea {
@@ -95,14 +72,11 @@ textarea {
   min-height: 180px;
 }
 
-/* ==========================
-   Button
-========================== */
 
 .send {
   margin-top: 30px;
   align-self: flex-end;
-  background: #091d40;
+  background: #04173a;
   color: white;
   border: none;
   border-radius: 10px;
@@ -111,10 +85,11 @@ textarea {
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
+  width: 100%;
 }
 
 .send:hover {
-  background: #123066;
+  background: #032564;
   transform: translateY(-2px);
 }
 

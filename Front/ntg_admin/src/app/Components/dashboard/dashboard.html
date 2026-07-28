@@ -29,13 +29,12 @@
         <img src="/images/image.png" alt="Welcome">
       </div>
     </section>
-
     <section class="stats">
       <div class="stat-card-wrapper">
         <div class="stat-left-bar1"></div>
         <div class="stat-card">
           <div class="stat-icon students">
-            <i class="fas fa-graduation-cap"><img src="/images/stud.png" alt=""></i>
+            <i class="fas fa-graduation-cap"></i>
           </div>
           <div class="stat-info1">
             <h3>Total Students</h3>
@@ -47,7 +46,7 @@
         <div class="stat-card">
           <div class="stat-left-bar2"></div>
           <div class="stat-icon engineers">
-            <i class="fas fa-user-tie"><img src="/images/eng.png" alt=""></i>
+            <i class="fas fa-user-tie"></i>
           </div>
           <div class="stat-info2">
             <h3>Total Engineers</h3>
@@ -59,7 +58,7 @@
         <div class="stat-card">
           <div class="stat-left-bar3"></div>
           <div class="stat-icon training">
-            <i class="fas fa-book-open"><img src="/images/prog.png" alt=""></i>
+            <i class="fas fa-book-open"></i>
           </div>
           <div class="stat-info3">
             <h3>Training program</h3>
@@ -72,10 +71,6 @@
       <div class="chart-card">
         <div class="chart-header">
           <h3>Performance Overview</h3>
-          <select>
-            <option>This Year</option>
-            <option>Last Year</option>
-          </select>
         </div>
         <div class="chart-canvas-wrap">
           <canvas #performanceChart></canvas>
@@ -83,18 +78,18 @@
       </div>
 
       <div class="chart-card">
+         <div class="chart-header">
         <h3>Students Overview</h3>
+         </div>
         <div class="chart-canvas-wrap">
           <canvas #studentsChart></canvas>
-        </div>
-        <div class="chart-legend-note">
-          <span class="chart-number">{{ studentCount() }}</span>
-          <span class="chart-label">Total Students</span>
         </div>
       </div>
 
       <div class="chart-card">
+         <div class="chart-header">
         <h3>Engineers by Experience</h3>
+         </div>
         <div class="chart-canvas-wrap">
           <canvas #engineersChart></canvas>
         </div>

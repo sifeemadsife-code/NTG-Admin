@@ -1,42 +1,41 @@
 <div class="container">
   <div class="sidebar">
-    <div class="logo">
-      <img src="/images/logo.png" alt="" />
-    </div>
-    <div class="profile-image">
+<div class="logo">
+        <div class="header-white">
+            <img src="/images/logo.png" alt="NTG">
+        </div>
+    </div> 
+    <div class="profile">
+    <div class="avatar-container">
       @if (profile()?.gender == "M") {
-      <img src="/images/man.png" alt="Profile" class="profile-img">
+      <img src="/images/man.png" alt="Profile" class="avatar">
       }@else {
-      <img src="/images/avatar.png" alt="Profile" class="profile-img">
+      <img src="/images/avatar.png" alt="Profile" class="avatar">
       }
     </div>
     <h2>{{ profile()?.firstName }} {{ profile()?.lastName }}</h2>
+ <span>Administrator</span>  
+ <div class="line"></div>
+ <div class="information">
+  <i class="fa-solid fa-envelope" style="color: rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
+  <p>{{ profileForm.get('email')?.value }}</p>      
   </div>
-
+   <div class="information">
+  <i class="fa-solid fa-location-dot"style="color:rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
+  <p>{{ profileForm.get('address')?.value }}, Egypt</p>      
+  </div>
+    <div class="information">
+  <i class="fa-solid fa-calendar"style="color:rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
+ <p>Joined {{ profile()?.createdAt | date:'MMM yyyy' }}</p>  </div>
+</div>
+  </div>
   <main class="main">
-    <header>
-      <div class="header-right">
-        <div class="user">
-          @if (profile()?.gender == "M") {
-          <img src="/images/man.png" alt="Profile" class="profile-img">
-        }@else {
-        <img src="/images/avatar.png" alt="Profile" class="profile-img">
-        }
-          <div>
-            <h4>{{ profile()?.firstName }} {{ profile()?.lastName }}</h4>
-            <small>{{ profile()?.roleName }}</small>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <div class="title">
       <div>
-        <h1>Profile</h1>
+        <h2>Profile</h2>
         <p>Dashboard > Profile</p>
       </div>
-      <button class="back" routerLink="/dashboard">
-        <i class="fa-solid fa-angle-left"></i>
+      <button class="back-btn" type="button" routerLink='/engineersList'>
         Back
       </button>
     </div>
@@ -46,11 +45,6 @@
     } @else {
 
     <section class="card">
-      <h2>Personal Information</h2>
-
-      @if (error()) {
-      <p class="error-text">{{ error() }}</p>
-      }
       <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
         <div class="form-group">
           <label>First Name*</label>
@@ -60,16 +54,6 @@
           <label>Last Name*</label>
           <input type="text" formControlName="lastName" />
         </div>
-
-        <div class="form-group">
-          <label>First Name (Arabic)</label>
-          <input type="text" formControlName="firstNameInArabic" />
-        </div>
-        <div class="form-group">
-          <label>Last Name (Arabic)</label>
-          <input type="text" formControlName="lastNameInArabic" />
-        </div>
-
         <div class="form-group">
           <label>Email*</label>
           <input type="email" formControlName="email" />
@@ -102,25 +86,73 @@
           <label>National Number</label>
           <input type="number" formControlName="nationalNumber" />
         </div>
-        <div class="double">
-          <div class="form-group">
-            <label>Role</label>
-            <input type="text" [value]="profile()?.roleName" disabled />
-          </div>
-          <div class="form-group">
-            <label>Joined</label>
-            <input type="text" [value]="profile()?.createdAt" disabled />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Last Login</label>
-          <input type="text" [value]="profile()?.lastLogin" disabled />
-        </div>
         <button type="submit" class="save-btn" [disabled]="saving()">
           {{ saving() ? 'Saving...' : 'Save Changes' }}
         </button>
       </form>
     </section>
     }
+@if(error()){
+
+<div class="overlay">
+
+    <div class="popup error-popup">
+
+        <div class="icon">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+
+        <h2>Update Failed</h2>
+
+        <p>{{ error() }}</p>
+
+        <button
+            class="ok-btn"
+            (click)="closeError()">
+
+            Try Again
+
+        </button>
+
+    </div>
+
+</div>
+
+}
+@if(successMessage()){
+
+<div class="overlay">
+
+    <div class="popup success-popup">
+
+        <div class="top-line"></div>
+
+        <div class="success-circle">
+            <i class="fa-solid fa-check"></i>
+        </div>
+
+        <h2>Profile Updated!</h2>
+
+        <p>{{ successMessage() }}</p>
+
+        <div class="buttons">
+
+            <button class="primary-btn"
+                    (click)="closeSuccess()">
+                Continue
+            </button>
+
+            <button class="secondary-btn"
+                    (click)="closeSuccess()">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+}
   </main>
 </div>

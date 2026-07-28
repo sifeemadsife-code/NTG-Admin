@@ -40,7 +40,6 @@ async send() {
     }));
     return;
   }
-
   try {
     emailjs.init('lWZpFiHTYw-gy86rP');
     await emailjs.send("service_hvxs5dw","template_pygwnbu",{
@@ -53,11 +52,10 @@ ToEmail: this.form.value.ToEmail,
 toname: this.form.value.toname,
     });
 
-    this.successMessage.show('Email sent successfully!');
+    this.successMessage.show('Email sent successfully.');
     this.form.reset();
-  } catch (error) {
-    console.error(error);
-    this.successMessage.showError('Failed to send email. Please try again.');
+  } catch (err: any) {
+    this.successMessage.showError(err?.text || 'Failed to send email.');
   }
 }
 

@@ -116,12 +116,12 @@ export class Subject implements OnInit {
     this.courseService.delete(id).subscribe({
       next: () => {
         this.courses.update((courses) => courses.filter((c) => c.id !== id));
-        this.successMessage.show('Course deleted successfully');
+        this.successMessage.show('Course deleted successfully.');
       },
 
       error: (err) => {
         this.error.set(err.message);
-        this.successMessage.showError('Failed to delete course. Please try again.');
+        this.successMessage.showError(err?.error?.message || 'Failed to delete course.');
       },
     });
   }

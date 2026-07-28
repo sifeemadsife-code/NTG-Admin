@@ -75,9 +75,7 @@ export class EditSubject implements OnInit {
   saveCourse(): void {
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.editForm, {
-        courseName: 'Subject Name', description: 'Description', teacherId: 'Engineer', termId: 'Term',
-      }));
+      this.successMessage.showError(this.successMessage.validationMessage(this.editForm, {}));
       return;
     }
     this.saving.set(true);
@@ -92,12 +90,13 @@ export class EditSubject implements OnInit {
     this.courseService.update(this.courseId, payload).subscribe({
       next: () => {
         this.saving.set(false);
-        this.successMessage.show('Subject updated successfully');
+        this.successMessage.show('Subject updated successfully.');
         this.router.navigate(['/subjects']);
       },
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to update subject. Please try again.');
+        this.successMessage.showError(err?.error?.message || 'Failed to update subject.');
         console.log(err);
       },
     });

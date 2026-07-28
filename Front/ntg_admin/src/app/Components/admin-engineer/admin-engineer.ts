@@ -1,8 +1,6 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../Services/engineer';
-import { Engineer } from '../../Models/engineer';
-import { EngineerCards } from '../../Models/engineer-cards';
 import { EngineerList } from '../../Models/engineer_list';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar';
@@ -10,7 +8,7 @@ import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
   selector: 'app-admin-engineer',
-  imports: [CommonModule, RouterLink, RouterLinkActive, SidebarComponent],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './admin-engineer.html',
   styleUrl: './admin-engineer.css',
 })
@@ -78,12 +76,12 @@ export class AdminEngineer implements OnInit {
     }
     this.engineerService.deleteEngineer(id).subscribe({
       next: () => {
-        this.successMessage.show('Engineer deleted successfully');
+        this.successMessage.show('Engineer deleted successfully.');
         this.loadAllEngineers();
       },
       error: (err) => {
         console.log(err);
-        this.successMessage.showError('Failed to delete engineer. Please try again.');
+        this.successMessage.showError(err?.error?.message || 'Failed to delete engineer.');
       },
     });
   }
@@ -93,13 +91,10 @@ export class AdminEngineer implements OnInit {
     }
     this.engineerService.restoreEngineer(id).subscribe({
       next: () => {
-        this.successMessage.show('Engineer restored successfully');
+        this.successMessage.show('Engineer restored successfully.');
         this.loadAllEngineers();
       },
-      error: (err) => {
-        console.error(err);
-        this.successMessage.showError('Failed to restore engineer. Please try again.');
-      },
+      error: (err) => { console.error(err); this.successMessage.showError(err?.error?.message || 'Failed to restore engineer.'); },
     });
   }
 }

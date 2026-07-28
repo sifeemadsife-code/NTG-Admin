@@ -1,12 +1,12 @@
+import { RecipientModel } from './../../Services/user-recipients';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ReportService } from '../../Services/report';
-import { EngineerService } from '../../Services/engineer';
-import { EngineerList } from '../../Models/engineer_list';
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
 import { SuccessMessageService } from '../../Services/success-message';
+import { UserRecipientsService } from '../../Services/user-recipients';
 
 @Component({
   selector: 'app-compose-report',
@@ -18,32 +18,14 @@ import { SuccessMessageService } from '../../Services/success-message';
 export class ComposeReport implements OnInit {
   private fb = inject(FormBuilder);
   private reportService = inject(ReportService);
-  private engineerService = inject(EngineerService);
+  private userDirectoryService = inject(UserRecipientsService);
   private router = inject(Router);
   private successMessage = inject(SuccessMessageService);
-  isSidebarOpen = false;
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports', active: true },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notifications' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
 
-  engineers = signal<EngineerList[]>([]);
+  isSidebarOpen = false;
+  recipients = signal<RecipientModel[]>([]);
   saving = signal(false);
   error = signal('');
-
   form!: FormGroup;
 
   ngOnInit(): void {
@@ -53,18 +35,23 @@ export class ComposeReport implements OnInit {
       fileLink: [''],
     });
 
-    this.engineerService.getAllEngineers().subscribe({
-      next: (data) => this.engineers.set(data),
-      error: (err) => console.log(err),
+    this.loadRecipients();
+  }
+
+  private loadRecipients(): void {
+    this.userDirectoryService.getRecipients().subscribe({
+      next: (data) => this.recipients.set(data),
+      error: (err) => {
+        console.log(err);
+        this.successMessage.showError('Failed to load recipients list.');
+      },
     });
   }
 
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
-        sentToId: 'Recipient', content: 'Report Content',
-      }));
+      this.successMessage.showError('Please select a recipient and enter the report content.');
       return;
     }
 
@@ -81,12 +68,13 @@ export class ComposeReport implements OnInit {
     this.reportService.create(payload).subscribe({
       next: () => {
         this.saving.set(false);
-        this.successMessage.show('Report sent successfully');
+        this.successMessage.show('Report sent successfully.');
         this.router.navigate(['/reports']);
       },
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to send report');
+        this.successMessage.showError(err?.error?.message || 'Failed to send report.');
         console.log(err);
       },
     });

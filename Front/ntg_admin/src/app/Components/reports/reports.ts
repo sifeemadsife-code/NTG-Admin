@@ -10,7 +10,7 @@ import { SuccessMessageService } from '../../Services/success-message';
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule, RouterLink, Sendemail, SidebarComponent],
+  imports: [CommonModule, RouterLink,  SidebarComponent],
   templateUrl: './reports.html',
   styleUrl: './reports.css',
 })
@@ -68,14 +68,8 @@ export class Reports implements OnInit {
   async deleteReport(id: number): Promise<void> {
     if (!(await this.successMessage.confirm('Are you sure you want to delete this report?', 'Delete report?'))) return;
     this.reportService.delete(id).subscribe({
-      next: () => {
-        this.reports.update((list) => list.filter((r) => r.id !== id));
-        this.successMessage.show('Report deleted successfully');
-      },
-      error: (err) => {
-        console.log(err);
-        this.successMessage.showError('Failed to delete report. Please try again.');
-      },
+      next: () => { this.reports.update((list) => list.filter((r) => r.id !== id)); this.successMessage.show('Report deleted successfully.'); },
+      error: (err) => { console.log(err); this.successMessage.showError(err?.error?.message || 'Failed to delete report.'); },
     });
   }
 }

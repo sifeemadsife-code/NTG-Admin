@@ -1,165 +1,58 @@
-/* ===========================
-   GLOBAL
-=========================== */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
 }
-
-body {
-  background: #f5f5f5;
-}
-
 .dashboard {
   display: flex;
   min-height: 100vh;
-  background: #f5f5f5;
-}
-
-/* ===========================
-   SIDEBAR
-=========================== */
-
-a {
-  text-decoration: none;
-  color: white;
-}
-.dashboard-container {
-  display: flex;
-  min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
-  background: #f5f5f5;
 }
-.sidebar {
-  width: 250px;
-  background: #620000;
-  color: white;
-  padding: 20px 0;
-  position: fixed;
-  height: 100vh;
-}
-.header {
-  height: 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  margin-left: 0;
-  width: 230px;
-}
-.header-white {
-  width: 300px;
-  height: 65px;
-  background: #fff;
-  border-radius: 30px 0 0px 30px;
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #ffdcdc;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 42px;
+  color: #a10808;
+  font-weight: bold;
 }
-.logo {
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.logo img {
-  width: 80px;
-  height: auto;
-}
-.menu {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-}
-.menu-item {
-  padding: 13px 25px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.menu-item:hover,
-.menu-item.active {
-  background: rgba(87, 23, 23, 50%);
-  border: 1px solid white;
-  color: #ffffff;
-  list-style: none;
-}
-.menu-item i {
-  width: 30px;
-  font-size: 18px;
-}
-
-.menu-item span {
-  margin-left: 10px;
-  font-size: 14px;
-}
-/* ===========================
-CONTENT
-=========================== */
 .content {
   flex: 1;
   min-width: 0;
-  padding: 2% 3%;
+  padding: 25px 20px;
   margin-left: 250px;
 }
-/* ===========================
-HEADER
-=========================== */
-
 .page-header {
-  margin-bottom: 45px;
+  margin-bottom: 30px;
 }
-
-.page-header h1 {
-  font-size: 42px;
-
-  color: #1b1b1b;
-
-  font-weight: 700;
-
-  margin-bottom: 8px;
-}
-
-.breadcrumb {
-  color: #9b9b9b;
-
-  font-size: 13px;
-}
-
-/* ===========================
-CARD
-=========================== */
-
 .settings-card {
   width: 100%;
-
   max-width: 980px;
+  background: white;
+  border-radius: 22px;
+  padding: 10px;
+  margin-left: 20px;
+
 }
-
-/* ===========================
-SETTING ROW
-=========================== */
-
+.top p{
+  margin-top: 2px;
+  font-size: 12px;
+  color: #8f8e8e;
+  font-weight: 450;
+}
 .setting-item {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
-  padding: 20px 12px;
-
-  border-bottom: 1px solid #cfcfcf;
-
+  padding: 15px 12px;
+  border-bottom: 1px solid #dfdfdf;
   transition: 0.25s;
 }
-
-.setting-item:hover {
-  background: #fafafa;
-}
-
 .left {
   display: flex;
 
@@ -348,9 +241,4 @@ SETTING ROW
     width: 32px;
     height: 32px;
   }
-}
-
-
-.setting-item {
-  cursor: pointer;
 }

@@ -1,0 +1,152 @@
+/* confirm-dialog.component.css */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.confirm-dialog {
+  background: white;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease;
+}
+
+.confirm-header {
+  padding: 24px 24px 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.confirm-header.danger {
+  border-bottom-color: #ffcdd2;
+}
+
+.confirm-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background: #f8f0f0;
+}
+
+.confirm-icon i {
+  font-size: 20px;
+  color: #620000;
+}
+
+.confirm-header.danger .confirm-icon {
+  background: #fff0f0;
+}
+
+.confirm-header.danger .confirm-icon i {
+  color: #c00000;
+}
+
+.confirm-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.confirm-body {
+  padding: 20px 24px;
+}
+
+.confirm-body p {
+  font-size: 15px;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.confirm-footer {
+  padding: 16px 24px 24px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  border-top: 1px solid #f0f0f0;
+}
+
+.confirm-footer button {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+.btn-confirm {
+  background: #620000;
+  color: white;
+}
+
+.btn-confirm:hover {
+  background: #4a0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(98, 0, 0, 0.3);
+}
+
+.btn-confirm.danger {
+  background: #c00000;
+}
+
+.btn-confirm.danger:hover {
+  background: #a00000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .confirm-footer {
+    flex-direction: column;
+  }
+  
+  .confirm-footer button {
+    width: 100%;
+    justify-content: center;
+  }
+}

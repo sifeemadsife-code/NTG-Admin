@@ -1,80 +1,11 @@
-a {
-  text-decoration: none;
-  color: white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.dashboard-container {
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f5f5f5;
-}
-.sidebar {
-  width: 250px;
-  background: #620000;
-  color: white;
-  padding: 20px 0;
-  position: fixed;
-  height: 100vh;
-}
-.header {
-  height: 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  margin-left: 0;
-  width: 230px;
-}
-.header-white {
-  width: 300px;
-  height: 65px;
-  background: #fff;
-  border-radius: 30px 0 0px 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.logo {
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.logo img {
-  width: 80px;
-  height: auto;
-}
-.menu {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-}
-.menu-item {
-  padding: 13px 25px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.menu-item:hover,
-.menu-item.active {
-  background: rgba(87, 23, 23, 50%);
-  border: 1px solid white;
-  color: #ffffff;
-  list-style: none;
-}
-.menu-item i {
-  width: 30px;
-  font-size: 18px;
-}
-
-.menu-item span {
-  margin-left: 10px;
-  font-size: 14px;
-}
-
 .page {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   margin-left: 250px;
-  width: calc(100% - 250px);
   padding: 30px;
   box-sizing: border-box;
 }
@@ -84,12 +15,9 @@ a {
   align-items: center;
   margin-bottom: 25px;
 }
-.page-header h1 {
-  font-size: 32px;
-}
 .page-header p {
   color: gray;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 .back-btn {
   background: white;
@@ -100,19 +28,23 @@ a {
   color: #333;
 }
 .form-card {
+  margin-top: 4%;
   background: white;
   border-radius: 15px;
-  padding: 30px;
-  max-width: 700px;
+  padding: 30px 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 6px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 232, 232);
+
 }
 label {
-  font-weight: 600;
-  margin-top: 12px;
+  font-weight: 500;
+  margin-top: 8px;
 }
+
 input,
 select,
 textarea {
@@ -122,6 +54,7 @@ textarea {
   outline: none;
   font-size: 14px;
 }
+
 .error-text {
   color: #c00000;
 }
@@ -133,7 +66,8 @@ button[type='submit'] {
   padding: 14px;
   border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
+  font-size:15px;
 }
 /* ===========================
         RESPONSIVE

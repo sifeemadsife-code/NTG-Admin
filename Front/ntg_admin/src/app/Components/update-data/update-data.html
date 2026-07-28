@@ -3,17 +3,13 @@
   <main class="content">
 
     <div class="page-header">
-
       <div>
-        <h1>Engineers</h1>
-
+        <h2>Engineers</h2>
         <p class="breadcrumb">
           Dashboard > Engineers > Edit Engineer
         </p>
       </div>
-
       <button class="back-btn" type="button" routerLink='/engineersList'>
-        <i class="fa fa-chevron-left"></i>
         Back
       </button>
 
@@ -27,16 +23,10 @@
     <p class="error-text">{{ errorMessage() }}</p>
     }
 
-    <form (ngSubmit)="saveEngineer(engineerForm)" #engineerForm="ngForm">
-
+    <form (ngSubmit)="saveEngineer(engineerForm)" #engineerForm="ngForm" novalidate>
       <div class="edit-card">
-
-        <!-- LEFT -->
-
         <div class="form-section">
-
           <h3>Personal Information</h3>
-
           <div class="form-group">
             <label>First Name*</label>
             <input name="firstName" title="First Name" placeholder="Enter first name" type="text" required
@@ -59,14 +49,13 @@
           <div class="form-group">
             <label>Address*</label>
 
-            <input name="address" title="Address" placeholder="Enter address" type="text" required
+            <input name="address" title="Address" placeholder="Enter address" type="text"
               [(ngModel)]="engineer().address">
           </div>
 
         </div>
 
-        <!-- RIGHT -->
-
+        
         <div class="form-section">
 
           <h3>Professional Information</h3>
@@ -74,7 +63,7 @@
           <div class="form-group">
             <label>Education*</label>
 
-            <input name="education" title="Education" placeholder="Enter education/subject" type="text" required
+            <input name="education" title="Education" placeholder="Enter education/subject" type="text"
               [(ngModel)]="engineer().education">
           </div>
 

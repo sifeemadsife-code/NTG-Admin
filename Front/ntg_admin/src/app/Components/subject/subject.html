@@ -4,7 +4,7 @@
     <div class="head">
 
       <div>
-        <h1>Subjects</h1>
+        <h2>Subjects</h2>
         <p>Dashboard > Subjects</p>
 
       </div>
@@ -38,8 +38,8 @@
             <td>{{ course.termId }}</td>
             <td>
               <button class="btn1" [routerLink]="['edit-course', course.id]"
-                (click)="editCourse(course.id)">Edit</button>
-              <button class="btn2" (click)="deleteCourse(course.id)">Delete</button>
+                (click)="editCourse(course.id)"><i class="fa-solid fa-pen" style="color:rgb(175, 174, 174);font-size: 13px; margin-bottom: 7px;"></i></button>
+              <button class="btn2" (click)="deleteCourse(course.id)"><i class="fa-solid fa-trash" style="color: rgb(236, 21, 21); font-size: 13px; margin-bottom: 7px;"></i></button>
             </td>
           </tr>
           <tr *ngIf="paginatedCourses().length === 0">

@@ -68,6 +68,7 @@ public class NotificationService {
         if (!notificationRepository.existsById(id)) {
             throw new RuntimeException("Notification not found");
         }
+        userNotificationRepository.deleteByNotification_Id(id);
         notificationRepository.deleteById(id);
     }
 

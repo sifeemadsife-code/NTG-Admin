@@ -2,7 +2,7 @@
     <app-sidebar></app-sidebar>
     <div class="page-header">
         <div>
-            <h1>Student Evaluations</h1>
+            <h2>Student Evaluations</h2>
             <p>Dashboard > Students > Evaluations</p>
         </div>
         <div class="header-buttons">
@@ -43,11 +43,17 @@
 
             <p class="eval-by">Evaluated by: {{ evaluation.userFirstName }} {{ evaluation.userLastName }}</p>
         </div>
-        } @empty {
-        <div class="empty-state">
-            <p>No evaluations found for this student yet.</p>
-        </div>
-        }
+        }@empty {
+          <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Engineers" class="empty-image">
+                <h3>No Evaluation Found</h3>
+                <p>There are no evaluation to display.</p>
+              </div>
+            </td>
+          </tr>
+          }
     </div>
     }
 </div>

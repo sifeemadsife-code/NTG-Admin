@@ -1,11 +1,14 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .about-container {
   min-height: 100vh;
   padding: 40px;
-  background: #f5f7fb;
+  font-family: 'Segoe UI', sans-serif;
+
 }
 
 .hero-section {
@@ -40,6 +43,8 @@
   text-align: center;
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
   transition: 0.3s;
+   border: 1px solid #ddd;
+
 }
 
 .feature-card:hover {
@@ -80,29 +85,19 @@
   font-size: 18px;
   line-height: 1.7;
 }
-
-
-
 .back-btn {
+  padding: 10px 22px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-
-  padding: 10px 18px;
-  margin-bottom: 25px;
-
-  border: none;
-  border-radius: 8px;
-
-  background-color: #620000;
-  color: white;
-
-  font-size: 15px;
-  cursor: pointer;
-
-  transition: 0.3s;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.3s ease;
 }
-
 .back-btn:hover {
   opacity: 0.9;
   transform: translateY(-2px);

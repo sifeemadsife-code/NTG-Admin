@@ -1,66 +1,97 @@
-
-
 <div class="dashboard">
-<app-sidebar></app-sidebar>
+    <app-sidebar></app-sidebar>
+    <main class="student-card">
+        <div class="table-card">
+            <div class="pagination" *ngIf="totalPages() > 1">
+                <button (click)="prevPage()" [disabled]="currentPage() === 1">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button *ngFor="let page of pages()" [class.active]="page === currentPage()" (click)="goToPage(page)">
+                    {{ page }}
+                </button>
 
-
-    <main class="content">
-        <div class="page-header">
-            <h1>Students</h1>
-            <p class="breadcrumb">Dashboard &gt; Students &gt; Student Details</p>
+                <button (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
+        <div class="student-page">
+            <div class="page-header">
+                <div>
+                    <h2>Students</h2>
+                    <p>Dashboard > Students >Student Details</p>
 
-        <div *ngIf="loading()" class="state-message">Loading student details...</div>
-        <div *ngIf="error()" class="state-message error">{{ error() }}</div>
+                    <div *ngIf="loading()" class="state-message">Loading student details...</div>
+                    <div *ngIf="error()" class="state-message error">{{ error() }}</div>
 
-        <ng-container *ngIf="!loading() && !error()">
-            <div class="profile-row">
-                <img src="/images/avatar.png" alt="Student" class="avatar" />
-
-                <div class="profile-info">
-                    <h2>
-                        {{ student().firstName }} {{ student().lastName }}
-                        <span class="student-id">{{ student().studentNumber }}</span>
-                    </h2>
-                    <p>{{ student().email }}</p>
-                    <p>Grade {{ student().grade || '-' }}</p>
-                    <p>{{ student().studentNumber }}</p>
                 </div>
             </div>
-
-            <div class="stats-row">
-                <div class="stat-card black">
-                    <h2>{{ student().attendanceRate }}%</h2>
-                    <p>Attendance rate</p>
+            <div class="student-left">
+                <div class="avatar">
+                    {{ getInitials() }}
                 </div>
+                <div class="student-info">
 
-                <div class="stat-card red">
-                    <h2>{{ student().violationsCount }}</h2>
-                    <p>Violations</p>
+                    <h2> <i class="fa-solid fa-user" style="color: rgb(104, 7, 7); font-size: 25px;"></i> {{
+                        student().firstName }} {{ student().lastName }}</h2>
+                    <div class="sub">
+                        <span class="email"><i class="far fa-envelope"></i>{{ student().email }}</span>
+                        <span class="badge"><i class="fas fa-graduation-cap"></i>{{ student().grade || '-' }}</span>
+                    </div>
                 </div>
-                <div class="stat-card green">
-                    <h2>{{ student().assignmentsDone }}</h2>
-                    <p>Assignments Done</p>
+                <div class="student-image">
+                    <img src="images/student.png">
                 </div>
             </div>
-
-            <div class="table-card">
+            <div class="stats">
+                <div class="attendance card">
+                    <div class="icon green">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                        <h2>{{ student().attendanceRate }}%</h2>
+                        <h4>Attendance Rate</h4>
+                        <p>{{ getAttendanceMessage() }}</p>
+                    </div>
+                </div>
+                <div class="violations card">
+                    <div class="icon red">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                    <div>
+                        <h2>{{ student().violationsCount }}</h2>
+                        <h4>Violations</h4>
+                        <p>{{ getViolationMessage() }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="performance-card">
                 <table>
                     <thead>
                         <tr>
                             <th>Subject</th>
                             <th>Midterm</th>
-                            <th>final</th>
+                            <th>Final</th>
                             <th>Total</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @for (subject of paginatedSubjects(); track subject.subjectName) {
                         <tr>
-                            <td>{{ subject.subjectName }}</td>
+                            <td>
+                                <div class="subject">
+                                    <div class="subject-icon">
+                                        <i class="fa-solid fa-code"></i>
+                                    </div>
+                                    {{ subject.subjectName }}
+                                </div>
+                            </td>
+
                             <td>{{ subject.midterm ?? '-' }}</td>
                             <td>{{ subject.finalScore ?? '-' }}</td>
                             <td>{{ subject.total }}</td>
+
                         </tr>
                         } @empty {
                         <tr>
@@ -68,23 +99,12 @@
                         </tr>
                         }
                     </tbody>
+
                 </table>
 
-                <div class="pagination" *ngIf="totalPages() > 1">
-                    <button (click)="prevPage()" [disabled]="currentPage() === 1">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-
-                    <button *ngFor="let page of pages()" [class.active]="page === currentPage()"
-                        (click)="goToPage(page)">
-                        {{ page }}
-                    </button>
-
-                    <button (click)="nextPage()" [disabled]="currentPage() === totalPages()">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
             </div>
-        </ng-container>
+
+
+        </div>
     </main>
 </div>

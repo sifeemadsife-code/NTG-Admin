@@ -11,7 +11,7 @@ import { SuccessMessageService } from '../../Services/success-message';
 @Component({
   selector: 'app-evaluate-student',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
   templateUrl: './evaluate-student.html',
   styleUrl: './evaluate-student.css',
 })
@@ -68,9 +68,7 @@ export class EvaluateStudent implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
-        studentId: 'Student', evaluationDate: 'Evaluation Date', score: 'Score', evaluationText: 'Evaluation',
-      }));
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {}));
       return;
     }
 
@@ -89,12 +87,13 @@ export class EvaluateStudent implements OnInit {
     this.evaluationService.create(payload).subscribe({
       next: () => {
         this.saving.set(false);
-        this.successMessage.show('Evaluation saved successfully');
+        this.successMessage.show('Evaluation saved successfully.');
         this.router.navigate(['/studentsList']);
       },
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to save evaluation');
+        this.successMessage.showError(err?.error?.message || 'Failed to save evaluation.');
         console.log(err);
       },
     });

@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@//localhost:1521/ORCL20
-    username: C##WEB_USER
-    password: Password123
+    url: jdbc:oracle:thin:@//192.168.26.128:1521/FREEPDB1
+    username: HR
+    password: oracle
 
   jpa:
     hibernate:

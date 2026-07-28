@@ -7,20 +7,17 @@
   display: flex;
   min-height: 100vh;
   background: #eeeeee;
+    font-family: 'Segoe UI', sans-serif;
+
 }
 .description {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-.main-content {
-  margin-left: 250px;
-  flex: 1;
-  padding: 30px;
-}
 .content {
   margin-left: 250px;
-  padding: 35px;
+  padding: 25px 20px;
   background-color: #fff;
   width: 100%;
 }
@@ -56,6 +53,8 @@
   border-radius: 15px;
   padding: 35px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 232, 232);
+
 }
 
 .card h3 {
@@ -125,22 +124,21 @@ textarea {
 }
 
 .save {
-  background: #06152f;
+ background: #020d20;
   color: white;
   border: none;
   border-radius: 8px;
   padding: 12px 28px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
 }
 
 .save:hover {
-  background: #06152f;
+  background: #03062e;
 }
 
-.cancel:hover {
-  background: #06152f;
-  color: #fff;
-}
+
 /* ================= RESPONSIVE ================= */
 
 /* Tablet */

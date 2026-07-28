@@ -1,28 +1,27 @@
-
-
-/* =====================================================
-   SUPPORT PAGE
-===================================================== */
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} 
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
 .support-content {
     margin-left: 280px;
     margin-right: 30px;
 }
-
-/* =====================================================
-   WELCOME CARD
-===================================================== */
-
 .support-welcome {
     width: 100%;
     background: #620000;
     border-radius: 20px;
     padding: 30px;
+    margin-top: 25px;
     margin-bottom: 25px;
     color: #ffffff;
     box-shadow: 0 10px 25px rgba(98, 0, 0, 0.15);
 }
-
 .welcome-text {
     display: flex;
     align-items: center;

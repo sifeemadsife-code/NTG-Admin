@@ -1,6 +1,7 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrainingService } from '../../Services/training-service';
+import { Student } from '../../Services/student'; // إضافة import للـ Student Service
 import { Training } from '../../Models/Training';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentsListInterface } from '../../Models/Students_list';
@@ -16,7 +17,11 @@ import { SidebarComponent } from "../sidebar/sidebar";
 export class TrainingProgramStudents implements OnInit {
   loading = true;
 
-  constructor(private service: TrainingService, private route: ActivatedRoute) {}
+  constructor(
+    private service: TrainingService, 
+    private studentService: Student, // إضافة Student Service
+    private route: ActivatedRoute
+  ) {}
 
   training = signal<Training>({
     id: 1,
@@ -27,15 +32,21 @@ export class TrainingProgramStudents implements OnInit {
     gradeName: '',
     programName: '',
     description: '',
-    startDate: new Date('0-0-0'),
-    endDate: new Date('0-0-0'),
+    startDate: new Date(),
+    endDate: new Date(),
     location: '',
-    createdAt: new Date('0-0-0'),
+    createdAt: new Date(),
     totalStudents: 0,
   });
 
   students = signal<StudentsListInterface[]>([]);
   searchTerm = signal('');
+  studentsCount = signal(0); 
+  studentCount = signal(0); 
+
+  engineersCount = signal<number>(1);
+  programDuration = signal<string>('12 Weeks');
+  programDurationLabel = signal<string>('Program Duration');
 
   filteredStudents = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
@@ -53,14 +64,26 @@ export class TrainingProgramStudents implements OnInit {
     this.service.getProgram(this.program_id).subscribe({
       next: (data) => {
         this.training.set(data);
-        console.log(data);
+        this.calculateDuration(data.startDate, data.endDate);
       },
       error: (err) => {
         console.log(err);
       },
     });
 
+    this.getStudentsCount();
+    
     this.loadProgramStudents();
+  }
+
+  calculateDuration(startDate: Date, endDate: Date): void {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end.getTime() - start.getTime());
+      const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+      this.programDuration.set(`${diffWeeks} Weeks`);
+    }
   }
 
   loadProgramStudents(): void {
@@ -68,12 +91,22 @@ export class TrainingProgramStudents implements OnInit {
     this.service.getProgramStudents(this.program_id).subscribe({
       next: (data) => {
         this.students.set(data);
+        this.studentsCount.set(data.length); 
         this.loading = false;
       },
       error: (err) => {
         console.log(err);
         this.loading = false;
       },
+    });
+  }
+
+  getStudentsCount(): void {
+    this.studentService.getStudentsCount().subscribe({
+      next: (value) => {
+        this.studentCount.set(Number(value));
+      },
+      error: (err) => console.log(err),
     });
   }
 

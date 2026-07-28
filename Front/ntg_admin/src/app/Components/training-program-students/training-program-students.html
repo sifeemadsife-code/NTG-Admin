@@ -2,16 +2,15 @@
   <app-sidebar></app-sidebar>
 
   <div class="engineers-page">
-
     <div class="page-header">
       <div>
-        <h1>Training Programs</h1>
+        <h2>Training Programs</h2>
         <p>Dashboard > Training Programs > Training Program Details</p>
       </div>
     </div>
 
     <div class="page">
-
+     
       <div class="header">
         <div class="title">
           <div class="icon">
@@ -20,34 +19,71 @@
 
           <div>
             <h2>{{ training().programName }}</h2>
-
             <p class="description">{{ training().description }}</p>
+            <span class="status">
+              <i class="fa-solid fa-user" style="color: rgb(94, 92, 92);"></i>
+              {{ training().teacherFirstName }} {{ training().teacherLastName }}
+            </span>
+            <span class="status1" style="margin-left:10px;">
+              {{ training().gradeName }}
+            </span>
+            <span class="status2" style="margin-left:10px;">
+              {{ training().description }}
+            </span>
           </div>
-          <span class="status">
-            {{ training().teacherFirstName }} {{ training().teacherLastName }}
-          </span>
         </div>
 
         <div class="buttons">
-          <button class="edit" [routerLink]="['/edit-training-program', training().id]">Edit Program</button>
-          <button class="edit" routerLink="/evaluate-student">Evaluate Student</button>
-
-        </div>
+          <button class="edit" [routerLink]="['/edit-training-program', training().id]">
+            <i class="fa-solid fa-pen-clip" style="color: rgb(131, 8, 8); margin-right: 5px;"></i>Edit Program
+          </button>
+            <button class="edit" routerLink="/evaluate-student">
+            <i class="fa-solid fa-star" style="color: rgb(131, 8, 8); margin-right: 8px;"></i>Evaluate Student
+          </button>
+        </div> 
       </div>
-
 
       <div class="cards">
         <div class="card">
-          <h2 class="num">{{ filteredStudents().length }}</h2>
-          <p>Total Students in {{ training().gradeName }}</p>
+          <div class="card-icon1">
+            <i class="fa-solid fa-graduation-cap" style="color: rgb(148, 12, 12); font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ training().gradeName }}</h2>
+            <p>Grade</p>
+          </div>
         </div>
 
         <div class="card">
-          <h2 class="num">1</h2>
-          <p>Assigned Engineers</p>
+          <div class="card-icon2">
+            <i class="fa-solid fa-users"style="color:#023e8a; font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ studentsCount() }}</h2>
+            <p>Students</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon3">
+            <i class="fa-solid fa-user-cog"style="color:#006400; font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ engineersCount() }}</h2>
+            <p>Assigned Engineers</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon4">
+            <i class="fa-solid fa-clock"style="color:#5a189a; font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ programDuration() }}</h2>
+            <p>{{ programDurationLabel() }}</p>
+          </div>
         </div>
       </div>
-
       <div class="tabs">
 
         <a [routerLink]="['/programs',training().id]">
@@ -63,13 +99,6 @@
         </a>
 
       </div>
-      <div class="search-box">
-
-        <input type="text" placeholder="Search student..." [value]="searchTerm()"
-          (input)="onSearchChange($any($event.target).value)">
-
-      </div>
-
       <div class="table-card">
         <table>
           <thead>

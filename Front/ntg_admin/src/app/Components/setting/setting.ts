@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "../sidebar/sidebar";
+import { AuthService } from '../../Services/auth';
 
 @Component({
   selector: 'app-setting',
@@ -20,7 +20,7 @@ export class SettingComponent implements OnInit {
   languages: string[] = ['English', 'Arabic'];
 
   appearances: string[] = ['Light', 'Dark'];
-  private router = inject(Router);
+  private auth = inject(AuthService);
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
@@ -33,10 +33,7 @@ export class SettingComponent implements OnInit {
     { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
   ];
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
+    this.auth.logout();
   }
 
   constructor() {}
@@ -71,3 +68,4 @@ export class SettingComponent implements OnInit {
     console.log('About Clicked');
   }
 }
+     

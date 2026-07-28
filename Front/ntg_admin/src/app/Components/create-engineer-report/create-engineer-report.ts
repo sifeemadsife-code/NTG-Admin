@@ -25,7 +25,6 @@ export class CreateEngineerReport implements OnInit {
   engineers = signal<EngineerList[]>([]);
   saving = signal(false);
   error = signal('');
-
   isSidebarOpen = false;
   form!: FormGroup;
   menuItems = [
@@ -63,9 +62,7 @@ export class CreateEngineerReport implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
-        teacherId: 'Engineer', feedbackDate: 'Report Date', feedback: 'Feedback', rate: 'Rating',
-      }));
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {}));
       return;
     }
 
@@ -82,17 +79,15 @@ export class CreateEngineerReport implements OnInit {
     };
 
     this.engineerFeedbackService.create(payload).subscribe({
-     next: () => {
-  this.saving.set(false);
-
-  this.successMessage.show('Engineer report saved successfully');
-
-  this.form.reset();
-
-},
+      next: () => {
+        this.saving.set(false);
+        this.successMessage.show('Engineer report saved successfully.');
+        this.router.navigate(['/engineersList']);
+      },
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to save report');
+        this.successMessage.showError(err?.error?.message || 'Failed to save report.');
         console.log(err);
       },
     });

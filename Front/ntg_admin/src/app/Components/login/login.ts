@@ -61,16 +61,12 @@ export class Login {
           localStorage.setItem('userId', String(res.userId));
           localStorage.setItem('name', `${res.firstName} ${res.lastName}`);
 
-          this.successMessage.show('Logged in successfully!');
+          this.successMessage.show('Logged in successfully.');
           this.router.navigate(['/dashboard']);
         },
-        error: (error) => {
-          const message =
-            error.status === 401
-              ? 'Invalid email or password.'
-              : error.error?.message || 'Login failed. Please try again.';
-          this.successMessage.showError(message);
-        },
+        error: (err) => this.successMessage.showError(
+          err?.error?.message || 'Invalid email or password.'
+        ),
       });
   }
 }

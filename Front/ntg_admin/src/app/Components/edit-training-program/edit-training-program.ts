@@ -104,9 +104,7 @@ export class EditTrainingProgram implements OnInit {
   saveProgram(): void {
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.editForm, {
-        programName: 'Program Name', startDate: 'Start Date',
-      }));
+      this.successMessage.showError(this.successMessage.validationMessage(this.editForm, {}));
       return;
     }
 
@@ -124,12 +122,13 @@ export class EditTrainingProgram implements OnInit {
     this.service.updateProgram(this.programId, payload).subscribe({
       next: () => {
         this.saving.set(false);
-        this.successMessage.show('Training Program updated successfully');
+        this.successMessage.show('Training program updated successfully.');
         this.router.navigate(['/programs', this.programId]);
       },
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to update training program. Please try again.');
+        this.successMessage.showError(err?.error?.message || 'Failed to update training program.');
         console.log(err);
       },
     });

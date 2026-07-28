@@ -5,7 +5,7 @@
   <div class="email-page">
 
     <div class="header">
-      <div>
+      <div >
         <h2>Send Email</h2>
         <p>Dashboard > Send Email</p>
       </div>
@@ -14,20 +14,17 @@
     <div class="card">
       <div [formGroup]="form" class="left">
         <form action="javascript:void(0)" (submit)="send()">
-          <label> name</label>
+          <label> Form</label>
           <input formControlName="name" type="text" placeholder="Enter your name...">
-          <label> To email</label>
+          <label> To Email</label>
           <input formControlName="ToEmail" type="text" placeholder="Enter the email of reciver...">
-          <label> To name</label>
+          <label> To Name</label>
           <input formControlName="toname" type="text" placeholder="Enter the name of reciver...">
-          <label>Bcc</label>
-          <input formControlName="bcc" type="text" placeholder="Enter the email of Bcc...">
-          <label>Cc</label>
-          <input formControlName="cc" type="text" placeholder="Enter the email of Cc...">
+
           <label>Subject</label>
           <input formControlName="subject" type="text" placeholder="Enter Subject">
 
-          <label>Reply To Email</label>
+          <label>Email</label>
 
           <input formControlName="email" type="text" placeholder="Enter the email">
 

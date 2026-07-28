@@ -22,7 +22,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, SidebarComponent],
+  imports: [CommonModule, SidebarComponent],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
 })
@@ -46,10 +46,16 @@ export class Dashboard implements OnInit, AfterViewInit {
   private profileService = inject(ProfileService);
   engineerExperience = signal<{ level: string; count: number }[]>([]);
 
-  profile = signal({
-    name: localStorage.getItem('name') || 'Admin',
-    role: localStorage.getItem('role') || 'Admin',
-  });
+ private toTitleCase(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+profile = signal({
+  name: this.toTitleCase(localStorage.getItem('name') || 'Admin'),
+  role: this.toTitleCase(localStorage.getItem('role') || 'Admin'),
+});
 
   constructor(
     private programsService: TrainingService,
@@ -175,7 +181,7 @@ export class Dashboard implements OnInit, AfterViewInit {
           {
             label: 'Total',
             data,
-            backgroundColor: ['#05172F', '#0B2202', '#5B1717'],
+            backgroundColor: ['#8d0801', '#bf0603', '#708d81'],
             borderRadius: 8,
             barThickness: 40,
           },
@@ -198,14 +204,9 @@ export class Dashboard implements OnInit, AfterViewInit {
       return;
     }
     const palette = [
-      '#05172F',
-      '#8F0000',
-      '#DA7612',
-      '#28964d',
-      '#4a90d9',
-      '#a855f7',
-      '#f59e0b',
-      '#14b8a6',
+      '#8d0801',
+      '#f4d58d',
+      '#708d81',
     ];
     if (this.studentsChart) {
       this.studentsChart.data.labels = dist.map((d) => d.grade);
@@ -241,7 +242,7 @@ export class Dashboard implements OnInit, AfterViewInit {
       setTimeout(() => this.renderEngineersChart(dist), 100);
       return;
     }
-    const palette = ['#05172F', '#0b2202', '#5b1717', '#DA7612'];
+    const palette = ['#bf0603', '#708d81'];
     if (this.engineersChart) {
       this.engineersChart.data.labels = dist.map((d) => d.level);
       this.engineersChart.data.datasets[0].data = dist.map((d) => d.count);

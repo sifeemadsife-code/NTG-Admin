@@ -1,139 +1,145 @@
 <div class="dashbored">
-
   <app-sidebar></app-sidebar>
 
   <div class="engineers-page">
-
     <div class="page-header">
       <div>
-        <h1>Training Programs</h1>
+        <h2>Training Programs</h2>
         <p>Dashboard > Training Programs > Training Program Details</p>
       </div>
     </div>
 
     <div class="page">
-
       <div class="header">
-
         <div class="title">
-
           <div class="icon">
             <img src="/images/code1.png" alt="Code Icon" width="50" height="45" />
           </div>
 
           <div>
             <h2>{{ training().programName }}</h2>
-
-            <p class="description">
-              {{ training().description }}
-            </p>
-
-            <span class="status">
-              {{ training().teacherFirstName }}
-              {{ training().teacherLastName }}
-            </span>
+            <p class="description">{{ training().description }}</p>
+            <div class="status-wrapper">
+              <span class="status">
+                <i class="fa-solid fa-user" style="margin-right: 6px;"></i>
+                {{ training().teacherFirstName }} {{ training().teacherLastName }}
+              </span>
+              <span class="status1">
+                {{ training().gradeName }}
+              </span>
+              <span class="status2">
+                {{ training().description }}
+              </span>
+            </div>
           </div>
-
-
         </div>
-
         <div class="buttons">
-
           <button class="edit" [routerLink]="['/edit-training-program', training().id]">
-            Edit Program
+            <i class="fa-solid fa-pen-clip" style="color: rgb(131, 8, 8); margin-right: 5px;"></i>Edit Program
           </button>
-
         </div>
-
       </div>
-
       <div class="cards">
-
         <div class="card">
-
-          <h2 class="num">{{training().totalStudents}}</h2>
-
-          <p>Total Students</p>
-
+          <div class="card-icon1">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ training().gradeName }}</h2>
+            <p>Grade</p>
+          </div>
         </div>
 
         <div class="card">
-
-          <h2 class="num">1</h2>
-
-          <p>Assigned Engineers</p>
-
+          <div class="card-icon2">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ studentsCount() }}</h2>
+            <p>Students</p>
+          </div>
         </div>
-
-
+        <div class="card">
+          <div class="card-icon3">
+            <i class="fa-solid fa-user-cog"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ engineersCount() }}</h2>
+            <p>Assigned Engineers</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon4">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ programDuration() }}</h2>
+            <p>{{ programDurationLabel() }}</p>
+          </div>
+        </div>
       </div>
-
       <div class="tabs">
-
-        <a [routerLink]="['/programs', training().id]">
-          Overview
-        </a>
-
-        <a [routerLink]="['/programs', training().id, 'students']">
-          Students
-        </a>
-
-        <a class="active">
-          Engineers
-        </a>
-
+        <a [routerLink]="['/programs', training().id]">Overview</a>
+        <a [routerLink]="['/programs', training().id, 'students']">Students</a>
+        <a class="active">Engineers</a>
       </div>
-
       <div class="table-card">
-
         <table>
-
           <thead>
-
             <tr>
-
               <th>ID</th>
-
               <th>Engineer</th>
-
-              <th>Experience</th>
-
+              <th>Experience (Years)</th>
               <th>Rating</th>
-
               <th>Actions</th>
-
             </tr>
-
           </thead>
 
           <tbody>
-
+            @if (engineer() && engineer().id) {
             <tr>
-
-              <td>{{ engineer().id }}</td>
-
-              <td>{{ engineer().firstName }} {{ engineer().lastName }}</td>
-
-              <td>{{ engineer().numberOfYearsOfExperience }}</td>
-
-              <td>{{ cards().rating }}</td>
-
               <td>
-
-                <button class="action-butt" [routerLink]= "['/engineers', engineer().id]">
-
-                  View Engineer
-
-                </button>
-
+                <span class="id-badge">{{ engineer().id }}</span>
               </td>
 
+              <td>
+                <div class="engineer-info">
+                  <div class="avatar">
+                    {{ engineer().firstName?.charAt(0) }}{{ engineer().lastName?.charAt(0) }}
+                  </div>
+                  <span>{{ engineer().firstName }} {{ engineer().lastName }}</span>
+                </div>
+              </td>
+
+              <td>{{ engineer().numberOfYearsOfExperience || 0 }}</td>
+
+              <td>
+                <div class="rating">
+                  <i class="fa-solid fa-star"></i>
+                  {{ cards().rating || 4.8 }}
+                </div>
+              </td>
+
+              <td>
+                <button class="action-butt" [routerLink]="['/engineers', engineer().id]">
+                   View Engineer
+                </button>
+              </td>
             </tr>
-
+            } @else {
+            <tr>
+              <td colspan="5">
+                <div class="empty-state">
+                  <i class="fa-solid fa-user-slash"></i>
+                  <p>No Engineer Assigned to This Training Program</p>
+                </div>
+              </td>
+            </tr>
+            }
           </tbody>
-
         </table>
-
       </div>
-
     </div>
+  </div>
+</div>

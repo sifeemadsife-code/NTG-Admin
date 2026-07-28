@@ -22,7 +22,6 @@ export class NotificationComponent implements OnInit {
   currentPage = signal(1);
   itemsPerPage = signal(6);
 
-  // Currently open detail modal, null when closed.
   selectedNotification = signal<NotificationModel | null>(null);
 
   totalPages = computed(() =>
@@ -30,9 +29,26 @@ export class NotificationComponent implements OnInit {
   );
 
   paginatedNotifications = computed(() => {
-    const start = (this.currentPage() - 1) * this.itemsPerPage();
-    return this.notifications().slice(start, start + this.itemsPerPage());
+  const priorityOrder: Record<string, number> = {
+    high: 0,
+    normal: 1,
+    low: 2,
+  };
+
+  const sorted = [...this.notifications()].sort((a, b) => {
+    const priorityDiff =
+      priorityOrder[(a.priority || 'normal').toLowerCase()] -
+      priorityOrder[(b.priority || 'normal').toLowerCase()];
+
+    if (priorityDiff !== 0) {
+      return priorityDiff;
+    }
+    return new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime();
   });
+
+  const start = (this.currentPage() - 1) * this.itemsPerPage();
+  return sorted.slice(start, start + this.itemsPerPage());
+});
 
   pages = computed(() => Array.from({ length: this.totalPages() }, (_, i) => i + 1));
 
@@ -65,14 +81,13 @@ export class NotificationComponent implements OnInit {
   getIcon(type: string): string {
     switch (type) {
       case 'REPORT': return 'description';
-      case 'ALERT': return 'warning';
+      case 'ALERT': return 'ALERT';
       case 'MESSAGE': return 'mail';
       case 'SYSTEM': return 'settings';
       default: return 'notifications';
     }
   }
 
-  // Normalizes priority text so it can be safely used as a CSS class suffix.
   priorityClass(priority: string): string {
     return (priority || 'normal').toLowerCase();
   }

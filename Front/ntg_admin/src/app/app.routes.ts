@@ -17,7 +17,7 @@ import { AdminProfile } from './Components/admin-profile/admin-profile';
 import { Subject } from './Components/subject/subject';
 import { EditSubject } from './Components/edit-subject/edit-subject';
 import { Dashboard } from './Components/dashboard/dashboard';
-import { NotificationComponent } from './Components/notification/notification';
+import { NotificationComponent } from './Components/notifications/notification';
 import { Login } from './Components/login/login';
 import { SettingComponent } from './Components/setting/setting';
 import { Reports } from './Components/reports/reports';
@@ -34,6 +34,7 @@ import { About } from './Components/about/about';
 import { SupportComponent } from './Components/support/support';
 import { UnauthorizedComponent } from './Components/unauthorized/unauthorized';
 import { authGuard } from './Services/auth.guard';
+import { NotificationSettings } from './Components/notication-setting/notication-setting';
 
 export const routes: Routes = [
   {
@@ -192,6 +193,11 @@ export const routes: Routes = [
   {
     path: 'resetPassword',
     component: ResetPassword,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'noticationsetting',
+    component: NotificationSettings,
     canActivate: [authGuard],
   },
   {

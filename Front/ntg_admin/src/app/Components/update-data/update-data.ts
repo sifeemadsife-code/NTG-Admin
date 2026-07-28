@@ -73,16 +73,10 @@ export class UpdateDataComponent implements OnInit {
     });
   }
 
-  saveEngineer(engineerForm: NgForm): void {
-    if (engineerForm.invalid) {
-      engineerForm.control.markAllAsTouched();
-      const fieldLabels: Record<string, string> = {
-        firstName: 'First Name', lastName: 'Last Name', email: 'Email', address: 'Address', education: 'Education',
-      };
-      const invalidFields = Object.entries(engineerForm.controls)
-        .filter(([, control]) => control.invalid)
-        .map(([name]) => fieldLabels[name] ?? name);
-      this.successMessage.showError(`Please complete the following fields: ${invalidFields.join(', ')}.`);
+  saveEngineer(form?: NgForm): void {
+    if (form?.invalid) {
+      form.control.markAllAsTouched();
+      this.successMessage.showError('Please complete all required fields with valid values.');
       return;
     }
 
@@ -92,7 +86,7 @@ export class UpdateDataComponent implements OnInit {
     this.engineerService.updateEngineer(this.engineer_id, this.engineer()).subscribe({
       next: () => {
         this.saving.set(false);
-        this.successMessage.show('Engineer updated successfully');
+        this.successMessage.show('Engineer updated successfully.');
         this.router.navigate(['/engineersList']);
       },
       error: (err) => {
@@ -100,8 +94,10 @@ export class UpdateDataComponent implements OnInit {
         console.error(err);
         if (err.status === 500) {
           this.errorMessage.set('The email you entered is already in use.');
+          this.successMessage.showError('The email you entered is already in use.');
         } else {
           this.errorMessage.set('Failed to update engineer. Please try again.');
+          this.successMessage.showError('Failed to update engineer. Please try again.');
         }
       },
     });

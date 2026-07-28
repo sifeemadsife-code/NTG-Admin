@@ -9,20 +9,54 @@ import { SidebarComponent } from "../sidebar/sidebar";
 @Component({
   selector: 'app-student-details',
   standalone: true,
-  imports: [CommonModule, RouterLink, SidebarComponent],
+  imports: [CommonModule, SidebarComponent],
   templateUrl: './student-details.html',
   styleUrls: ['./student-details.css'],
 })
 export class StudentDetailsComponent implements OnInit {
+  getAttendanceMessage(): string {
+  const rate = this.student().attendanceRate;
+
+  if (rate >= 95) {
+    return 'Excellent! Keep it up.';
+  } else if (rate >= 80) {
+    return 'Very good! Stay consistent.';
+  } else if (rate >= 60) {
+    return 'Good, but you can improve.';
+  } else if (rate >= 40) {
+    return 'Your attendance needs improvement.';
+  } else {
+    return 'Poor attendance. Please attend classes regularly.';
+  }
+}
+getViolationMessage(): string {
+  const violations = this.student().violationsCount;
+
+  if (violations === 0) {
+    return 'Excellent behavior. Keep it up!';
+  } else if (violations <= 2) {
+    return 'Good behavior. Be more careful.';
+  } else if (violations <= 5) {
+    return 'Too many violations. Please improve.';
+  } else {
+    return 'Critical behavior. Immediate improvement is required.';
+  }
+}
+  getInitials(): string {
+  const student = this.student();
+
+  const first = student.firstName?.charAt(0) || '';
+  const last = student.lastName?.charAt(0) || '';
+
+  return (first + last).toUpperCase();
+}
   private studentService = inject(Student);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   isSidebarOpen = false;
-
   studentId = 0;
   loading = signal(true);
   error = signal<string | null>(null);
-
   student = signal<StudentDetails>({
     id: 0,
     firstName: '',
@@ -35,9 +69,9 @@ export class StudentDetailsComponent implements OnInit {
     violationsCount: 0,
     classRank: 0,
     subjects: [],
+   
   });
 
-  // client-side pagination for the subjects table
   currentPage = signal(1);
   itemsPerPage = signal(5);
 

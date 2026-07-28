@@ -3,19 +3,16 @@
   <div class="engineers-page">
     <div class="page-header">
       <div>
-        <h1>Students</h1>
+        <h2>Students</h2>
         <p>Dashboard > Students</p>
       </div>
     </div>
-
     <div class="toolbar">
       <div class="search-box">
-
         <input placeholder="Search by Student ID..." [value]="searchTerm()"
           (input)="searchTerm.set($any($event.target).value)" />
 
       </div>
-
       <div class="fle">
         <div class="filters">
           <select [value]="statusFilter()" (change)="statusFilter.set($any($event.target).value)">
@@ -39,13 +36,13 @@
     <div class="table-card">
       <table>
         <thead>
-          <tr>
+          
             <th>ID</th>
             <th>Student</th>
             <th>Grade</th>
             <th>Status</th>
             <th>Actions</th>
-          </tr>
+          
         </thead>
 
         <tbody>
@@ -69,7 +66,15 @@
             </td>
           </tr>
           } @empty {
-          <h1>No Students</h1>
+         <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Engineers" class="empty-image">
+                 <h3>No Students Found</h3>
+                <p>There are no Students to display.</p>
+              </div>
+            </td>
+          </tr>
           }
         </tbody>
       </table>

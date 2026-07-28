@@ -2,10 +2,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Chart } from 'chart.js/auto';
-
 import { TrainingService } from '../../Services/training-service';
 import { Student } from '../../Services/student';
-
 import { Training } from '../../Models/Training';
 import { StudentsListInterface } from '../../Models/Students_list';
 import { SidebarComponent } from "../sidebar/sidebar";
@@ -49,6 +47,14 @@ export class TrainingProgramOverveiw implements OnInit {
   studentsCount = signal(0);
   studentCount = signal(0);
 
+
+  programDuration = signal<string>('0 Weeks');
+  programDurationLabel = signal<string>('Program Duration');
+  engineersCount = signal<number>(1);
+  progressCompleted = signal<number>(72);
+  progressRemaining = signal<number>(28);
+  weeksRemaining = signal<number>(8);
+
   chart!: Chart;
 
   menuItems = [
@@ -81,6 +87,8 @@ export class TrainingProgramOverveiw implements OnInit {
     this.service.getProgram(this.program_id).subscribe({
       next: (data) => {
         this.training.set(data);
+                this.calculateProgramDuration(data.startDate, data.endDate);
+        
         this.checkDataReady();
       },
       error: (err) => console.log(err),
@@ -88,6 +96,32 @@ export class TrainingProgramOverveiw implements OnInit {
 
     this.getStudentsCount();
     this.loadProgramStudents();
+    
+    this.getEngineersCount();
+  }
+
+  calculateProgramDuration(startDate: Date, endDate: Date): void {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end.getTime() - start.getTime());
+      const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+      this.programDuration.set(`${diffWeeks} Weeks`);
+      
+      const totalWeeks = diffWeeks;
+      const currentDate = new Date();
+      const elapsedTime = Math.abs(currentDate.getTime() - start.getTime());
+      const elapsedWeeks = Math.ceil(elapsedTime / (1000 * 60 * 60 * 24 * 7));
+      const remaining = Math.max(0, totalWeeks - elapsedWeeks);
+      this.weeksRemaining.set(remaining);
+      
+      const progress = Math.min(100, Math.round((elapsedWeeks / totalWeeks) * 100));
+      this.progressCompleted.set(progress);
+      this.progressRemaining.set(100 - progress);
+    }
+  }
+
+  getEngineersCount(): void {
   }
 
   getStudentsCount(): void {
@@ -112,7 +146,6 @@ export class TrainingProgramOverveiw implements OnInit {
   }
 
   createChart(): void {
-
     const total = this.studentCount();
     const inProgram = this.studentsCount();
 
@@ -132,7 +165,7 @@ export class TrainingProgramOverveiw implements OnInit {
         datasets: [
           {
             data: [inProgram, total - inProgram],
-            backgroundColor: ['#8B0000', '#D9D9D9'],
+            backgroundColor: ['#780000', '#dcdfe5'],
             borderWidth: 0,
           },
         ],
@@ -140,9 +173,21 @@ export class TrainingProgramOverveiw implements OnInit {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+         cutout: '70%',
         plugins: {
           legend: {
             position: 'bottom',
+            labels: {
+              usePointStyle: true, 
+              pointStyle: 'circle', 
+              padding: 12,
+              font: {
+                size: 13,
+                
+              },
+              color: '#666'
+            }
+          
           },
         },
       },

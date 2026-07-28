@@ -4,98 +4,110 @@
   <main class="content">
     <div class="page-header">
       <div>
-        <h1>Setting</h1>
+        <h2>Setting</h2>
         <p class="breadcrumb">
           Dashboard > Setting
         </p>
       </div>
     </div>
     <div class="settings-card">
-      <div class="setting-item">
+          <div class="setting-item">
         <div class="left">
-          <img src="/images/lang.png" class="setting-icon">
-          <span>
+          <div class="avatar">
+            <i class="fa-solid fa-language" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
+          </div>
+          <div class="top">        
+         <span>
             Language
           </span>
+          <p>Choose system language</p>
+        </div>
         </div>
         <div class="right">
-          English
+          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
         </div>
       </div>
-      <div class="setting-item">
+      <div class="setting-item"routerLink="/noticationsetting">
         <div class="left">
-          <img src="/images/appea.png" class="setting-icon">
-          <span>
-            Appearance
+          <div class="avatar">
+            <i class="fa-solid fa-bell" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
+          </div>
+          <div class="top">        
+         <span>
+            Notication Setting
           </span>
+          <p>Manage your notification </p>
+        </div>
         </div>
         <div class="right">
-          Light
+          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
+        </div>
+      </div>
+      <div class="setting-item" routerLink="/resetPassword">
+        <div class="left">
+          <div class="avatar">
+            <i class="fa-solid fa-lock" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
+          </div>
+           <div class="top">        
+         <span>
+            Change Password
+          </span>
+          <p>Update your account password</p>
+        </div>
+        </div>
+        <div class="right">
+          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
         </div>
       </div>
       <div class="setting-item" routerLink="/support">
-
         <div class="left">
-
-          <img src="/images/supp.png" class="setting-icon">
-
-          <span>
+          <div class="avatar">
+            <i class="fa-solid fa-handshake" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
+          </div>
+         <div class="top"  routerLink="/support">        
+         <span>
             Support
           </span>
-
+          <p> Get support information</p>
         </div>
-
+        </div>
         <div class="right">
-
-          Need help?
-
+          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
         </div>
-
       </div>
-
-
-
-      <div class="setting-item" routerLink="/resetPassword">
-
+      <div class="setting-item" routerLink="/about">
         <div class="left">
-
-          <img src="/images/change.png" class="setting-icon">
-
-          <span>
-            Change Password
+          <div class="avatar">
+            <i class="fa-solid fa-info" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
+          </div>
+           <div class="top">        
+         <span>
+          About System
           </span>
-
+          <p>View system information and version</p>
         </div>
-
+        </div>
         <div class="right">
-
+          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
         </div>
-
       </div>
-
-
-
-
-
-       <div class="setting-item" routerLink="/about">
-
-  <div class="left">
-
-    <img src="/images/about.png" class="setting-icon">
-
-    <span>
-      About
-    </span>
-
-  </div>
-
-  <div class="right">
-
-  </div>
-
+          <div class="setting-item" role="button" tabindex="0" (click)="logout()" (keydown.enter)="logout()" (keydown.space)="logout()">
+        <div class="left">
+          <div class="avatar">
+            <i class="fa-solid fa-right-to-bracket" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
+          </div>
+          <div class="top">        
+         <span>
+            Log Out
+          </span>
+          <p>Sign out from your account </p>
+        </div>
+        </div>
+        <div class="right">
+          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
+        </div>
+      </div>
     </div>
-
-      </div>
 
   </main>
 

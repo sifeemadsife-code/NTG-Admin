@@ -15,10 +15,26 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-.logo { width: 108px; margin-bottom: 24px; }
-.unauthorized-card > i { display: block; color: #b42318; font-size: 48px; }
-.unauthorized-card h1 { margin: 16px 0 10px; color: #1f2937; font-size: 30px; }
-.unauthorized-card p { margin: 0; color: #6b7280; line-height: 1.6; }
+.logo {
+  width: 108px;
+  margin-bottom: 24px;
+}
+.unauthorized-card > i {
+  display: block;
+  color: #b42318;
+  font-size: 48px;
+  margin-left: 42%;
+}
+.unauthorized-card h1 {
+  margin: 16px 0 10px;
+  color: #1f2937;
+  font-size: 30px;
+}
+.unauthorized-card p {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.6;
+}
 
 .login-button {
   display: inline-block;
@@ -31,4 +47,6 @@
   text-decoration: none;
 }
 
-.login-button:hover { background: #810000; }
+.login-button:hover {
+  background: #810000;
+}

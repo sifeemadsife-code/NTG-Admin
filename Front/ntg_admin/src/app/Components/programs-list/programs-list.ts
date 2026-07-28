@@ -17,11 +17,9 @@ export class ProgramsList implements OnInit {
 
   programs = signal<TrainingProgramList[]>([]);
 
-  constructor(
-    private trainingService: TrainingService,
-    private successMessage: SuccessMessageService,
-  ) {}
+  constructor(private trainingService: TrainingService) {}
   private router = inject(Router);
+  private successMessage = inject(SuccessMessageService);
   searchTerm = signal('');
   ngOnInit(): void {
     this.getAllPrograms();
@@ -55,12 +53,12 @@ export class ProgramsList implements OnInit {
     }
     this.trainingService.deleteProgram(id).subscribe({
       next: () => {
-        this.successMessage.show('Program deleted successfully');
-        this.getAllPrograms();
+        this.programs.update((programs) => programs.filter((program) => program.id !== id));
+        this.successMessage.show('Program deleted successfully.');
       },
       error: (err) => {
         console.log(err);
-        this.successMessage.showError('Failed to delete program. Please try again.');
+        this.successMessage.showError(err?.error?.message || 'Failed to delete program.');
       },
     });
   }

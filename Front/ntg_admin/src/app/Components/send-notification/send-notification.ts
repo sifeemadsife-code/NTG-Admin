@@ -19,10 +19,10 @@ import { RecipientModel, UserRecipientsService } from '../../Services/user-recip
 export class SendNotification implements OnInit {
   private fb = inject(FormBuilder);
   private notificationService = inject(NotificationService);
-  private engineerService = inject(EngineerService);
+  private userDirectoryService = inject(UserRecipientsService);
   private router = inject(Router);
   private successMessage = inject(SuccessMessageService);
-  private recipientsService = inject(UserRecipientsService);
+
   recipients = signal<RecipientModel[]>([]);
   saving = signal(false);
   error = signal('');
@@ -38,7 +38,7 @@ export class SendNotification implements OnInit {
       sentToId: ['', Validators.required],
     });
 
-    this.recipientsService.getRecipients().subscribe({
+    this.userDirectoryService.getRecipients().subscribe({
       next: (data) => this.recipients.set(data),
       error: (err) => console.log(err),
     });
@@ -47,9 +47,7 @@ export class SendNotification implements OnInit {
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.form, {
-        sentToId: 'Recipient', title: 'Title', type: 'Type', priority: 'Priority', body: 'Message',
-      }));
+      this.successMessage.showError(this.successMessage.validationMessage(this.form, {}));
       return;
     }
 
@@ -68,12 +66,13 @@ export class SendNotification implements OnInit {
     this.notificationService.create(payload).subscribe({
       next: () => {
         this.saving.set(false);
-        this.successMessage.show('Notification sent successfully');
+        this.successMessage.show('Notification sent successfully.');
         this.router.navigate(['/notifications']);
       },
       error: (err) => {
         this.saving.set(false);
         this.error.set('Failed to send notification');
+        this.successMessage.showError(err?.error?.message || 'Failed to send notification.');
         console.log(err);
       },
     });

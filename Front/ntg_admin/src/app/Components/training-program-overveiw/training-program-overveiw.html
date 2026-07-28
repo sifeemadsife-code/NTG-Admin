@@ -4,12 +4,13 @@
   <div class="engineers-page">
     <div class="page-header">
       <div>
-        <h1>Training Programs</h1>
+        <h2>Training Programs</h2>
         <p>Dashboard > Training Programs > Training Program Details</p>
       </div>
     </div>
 
     <div class="page">
+     
       <div class="header">
         <div class="title">
           <div class="icon">
@@ -18,30 +19,66 @@
 
           <div>
             <h2>{{ training().programName }}</h2>
-
             <p class="description">{{ training().description }}</p>
+            <span class="status">
+              <i class="fa-solid fa-user" style="color: rgb(94, 92, 92);"></i>
+              {{ training().teacherFirstName }} {{ training().teacherLastName }}
+            </span>
+            <span class="status1" style="margin-left:10px;">
+              {{ training().gradeName }}
+            </span>
+            <span class="status2" style="margin-left:10px;">
+              {{ training().description }}
+            </span>
           </div>
-          <span class="status">
-            {{ training().teacherFirstName }} {{ training().teacherLastName }}
-          </span>
         </div>
 
         <div class="buttons">
-          <button class="edit" [routerLink]="['/edit-training-program', training().id]">Edit Program</button>
-
-        </div>
+          <button class="edit" [routerLink]="['/edit-training-program', training().id]">
+            <i class="fa-solid fa-pen-clip" style="color: rgb(131, 8, 8); margin-right: 5px;"></i>Edit Program
+          </button>
+        </div> 
       </div>
 
       <div class="cards">
         <div class="card">
-          <h2 class="num">{{ training().gradeName }}</h2>
-
+          <div class="card-icon1">
+            <i class="fa-solid fa-graduation-cap" style="color: rgb(148, 12, 12); font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ training().gradeName }}</h2>
+            <p>Grade</p>
+          </div>
         </div>
 
         <div class="card">
-          <h2 class="num">1</h2>
+          <div class="card-icon2">
+            <i class="fa-solid fa-users"style="color:#023e8a; font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ studentsCount() }}</h2>
+            <p>Students</p>
+          </div>
+        </div>
 
-          <p>Assigned Engineers</p>
+        <div class="card">
+          <div class="card-icon3">
+            <i class="fa-solid fa-user-cog"style="color:#006400; font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ engineersCount() }}</h2>
+            <p>Assigned Engineers</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon4">
+            <i class="fa-solid fa-clock"style="color:#5a189a; font-size: 22px;"></i>
+          </div>
+          <div class="card-content">
+            <h2 class="num">{{ programDuration() }}</h2>
+            <p>{{ programDurationLabel() }}</p>
+          </div>
         </div>
       </div>
 
@@ -51,9 +88,25 @@
         <a [routerLink]="['/programs', training().id, 'engineers']">Engineers</a>
       </div>
 
+ 
       <div class="content">
         <div class="chart">
           <canvas id="studentsChart"></canvas>
+          <div class="progress-section">
+            <h4>Program Progress</h4>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" [style.width.%]="progressCompleted()"></div>
+            </div>
+            <div class="progress-stats">
+              <span>Completed: {{ progressCompleted() }}%</span>
+              <span>Remaining: {{ progressRemaining() }}%</span>
+            </div>
+          </div>
+
+          <div class="motivation-message">
+            <h3>Keep going! You're doing great.</h3>
+            <p>{{ weeksRemaining() }} weeks remaining to complete this program.</p>
+          </div>
         </div>
         <div class="info">
           <h3>Program Information</h3>
@@ -63,32 +116,32 @@
             <strong>{{ training().programName }}</strong>
           </div>
           <div class="row">
-            <span>Duration</span>
+            <span>Category</span>
             <strong>{{ training().description }}</strong>
           </div>
           <div class="row">
             <span>Teacher</span>
             <strong>{{ training().teacherFirstName }} {{ training().teacherLastName }}</strong>
           </div>
-
           <div class="row">
-            <span>Start Date</span>
-            <strong>{{ training().startDate }}</strong>
+            <span>Grade</span>
+            <strong>{{ training().gradeName }}</strong>
           </div>
-
-          <div class="row">
-            <span>End Date</span>
-            <strong>{{ training().endDate }}</strong>
-          </div>
-
           <div class="row">
             <span>Location</span>
             <strong>{{ training().location }}</strong>
           </div>
-
           <div class="row">
-            <span>For Grade </span>
-            <strong>{{ training().gradeName }}</strong>
+            <span>Start Date</span>
+            <strong>{{ training().startDate | date: 'dd MMM yyyy' }}</strong>
+          </div>
+          <div class="row">
+            <span>End Date</span>
+            <strong>{{ training().endDate | date: 'dd MMM yyyy' }}</strong>
+          </div>
+          <div class="row">
+            <span>Duration</span>
+            <strong>{{ programDuration() }}</strong>
           </div>
         </div>
       </div>

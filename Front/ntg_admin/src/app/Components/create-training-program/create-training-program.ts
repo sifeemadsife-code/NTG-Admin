@@ -13,7 +13,7 @@ import { SuccessMessageService } from '../../Services/success-message';
 @Component({
   selector: 'app-create-training-program',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule,  SidebarComponent],
   templateUrl: './create-training-program.html',
   styleUrl: './create-training-program.css',
 })
@@ -22,7 +22,6 @@ export class CreateTrainingProgramComponent implements OnInit {
   grades = signal<GradeModel[]>([]);
   trainingForm!: FormGroup;
   isSidebarOpen = false;
-
 
   constructor(
     private fb: FormBuilder,
@@ -89,10 +88,7 @@ export class CreateTrainingProgramComponent implements OnInit {
   createProgram(): void {
     if (this.trainingForm.invalid) {
       this.trainingForm.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.trainingForm, {
-        title: 'Program Name', description: 'Description', engineerId: 'Engineer', gradeId: 'Grade',
-        location: 'Location', startDate: 'Start Date', endDate: 'End Date',
-      }));
+      this.successMessage.showError(this.successMessage.validationMessage(this.trainingForm, {}));
       return;
     }
 
@@ -114,11 +110,12 @@ export class CreateTrainingProgramComponent implements OnInit {
     this.service.createProgram(payload).subscribe({
       next: (res) => {
         console.log(res);
-        this.successMessage.show('Training Program created successfully!');
+        this.successMessage.show('Training program created successfully.');
         this.trainingForm.reset();
       },
       error: (err) => {
         console.log(err);
+        this.successMessage.showError(err?.error?.message || 'Failed to create training program.');
       },
     });
   }

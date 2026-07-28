@@ -1,33 +1,31 @@
-<app-sidebar></app-sidebar>
 <div class="page">
+    <app-sidebar></app-sidebar>
     <div class="page-header">
         <div>
-            <h1>Compose Report</h1>
-            <p>Dashboard > Reports > Compose Report</p>
+            <h2>Send Report</h2>
+            <p>Dashboard > Reports > Send Report</p>
         </div>
         <a class="back-btn" routerLink="/reports">Back</a>
     </div>
-
     <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
         @if (error()) {
         <p class="error-text">{{ error() }}</p>
         }
-
         <label>Send To</label>
         <select formControlName="sentToId">
             <option value="">Select Recipient</option>
-            @for (engineer of engineers(); track engineer.id) {
-            @if(engineer.status == false){
-            <option [value]="engineer.id">{{ engineer.firstName }} {{ engineer.lastName }}</option>
-            }
+            @for (recipient of recipients(); track recipient.id) {
+            <option [value]="recipient.id">
+                {{ recipient.firstName }} {{ recipient.lastName }} ({{ recipient.roleName }})
+            </option>
             }
         </select>
 
-        <label>Content</label>
-        <textarea rows="6" formControlName="content" placeholder="Write your report content..."></textarea>
-
         <label>Attachment Link (optional)</label>
         <input type="text" formControlName="fileLink" placeholder="Paste a file URL if any" />
+
+        <label>Content</label>
+        <textarea rows="6" formControlName="content" placeholder="Write your report content..."></textarea>
 
         <button type="submit" [disabled]="saving()">
             {{ saving() ? 'Sending...' : 'Send Report' }}

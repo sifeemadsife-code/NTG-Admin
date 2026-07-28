@@ -13,7 +13,7 @@ export const NAV_ITEMS: NavItem[] = [
   { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
   { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
   { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-  { icon: 'fas fa-chart-bar', label: 'Send Email', route: '/sendEmail' },
+  { icon:'fa-solid fa-envelope' ,label: 'Send Email', route: '/sendEmail' },
   { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
   { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
   { icon: 'fas fa-bell', label: 'Notification', route: '/notifications' },

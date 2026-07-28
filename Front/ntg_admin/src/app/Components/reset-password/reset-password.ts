@@ -14,23 +14,65 @@ import { SuccessMessageService } from '../../Services/success-message';
 })
 export class ResetPassword {
   passwordError = signal('');
+  successMessage = signal('');
   changingPassword = signal(false);
-  constructor(
-    private profileService: ProfileService,
-    private successMessage: SuccessMessageService,
-  ) {}
+
+  // Password visibility toggles
+  showCurrentPassword = false;
+  showNewPassword = false;
+  showConfirmPassword = false;
+
+  constructor(private profileService: ProfileService) {}
+
   private fb = inject(FormBuilder);
+  private successMessageService = inject(SuccessMessageService);
+
   passwordForm: FormGroup = this.fb.group({
-    currentPassword: ['', Validators.required],
-    newPassword: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', Validators.required],
+    currentPassword: ['', [Validators.required]],
+    newPassword: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required]],
   });
+
+  // Toggle password visibility
+  togglePasswordVisibility(field: string): void {
+    if (field === 'current') {
+      this.showCurrentPassword = !this.showCurrentPassword;
+    } else if (field === 'new') {
+      this.showNewPassword = !this.showNewPassword;
+    } else if (field === 'confirm') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
+  }
+
+  hasMinLength(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return password.length >= 8;
+  }
+
+  hasUppercase(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[A-Z]/.test(password);
+  }
+
+  hasLowercase(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[a-z]/.test(password);
+  }
+
+  hasNumber(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[0-9]/.test(password);
+  }
+
+  hasSpecialChar(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  }
+
   changePassword(): void {
     if (this.passwordForm.invalid) {
       this.passwordForm.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.passwordForm, {
-        currentPassword: 'Current Password', newPassword: 'New Password', confirmPassword: 'Confirm New Password',
-      }));
+      this.successMessageService.showError(this.successMessageService.validationMessage(this.passwordForm, {}));
       return;
     }
 
@@ -38,21 +80,28 @@ export class ResetPassword {
 
     if (newPassword !== confirmPassword) {
       this.passwordError.set('New password and confirmation do not match.');
+      this.successMessageService.showError('New password and confirmation do not match.');
       return;
     }
 
     this.changingPassword.set(true);
     this.passwordError.set('');
+    this.successMessage.set('');
 
     this.profileService.changePassword({ currentPassword, newPassword }).subscribe({
       next: () => {
         this.changingPassword.set(false);
         this.passwordForm.reset();
-        this.successMessage.show('Password changed successfully.');
+        this.successMessage.set('Password changed successfully!');
+        this.successMessageService.show('Password changed successfully.');
+        setTimeout(() => {
+          this.successMessage.set('');
+        }, 5000);
       },
       error: (err) => {
         this.changingPassword.set(false);
         this.passwordError.set(err?.error?.message || 'Failed to change password.');
+        this.successMessageService.showError(err?.error?.message || 'Failed to change password.');
         console.log(err);
       },
     });

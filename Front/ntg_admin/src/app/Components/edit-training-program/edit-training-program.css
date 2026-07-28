@@ -3,19 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  background: #f5f7fb;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .dashbored {
   display: flex;
-  min-height: 100vh;
-  background: #eeeeee;
+  min-height: 80vh;
+  font-family: 'Segoe UI', sans-serif;
 }
-
-/* ===== Page ===== */
 
 .page {
   flex: 1;
@@ -31,101 +23,61 @@ body {
   margin-bottom: 4%;
 }
 
-.page-header h1 {
-  margin: 0;
-  font-size: 38px;
-  font-weight: 700;
-  color: #111;
-}
+
 
 .page-header p {
-  color: gray;
-  margin-top: 6px;
+color: gray;
+  margin-top: 4px;
   font-size: 14px;
-}
 
+}
+a{
+  text-decoration: none;
+}
 .back-btn {
   padding: 12px 24px;
   border-radius: 10px;
   background: #fff;
-  color: #333 !important;
+  color: #333;
   border: 1px solid #ddd;
   transition: 0.3s;
-  white-space: nowrap;
 }
-
-.back-btn:hover {
-  background: #620000;
-  color: #fff !important;
-}
-
-.status-text {
-  color: #666;
-  font-size: 15px;
-}
-
-.error-text {
-  color: #c00000;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-/* ===== Form ===== */
-
 .form-card {
-  max-width: 900px;
   background: white;
   border-radius: 15px;
-  padding: 35px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
+  padding: 30px ;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(233, 232, 232);
+  margin-top: 30px;
 
+}
 .form-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 30px;
   margin-bottom: 22px;
-  display: flex;
-  gap: 20px;
 }
-
-.form-group > div {
-  flex: 1;
-  min-width: 0;
-}
-
-.form-group .full {
-  flex: 1 1 100%;
-}
-
 label {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
   color: #444;
 }
-
 input,
 select,
 textarea {
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
   border-radius: 10px;
   padding: 14px;
   font-size: 15px;
   outline: none;
-  transition: 0.3s;
-  font-family: inherit;
+  transition: .3s;
 }
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: #620000;
-  box-shadow: 0 0 0 3px rgba(98, 0, 0, 0.12);
-}
-
 textarea {
-  resize: vertical;
+    min-height: 120px;
+    resize: vertical;
 }
-
 button[type='submit'] {
   width: 100%;
   background: #05172f;
@@ -138,36 +90,10 @@ button[type='submit'] {
   cursor: pointer;
   transition: 0.3s;
 }
-
-button[type='submit']:hover {
-  background: #620000;
-}
-
 button[type='submit']:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
-/* ===========================
-        RESPONSIVE
-=========================== */
-
-.menu-btn {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 8px;
-  background: #620000;
-  color: white;
-  cursor: pointer;
-  z-index: 2000;
-}
-
-/* Laptop */
 
 @media (max-width: 1200px) {
   .form-card {

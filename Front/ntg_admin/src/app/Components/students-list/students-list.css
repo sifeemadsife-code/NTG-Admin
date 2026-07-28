@@ -2,102 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-.active {
-  background: #d4edda;
-  color: white;
-  padding: 4px 10px;
-  border-radius: 20px;
-}
-.inactive {
-  background: #f8d7da;
-  color: #721c24;
-  padding: 4px 10px;
-  border-radius: 20px;
+  font-family: 'Segoe UI', sans-serif;
 }
 .dashbored {
   display: flex;
   min-height: 100vh;
   background: white;
-}
-.sidebar {
-  width: 250px;
-  background: #620000;
-  color: white;
-  padding: 20px 0;
-  position: fixed;
-  height: 100vh;
-}
-.header {
-  height: 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  margin-left: 0;
-  width: 230px;
-}
-.header-white {
-  width: 230px;
-  height: 65px;
-  background: #fff;
-  border-radius: 30px 0 0px 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.logo {
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.logo img {
-  width: 80px;
-  height: auto;
-}
-.menu {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-}
-.menu-item {
-  padding: 13px 25px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.menu-item:hover,
-.menu-item.active {
-  background: rgba(87, 23, 23, 50%);
-  border: 1px solid white;
-  color: #ffffff;
-  list-style: none;
-}
-.menu-item i {
-  width: 30px;
-  font-size: 18px;
-}
-.menu-item span {
-  margin-left: 10px;
-  font-size: 14px;
-}
-.main-content {
-  margin-left: 250px;
-  flex: 1;
-  padding: 30px;
-}
-.content {
-  margin-left: 250px;
-  padding: 35px;
-  background-color: #fff;
-  width: 100%;
-}
-a {
-  text-decoration: none;
-  color: white;
-  display: flex;
-  font-family: 'Segoe UI', sans-serif;
 }
 .fle{
   display: flex;
@@ -111,13 +21,6 @@ a {
   min-height: 100vh;
 }
 
-.page-header h1 {
-  margin: 0;
-  font-size: 38px;
-  font-weight: 700;
-  color: #111;
-}
-
 .page-header p {
   color: gray;
   margin-top: 6px;
@@ -128,7 +31,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 0;
+  margin: 20px 0;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -136,13 +39,10 @@ a {
 .search-box input {
   width: 320px;
   height: 45px;
-
   border: 1px solid #d8d8d8;
   border-radius: 10px;
-
   padding: 0 15px;
   outline: none;
-
   font-size: 14px;
 }
 
@@ -155,52 +55,21 @@ a {
 .filters select {
   width: 160px;
   height: 45px;
-
   border: 1px solid #ddd;
   border-radius: 10px;
-
   padding: 0 12px;
   cursor: pointer;
 }
 
-.add-btn {
-  height: 45px;
-  padding: 0 25px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: black;
-  color: white;
-
-  font-weight: 600;
-  cursor: pointer;
-
+.filters {
   display: flex;
+  gap: 15px;
   align-items: center;
-  gap: 10px;
 }
-
-.add-btn span {
-  width: 22px;
-  height: 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-  background: #111;
-  color: white;
-}
-
 .table-card {
   background: white;
   border-radius: 10px;
-
   overflow: hidden;
-
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 table {
@@ -215,71 +84,67 @@ thead {
 
 th {
   padding: 18px;
-  text-align: left;
-  font-size: 20px;
+  text-align: center;
+  font-size: 17px;
 }
-
-td {
-  padding: 16px;
+tr {
   border-bottom: 1px solid #ececec;
 }
 
-.Student-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.Student-info img {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.status {
-  display: inline-block;
-
-  min-width: 70px;
+td {
   text-align: center;
-
-  padding: 6px 16px;
-
-  border-radius: 20px;
-
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
 }
-
+tr:hover {
+  background-color: rgb(247, 239, 239);
+  transition: 0.5s;
+}
 .active {
-  background: #14923c;
+  background: #058c42;
+  color: #ffffff;
+  padding: 5px 17px;
+  border-radius: 20px;
+  margin-left: 10px;
 }
-
 .leave {
-  background: #9e1414;
-}
+  background: #750808;
+  color: #ffffff;
+  padding: 5px 17px;
+  border-radius: 20px;
+  margin-left: 10px;
 
+}
 .actions {
   display: flex;
   gap: 10px;
-  padding: 20px;
+  padding: 8px;
   justify-content: center;
+  align-self: center;
+  margin-top: 10px;
+  margin-right: 9px;
+  box-shadow: none;
 }
 
 .actions button {
   border: none;
   background: transparent;
-  background-color: #111;
-  padding: 10px 30px;
-  border-radius: 15px;
-
   cursor: pointer;
   font-size: 18px;
+  margin-bottom: 5px;
 }
-
-
+.empty-state {
+  text-align: center;
+  padding: 100px 300px;
+}
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #777;
+}
+.empty-image {
+  width: 20%;
+  margin-bottom: 15px;
+}
 
 
 
