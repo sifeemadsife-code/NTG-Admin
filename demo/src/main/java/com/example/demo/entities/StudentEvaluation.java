@@ -30,6 +30,10 @@ public class StudentEvaluation {
     @JoinColumn(name = "USER_ID", nullable = false)
     private com.example.demo.entities.User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TRAINING_PROGRAM_ID")
+    private TrainingProgram trainingProgram;
+
     @NotNull
     @Column(name = "EVALUATION_DATE", nullable = false)
     private LocalDate evaluationDate;
@@ -45,6 +49,4 @@ public class StudentEvaluation {
     @Size(max = 150)
     @Column(name = "EVALUATION_NOTE", length = 150)
     private String evaluationNote;
-
-
 }

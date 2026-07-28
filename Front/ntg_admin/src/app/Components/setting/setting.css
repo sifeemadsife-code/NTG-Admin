@@ -85,6 +85,32 @@
   color: #666;
 }
 
+.language-setting .right select {
+  display: none;
+  min-width: 120px;
+  padding: 9px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font: inherit;
+  cursor: pointer;
+}
+
+.language-trigger { padding: 10px 14px; border: 1px solid #ead0d0; border-radius: 9px; background: #fff7f7; color: #700808; font: inherit; font-weight: 600; cursor: pointer; }
+.language-modal-backdrop { position: fixed; inset: 0; z-index: 3000; display: grid; place-items: center; padding: 20px; background: rgba(15, 23, 42, .45); backdrop-filter: blur(5px); }
+.language-modal { width: min(420px, 100%); padding: 30px; border-radius: 22px; background: #fff; box-shadow: 0 24px 60px rgba(0,0,0,.25); text-align: center; }
+.language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }.language-options button { padding: 22px 12px; border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; font: inherit; font-weight: 600; cursor: pointer; }.language-options button.selected { border-color: #800000; background: #fff6f6; box-shadow: 0 0 0 3px rgba(128,0,0,.1); }.language-actions { display: flex; justify-content: flex-end; gap: 12px; }.language-actions button { padding: 11px 18px; border: 1px solid #ddd; border-radius: 9px; background: #fff; font: inherit; cursor: pointer; }.language-actions button:last-child { border-color: #05172f; background: #05172f; color: #fff; }
+
+:host-context(html[dir='rtl']) .content {
+  margin-left: 0;
+  margin-right: 250px;
+}
+
+:host-context(html[dir='rtl']) .right {
+  margin-left: 0;
+}
+
 
 
 
@@ -184,6 +210,10 @@
   .content {
     margin-left: 0;
     padding: 80px 15px 20px;
+  }
+
+  :host-context(html[dir='rtl']) .content {
+    margin-right: 0;
   }
 
   .page-header {

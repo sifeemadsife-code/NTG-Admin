@@ -1,9 +1,9 @@
 <div class="dashboard">
   <aside class="sidebar">
-<div class="logo">
-        <div class="header-white">
-            <img src="/images/logo.png" alt="NTG">
-        </div>
+    <div class="logo">
+      <div class="header-white">
+        <img src="/images/logo.png" alt="NTG">
+      </div>
     </div>
     <div class="profile">
       <div class="avatar-container">
@@ -20,33 +20,34 @@
     </div>
 
     <div class="divider"></div>
-       <div class="info">
+    <div class="info">
       <div class="info-item">
-       <img src="images/email_icon.png" alt="" />
+        <img src="images/email_icon.png" alt="" />
         <div class="info-text">
           <h4>Email</h4>
           <span>{{ engineer().email }}</span>
         </div>
       </div>
     </div>
-    <button class="message-btn" routerLink="/sendemail">
+    <button class="message-btn" [routerLink]="['/sendEmail']"
+      [queryParams]="{ toEmail: engineer().email, toName: engineer().firstName + ' ' + engineer().lastName }">
       <i class="fa fa-paper-plane"></i>
       Send Message
-    </button>  
+    </button>
   </aside>
   <main class="content">
-       <div class="top-bar">
+    <div class="top-bar">
       <div class="search-box">
         <i class="fas fa-search"></i>
         <input type="text" placeholder="Search anything..." />
       </div>
-       <button class="back-btn" routerLink="/engineersList">
+      <button class="back-btn" routerLink="/engineersList">
         Back
       </button>
     </div>
-  
+
     <h2>Engineers</h2>
-    <p class="breadcrumb">Dashboard>Engineers>Engineer Details</p>
+    <p class="breadcrumb">Engineers>Engineer Details</p>
     <div class="cards">
       <div class="card students">
         <div class="icon-box blue-box">
@@ -60,9 +61,9 @@
       </div>
       <div class="card reports">
         <div class="icon-box red-box">
-       <i class="fa-solid fa-file" style="color: rgb(252, 251, 251); font-size: 20px;"></i>     
+          <i class="fa-solid fa-file" style="color: rgb(252, 251, 251); font-size: 20px;"></i>
         </div>
-   <div class="card-data">
+        <div class="card-data">
           <h3>Feedback</h3>
           <h4>{{ feedbacksCount() }}</h4>
           <span>Submitted</span>
@@ -95,8 +96,8 @@
     </div>
 
     <div class="tabs">
-      <a [routerLink]="['/engineers', engineerId]" >Overview</a>
-      <a [routerLink]="['/engineers', engineerId]"class="active"> Personal Info </a>
+      <a [routerLink]="['/engineers', engineerId]">Overview</a>
+      <a [routerLink]="['/engineers', engineerId]" class="active"> Personal Info </a>
     </div>
     <div class="profile-card" *ngIf="engineer">
       <div class="card-header">

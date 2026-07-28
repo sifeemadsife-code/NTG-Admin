@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { EngineerService } from '../../Services/engineer';
 import { CourseService } from '../../Services/course-service';
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
 import { SuccessMessageService } from '../../Services/success-message';
 
 @Component({
@@ -28,39 +28,18 @@ export class AddSubject implements OnInit {
   error = signal('');
 
   subjectForm!: FormGroup;
-
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/' },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects', active: true },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notification' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
-
   ngOnInit(): void {
     this.subjectForm = this.fb.group({
       courseName: ['', Validators.required],
       description: ['', Validators.required],
       courseType: [''],
-      studyPlan: [''],
+      studyPlan: ['', Validators.required],
       teacherId: [null, Validators.required],
       termId: [null, Validators.required],
     });
 
     this.loadTeachers();
   }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    this.router.navigate(['/']);
-  }
-
   loadTeachers(): void {
     this.loading.set(true);
 
@@ -82,7 +61,15 @@ export class AddSubject implements OnInit {
   saveSubject(): void {
     if (this.subjectForm.invalid) {
       this.subjectForm.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.subjectForm, {}));
+      this.successMessage.showError(
+        this.successMessage.validationMessage(this.subjectForm, {
+          courseName: 'Subject Name',
+          description: 'Description',
+          studyPlan: 'Study Plan',
+          teacherId: 'Engineer',
+          termId: 'Term',
+        }),
+      );
       return;
     }
 
@@ -98,9 +85,12 @@ export class AddSubject implements OnInit {
 
       error: (err: any) => {
         this.error.set(err.message);
-        this.successMessage.showError(err?.error?.message || 'Failed to create subject.');
         this.saving.set(false);
-
+        if (err.message.includes('409')) {
+          this.successMessage.showError('A subject with this name already exists.');
+        } else {
+          this.successMessage.showError(err?.error?.message || 'Failed to create subject.');
+        }
         console.log(err);
       },
     });

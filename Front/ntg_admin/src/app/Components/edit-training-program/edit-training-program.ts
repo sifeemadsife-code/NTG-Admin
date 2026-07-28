@@ -123,7 +123,7 @@ export class EditTrainingProgram implements OnInit {
       next: () => {
         this.saving.set(false);
         this.successMessage.show('Training program updated successfully.');
-        this.router.navigate(['/programs', this.programId]);
+        this.router.navigate(['/trainingProgramsList']);
       },
       error: (err) => {
         this.saving.set(false);

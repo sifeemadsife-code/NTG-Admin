@@ -7,15 +7,24 @@ import {
   ElementRef,
   signal,
   inject,
+  computed,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { TrainingService } from '../../Services/training-service';
 import { EngineerService } from '../../Services/engineer';
 import { Chart, registerables } from 'chart.js';
 import { SidebarComponent } from '../sidebar/sidebar';
 import { AdminProfile } from '../../Models/admin-profile';
 import { ProfileService } from '../../Services/profile';
+
+interface DashboardSearchResult {
+  title: string;
+  subtitle: string;
+  type: 'Engineer' | 'Student' | 'Program' | 'Quick action';
+  icon: string;
+  route: (string | number)[];
+}
 
 Chart.register(...registerables);
 
@@ -44,18 +53,88 @@ export class Dashboard implements OnInit, AfterViewInit {
   profile2 = signal<AdminProfile | null>(null);
   gradeDistribution = signal<{ grade: string; count: number }[]>([]);
   private profileService = inject(ProfileService);
+  router = inject(Router);
   engineerExperience = signal<{ level: string; count: number }[]>([]);
+  searchTerm = signal('');
+  searchOpen = signal(false);
+  private searchEngineers = signal<any[]>([]);
+  private searchStudents = signal<any[]>([]);
+  private searchPrograms = signal<any[]>([]);
 
- private toTitleCase(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/\b\w/g, char => char.toUpperCase());
-}
+  private toTitleCase(text: string): string {
+    return text.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 
-profile = signal({
-  name: this.toTitleCase(localStorage.getItem('name') || 'Admin'),
-  role: this.toTitleCase(localStorage.getItem('role') || 'Admin'),
-});
+  profile = signal({
+    name: this.toTitleCase(localStorage.getItem('name') || 'Admin'),
+    role: this.toTitleCase(localStorage.getItem('role') || 'Admin'),
+  });
+
+  searchResults = computed<DashboardSearchResult[]>(() => {
+    const query = this.searchTerm().trim().toLowerCase();
+    if (!query) return [];
+
+    const engineers = this.searchEngineers()
+      .filter((engineer) =>
+        `${engineer.firstName} ${engineer.lastName} ${engineer.email} ${engineer.education}`
+          .toLowerCase()
+          .includes(query),
+      )
+      .map((engineer) => ({
+        title: `${engineer.firstName} ${engineer.lastName}`,
+        subtitle: engineer.email || engineer.education || 'Engineer',
+        type: 'Engineer' as const,
+        icon: 'fa-user-tie',
+        route: ['/engineers', engineer.id],
+      }));
+    const students = this.searchStudents()
+      .filter((student) =>
+        `${student.first_name} ${student.last_name} ${student.grade}`.toLowerCase().includes(query),
+      )
+      .map((student) => ({
+        title: `${student.first_name} ${student.last_name}`,
+        subtitle: student.grade ? `Grade: ${student.grade}` : 'Student',
+        type: 'Student' as const,
+        icon: 'fa-graduation-cap',
+        route: ['/students', student.id],
+      }));
+    const programs = this.searchPrograms()
+      .filter((program) =>
+        `${program.program_name} ${program.grade_name}`.toLowerCase().includes(query),
+      )
+      .map((program) => ({
+        title: program.program_name,
+        subtitle: program.grade_name ? `Grade: ${program.grade_name}` : 'Training program',
+        type: 'Program' as const,
+        icon: 'fa-book-open',
+        route: ['/programs', program.id],
+      }));
+    const shortcuts: DashboardSearchResult[] = [
+      {
+        title: 'Add Engineer',
+        subtitle: 'Create a new engineer account',
+        type: 'Quick action' as const,
+        icon: 'fa-user-plus',
+        route: ['/addEngineer'],
+      },
+      {
+        title: 'Create Training Program',
+        subtitle: 'Create a new training program',
+        type: 'Quick action' as const,
+        icon: 'fa-plus-circle',
+        route: ['/createProgram'],
+      },
+      {
+        title: 'Send Report',
+        subtitle: 'Create and send a report',
+        type: 'Quick action' as const,
+        icon: 'fa-paper-plane',
+        route: ['/compose-report'],
+      },
+    ].filter((item) => `${item.title} ${item.subtitle}`.toLowerCase().includes(query));
+
+    return [...engineers, ...students, ...programs, ...shortcuts].slice(0, 7);
+  });
 
   constructor(
     private programsService: TrainingService,
@@ -70,6 +149,7 @@ profile = signal({
     this.loadStudentsByGrade();
     this.loadEngineersByExperience();
     this.loadProfile();
+    this.loadProgramsForSearch();
   }
 
   ngAfterViewInit(): void {
@@ -89,6 +169,13 @@ profile = signal({
         this.programsCount.set(value);
         this.renderPerformanceChart();
       },
+      error: (err) => console.log(err),
+    });
+  }
+
+  loadProgramsForSearch(): void {
+    this.programsService.getTrainingPrograms().subscribe({
+      next: (programs) => this.searchPrograms.set(programs || []),
       error: (err) => console.log(err),
     });
   }
@@ -115,6 +202,7 @@ profile = signal({
   loadStudentsByGrade(): void {
     this.studentsService.getAllStudents().subscribe({
       next: (students: any[]) => {
+        this.searchStudents.set(students || []);
         const map = new Map<string, number>();
         (students || []).forEach((s) => {
           const grade = s.grade && s.grade.trim() ? s.grade : 'Unassigned';
@@ -132,6 +220,7 @@ profile = signal({
     this.loading.set(true);
     this.engineersService.getAllEngineers().subscribe({
       next: (engineers: any[]) => {
+        this.searchEngineers.set(engineers || []);
         const buckets = [
           { level: '0-2 yrs', min: 0, max: 2, count: 0 },
           { level: '3-5 yrs', min: 3, max: 5, count: 0 },
@@ -203,11 +292,7 @@ profile = signal({
       setTimeout(() => this.renderStudentsChart(dist), 100);
       return;
     }
-    const palette = [
-      '#8d0801',
-      '#f4d58d',
-      '#708d81',
-    ];
+    const palette = ['#8d0801', '#f4d58d', '#708d81'];
     if (this.studentsChart) {
       this.studentsChart.data.labels = dist.map((d) => d.grade);
       this.studentsChart.data.datasets[0].data = dist.map((d) => d.count);
@@ -285,5 +370,10 @@ profile = signal({
         console.log(err);
       },
     });
+  }
+  closeSearch(): void {
+    setTimeout(() => {
+      this.searchOpen.set(false);
+    }, 200);
   }
 }

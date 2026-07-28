@@ -1,9 +1,9 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StudentEvaluationService } from '../../Services/student-evaluation';
-import { Student } from '../../Services/student';
+import { TrainingService } from '../../Services/training-service';
 import { StudentsListInterface } from '../../Models/Students_list';
 import { SidebarComponent } from "../sidebar/sidebar";
 import { SuccessMessageService } from '../../Services/success-message';
@@ -11,32 +11,31 @@ import { SuccessMessageService } from '../../Services/success-message';
 @Component({
   selector: 'app-evaluate-student',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
   templateUrl: './evaluate-student.html',
   styleUrl: './evaluate-student.css',
 })
 export class EvaluateStudent implements OnInit {
   private fb = inject(FormBuilder);
   private evaluationService = inject(StudentEvaluationService);
-  private studentService = inject(Student);
+  private trainingService = inject(TrainingService);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private successMessage = inject(SuccessMessageService);
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports' },
-    {
-      icon: 'fas fa-book',
-      label: 'Training Program',
-      route: '/trainingProgramsList',
-      active: true,
-    },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notifications' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
+
+  programId = 0;
+  private selectedStudentId = '';
+  programName = signal('');
+
+  // NEW: طلاب هذا البرنامج فقط، مش كل الطلاب في النظام
+  students = signal<StudentsListInterface[]>([]);
+  loadingStudents = signal(true);
+
+  saving = signal(false);
+  error = signal('');
+
+  form!: FormGroup;
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
@@ -44,25 +43,56 @@ export class EvaluateStudent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  students = signal<StudentsListInterface[]>([]);
-  saving = signal(false);
-  error = signal('');
-
-  form!: FormGroup;
-
   ngOnInit(): void {
+    this.programId = Number(this.route.snapshot.paramMap.get('id'));
+    this.selectedStudentId = this.route.snapshot.queryParamMap.get('studentId') || '';
+
+    if (!this.programId) {
+      this.error.set('No training program specified. Please open this page from a training program.');
+      this.loadingStudents.set(false);
+      return;
+    }
+
     this.form = this.fb.group({
-      studentId: ['', Validators.required],
-      evaluationDate: ['', Validators.required],
+      studentId: [this.selectedStudentId, Validators.required],
+      evaluationDate: [this.getTodayDate(), Validators.required],
       score: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       evaluationText: ['', Validators.required],
       evaluationNote: [''],
     });
 
-    this.studentService.getAllStudents().subscribe({
-      next: (data) => this.students.set(data),
+    this.loadProgram();
+    this.loadProgramStudents();
+  }
+
+  private loadProgram(): void {
+    this.trainingService.getProgram(this.programId).subscribe({
+      next: (data) => this.programName.set(data.programName),
       error: (err) => console.log(err),
     });
+  }
+
+  private loadProgramStudents(): void {
+    this.loadingStudents.set(true);
+    this.trainingService.getProgramStudents(this.programId).subscribe({
+      next: (data) => {
+        this.students.set(data);
+        this.loadingStudents.set(false);
+      },
+      error: (err) => {
+        this.error.set('Failed to load students for this training program.');
+        this.loadingStudents.set(false);
+        console.log(err);
+      },
+    });
+  }
+
+  private getTodayDate(): string {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${today.getFullYear()}-${month}-${day}`;
   }
 
   submit(): void {
@@ -78,6 +108,7 @@ export class EvaluateStudent implements OnInit {
     const payload = {
       studentId: Number(this.form.value.studentId),
       userId: adminId,
+      trainingProgramId: this.programId,
       evaluationDate: this.form.value.evaluationDate,
       score: Number(this.form.value.score),
       evaluationText: this.form.value.evaluationText,
@@ -88,7 +119,7 @@ export class EvaluateStudent implements OnInit {
       next: () => {
         this.saving.set(false);
         this.successMessage.show('Evaluation saved successfully.');
-        this.router.navigate(['/studentsList']);
+        this.router.navigate(['/programs', this.programId, 'students']);
       },
       error: (err) => {
         this.saving.set(false);

@@ -23,8 +23,6 @@
   font-size: 14px;
 }
 
-
-
 .card {
   background: #fff;
   border-radius: 18px;
@@ -72,7 +70,6 @@ textarea {
   min-height: 180px;
 }
 
-
 .send {
   margin-top: 30px;
   align-self: flex-end;
@@ -96,7 +93,21 @@ textarea {
 .send:active {
   transform: translateY(0);
 }
-
+.readonly-field {
+  background: #f3f3f3;
+  color: #555;
+  cursor: not-allowed;
+}
+.sender-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 15px;
+  background: #fafafa;
+  border: 1px dashed #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 /* ==========================
    Responsive
 ========================== */

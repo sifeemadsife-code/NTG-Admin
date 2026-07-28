@@ -5,7 +5,6 @@
       <div>
         <h2>Add New Subject</h2>
         <p>
-          Dashboard >
           Subjects >
           Add New Subject
         </p>
@@ -13,7 +12,7 @@
       </div>
 
       <button class="back-btn" routerLink="/subjects">
-        
+
 
         Back to Subjects
 
@@ -44,12 +43,13 @@
               <option [ngValue]="null">
                 Select engineer
               </option>
-
-              <option *ngFor="let teacher of engineers()" [value]="teacher.id">
-                {{teacher.firstName}}
-                {{teacher.lastName}}
-
+              @for (engineer of engineers(); track engineer.id) {
+              @if (engineer.status == false) {
+              <option [value]="engineer.id">
+                {{ engineer.firstName }} {{ engineer.lastName }}
               </option>
+              }
+              }
             </select>
           </div>
 
@@ -60,6 +60,12 @@
             </label>
             <textarea rows="5" formControlName="description" placeholder="Enter subject description">
             </textarea>
+          </div>
+          <div class="form-group">
+            <label>
+              Study Plan <span>*</span>
+            </label>
+            <textarea rows="5" formControlName="studyPlan" placeholder="Enter study plan"></textarea>
           </div>
           <div class="form-group">
             <label>

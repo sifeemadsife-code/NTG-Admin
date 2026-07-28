@@ -73,6 +73,7 @@ export class CourseService {
       .delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
+  
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let message = 'An unknown error occurred';

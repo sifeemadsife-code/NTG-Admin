@@ -85,7 +85,7 @@ export class AddEngineer {
       next: () => {
         this.submitting.set(false);
         this.successMessage.show('Engineer added successfully.');
-        this.router.navigate(['/']);
+        this.router.navigate(['/engineersList']);
       },
       error: (err) => {
         this.submitting.set(false);

@@ -1,10 +1,10 @@
 // Front/ntg_admin/src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import { AdminEngineer } from './Components/admin-engineer/admin-engineer';
-import { EngineerDetailsOverView } from './Components/engineer-details-overview/engineer-details';
-import { EngineerDetailsPersonalInfo } from './Components/engineer-details-personal-info/engineer-details-personal-info';
+import { AdminEngineer } from './Components/engineers-list/admin-engineer';
+import { EngineerDetailsOverView } from './Components/engineer-overview/engineer-details';
+import { EngineerDetailsPersonalInfo } from './Components/engineer-personal-info/engineer-details-personal-info';
 import { NotFound } from './Components/not-found/not-found';
-import { UpdateDataComponent } from './Components/update-data/update-data';
+import { UpdateDataComponent } from './Components/update-engineer/update-data';
 import { AddEngineer } from './Components/add-engineer/add-engineer';
 import { StudentsList } from './Components/students-list/students-list';
 import { TrainingProgramOverveiw } from './Components/training-program-overveiw/training-program-overveiw';
@@ -21,10 +21,10 @@ import { NotificationComponent } from './Components/notifications/notification';
 import { Login } from './Components/login/login';
 import { SettingComponent } from './Components/setting/setting';
 import { Reports } from './Components/reports/reports';
-import { ComposeReport } from './Components/compose-report/compose-report';
+import { ComposeReport } from './Components/send-report/compose-report';
 import { EvaluateStudent } from './Components/evaluate-student/evaluate-student';
 import { StudentEvaluationsView } from './Components/student-evaluations-view/student-evaluations-view';
-import { CreateEngineerReport } from './Components/create-engineer-report/create-engineer-report';
+import { CreateEngineerReport } from './Components/create-engineer-feedback/create-engineer-report';
 import { StudentDetailsComponent } from './Components/student-details/student-details';
 import { AddSubject } from './Components/add-subject/add-subject';
 import { Sendemail } from './Components/sendemail/sendemail';
@@ -106,7 +106,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'evaluate-student',
+    path: 'programs/:id/evaluate-student',
     component: EvaluateStudent,
     canActivate: [authGuard],
   },

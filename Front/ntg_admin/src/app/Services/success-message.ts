@@ -23,6 +23,10 @@ export class SuccessMessageService {
   }
 
   dismissMessage(): void {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
     this.message.set(null);
   }
 
@@ -51,8 +55,19 @@ export class SuccessMessageService {
     confirmation?.resolve(confirmed);
   }
 
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
+
   private showMessage(message: string, kind: MessageKind): void {
     this.messageKind.set(kind);
     this.message.set(message);
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+    if (kind === 'success') {
+      this.timeoutId = setTimeout(() => {
+        this.dismissMessage();
+      }, 1000);
+    }
   }
 }

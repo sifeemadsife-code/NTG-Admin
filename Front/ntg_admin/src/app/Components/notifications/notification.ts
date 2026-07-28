@@ -20,12 +20,12 @@ export class NotificationComponent implements OnInit {
 
   notifications = signal<NotificationModel[]>([]);
   currentPage = signal(1);
-  itemsPerPage = signal(6);
+  readonly itemsPerPage = 5;
 
   selectedNotification = signal<NotificationModel | null>(null);
 
   totalPages = computed(() =>
-    Math.max(1, Math.ceil(this.notifications().length / this.itemsPerPage()))
+    Math.max(1, Math.ceil(this.notifications().length / this.itemsPerPage))
   );
 
   paginatedNotifications = computed(() => {
@@ -46,9 +46,9 @@ export class NotificationComponent implements OnInit {
     return new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime();
   });
 
-  const start = (this.currentPage() - 1) * this.itemsPerPage();
-  return sorted.slice(start, start + this.itemsPerPage());
-});
+    const start = (this.currentPage() - 1) * this.itemsPerPage;
+    return sorted.slice(start, start + this.itemsPerPage);
+  });
 
   pages = computed(() => Array.from({ length: this.totalPages() }, (_, i) => i + 1));
 
@@ -59,7 +59,10 @@ export class NotificationComponent implements OnInit {
   loadNotifications(): void {
     const userId = Number(localStorage.getItem('userId')) || 1;
     this.notificationService.getUserNotifications(userId).subscribe({
-      next: (data) => this.notifications.set(data),
+      next: (data) => {
+        this.notifications.set(data);
+        this.currentPage.update((page) => Math.min(page, this.totalPages()));
+      },
       error: (err) => console.log(err),
     });
   }

@@ -32,6 +32,24 @@
   z-index: 1500;
 }
 
+:host-context(html[dir='rtl']) .sidebar {
+  left: auto;
+  right: 0;
+}
+
+:host-context(html[dir='rtl']) .menu-btn {
+  left: auto;
+  right: 15px;
+}
+
+:host-context(html[dir='rtl']) .logo {
+  padding: 20px 20px 20px 0;
+}
+
+:host-context(html[dir='rtl']) .header-white {
+  border-radius: 0 30px 30px 0;
+}
+
 .logo {
   text-align: center;
   padding: 20px 0 20px 20px;

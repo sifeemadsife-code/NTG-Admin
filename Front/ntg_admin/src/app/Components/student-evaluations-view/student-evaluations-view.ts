@@ -17,12 +17,14 @@ export class StudentEvaluationsView implements OnInit {
   private evaluationService = inject(StudentEvaluationService);
 
   studentId = 0;
+  programId = 0;
   evaluations = signal<StudentEvaluationModel[]>([]);
   loading = signal(true);
   error = signal('');
 
   ngOnInit(): void {
     this.studentId = Number(this.route.snapshot.paramMap.get('id'));
+    this.programId = Number(this.route.snapshot.queryParamMap.get('programId'));
     this.loadEvaluations();
   }
 
@@ -31,6 +33,9 @@ export class StudentEvaluationsView implements OnInit {
     this.evaluationService.getByStudent(this.studentId).subscribe({
       next: (data) => {
         this.evaluations.set(data);
+        if (!this.programId && data.length > 0) {
+          this.programId = data[0].trainingProgramId;
+        }
         this.loading.set(false);
       },
       error: (err) => {

@@ -53,7 +53,8 @@ export class ProgramsList implements OnInit {
     }
     this.trainingService.deleteProgram(id).subscribe({
       next: () => {
-        this.programs.update((programs) => programs.filter((program) => program.id !== id));
+        this.getAllPrograms();
+        this.getProgramsCount();
         this.successMessage.show('Program deleted successfully.');
       },
       error: (err) => {

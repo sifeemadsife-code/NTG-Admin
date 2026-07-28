@@ -5,7 +5,7 @@
     <div class="page-header">
       <div>
         <h2>Notification</h2>
-        <p>Dashboard > Notification</p>
+        <p>Notification</p>
       </div>
       <a class="add-btn" routerLink="/sendNotification">
         <span>+</span>
@@ -33,12 +33,19 @@
         </div>
       </div>
       } @empty {
-      <p class="empty">No notifications yet</p>
+      <div class="empty-state">
+        <div class="empty-content">
+          <img src="/images/warning.png" alt="No Notifications" class="empty-image">
+          <h3>No Notifications Found</h3>
+          <p>There are no notifications to display.</p>
+        </div>
+      </div>
       }
     </div>  
 
-    <div class="pagination">
-      <button (click)="prevPage()">
+    @if (totalPages() > 1) {
+    <div class="pagination" aria-label="Notifications pages">
+      <button type="button" (click)="prevPage()" [disabled]="currentPage() === 1" aria-label="Previous page">
         <span class="material-icons"> ← </span>
       </button>
 
@@ -46,10 +53,11 @@
       <button [class.active]="page === currentPage()" (click)="goToPage(page)">{{ page }}</button>
       }
 
-      <button (click)="nextPage()">
+      <button type="button" (click)="nextPage()" [disabled]="currentPage() === totalPages()" aria-label="Next page">
         <span class="material-icons"> → </span>
       </button>
     </div>
+    }
   </div>
 
   @if (selectedNotification(); as notif) {

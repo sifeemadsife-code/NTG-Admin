@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Engineer } from '../../Models/engineer';
 import { GradeModel } from '../../Models/grade';
 import { TrainingService } from '../../Services/training-service';
@@ -9,6 +9,17 @@ import { GradeService } from '../../Services/grade';
 import { Router, RouterLink } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar";
 import { SuccessMessageService } from '../../Services/success-message';
+
+function notBeforeToday(today: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null =>
+    control.value && control.value < today ? { beforeToday: true } : null;
+}
+
+function endDateAfterStartDate(group: AbstractControl): ValidationErrors | null {
+  const startDate = group.get('startDate')?.value;
+  const endDate = group.get('endDate')?.value;
+  return startDate && endDate && endDate < startDate ? { endDateBeforeStartDate: true } : null;
+}
 
 @Component({
   selector: 'app-create-training-program',
@@ -22,6 +33,9 @@ export class CreateTrainingProgramComponent implements OnInit {
   grades = signal<GradeModel[]>([]);
   trainingForm!: FormGroup;
   isSidebarOpen = false;
+  readonly today = new Date(Date.now() - new Date().getTimezoneOffset() * 60_000)
+    .toISOString()
+    .slice(0, 10);
 
   constructor(
     private fb: FormBuilder,
@@ -80,15 +94,36 @@ export class CreateTrainingProgramComponent implements OnInit {
       engineerId: ['', Validators.required],
       gradeId: ['', Validators.required],
       location: ['', Validators.required],
-      startDate: ['', Validators.required],
+      startDate: ['', [Validators.required, notBeforeToday(this.today)]],
       endDate: ['', Validators.required],
-    });
+    }, { validators: endDateAfterStartDate });
+  }
+
+  onStartDateChange(): void {
+    const startDate = this.trainingForm.get('startDate')?.value;
+    const endDateControl = this.trainingForm.get('endDate');
+
+    // An end date selected before changing the start date can become invalid.
+    // Clear it so the user must select a valid end date again.
+    if (startDate && endDateControl?.value && endDateControl.value < startDate) {
+      endDateControl.setValue('');
+      endDateControl.markAsTouched();
+    }
   }
 
   createProgram(): void {
     if (this.trainingForm.invalid) {
       this.trainingForm.markAllAsTouched();
-      this.successMessage.showError(this.successMessage.validationMessage(this.trainingForm, {}));
+      if (this.trainingForm.hasError('endDateBeforeStartDate')) {
+        this.successMessage.showError('End date must be on or after the start date.');
+      } else if (this.trainingForm.get('startDate')?.hasError('beforeToday')) {
+        this.successMessage.showError('Start date cannot be before today.');
+      } else {
+        this.successMessage.showError(this.successMessage.validationMessage(this.trainingForm, {
+          title: 'Program Name', description: 'Description', engineerId: 'Engineer', gradeId: 'Grade',
+          location: 'Location', startDate: 'Start Date', endDate: 'End Date',
+        }));
+      }
       return;
     }
 
@@ -111,7 +146,7 @@ export class CreateTrainingProgramComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.successMessage.show('Training program created successfully.');
-        this.trainingForm.reset();
+        this.router.navigate(['/trainingProgramsList']);
       },
       error: (err) => {
         console.log(err);

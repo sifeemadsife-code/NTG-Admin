@@ -10,8 +10,10 @@ import com.example.demo.repositories.CourseRepository;
 import com.example.demo.repositories.TeacherRepository;
 import com.example.demo.repositories.TermRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,7 +39,10 @@ public class CourseService {
     @Transactional
     public CourseResponseDTO createCourse(CreateCourseRequestDTO request) {
         if (courseRepository.existsByCourseNameIgnoreCase(request.courseName())) {
-            throw new RuntimeException("Course already exists");
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "A subject with this name already exists."
+            );
         }
 
         Teacher teacher = teacherRepository.findById(request.teacherId())

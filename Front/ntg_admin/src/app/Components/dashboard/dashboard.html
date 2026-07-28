@@ -4,7 +4,7 @@
     <header class="headers">
       <div class="profile-section">
         @if (profile2()?.gender == "M") {
-          <img src="/images/man.png" alt="Profile" class="profile-img">
+        <img src="/images/man.png" alt="Profile" class="profile-img">
         }@else {
         <img src="/images/avatar.png" alt="Profile" class="profile-img">
         }
@@ -13,10 +13,34 @@
           <span>{{ profile().role }}</span>
         </div>
       </div>
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search anything..." [value]="searchTerm()"
+            (input)="searchTerm.set(($any($event.target)).value)" (focus)="searchOpen.set(true)" (blur)="closeSearch()" />
+        </div>
+        @if (searchOpen() && searchResults().length > 0) {
+        <div class="search-results">
 
-      <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search anything...">
+        @for (item of searchResults(); track item.title) {
+
+        <div class="search-item" (click)="router.navigate(item.route); searchOpen.set(false)">
+
+          <i class="fas" [class]="item.icon"></i>
+
+          <div>
+            <strong>{{ item.title }}</strong>
+            <small>{{ item.subtitle }}</small>
+          </div>
+
+          <span>{{ item.type }}</span>
+
+        </div>
+
+        }
+
+        </div>
+        }
       </div>
     </header>
     <section class="welcome">
@@ -78,18 +102,18 @@
       </div>
 
       <div class="chart-card">
-         <div class="chart-header">
-        <h3>Students Overview</h3>
-         </div>
+        <div class="chart-header">
+          <h3>Students Overview</h3>
+        </div>
         <div class="chart-canvas-wrap">
           <canvas #studentsChart></canvas>
         </div>
       </div>
 
       <div class="chart-card">
-         <div class="chart-header">
-        <h3>Engineers by Experience</h3>
-         </div>
+        <div class="chart-header">
+          <h3>Engineers by Experience</h3>
+        </div>
         <div class="chart-canvas-wrap">
           <canvas #engineersChart></canvas>
         </div>

@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "../sidebar/sidebar";
 import { AuthService } from '../../Services/auth';
+import { AppLanguage, LanguageService } from '../../Services/language';
 
 @Component({
   selector: 'app-setting',
@@ -21,6 +22,9 @@ export class SettingComponent implements OnInit {
 
   appearances: string[] = ['Light', 'Dark'];
   private auth = inject(AuthService);
+  readonly languageService = inject(LanguageService);
+  readonly languageModalOpen = signal(false);
+  readonly pendingLanguage = signal<AppLanguage>(this.languageService.language());
   menuItems = [
     { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
     { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
@@ -46,10 +50,10 @@ export class SettingComponent implements OnInit {
     console.log('Settings Loaded');
   }
 
-  changeLanguage(language: string): void {
-    this.settings.language = language;
-    console.log('Language Changed:', language);
-  }
+  openLanguageModal(): void { this.pendingLanguage.set(this.languageService.language()); this.languageModalOpen.set(true); }
+  selectLanguage(language: AppLanguage): void { this.pendingLanguage.set(language); }
+  confirmLanguage(): void { this.languageService.setLanguage(this.pendingLanguage()); this.languageModalOpen.set(false); }
+  changeLanguage(language: string): void { this.languageService.setLanguage(language as AppLanguage); }
 
   changeAppearance(theme: string): void {
     this.settings.appearance = theme;

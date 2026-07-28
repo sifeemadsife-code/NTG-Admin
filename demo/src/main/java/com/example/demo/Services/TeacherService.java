@@ -148,11 +148,11 @@ public class TeacherService {
     }
     @Transactional
     public void deleteEngineer(Long id) {
-        Teacher tacher = teacherRepository.findById(id)
+        Teacher teacher = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
-        User user = tacher.getUser();
+        User user = teacher.getUser();
         user.setIsdeleted(true);
-        teacherRepository.save(tacher);
+        userRepository.save(user);
     }
     @Transactional
     public void restoreEngineer(Long id) {

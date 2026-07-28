@@ -1,9 +1,15 @@
+.active,
+.inactive {
+  display: inline-block;
+  min-width: 70px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-align: center;
+  color: #ffffff;
+}
+
 .active {
   background: #058c42;
-  color: #ffffff;
-  padding: 5px 17px;
-  border-radius: 20px;
-  margin-left: 10px;
 }
 tr {
   border-bottom: 1px solid #ececec;
@@ -17,9 +23,6 @@ tr:hover {
 }
 .inactive {
   background: #900b09;
-  color: #ffffff;
-  padding: 4px 10px;
-  border-radius: 20px;
 }
 * {
   margin: 0;
@@ -42,6 +45,7 @@ tr:hover {
 
 .engineers-page {
   margin-left: 250px;
+  width: calc(100% - 250px);
   padding: 30px;
   background: white;
   min-height: 100vh;

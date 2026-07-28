@@ -10,6 +10,8 @@ public record StudentEvaluationResponseDTO(
         Long userId,
         String userFirstName,
         String userLastName,
+        Long trainingProgramId,
+        String trainingProgramName,
         LocalDate evaluationDate,
         Long score,
         String evaluationText,

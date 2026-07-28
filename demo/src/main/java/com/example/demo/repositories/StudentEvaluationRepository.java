@@ -9,6 +9,8 @@ import java.util.List;
 public interface StudentEvaluationRepository extends JpaRepository<StudentEvaluation, Long> {
     List<StudentEvaluation> findByStudentIdOrderByEvaluationDateDesc(Long studentId);
 
+    List<StudentEvaluation> findByTrainingProgramIdOrderByEvaluationDateDesc(Long trainingProgramId);
+
     @Query("SELECT COALESCE(MAX(e.id), 0) + 1 FROM StudentEvaluation e")
     Long getNextId();
 }

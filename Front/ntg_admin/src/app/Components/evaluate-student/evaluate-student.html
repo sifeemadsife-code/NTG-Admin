@@ -3,15 +3,20 @@
     <div class="page-header">
         <div>
             <h2>Evaluate Student</h2>
-            <p>Dashboard > Students > Evaluate</p>
+            <p>Training Programs &gt; {{ programName() || 'Program' }} &gt; Evaluate Student</p>
         </div>
+        <a class="back-btn" [routerLink]="['/programs', programId, 'students']">Back</a>
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
-        @if (error()) {
-        <p class="error-text">{{ error() }}</p>
-        }
+    @if (error()) {
+    <p class="error-text">{{ error() }}</p>
+    }
 
+    @if (!loadingStudents() && students().length === 0 && !error()) {
+    <p class="error-text">This training program has no students yet.</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
         <label>Student</label>
         <select formControlName="studentId">
             <option value="">Select Student</option>
@@ -33,7 +38,7 @@
         <label>Notes</label>
         <textarea rows="3" formControlName="evaluationNote" placeholder="Additional notes..."></textarea>
 
-        <button type="submit" [disabled]="saving()">
+        <button type="submit" [disabled]="saving() || students().length === 0">
             {{ saving() ? 'Saving...' : 'Save Evaluation' }}
         </button>
     </form>

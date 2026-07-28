@@ -17,6 +17,10 @@ export class StudentEvaluationService {
     return this.http.get<StudentEvaluationModel[]>(`${this.apiUrl}/student/${studentId}`);
   }
 
+  getByProgram(trainingProgramId: number): Observable<StudentEvaluationModel[]> {
+    return this.http.get<StudentEvaluationModel[]>(`${this.apiUrl}/program/${trainingProgramId}`);
+  }
+
   create(request: CreateStudentEvaluationRequest): Observable<StudentEvaluationModel> {
     return this.http.post<StudentEvaluationModel>(this.apiUrl, request);
   }

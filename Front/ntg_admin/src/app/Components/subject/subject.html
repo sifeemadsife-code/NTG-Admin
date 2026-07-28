@@ -5,7 +5,7 @@
 
       <div>
         <h2>Subjects</h2>
-        <p>Dashboard > Subjects</p>
+        <p>Subjects</p>
 
       </div>
     </div>
@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let course of paginatedCourses()">
+          <tr *ngFor="let course of courses()">
             <td>{{ course.courseName }}</td>
             <td>{{ getTeacherFullName(course) }}</td>
             <td>{{ course.termId }}</td>
@@ -42,9 +42,13 @@
               <button class="btn2" (click)="deleteCourse(course.id)"><i class="fa-solid fa-trash" style="color: rgb(236, 21, 21); font-size: 13px; margin-bottom: 7px;"></i></button>
             </td>
           </tr>
-          <tr *ngIf="paginatedCourses().length === 0">
-            <td colspan="4" style="text-align:center">
-              No subjects found.
+          <tr *ngIf="courses().length === 0">
+            <td colspan="4" class="empty-state">
+              <div class="empty-content">
+                <img src="/images/warning.png" alt="No Subjects" class="empty-image">
+                <h3>No Subjects Found</h3>
+                <p>There are no subjects to display.</p>
+              </div>
             </td>
           </tr>
         </tbody>

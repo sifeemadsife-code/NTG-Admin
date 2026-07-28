@@ -19,12 +19,12 @@
         <a *ngFor="let item of navItems" [routerLink]="item.route" routerLinkActive="active" class="menu-item"
             (click)="close()">
             <i [class]="item.icon"></i>
-            <span>{{ item.label }}</span>
+            <span>{{ language.translate(item.label) }}</span>
         </a>
 
         <a class="menu-item logout" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i>
-            <span>Log Out</span>
+            <span>{{ language.translate('Log Out') }}</span>
         </a>
     </nav>
 </aside>

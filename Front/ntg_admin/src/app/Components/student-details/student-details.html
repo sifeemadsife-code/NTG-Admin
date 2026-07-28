@@ -19,7 +19,7 @@
             <div class="page-header">
                 <div>
                     <h2>Students</h2>
-                    <p>Dashboard > Students >Student Details</p>
+                    <p>Students >Student Details</p>
 
                     <div *ngIf="loading()" class="state-message">Loading student details...</div>
                     <div *ngIf="error()" class="state-message error">{{ error() }}</div>
@@ -95,7 +95,13 @@
                         </tr>
                         } @empty {
                         <tr>
-                            <td colspan="4">No subjects found</td>
+                            <td colspan="4" class="empty-state">
+                                <div class="empty-content">
+                                    <img src="/images/warning.png" alt="No Subjects" class="empty-image">
+                                    <h3>No Subjects Found</h3>
+                                    <p>There are no subjects to display.</p>
+                                </div>
+                            </td>
                         </tr>
                         }
                     </tbody>

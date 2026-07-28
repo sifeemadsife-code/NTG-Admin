@@ -1,41 +1,42 @@
 <div class="container">
   <div class="sidebar">
-<div class="logo">
-        <div class="header-white">
-            <img src="/images/logo.png" alt="NTG">
-        </div>
-    </div> 
-    <div class="profile">
-    <div class="avatar-container">
-      @if (profile()?.gender == "M") {
-      <img src="/images/man.png" alt="Profile" class="avatar">
-      }@else {
-      <img src="/images/avatar.png" alt="Profile" class="avatar">
-      }
+    <div class="logo">
+      <div class="header-white">
+        <img src="/images/logo.png" alt="NTG">
+      </div>
     </div>
-    <h2>{{ profile()?.firstName }} {{ profile()?.lastName }}</h2>
- <span>Administrator</span>  
- <div class="line"></div>
- <div class="information">
-  <i class="fa-solid fa-envelope" style="color: rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
-  <p>{{ profileForm.get('email')?.value }}</p>      
-  </div>
-   <div class="information">
-  <i class="fa-solid fa-location-dot"style="color:rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
-  <p>{{ profileForm.get('address')?.value }}, Egypt</p>      
-  </div>
-    <div class="information">
-  <i class="fa-solid fa-calendar"style="color:rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
- <p>Joined {{ profile()?.createdAt | date:'MMM yyyy' }}</p>  </div>
-</div>
+    <div class="profile">
+      <div class="avatar-container">
+        @if (profile()?.gender == "M") {
+        <img src="/images/man.png" alt="Profile" class="avatar">
+        }@else {
+        <img src="/images/avatar.png" alt="Profile" class="avatar">
+        }
+      </div>
+      <h2>{{ profile()?.firstName }} {{ profile()?.lastName }}</h2>
+      <span>Administrator</span>
+      <div class="line"></div>
+      <div class="information">
+        <i class="fa-solid fa-envelope" style="color: rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
+        <p>{{ profileForm.get('email')?.value }}</p>
+      </div>
+      <div class="information">
+        <i class="fa-solid fa-location-dot" style="color:rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
+        <p>{{ profileForm.get('address')?.value }}, Egypt</p>
+      </div>
+      <div class="information">
+        <i class="fa-solid fa-calendar" style="color:rgb(219, 219, 219); font-size: 15px; margin-top: 3px;"></i>
+        <p>Joined {{ profile()?.createdAt | date:'MMM yyyy' }}</p>
+      </div>
+    </div>
   </div>
   <main class="main">
     <div class="title">
       <div>
         <h2>Profile</h2>
-        <p>Dashboard > Profile</p>
+        <p>Profile</p>
       </div>
-      <button class="back-btn" type="button" routerLink='/engineersList'>
+      <button class="back-btn" type="button" routerLink='/dashboard'>
         Back
       </button>
     </div>
@@ -92,43 +93,41 @@
       </form>
     </section>
     }
-@if(error()){
+    @if(error()){
 
-<div class="overlay">
+    <div class="overlay">
 
-    <div class="popup error-popup">
+      <div class="popup error-popup">
 
         <div class="icon">
-            <i class="fa-solid fa-circle-xmark"></i>
+          <i class="fa-solid fa-circle-xmark"></i>
         </div>
 
         <h2>Update Failed</h2>
 
         <p>{{ error() }}</p>
 
-        <button
-            class="ok-btn"
-            (click)="closeError()">
+        <button class="ok-btn" (click)="closeError()">
 
-            Try Again
+          Try Again
 
         </button>
 
+      </div>
+
     </div>
 
-</div>
+    }
+    @if(successMessage()){
 
-}
-@if(successMessage()){
+    <div class="overlay">
 
-<div class="overlay">
-
-    <div class="popup success-popup">
+      <div class="popup success-popup">
 
         <div class="top-line"></div>
 
         <div class="success-circle">
-            <i class="fa-solid fa-check"></i>
+          <i class="fa-solid fa-check"></i>
         </div>
 
         <h2>Profile Updated!</h2>
@@ -137,22 +136,20 @@
 
         <div class="buttons">
 
-            <button class="primary-btn"
-                    (click)="closeSuccess()">
-                Continue
-            </button>
+          <button class="primary-btn" (click)="closeSuccess()">
+            Continue
+          </button>
 
-            <button class="secondary-btn"
-                    (click)="closeSuccess()">
-                Close
-            </button>
+          <button class="secondary-btn" (click)="closeSuccess()">
+            Close
+          </button>
 
         </div>
 
+      </div>
+
     </div>
 
-</div>
-
-}
+    }
   </main>
 </div>

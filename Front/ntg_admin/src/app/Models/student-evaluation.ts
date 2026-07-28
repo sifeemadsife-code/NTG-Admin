@@ -6,6 +6,8 @@ export interface StudentEvaluationModel {
   userId: number;
   userFirstName: string;
   userLastName: string;
+  trainingProgramId: number;
+  trainingProgramName: string;
   evaluationDate: string;
   score: number | null;
   evaluationText: string;
@@ -15,6 +17,7 @@ export interface StudentEvaluationModel {
 export interface CreateStudentEvaluationRequest {
   studentId: number;
   userId: number;
+  trainingProgramId: number;
   evaluationDate: string;
   score: number | null;
   evaluationText: string;

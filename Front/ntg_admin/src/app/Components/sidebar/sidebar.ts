@@ -3,6 +3,7 @@ import { NAV_ITEMS } from './navItems';
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LanguageService } from '../../Services/language';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,6 +14,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SidebarComponent {
   private auth = inject(AuthService);
+  readonly language = inject(LanguageService);
 
   // Comes from the shared constant - never redefined per page.
   readonly navItems = NAV_ITEMS;

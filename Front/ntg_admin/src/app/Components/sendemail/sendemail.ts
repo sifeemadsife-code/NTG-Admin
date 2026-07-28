@@ -1,63 +1,113 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import emailjs from '@emailjs/browser';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SidebarComponent } from "../sidebar/sidebar";
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
+import { SidebarComponent } from '../sidebar/sidebar';
+import { RouterLink } from '@angular/router';
 import { SuccessMessageService } from '../../Services/success-message';
+import { ProfileService } from '../../Services/profile';
+
 @Component({
   selector: 'app-sendemail',
+  standalone: true,
   imports: [ReactiveFormsModule, SidebarComponent, RouterLink],
   templateUrl: './sendemail.html',
   styleUrl: './sendemail.css',
 })
-export class Sendemail {
+export class Sendemail implements OnInit {
+  private fb = inject(FormBuilder);
+  private successMessage = inject(SuccessMessageService);
+  private profileService = inject(ProfileService);
+  private route = inject(ActivatedRoute);
+
   form!: FormGroup;
-  constructor(private fb: FormBuilder, private successMessage: SuccessMessageService) {}
+  sending = false;
 
   ngOnInit() {
-   this.form = this.fb.group({
-    name: ['Admin', Validators.required],
-    subject: ['', Validators.required],
-    message: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    ToEmail: ['', [Validators.required, Validators.email]],
-    toname: ['', Validators.required],
-    bcc: ['', [Validators.email]],
-    cc: ['', [Validators.email]],
-  });
-  }
+    this.form = this.fb.group({
+      name: [{ value: '', disabled: true }, Validators.required],
+      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
 
-
-
-
-
-async send() {
-  if (this.form.invalid) {
-    this.form.markAllAsTouched();
-    this.successMessage.showError(this.successMessage.validationMessage(this.form, {
-      name: 'Sender Name', ToEmail: 'Recipient Email', toname: 'Recipient Name',
-      subject: 'Subject', email: 'Sender Email', message: 'Message',
-    }));
-    return;
-  }
-  try {
-    emailjs.init('lWZpFiHTYw-gy86rP');
-    await emailjs.send("service_hvxs5dw","template_pygwnbu",{
-name: this.form.value.name,
-subject: this.form.value.subject,
-message: this.form.value.message,
-title: "Admin ntg",
-email: this.form.value.email,
-ToEmail: this.form.value.ToEmail,
-toname: this.form.value.toname,
+      subject: ['', Validators.required],
+      message: ['', Validators.required],
+      ToEmail: ['', [Validators.required, Validators.email]],
+      toname: ['', Validators.required],
+      bcc: ['', [Validators.email]],
+      cc: ['', [Validators.email]],
     });
 
-    this.successMessage.show('Email sent successfully.');
-    this.form.reset();
-  } catch (err: any) {
-    this.successMessage.showError(err?.text || 'Failed to send email.');
+    this.loadSenderInfo();
+    this.prefillRecipientFromQueryParams();
   }
-}
 
+  private loadSenderInfo(): void {
+    this.profileService.getMyProfile().subscribe({
+      next: (profile) => {
+        this.form.patchValue({
+          name: `${profile.firstName} ${profile.lastName}`,
+          email: profile.email,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+        this.successMessage.showError('Failed to load your account information.');
+      },
+    });
+  }
 
+  private prefillRecipientFromQueryParams(): void {
+    const params = this.route.snapshot.queryParamMap;
+    const toEmail = params.get('toEmail');
+    const toName = params.get('toName');
+
+    if (toEmail || toName) {
+      this.form.patchValue({
+        ToEmail: toEmail ?? '',
+        toname: toName ?? '',
+      });
+    }
+  }
+
+  async send() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.successMessage.showError(
+        this.successMessage.validationMessage(this.form, {
+          name: 'Sender Name',
+          email: 'Sender Email',
+          ToEmail: 'Recipient Email',
+          toname: 'Recipient Name',
+          subject: 'Subject',
+          message: 'Message',
+        }),
+      );
+      return;
+    }
+
+    const value = this.form.getRawValue();
+    this.sending = true;
+
+    try {
+      emailjs.init('lWZpFiHTYw-gy86rP');
+      await emailjs.send('service_hvxs5dw', 'template_pygwnbu', {
+        name: value.name,
+        subject: value.subject,
+        message: value.message,
+        title: 'Admin ntg',
+        email: value.email,
+        ToEmail: value.ToEmail,
+        toname: value.toname,
+        cc: value.cc || '',
+        bcc: value.bcc || '',
+      });
+
+      this.successMessage.show('Email sent successfully.');
+      this.form.reset();
+      this.loadSenderInfo();
+    } catch (err: any) {
+      this.successMessage.showError(err?.text || 'Failed to send email.');
+    } finally {
+      this.sending = false;
+    }
+  }
 }

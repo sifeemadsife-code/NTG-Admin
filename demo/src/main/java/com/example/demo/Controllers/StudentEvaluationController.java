@@ -27,6 +27,12 @@ public class StudentEvaluationController {
         return studentEvaluationService.getByStudent(studentId);
     }
 
+    // NEW
+    @GetMapping("/program/{trainingProgramId}")
+    public List<StudentEvaluationResponseDTO> getByTrainingProgram(@PathVariable Long trainingProgramId) {
+        return studentEvaluationService.getByTrainingProgram(trainingProgramId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public StudentEvaluationResponseDTO create(@RequestBody CreateStudentEvaluationRequestDTO request) {

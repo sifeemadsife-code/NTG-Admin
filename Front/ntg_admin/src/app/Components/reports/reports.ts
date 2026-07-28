@@ -3,33 +3,32 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ReportService } from '../../Services/report';
 import { ReportModel } from '../../Models/report';
-import { Sendemail } from "../sendemail/sendemail";
-import { SidebarComponent } from "../sidebar/sidebar";
+import { SidebarComponent } from '../sidebar/sidebar';
 import { SuccessMessageService } from '../../Services/success-message';
+
+type ReportTab = 'inbox' | 'sent';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule, RouterLink,  SidebarComponent],
+  imports: [CommonModule, RouterLink, SidebarComponent],
   templateUrl: './reports.html',
   styleUrl: './reports.css',
 })
 export class Reports implements OnInit {
   private reportService = inject(ReportService);
   private successMessage = inject(SuccessMessageService);
+
   isSidebarOpen = false;
   constructor(private router: Router) {}
-  menuItems = [
-    { icon: 'fas fa-home', label: 'Dashboard', route: '/dashboard' },
-    { icon: 'fas fa-users-cog', label: 'Engineers', route: '/engineersList' },
-    { icon: 'fas fa-user-graduate', label: 'Students', route: '/studentsList' },
-    { icon: 'fas fa-chart-bar', label: 'Reports', route: '/reports', active: true },
-    { icon: 'fas fa-book', label: 'Training Program', route: '/trainingProgramsList' },
-    { icon: 'fas fa-book-open', label: 'Subjects', route: '/subjects' },
-    { icon: 'fas fa-bell', label: 'Notification', route: '/notifications' },
-    { icon: 'fas fa-cog', label: 'Settings', route: '/settings' },
-    { icon: 'fas fa-user', label: 'Profile', route: '/profile' },
-  ];
+
+  private readonly currentUserId = Number(localStorage.getItem('userId')) || 1;
+
+  activeTab = signal<ReportTab>('inbox');
+  inboxReports = signal<ReportModel[]>([]);
+  sentReports = signal<ReportModel[]>([]);
+  searchTerm = signal('');
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
@@ -37,29 +36,44 @@ export class Reports implements OnInit {
     this.router.navigate(['/']);
   }
 
-  reports = signal<ReportModel[]>([]);
-  searchTerm = signal('');
-
-  filteredReports = computed(() => {
-    const term = this.searchTerm().trim().toLowerCase();
-    if (!term) return this.reports();
-    return this.reports().filter(
-      (r) =>
-        `${r.userFirstName} ${r.userLastName}`.toLowerCase().includes(term) ||
-        r.content.toLowerCase().includes(term),
-    );
-  });
-
   ngOnInit(): void {
-    this.loadReports();
+    this.loadInbox();
+    this.loadSent();
   }
 
-  loadReports(): void {
-    this.reportService.getAll().subscribe({
-      next: (data) => this.reports.set(data),
+  loadInbox(): void {
+    this.reportService.getInbox(this.currentUserId).subscribe({
+      next: (data) => this.inboxReports.set(data),
       error: (err) => console.log(err),
     });
   }
+
+  loadSent(): void {
+    this.reportService.getSent(this.currentUserId).subscribe({
+      next: (data) => this.sentReports.set(data),
+      error: (err) => console.log(err),
+    });
+  }
+
+  switchTab(tab: ReportTab): void {
+    this.activeTab.set(tab);
+  }
+
+  private currentTabReports = computed(() =>
+    this.activeTab() === 'inbox' ? this.inboxReports() : this.sentReports(),
+  );
+
+  filteredReports = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+    const source = this.currentTabReports();
+    if (!term) return source;
+    return source.filter(
+      (r) =>
+        `${r.userFirstName} ${r.userLastName}`.toLowerCase().includes(term) ||
+        `${r.sentToFirstName} ${r.sentToLastName}`.toLowerCase().includes(term) ||
+        r.content.toLowerCase().includes(term),
+    );
+  });
 
   onSearchChange(value: string): void {
     this.searchTerm.set(value);
@@ -67,9 +81,16 @@ export class Reports implements OnInit {
 
   async deleteReport(id: number): Promise<void> {
     if (!(await this.successMessage.confirm('Are you sure you want to delete this report?', 'Delete report?'))) return;
+
     this.reportService.delete(id).subscribe({
-      next: () => { this.reports.update((list) => list.filter((r) => r.id !== id)); this.successMessage.show('Report deleted successfully.'); },
-      error: (err) => { console.log(err); this.successMessage.showError(err?.error?.message || 'Failed to delete report.'); },
+      next: () => {
+        this.loadSent();
+        this.successMessage.show('Report deleted successfully.');
+      },
+      error: (err) => {
+        console.log(err);
+        this.successMessage.showError(err?.error?.message || 'Failed to delete report.');
+      },
     });
   }
 }

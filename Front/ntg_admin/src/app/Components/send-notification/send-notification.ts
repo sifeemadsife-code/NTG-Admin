@@ -32,14 +32,16 @@ export class SendNotification implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       title: ['', Validators.required],
-      type: ['ALERT', Validators.required],
       priority: ['NORMAL', Validators.required],
       body: ['', Validators.required],
       sentToId: ['', Validators.required],
     });
 
     this.userDirectoryService.getRecipients().subscribe({
-      next: (data) => this.recipients.set(data),
+      next: (data) =>
+        this.recipients.set(
+          data.filter((recipient) => recipient.roleName.trim().toUpperCase() !== 'PARENT'),
+        ),
       error: (err) => console.log(err),
     });
   }
@@ -57,7 +59,7 @@ export class SendNotification implements OnInit {
     const payload = {
       userId: adminId,
       title: this.form.value.title,
-      type: this.form.value.type,
+      type: 'ALERT',
       priority: this.form.value.priority,
       body: this.form.value.body,
       sentToIds: [Number(this.form.value.sentToId)],

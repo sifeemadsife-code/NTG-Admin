@@ -139,6 +139,33 @@
   background: #ddd;
 }
 
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.pagination button:disabled:hover {
+  background: #f3f3f3;
+}
+
+.pagination button:first-child .material-icons,
+.pagination button:last-child .material-icons {
+  font-size: 0;
+}
+
+.pagination button:first-child .material-icons::after,
+.pagination button:last-child .material-icons::after {
+  font-size: 20px;
+}
+
+.pagination button:first-child .material-icons::after {
+  content: '\2190';
+}
+
+.pagination button:last-child .material-icons::after {
+  content: '\2192';
+}
+
 .pagination .active {
   background: #8b0000;
 
@@ -378,3 +405,9 @@
     padding: 28px 20px 24px;
   }
 }
+
+.empty-state { padding: 56px 24px; text-align: center; }
+.empty-content { display: flex; flex-direction: column; align-items: center; color: #777; }
+.empty-image { width: 80px; margin-bottom: 15px; }
+.empty-content h3 { margin: 0; color: #333; font-size: 22px; }
+.empty-content p { margin-top: 8px; font-size: 15px; }

@@ -4,28 +4,33 @@
   <main class="content">
     <div class="page-header">
       <div>
-        <h2>Setting</h2>
+        <h2>{{ languageService.translate('Setting') }}</h2>
         <p class="breadcrumb">
-          Dashboard > Setting
+          {{ languageService.translate('Setting') }}
         </p>
       </div>
     </div>
     <div class="settings-card">
-          <div class="setting-item">
+      <div class="setting-item language-setting">
         <div class="left">
           <div class="avatar">
             <i class="fa-solid fa-language" style="color: rgb(110, 6, 6); font-size: 20px;"></i>
           </div>
           <div class="top">        
          <span>
-            Language
+            {{ languageService.translate('Language') }}
           </span>
-          <p>Choose system language</p>
+          <p>{{ languageService.translate('Choose system language') }}</p>
         </div>
         </div>
         <div class="right">
-          <i class="fa-solid fa-angle-right" style="color: rgb(134, 134, 134);"></i>
-        </div>
+          <button type="button" class="language-trigger" (click)="openLanguageModal()">{{languageService.translate('Change language') }}</button>
+          <select [value]="languageService.language()" (change)="changeLanguage($any($event.target).value)"
+            aria-label="Choose system language">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+          </select>
+        </div> 
       </div>
       <div class="setting-item"routerLink="/noticationsetting">
         <div class="left">
@@ -34,9 +39,9 @@
           </div>
           <div class="top">        
          <span>
-            Notication Setting
+            {{ languageService.translate('Notification Setting') }}
           </span>
-          <p>Manage your notification </p>
+          <p>{{ languageService.translate('Manage your notification') }}</p>
         </div>
         </div>
         <div class="right">
@@ -50,9 +55,9 @@
           </div>
            <div class="top">        
          <span>
-            Change Password
+            {{ languageService.translate('Change Password') }}
           </span>
-          <p>Update your account password</p>
+          <p>{{ languageService.translate('Update your account password') }}</p>
         </div>
         </div>
         <div class="right">
@@ -66,9 +71,9 @@
           </div>
          <div class="top"  routerLink="/support">        
          <span>
-            Support
+            {{ languageService.translate('Support') }}
           </span>
-          <p> Get support information</p>
+          <p>{{ languageService.translate('Get support information') }}</p>
         </div>
         </div>
         <div class="right">
@@ -82,9 +87,9 @@
           </div>
            <div class="top">        
          <span>
-          About System
+          {{ languageService.translate('About System') }}
           </span>
-          <p>View system information and version</p>
+          <p>{{ languageService.translate('View system information and version') }}</p>
         </div>
         </div>
         <div class="right">
@@ -98,9 +103,9 @@
           </div>
           <div class="top">        
          <span>
-            Log Out
+            {{ languageService.translate('Log Out') }}
           </span>
-          <p>Sign out from your account </p>
+          <p>{{ languageService.translate('Sign out from your account') }}</p>
         </div>
         </div>
         <div class="right">
@@ -110,5 +115,16 @@
     </div>
 
   </main>
-
+  @if (languageModalOpen()) {
+  <div class="language-modal-backdrop" (click)="languageModalOpen.set(false)">
+    <section class="language-modal" (click)="$event.stopPropagation()">
+      <h3>Choose a language</h3>
+      <div class="language-options">
+        <button type="button" [class.selected]="pendingLanguage() === 'en'" (click)="selectLanguage('en')">English</button>
+        <button type="button" [class.selected]="pendingLanguage() === 'ar'" (click)="selectLanguage('ar')">Arabic</button>
+      </div>
+      <div class="language-actions"><button type="button" (click)="languageModalOpen.set(false)">Cancel</button><button type="button" (click)="confirmLanguage()">Confirm</button></div>
+    </section>
+  </div>
+  }
 </div>

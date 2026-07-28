@@ -1,48 +1,50 @@
 <div class="dashbored">
   <app-sidebar></app-sidebar>
 
-
   <div class="email-page">
 
     <div class="header">
-      <div >
+      <div>
         <h2>Send Email</h2>
-        <p>Dashboard > Send Email</p>
+        <p>Send Email</p>
       </div>
     </div>
 
     <div class="card">
       <div [formGroup]="form" class="left">
         <form action="javascript:void(0)" (submit)="send()">
-          <label> Form</label>
-          <input formControlName="name" type="text" placeholder="Enter your name...">
-          <label> To Email</label>
-          <input formControlName="ToEmail" type="text" placeholder="Enter the email of reciver...">
-          <label> To Name</label>
-          <input formControlName="toname" type="text" placeholder="Enter the name of reciver...">
+
+          <div class="sender-info">
+            <label>From (Name)</label>
+            <input formControlName="name" type="text" readonly class="readonly-field">
+
+            <label>From (Email)</label>
+            <input formControlName="email" type="email" readonly class="readonly-field">
+          </div>
+
+          <label>To Email</label>
+          <input formControlName="ToEmail" type="email" placeholder="Enter the recipient's email...">
+
+          <label>To Name</label>
+          <input formControlName="toname" type="text" placeholder="Enter the recipient's name...">
+
+          <label>CC (optional)</label>
+          <input formControlName="cc" type="email" placeholder="Carbon copy email...">
+
+          <label>BCC (optional)</label>
+          <input formControlName="bcc" type="email" placeholder="Blind carbon copy email...">
 
           <label>Subject</label>
           <input formControlName="subject" type="text" placeholder="Enter Subject">
 
-          <label>Email</label>
-
-          <input formControlName="email" type="text" placeholder="Enter the email">
-
           <label>Message</label>
+          <textarea formControlName="message" rows="10" placeholder="Write your email..."></textarea>
 
-          <textarea formControlName="message" rows="10" placeholder="Write your email...">
-            </textarea>
-          <button type="submit" class="send">
-            Send Email
+          <button type="submit" class="send" [disabled]="sending">
+            {{ sending ? 'Sending...' : 'Send Email' }}
           </button>
         </form>
       </div>
-
-
-
-
-
-
 
     </div>
 

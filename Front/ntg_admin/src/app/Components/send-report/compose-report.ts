@@ -1,4 +1,4 @@
-import { RecipientModel } from './../../Services/user-recipients';
+import { RecipientModel } from '../../Services/user-recipients';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -40,7 +40,10 @@ export class ComposeReport implements OnInit {
 
   private loadRecipients(): void {
     this.userDirectoryService.getRecipients().subscribe({
-      next: (data) => this.recipients.set(data),
+      next: (data) =>
+        this.recipients.set(
+          data.filter((recipient) => recipient.roleName.trim().toUpperCase() !== 'PARENT'),
+        ),
       error: (err) => {
         console.log(err);
         this.successMessage.showError('Failed to load recipients list.');

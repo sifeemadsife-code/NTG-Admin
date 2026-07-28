@@ -6,7 +6,6 @@
 .dashboard-container {
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
- 
 }
 .main-content {
   margin-left: 270px;
@@ -38,10 +37,15 @@
 .profile-info span {
   font-size: 13px;
   color: #888;
- text-transform: capitalize;
+  text-transform: capitalize;
 }
-.search-box {
+.search-container {
   margin-right: 15%;
+  position: relative;
+  width: 550px;
+}
+
+.search-box {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -49,7 +53,7 @@
   padding: 10px 15px;
   border-radius: 10px;
   border: 1px solid #ddd;
-  width: 550px;
+  width: 100%;
   box-shadow: none;
 }
 
@@ -83,7 +87,6 @@
   color: #888;
   font-size: 14px;
   margin-left: 5px;
-
 }
 .welcome-image img {
   width: 230px;
@@ -140,7 +143,6 @@
   margin-bottom: 10px;
   gap: 10px;
   width: 100%;
-
 }
 .stat-card-wrapper {
   position: relative;
@@ -155,7 +157,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   gap: 15px;
-  padding: 20px ;
+  padding: 20px;
   flex: 1;
 }
 .stat-icon {
@@ -489,8 +491,6 @@
   }
 }
 
-
-
 .menu-btn {
   display: none;
   position: fixed;
@@ -505,11 +505,77 @@
   z-index: 2000;
   cursor: pointer;
 }
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+  z-index: 1000;
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 6px;
+}
 
+.search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-item i {
+  width: 18px;
+  color: #620000;
+  text-align: center;
+}
+
+.search-item div {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+  min-width: 0;
+}
+
+.search-item strong,
+.search-item small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-item strong {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.search-item small {
+  color: #6b7280;
+}
+
+.search-item span {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.search-item:hover {
+  background: #fff5f5;
+}
 /* Tablet */
 
 @media screen and (max-width: 1024px) {
-  .search-box {
+  .search-container {
     width: 100%;
     margin-right: 0;
   }
@@ -566,7 +632,7 @@
     justify-content: center;
   }
 
-  .search-box {
+  .search-container {
     width: 100%;
   }
 
