@@ -18,4 +18,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN FETCH u.role WHERE UPPER(u.role.roleName) <> 'STUDENT'")
     List<User> findAllExceptStudents();
+
+    // NEW: excludes students AND the current logged-in user
+    @Query("SELECT u FROM User u JOIN FETCH u.role " +
+            "WHERE UPPER(u.role.roleName) <> 'STUDENT' AND u.id <> :currentUserId")
+    List<User> findAllExceptStudentsAndUser(@Param("currentUserId") Long currentUserId);
 }

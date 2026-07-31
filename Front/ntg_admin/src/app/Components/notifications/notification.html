@@ -27,7 +27,7 @@
 
         <div class="notification-time">
           <span>{{ item.sentAt }}</span>
-          <button class="delete-btn" (click)="$event.stopPropagation(); deleteNotification(item.id)">
+          <button title="Delete Notification" class="delete-btn" (click)="$event.stopPropagation(); deleteNotification(item.id)">
             <i class="fas fa-trash"></i>
           </button>
         </div>
@@ -41,7 +41,7 @@
         </div>
       </div>
       }
-    </div>  
+    </div>
 
     @if (totalPages() > 1) {
     <div class="pagination" aria-label="Notifications pages">
@@ -83,10 +83,6 @@
         <div class="meta-row">
           <i class="fas fa-user"></i>
           <span><strong>From:</strong> {{ notif.senderFirstName }} {{ notif.senderLastName }}</span>
-        </div>
-        <div class="meta-row">
-          <i class="fas fa-tag"></i>
-          <span><strong>Type:</strong> {{ notif.type }}</span>
         </div>
         <div class="meta-row">
           <i class="fas fa-calendar"></i>

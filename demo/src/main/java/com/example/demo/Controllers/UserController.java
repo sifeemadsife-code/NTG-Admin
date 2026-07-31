@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.DTOs.UserListDTO;
+import com.example.demo.Security.AuthenticationService;
 import com.example.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,13 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final AuthenticationService authenticationService;
 
     @GetMapping("/recipients")
     public List<UserListDTO> getRecipients() {
-        return userRepository.findAllExceptStudents().stream()
+        Long currentUserId = authenticationService.getUser().getId();
+
+        return userRepository.findAllExceptStudentsAndUser(currentUserId).stream()
                 .map(u -> new UserListDTO(
                         u.getId(),
                         u.getFirstName(),

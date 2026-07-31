@@ -17,12 +17,12 @@ export class AdminProfile implements OnInit {
   private fb = inject(FormBuilder);
   private profileService = inject(ProfileService);
   private successMessageService = inject(SuccessMessageService);
-loading = signal(true);
-saving = signal(false);
+  loading = signal(true);
+  saving = signal(false);
 
-error = signal<string | null>(null);
-successMessage = signal<string | null>(null);
-profile = signal<AdminProfileModel | null>(null);
+  error = signal<string | null>(null);
+  successMessage = signal<string | null>(null);
+  profile = signal<AdminProfileModel | null>(null);
 
   profileForm: FormGroup = this.fb.group({
     firstName: ['', Validators.required],
@@ -36,7 +36,6 @@ profile = signal<AdminProfileModel | null>(null);
     birthDate: [''],
     religion: [''],
     nationalNumber: [null],
-    
   });
 
   passwordForm: FormGroup = this.fb.group({
@@ -79,58 +78,39 @@ profile = signal<AdminProfileModel | null>(null);
     });
   }
 
-saveProfile(): void {
-
-  if (this.profileForm.invalid) {
-    this.profileForm.markAllAsTouched();
-    this.successMessageService.showError(this.successMessageService.validationMessage(this.profileForm, {}));
-    return;
-  }
-
-  this.saving.set(true);
-
-  this.error.set(null);
-  this.successMessage.set(null);
-
-  this.profileService.updateMyProfile(this.profileForm.value).subscribe({
-
-    next: (data) => {
-
-      this.profile.set(data);
-
-      this.saving.set(false);
-
-      this.successMessage.set('Profile updated successfully.');
-      this.successMessageService.show('Profile updated successfully.');
-
-      localStorage.setItem(
-        'name',
-        `${data.firstName} ${data.lastName}`
+  saveProfile(): void {
+    if (this.profileForm.invalid) {
+      this.profileForm.markAllAsTouched();
+      this.successMessageService.showError(
+        this.successMessageService.validationMessage(this.profileForm, {}),
       );
-
-    },
-
-    error: (err) => {
-
-      this.saving.set(false);
-
-      this.error.set(
-        err?.error?.message || 'Failed to update profile.'
-      );
-      this.successMessageService.showError(err?.error?.message || 'Failed to update profile.');
-
-      console.error(err);
-
+      return;
     }
 
-  });
+    this.saving.set(true);
 
-}
-closeError(): void {
-  this.error.set(null);
-}
+    this.error.set(null);
+    this.successMessage.set(null);
 
-closeSuccess(): void {
-  this.successMessage.set(null);
-}
+    this.profileService.updateMyProfile(this.profileForm.value).subscribe({
+      next: (data) => {
+        this.profile.set(data);
+        this.saving.set(false);
+        this.successMessageService.show('Profile updated successfully.');
+        localStorage.setItem('name', `${data.firstName} ${data.lastName}`);
+      },
+      error: (err) => {
+        this.saving.set(false);
+        this.error.set(err?.error?.message || 'Failed to update profile.');
+        this.successMessageService.showError(err?.error?.message || 'Failed to update profile.');
+        console.error(err);
+      },
+    });
+  }
+  closeError(): void {
+    this.error.set(null);
+  }
+  closeSuccess(): void {
+    this.successMessage.set(null);
+  }
 }

@@ -35,8 +35,8 @@
                 <option value="HIGH">High</option>
             </select>
 
-            <label>Message</label>
-            <textarea rows="6" formControlName="body" placeholder="Write your notification message..."></textarea>
+            <label>Body</label>
+            <textarea rows="6" formControlName="body" placeholder="Write your notification body..."></textarea>
 
             <button type="submit" [disabled]="saving()">
                 {{ saving() ? 'Sending...' : 'Send Notification' }}

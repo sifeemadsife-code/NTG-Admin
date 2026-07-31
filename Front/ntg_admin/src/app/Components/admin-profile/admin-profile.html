@@ -94,62 +94,10 @@
     </section>
     }
     @if(error()){
-
-    <div class="overlay">
-
-      <div class="popup error-popup">
-
-        <div class="icon">
-          <i class="fa-solid fa-circle-xmark"></i>
-        </div>
-
-        <h2>Update Failed</h2>
-
-        <p>{{ error() }}</p>
-
-        <button class="ok-btn" (click)="closeError()">
-
-          Try Again
-
-        </button>
-
-      </div>
-
-    </div>
-
+    <p>{{ error() }}</p>
     }
     @if(successMessage()){
-
-    <div class="overlay">
-
-      <div class="popup success-popup">
-
-        <div class="top-line"></div>
-
-        <div class="success-circle">
-          <i class="fa-solid fa-check"></i>
-        </div>
-
-        <h2>Profile Updated!</h2>
-
-        <p>{{ successMessage() }}</p>
-
-        <div class="buttons">
-
-          <button class="primary-btn" (click)="closeSuccess()">
-            Continue
-          </button>
-
-          <button class="secondary-btn" (click)="closeSuccess()">
-            Close
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
+    <p>{{ successMessage() }}</p>
     }
   </main>
 </div>
