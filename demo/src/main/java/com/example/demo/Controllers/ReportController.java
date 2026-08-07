@@ -17,11 +17,6 @@ public class ReportController {
 
     private final ReportService reportService;
 
-    @GetMapping
-    public List<ReportResponseDTO> getAll() {
-        return reportService.getAll();
-    }
-
     @GetMapping("/inbox/{userId}")
     public List<ReportResponseDTO> getInbox(@PathVariable Long userId) {
         return reportService.getInbox(userId);

@@ -2,6 +2,7 @@ package com.example.demo.Services;
 
 import com.example.demo.DTOs.CreateStudentEvaluationRequestDTO;
 import com.example.demo.DTOs.StudentEvaluationResponseDTO;
+import com.example.demo.DTOs.UpdateStudentEvaluationRequestDTO;
 import com.example.demo.entities.Student;
 import com.example.demo.entities.StudentEvaluation;
 import com.example.demo.entities.TrainingProgram;
@@ -65,7 +66,16 @@ public class StudentEvaluationService {
         StudentEvaluation saved = studentEvaluationRepository.save(evaluation);
         return toResponse(saved);
     }
-
+    @Transactional
+    public StudentEvaluationResponseDTO update(Long id, UpdateStudentEvaluationRequestDTO request) {
+        StudentEvaluation evaluation = studentEvaluationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+        evaluation.setScore(request.score());
+        evaluation.setEvaluationText(request.evaluationText());
+        evaluation.setEvaluationNote(request.evaluationNote());
+        StudentEvaluation saved = studentEvaluationRepository.save(evaluation);
+        return toResponse(saved);
+    }
     @Transactional
     public void delete(Long id) {
         if (!studentEvaluationRepository.existsById(id)) {
@@ -73,7 +83,6 @@ public class StudentEvaluationService {
         }
         studentEvaluationRepository.deleteById(id);
     }
-
     private StudentEvaluationResponseDTO toResponse(StudentEvaluation e) {
         return new StudentEvaluationResponseDTO(
                 e.getId(),

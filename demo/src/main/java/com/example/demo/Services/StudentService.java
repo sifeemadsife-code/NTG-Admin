@@ -58,7 +58,6 @@ public class StudentService {
 
         User user = student.getUser();
 
-        // --- Attendance rate ---
         List<Attendance> attendances = attendanceRepository.findByStudentId(studentId);
         long totalSessions = attendances.size();
         long presentSessions = attendances.stream()
@@ -68,10 +67,8 @@ public class StudentService {
                 ? 0.0
                 : Math.round((presentSessions * 10000.0) / totalSessions) / 100.0;
 
-        // --- Violations ---
         long violationsCount = violationRepository.countByStudentId(studentId);
 
-        // --- Marks grouped by course ---
         List<Mark> marks = markRepository.findByUserIdWithCourseAndType(user.getId());
 
         Map<Long, List<Mark>> marksByCourse = marks.stream()

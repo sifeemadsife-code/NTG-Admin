@@ -12,13 +12,18 @@ export interface StudentEvaluationModel {
   score: number | null;
   evaluationText: string;
   evaluationNote: string | null;
-}
+} 
 
 export interface CreateStudentEvaluationRequest {
   studentId: number;
   userId: number;
   trainingProgramId: number;
   evaluationDate: string;
+  score: number | null;
+  evaluationText: string;
+  evaluationNote?: string;
+}
+export interface UpdateStudentEvaluationRequest{
   score: number | null;
   evaluationText: string;
   evaluationNote?: string;

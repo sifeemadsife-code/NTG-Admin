@@ -2,6 +2,7 @@ package com.example.demo.Controllers;
 
 import com.example.demo.DTOs.CreateStudentEvaluationRequestDTO;
 import com.example.demo.DTOs.StudentEvaluationResponseDTO;
+import com.example.demo.DTOs.UpdateStudentEvaluationRequestDTO;
 import com.example.demo.Services.StudentEvaluationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,10 +39,14 @@ public class StudentEvaluationController {
     public StudentEvaluationResponseDTO create(@RequestBody CreateStudentEvaluationRequestDTO request) {
         return studentEvaluationService.create(request);
     }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         studentEvaluationService.delete(id);
     }
+    @PutMapping("/{id}")
+    public StudentEvaluationResponseDTO update(@PathVariable Long id, @RequestBody UpdateStudentEvaluationRequestDTO request) {
+        return studentEvaluationService.update(id,request);
+    }
+
 }

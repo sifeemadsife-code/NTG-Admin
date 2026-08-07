@@ -27,12 +27,6 @@ public class EngineerFeedbackController {
     public EngineerFeedbackResponseDTO create(@RequestBody CreateEngineerFeedbackRequestDTO request) {
         return engineerFeedbackService.create(request);
     }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        engineerFeedbackService.delete(id);
-    }
     @GetMapping("/teacher/{teacherId}/count")
     public long getCountByTeacher(@PathVariable Long teacherId) {
         return engineerFeedbackService.getCountByTeacher(teacherId);

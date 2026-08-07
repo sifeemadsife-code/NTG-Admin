@@ -19,10 +19,6 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
 
-    public List<ReportResponseDTO> getAll() {
-        return reportRepository.findAll().stream().map(this::toResponse).toList();
-    }
-
     public List<ReportResponseDTO> getInbox(Long userId) {
         return reportRepository.findBySentToIdOrderByCreatedAtDesc(userId).stream()
                 .map(this::toResponse).toList();

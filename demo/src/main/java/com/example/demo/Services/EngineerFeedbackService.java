@@ -46,13 +46,6 @@ public class EngineerFeedbackService {
         return toResponse(saved);
     }
 
-    @Transactional
-    public void delete(Long id) {
-        if (!engineerFeedbackRepository.existsById(id)) {
-            throw new RuntimeException("Feedback not found");
-        }
-        engineerFeedbackRepository.deleteById(id);
-    }
     public long getCountByTeacher(Long teacherId) {
         return engineerFeedbackRepository.countByTeacherId(teacherId);
     }
